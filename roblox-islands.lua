@@ -109,6 +109,8 @@ local Character = game.Players.LocalPlayer.Character
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TS = game:GetService('TweenService')
 local HR = Character.HumanoidRootPart
+local HttpService = game:GetService("HttpService")
+
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
 Toggled85 = false Toggled86 = false Toggled87 = false
 
@@ -432,21 +434,9 @@ GUIs.BorderColor3 = Color3.new(1,1,1)
 GUIs.ZIndex = 2
 GUIs.LayoutOrder = 2
 GUIs.Parent = CmdHandler
-GUIs.Text = "Event >"
+GUIs.Text = "Events >"
 GUIs.TextColor3 = Color3.fromRGB(250,250,250)
 GUIs.TextScaled = true
-
-local Notification2 = Instance.new("TextLabel")
-Notification2.Position = UDim2.new(0,1,0,5)
-Notification2.Size = UDim2.new(0,100,0,40)
-Notification2.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
-Notification2.BorderColor3 = Color3.fromRGB(190, 50, 250)
-Notification2.ZIndex = 2
-Notification2.Text = "Updated 9/17/2022"
-Notification2.TextColor3 = Color3.new(0,0,0)
-Notification2.TextScaled = true
-Notification2.LayoutOrder = 1
-Notification2.Parent = CmdHandler
 
 local Teleports = Instance.new("TextButton")
 Teleports.Position = UDim2.new(0,1,0,243)
@@ -999,13 +989,13 @@ Notification6.TextColor3 = Color3.fromRGB(2,2,2)
 Notification6.TextScaled = true
 
 local Notification7 = Instance.new("TextLabel")
-Notification7.Position = UDim2.new(0,0,0,150)
+Notification7.Position = UDim2.new(0,0,0,250)
 Notification7.Size = UDim2.new(0,140,0,15)
 Notification7.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification7.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification7.ZIndex = 2
 Notification7.Parent = CmdHandler4
-Notification7.Text = "Bow Aimbot (Patched)"
+Notification7.Text = "Bow Aimbot (InProgress)"
 Notification7.TextColor3 = Color3.fromRGB(2,2,2)
 Notification7.TextScaled = true
 
@@ -1142,7 +1132,7 @@ Mob8.TextColor3 = Color3.fromRGB(0,0,0)
 Mob8.TextScaled = true
 
 local God = Instance.new("TextButton")
-God.Position = UDim2.new(0,1,1,110)
+God.Position = UDim2.new(0,1,1,140)
 God.Size = UDim2.new(0,138,0,20)
 God.BackgroundColor3 = Color3.fromRGB(50,50,50)
 God.BorderSizePixel = 1
@@ -2949,24 +2939,39 @@ Item4.MouseButton1Click:Connect(function()
         Item4.BackgroundColor3 = Color3.fromRGB(63,165,63)
         Item4.Text = "Slimes"
         Item4.TextColor3 = Color3.fromRGB(250,250,250)
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
+        tween:Cancel()
     else
         Toggled1 = true
         Item4.BackgroundColor3 = Color3.new(1,0,0)
         Item4.Text = "KILL!"
         Item4.TextColor3 = Color3.fromRGB(0,0,0)
-        WS = 30
-        local Player = game.Players.LocalPlayer
-        local Humanoid = Player.Character.Humanoid
-        Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-            if Toggled24 then
-            Humanoid.WalkSpeed = WS
-            end
-        end)
-        Humanoid.WalkSpeed = WS
+        local BV = Instance.new("BodyVelocity")
+        BV.Velocity = Vector3.new(0,0,0)
+        BV.MaxForce = Vector3.new(0,math.huge,0)
+        BV.Parent = HR
+        local enemy = "slime"
         while Toggled1 == true do
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild("slime"):WaitForChild("HumanoidRootPart") then
-                game.Players.LocalPlayer.Character.Humanoid:MoveTo(game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("slime").HumanoidRootPart.Position)
-                game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+            wait()
+            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+                Distance = (HR.Position - Point).Magnitude
+                Speed = 20
+                Time = Distance/Speed
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
+                tween:Play()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
 		    end
         end
     end
@@ -2979,7 +2984,9 @@ Item5.MouseButton1Click:Connect(function()
         Item5.Text = "Buffalkor"
         Item5.TextColor3 = Color3.fromRGB(1,1,1)
         b1.CanCollide = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled2 = true
@@ -2992,15 +2999,25 @@ Item5.MouseButton1Click:Connect(function()
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
         while Toggled2 == true do
+            wait()
             if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
         end
     end
 end)
@@ -3011,7 +3028,9 @@ Mob3.MouseButton1Click:Connect(function()
         Mob3.BackgroundColor3 = Color3.fromRGB(128,0,0)
         Mob3.Text = "Wizard"
         Mob3.TextColor3 = Color3.fromRGB(250,250,250)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled3 = true
@@ -3024,15 +3043,25 @@ Mob3.MouseButton1Click:Connect(function()
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
         while Toggled3 == true do
+            wait()
             if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
         end
     end
 end)
@@ -3043,7 +3072,9 @@ Mob4.MouseButton1Click:Connect(function()
         Mob4.BackgroundColor3 = Color3.fromRGB(194,178,128)
         Mob4.Text = "Skorps"
         Mob4.TextColor3 = Color3.fromRGB(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled4 = true
@@ -3054,36 +3085,63 @@ Mob4.MouseButton1Click:Connect(function()
         BV.Velocity = Vector3.new(0,0,0)
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
+        enemy = "skorpRuby"
+        enemy2 = "skorpGold"
+        enemy3 = "skorpRuby"
         while Toggled4 == true do
             print("searching for skorps")
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("skorpRuby") then 
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("skorpRuby").HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-		    elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("skorpGold") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("skorpGold").HumanoidRootPart.Position
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+	        elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy2):WaitForChild("HumanoidRootPart") then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("skorpIron")then
-                print("found iron skorp")
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("skorpIron").HumanoidRootPart.Position
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy2)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy3):WaitForChild("HumanoidRootPart") then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
-            print("Finished, starting over")
-			wait()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy3)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
         end
     end
 end)
@@ -3107,12 +3165,10 @@ for i, v in pairs(_G.prox) do
 end
 end)
 
-local mouse = game:GetService("Players").LocalPlayer:GetMouse()
-
 mouse.Button1Down:connect(function()
-            if Toggled7 == true then
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = mouse.Hit
-            end
+    if Toggled7 == true then
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = mouse.Hit
+    end
 end)
     
 Item22.MouseButton1Click:Connect(function()
@@ -3864,7 +3920,7 @@ BowPower.BorderColor3 = Color3.new(1,1,1)
 BowPower.ZIndex = 2
 BowPower.Parent = Notification7
 BowPower.Text = ""
-BowPower.PlaceholderText = "Bow Power eg:1000"
+BowPower.PlaceholderText = "Test Number"
 BowPower.TextColor3 = Color3.fromRGB(250,250,250)
 BowPower.TextScaled = true
 
@@ -3881,6 +3937,22 @@ Item27.MouseButton1Click:Connect(function()
         Item27.TextColor3 = Color3.fromRGB(0,0,0)
         while Toggled14 == true do
             wait()
+            local Direction = (game:GetService("Workspace").WildernessIsland.Entities:WaitForChild("slimeKing").HumanoidRootPart.Position - HR.Position)
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["direction"] = Direction + Vector3.new(0, Direction.Magnitude, 0),
+            ["time"] = tick(),
+            ["charge"] = 1,
+            ["bow"] = Character.bow1,
+            ["arrowName"] = "arrow1"
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/lbrbzctgokg"):FireServer(unpack(args))
+
         end
     end
 end)
@@ -3898,6 +3970,22 @@ SlimeQueen.MouseButton1Click:Connect(function()
         SlimeQueen.TextColor3 = Color3.fromRGB(0,0,0)
         while Toggled76 == true do
             wait()
+            local Direction = (game:GetService("Workspace").WildernessIsland.Entities:WaitForChild("slimeQueen").HumanoidRootPart.Position - HR.Position)
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["direction"] = Direction + Vector3.new(0, Direction.Magnitude/4, 0),
+            ["time"] = tick(),
+            ["charge"] = 1,
+            ["bow"] = Character.bow1,
+            ["arrowName"] = "arrow1"
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/lbrbzctgokg"):FireServer(unpack(args))
+
         end
     end
 end)
@@ -4075,7 +4163,9 @@ Mob5.MouseButton1Click:Connect(function()
         Mob5.BackgroundColor3 = Color3.fromRGB(155,0,0)
         Mob5.Text = "magmaBlob"
         Mob5.TextColor3 = Color3.fromRGB(255,200,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled19 = true
@@ -4108,7 +4198,9 @@ Mob6.MouseButton1Click:Connect(function()
         Mob6.BackgroundColor3 = Color3.fromRGB(200,200,200)
         Mob6.Text = "Skeleton Pirate"
         Mob6.TextColor3 = Color3.new(0,0,0)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled48 = true
@@ -4121,16 +4213,25 @@ Mob6.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         local enemy = "skeletonPirate"
         while Toggled48 == true do
+            wait()
             if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
-	    wait()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
         end
     end
 end)
@@ -4141,7 +4242,9 @@ Mob7.MouseButton1Click:Connect(function()
         Mob7.BackgroundColor3 = Color3.fromRGB(200,50,50)
         Mob7.Text = "Crabs"
         Mob7.TextColor3 = Color3.fromRGB(255,200,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled49 = true
@@ -4154,16 +4257,25 @@ Mob7.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         local enemy = "hostileCrab"
         while Toggled49 == true do
+            wait()
             if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
-	    wait()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
         end
     end
 end)
@@ -4173,7 +4285,9 @@ Mob8.MouseButton1Click:Connect(function()
         Toggled60 = false
         Mob8.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
         Mob8.Text = "Rock Mimic"
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled60 = true
@@ -4187,31 +4301,59 @@ Mob8.MouseButton1Click:Connect(function()
         local enemy2 = "rockMimicIron"
         local enemy3 = "rockMimicCoal"
         while Toggled60 == true do
+            wait()
             if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
 		    elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy2):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy3):WaitForChild("HumanoidRootPart") then
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy2)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy3):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy3)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
 	    wait()
         end
     end
@@ -4233,7 +4375,9 @@ Mob9.MouseButton1Click:Connect(function()
         Mob9.BackgroundColor3 = Color3.fromRGB(150,0,150)
         Mob9.Text = "Void Dog"
         Mob9.TextColor3 = Color3.fromRGB(255,200,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
         tween:Cancel()
     else
         Toggled49 = true
@@ -4246,20 +4390,136 @@ Mob9.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         local enemy = "voidDog"
         while Toggled49 == true do
+            wait()
             if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                wait(Time - 2)
-            end
-	    wait()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
         end
     end
 end)
 
+local Mob10 = Instance.new("TextButton")
+Mob10.Position = UDim2.new(0,70,1,85)
+Mob10.Size = UDim2.new(0,70,0,20)
+Mob10.BackgroundColor3 = Color3.fromRGB(250,150,150)
+Mob10.BorderSizePixel = 0
+Mob10.ZIndex = 2
+Mob10.Parent = Notification6
+Mob10.Text = "Slime Queen"
+Mob10.TextColor3 = Color3.fromRGB(0,0,0)
+Mob10.TextScaled = true
+Mob10.MouseButton1Click:Connect(function()
+    if Toggled90 then
+        Toggled90 = false
+        Mob10.BackgroundColor3 = Color3.fromRGB(250,150,150)
+        Mob10.Text = "Slime Queen"
+        Mob10.TextColor3 = Color3.fromRGB(255,200,1)
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
+        tween:Cancel()
+    else
+        Toggled90 = true
+        Mob10.BackgroundColor3 = Color3.new(1,0,0)
+        Mob10.Text = "KILL"
+        Mob10.TextColor3 = Color3.fromRGB(0,0,0)
+        local BV = Instance.new("BodyVelocity")
+        BV.Velocity = Vector3.new(0,0,0)
+        BV.Parent = Character.HumanoidRootPart
+        BV.MaxForce = Vector3.new(0,math.huge,0)
+        local enemy = "slimeQueen"
+        while Toggled90 == true do
+            wait()
+            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+                Distance = (HR.Position - Point).Magnitude
+                Speed = 20
+                Time = Distance/Speed
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-15,0))})
+                tween:Play()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
+        end
+    end
+end)
+
+local Mob11 = Instance.new("TextButton")
+Mob11.Position = UDim2.new(0,0,1,106)
+Mob11.Size = UDim2.new(0,70,0,20)
+Mob11.BackgroundColor3 = Color3.fromRGB(0,150,0)
+Mob11.BorderSizePixel = 0
+Mob11.ZIndex = 2
+Mob11.Parent = Notification6
+Mob11.Text = "Slime King"
+Mob11.TextColor3 = Color3.fromRGB(0,0,0)
+Mob11.TextScaled = true
+Mob11.MouseButton1Click:Connect(function()
+    if Toggled91 then
+        Toggled91 = false
+        Mob11.BackgroundColor3 = Color3.fromRGB(0,150,0)
+        Mob11.Text = "Slime King"
+        Mob11.TextColor3 = Color3.fromRGB(255,200,1)
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
+        tween:Cancel()
+    else
+        Toggled91 = true
+        Mob11.BackgroundColor3 = Color3.new(1,0,0)
+        Mob11.Text = "KILL"
+        Mob11.TextColor3 = Color3.fromRGB(0,0,0)
+        local BV = Instance.new("BodyVelocity")
+        BV.Velocity = Vector3.new(0,0,0)
+        BV.Parent = Character.HumanoidRootPart
+        BV.MaxForce = Vector3.new(0,math.huge,0)
+        local enemy = "slimeKing"
+        while Toggled91 == true do
+            wait()
+            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+                Distance = (HR.Position - Point).Magnitude
+                Speed = 20
+                Time = Distance/Speed
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
+                tween:Play()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
+		    end
+        end
+    end
+end)
 
 Item32.MouseButton1Click:Connect(function()
     if Toggled20 then

@@ -97,6 +97,15 @@ local function NoclipLoop()
     end
 end
 
+local function AntiAFK()
+  game:GetService('Players').LocalPlayer.Idled:Connect(function()
+  game:GetService('VirtualUser'):CaptureController();
+  wait();
+  game:GetService('VirtualUser'):ClickButton2(Vector2.new(0,0))
+  end)
+  end
+spawn(AntiAFK)
+
 local CmdGui = Instance.new("ScreenGui")
 local Background = Instance.new("Frame")
 local CmdHandler = Instance.new("ScrollingFrame")

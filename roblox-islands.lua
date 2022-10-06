@@ -2964,8 +2964,8 @@ Item4.MouseButton1Click:Connect(function()
         local enemy = "slime"
         while Toggled1 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -2980,8 +2980,8 @@ Item4.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -3025,8 +3025,8 @@ Item5.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -3069,8 +3069,8 @@ Mob3.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -3096,11 +3096,12 @@ Mob4.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         enemy = "skorpRuby"
         enemy2 = "skorpGold"
-        enemy3 = "skorpRuby"
+        enemy3 = "skorpIron"
         while Toggled4 == true do
+            wait()
             print("searching for skorps")
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -3115,9 +3116,9 @@ Mob4.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-	        elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy2):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2).HumanoidRootPart.Position
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -3132,9 +3133,9 @@ Mob4.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy3):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3).HumanoidRootPart.Position
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -3149,8 +3150,8 @@ Mob4.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -4187,8 +4188,8 @@ Mob5.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         local enemy = "magmaBlob"
         while Toggled19 == true do
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4239,8 +4240,8 @@ Mob6.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -4283,8 +4284,8 @@ Mob7.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -4311,8 +4312,8 @@ Mob8.MouseButton1Click:Connect(function()
         local enemy3 = "rockMimicCoal"
         while Toggled60 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4327,9 +4328,9 @@ Mob8.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy2):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2).HumanoidRootPart.Position
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4344,9 +4345,9 @@ Mob8.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    elseif game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy3):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3).HumanoidRootPart.Position
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4361,9 +4362,8 @@ Mob8.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
-	    wait()
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -4400,8 +4400,8 @@ Mob9.MouseButton1Click:Connect(function()
         local enemy = "voidDog"
         while Toggled49 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):waitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4416,8 +4416,8 @@ Mob9.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -4454,8 +4454,8 @@ Mob10.MouseButton1Click:Connect(function()
         local enemy = "slimeQueen"
         while Toggled90 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4470,8 +4470,8 @@ Mob10.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -4508,8 +4508,8 @@ Mob11.MouseButton1Click:Connect(function()
         local enemy = "slimeKing"
         while Toggled91 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
                 Speed = 20
                 Time = Distance/Speed
@@ -4524,8 +4524,8 @@ Mob11.MouseButton1Click:Connect(function()
                 }
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/gauenubtSeznljuhemafuNE"):FireServer(unpack(args))
-		    end
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
+            end
         end
     end
 end)
@@ -7811,12 +7811,23 @@ MagmaBlob.MouseButton1Click:Connect(function()
         MagmaBlob.TextColor3 = Color3.fromRGB(0,0,0)
         while Toggled88 == true do
             wait()
-            for i,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
-                if (v.Name == "magmaBlob" or v.Name == "magmaGolem" or v.Name == "magmaGolemite") and v:FindFirstChild("HumanoidRootPart") then
-                    if (v.HumanoidRootPart.Position - Vector3.new(-8667, 345, -1119)).Magnitude < 200 then
-            wait()
-                    end
-                end
+            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
+                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
+                Distance = (HR.Position - Point).Magnitude
+                Speed = 20
+                Time = Distance/Speed
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
+                tween:Play()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["crit"] = true,
+                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
+                }
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("oqxtlxdsMoocTeRfziHgnbedhDSbybNHbmbsG/vyyoixpimbpcmcCfamafkVZcoapjAxikpxblpAvr"):FireServer(unpack(args))
             end
         end
     end

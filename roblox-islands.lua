@@ -4680,19 +4680,25 @@ end)
 Item43.MouseButton1Click:Connect(function()
 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     if v.Name == "rageblade" or v.Name == "arrow1" or v.Name == "bow3" or v.Name == "wateringCan" or v.Name == "sickleDiamond" or v.Name == "diamondPickaxe" or v.Name == "opalPickaxe" or v.Name == "opalAxe" or v.Name == "shears" or v.Name == "diamondAxe" or v.Name == "shovelStone" or v.Name == "fishingRodIron" or v.Name == "pizzaTruffle" or v.Name == "avocadoToastTruffle" or v.Name == "clippers" then wait() else
-local args = {
-    [1] = v.Name,
-    [2] = v.Amount.Value
-}
-
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.SetTradeQuantity:FireServer(unpack(args))
-end
+        -- add item to trade
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["quantity"] = v.Amount.Value,
+        ["toolName"] = v.Name
+        }
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vdSxixakqifrusurgCshjpPyzbE/tgimArrwbtuslkpp"):FireServer(unpack(args))
+    end
 end
 wait()
+-- accept trade
 local args = {
-    [1] = true
-}
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.SetTradeStatus:FireServer(unpack(args))
+    [1] = HttpService:GenerateGUID(false),
+    [2] = {[1] = {["accepted"] = true}}}
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vdSxixakqifrusurgCshjpPyzbE/gcnlqGueYvjqpZbSwbnvl"):FireServer(unpack(args))
 end)
 
 Item44.MouseButton1Click:Connect(function()

@@ -7228,7 +7228,7 @@ Item79.MouseButton1Click:Connect(function()
                     }
                     }
                     }
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cMgolqb/zbnjFj"):FireServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("hvyqwbKPmzDjwr/ezj")
                     wait()
                 end
             end

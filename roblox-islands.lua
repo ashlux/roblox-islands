@@ -97,6 +97,11 @@ local function NoclipLoop()
     end
 end
 
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+
 local function AntiAFK()
   game:GetService('Players').LocalPlayer.Idled:Connect(function()
   game:GetService('VirtualUser'):CaptureController();
@@ -117,7 +122,7 @@ local GetM = Plr:GetMouse()
 local Character = game.Players.LocalPlayer.Character
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TS = game:GetService('TweenService')
-local HR = Character.HumanoidRootPart
+local HR = getRoot(Character)
 local HttpService = game:GetService("HttpService")
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
@@ -4690,7 +4695,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vdSxixakqifrusurgCshjpPyzbE/tgimArrwbtuslkpp"):FireServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Hqre/uxptzzc")
     end
 end
 wait()
@@ -7191,8 +7196,9 @@ Item79.MouseButton1Click:Connect(function()
         Item79.BackgroundColor3 = Color3.fromRGB(55,55,55)
         Item79.Text = "Catch Spirits"
         Item79.TextColor3 = Color3.new(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        tween:Cancel()
+        HR:FindFirstChild("BodyVelocity"):Destroy()
+        Noclipping:Disconnect()
+        noClip = false
     else
         Toggled61 = true
         Item79.BackgroundColor3 = Color3.new(0,255,255)
@@ -7201,32 +7207,29 @@ Item79.MouseButton1Click:Connect(function()
         local BV = Instance.new("BodyVelocity")
         local YSpeed = 0
         BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
+        BV.Parent = HR
         BV.MaxForce = Vector3.new(0,math.huge,0)
         for i,v in pairs(game:GetService("Workspace").spawnPrefabs.WildIslands:GetChildren()) do
             v:Destroy()
         end
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         Times = 0
         while Toggled61 == true do
             wait()
-            for i,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
-                if v.Name == "spirit" then
-                    if v:FindFirstChild("HumanoidRootPart") then
-                        repeat
-                        if Toggled61 then
-                            Times = Times + 1
-                            VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-                            VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
-                            if HR then 
-                                pcall(function()
-                                HR.CFrame = CFrame.new(v:FindFirstChild("HumanoidRootPart").Position + Vector3.new(0,-1,5))
-                            end)
-                            end
-                            wait()
-                        end
-                        until Times == 100 or Toggled61 == false or v:FindFirstChild("HumanoidRootPart") == nil
-                    Times = 0
-                    end
+            if workspace.WildernessIsland.Entities:FindFirstChild("spirit") then
+                if workspace.WildernessIsland.Entities.spirit:FindFirstChild("HumanoidRootPart") then
+                HR.CFrame = CFrame.new(workspace.WildernessIsland.Entities.spirit:FindFirstChild("HumanoidRootPart").Position)
+                    local args = {
+                    [1] = HttpService:GenerateGUID(false),
+                    [2] = {
+                    [1] = {
+                    ["entity"] = workspace.WildernessIsland.Entities.spirit
+                    }
+                    }
+                    }
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cMgolqb/zbnjFj"):FireServer(unpack(args))
+                    wait()
                 end
             end
         end

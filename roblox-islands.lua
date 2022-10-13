@@ -23,7 +23,7 @@ function Fly()
 	bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
 		bg.cframe = torso.CFrame 
 		local bv = Instance.new("BodyVelocity", torso) 
-		bv.velocity = Vector3.new(0,0.1,0) 
+		bv.velocity = Vector3.new(0,0,0) 
 		bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
 		repeat wait() 
 			plr.Character.Humanoid.PlatformStand = true 

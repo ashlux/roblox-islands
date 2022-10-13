@@ -6,10 +6,8 @@ repeat wait()
 local Character = game.Players.LocalPlayer.Character
 local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
-local Island = ""
-for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-    Island = island
-end
+local Island = game.Workspace.Islands:GetChildren()[1]
+local island = game.Workspace.Islands:GetChildren()[1]
 local plr = game.Players.LocalPlayer
 local torso = plr.Character.LowerTorso
 local flying = false
@@ -3774,6 +3772,30 @@ Item36.MouseButton1Click:Connect(function()
     end
 end)
 
+
+function getHiveTrees()
+    local trees = {}
+    for _,tree in pairs(island.Blocks:GetChildren()) do
+        if tree:FindFirstChild("HiveLocations") then
+            table.insert(trees, tree)
+        end
+    end
+    return trees
+end
+    
+function findHives()
+    local trees = getHiveTrees()
+    local beeHives = {}
+    for i,t in pairs(trees) do
+        for _,h in pairs(t.HiveLocations:GetChildren()) do
+            if h:FindFirstChild("beeHive") then
+                table.insert(beeHives, h.Parent.Parent)
+            end
+        end
+    end
+    return beeHives
+end
+
 Item23.MouseButton1Click:Connect(function()
     if Toggled10 then
         Toggled10 = false
@@ -3785,26 +3807,16 @@ Item23.MouseButton1Click:Connect(function()
         Item23.BackgroundColor3 = Color3.new(0,255,255)
         Item23.Text = "Gettn HC"
         Item23.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled10 == true do
-            for i,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-                wait()
-                if (island:IsA("Model")) then
-                    for i,beehive in pairs(island.Blocks:GetDescendants()) do
-                        if (beehive:IsA("Model")) and beehive.Name == "beeHive" and beehive.Root.Effects.Honey.ParticleEmitter.Enabled == true then
-                            print("Found Honeycomb")
-                            local Beehive = beehive.Parent.Parent.Parent
-
-                            local args = {
-                                [1] = {
-                                ["tree"] = Beehive
-                                }
-                            }
-                            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_COLLECT_HONEY:InvokeServer(unpack(args))
-							wait(1)
-                        end
-                        
-                    end
-                end
+        while Toggled10 do
+            wait()
+            local tree = findHives()
+            for _,hive in pairs(tree) do
+                local args = {
+                [1] = {
+                ["tree"] = hive
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_COLLECT_HONEY:InvokeServer(unpack(args))
             end
         end
     end

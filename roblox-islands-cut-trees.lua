@@ -1,7 +1,19 @@
 local island = workspace.Islands:GetChildren()[1]
-local player = game.Players.LocalPlayer
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local tweenService = game:GetService("TweenService")
+local RS = game:GetService("ReplicatedStorage")
+
+local player = game.Players.LocalPlayer
+local Character = player.Character
+local HR = Character.HumanoidRootPart
+
+function enhanceLocalPlayerVelocity()
+	-- keep from falling into the void
+	local bv = Instance.new("BodyVelocity", torso) 
+	local BV = Instance.new("BodyVelocity", HR)
+	BV.Velocity = Vector3.new(0,0,0)
+	BV.MaxForce = Vector3.new(0,math.huge,0)
+end
 
 function getTrees()
 	local trees = {}
@@ -26,54 +38,64 @@ function getTrees()
 	return trees
 end
 
+function closeEnoughToCutTree(tree)
+	return player:DistanceFromCharacter(tree.Position) <= 20
+end
+
+function treeStillhealthy(tree)
+	return tree and tree:FindFirstChild("Health") and tree:FindFirstChild("Health").Value > 0
+end
+
+function hitTree(tree)
+	local args = {
+		[1] = {
+			["player_tracking_category"] = "join_from_web",
+			["part"] = tree:FindFirstChild("trunk"),
+			["block"] = tree,
+			["norm"] = nil,
+			["pos"] = nil
+		}
+	}
+	return RS.rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+end
+
+function moveToTree(tree)
+	local distance = player:DistanceFromCharacter(tree.Position)
+	local speed = 40
+	local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
+	local tween = tweenService:Create(player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(tree .Position)})
+	tween:Play()
+	return tween, distance, speed
+end
+
 
 function cutTrees()
-
-  while true do
-
-	wait()
+  enhanceLocalPlayerVelocity()
+  
+  while wait() do
+	if (player:GetAttribute("harvestTrees") == false) then return nil end
 
 	local trees = getTrees()
-	local closestTree = trees[1]
 
 	if (#trees == 0) then
 		print("No trees found.")
-		wait(1)	
-	elseif (player:DistanceFromCharacter(closestTree.Position) > 24) then
-		print("Moving to closest tree")
-		local distance = player:DistanceFromCharacter(closestTree.Position)
-		local speed = 
-		local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
-		local tween = tweenService:Create(player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(closestTree.Position)})
-		print("play")
-		tween:Play()
-		print("start waiting...")
-		tween.Completed:Wait()
-		print("finished moving")
+		wait()	
 	else
-		print("Cutting tree")
-		
 		for k,v in pairs(trees) do
 			local tree = v;
-			if (player:DistanceFromCharacter(tree.Position) <= 24) then
-				local args = {
-					[1] = {
-				   		["player_tracking_category"] = "join_from_web",
-				           ["part"] = tree:WaitForChild("trunk"),
-				           ["block"] = tree,
-				           ["norm"] = nil,
-				           ["pos"] = nil
-					}
-				}
-						
-				game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out
-					._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+			if (closeEnoughToCutTree(tree)) then
+				hitTree(tree)
 			else
-				break
+				local _, distance, speed = moveToTree(tree)
+				wait(distance/speed - 2)
+				break				
 			end
 		end
 	end
   end
 end
 
+player:SetAttribute("harvestTrees", false)
+wait(5)
+player:SetAttribute("harvestTrees", true)
 cutTrees()

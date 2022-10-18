@@ -3920,21 +3920,45 @@ Item25.MouseButton1Click:Connect(function()
 end)
 
 Item26.MouseButton1Click:Connect(function()
-local Tool = ""
+if buy then buy:Destroy() end
+if sell then sell:Destroy() end
 
-for i,tool in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-    if (tool:IsA("Tool")) then
-print(Tool)
+for _,t in pairs(Character:GetChildren()) do
+    if t:IsA("Tool") then
+        tool = t
+    end
+end
 
-for _,v in pairs(game.Workspace:GetDescendants()) do
-    if (v:IsA("Folder")) and v.Name == "SellingContents" then
-        if v:FindFirstChild(tool.Name) then
-    print("Found a machine")
-    game.Players.LocalPlayer.Character.Humanoid:MoveTo(v.Parent.Position)
+for _,v in pairs(Island.Blocks:GetChildren()) do
+    if v.Name == "vendingMachine" or v.Name == "vendingMachine1" then
+        for _,t in pairs(v.SellingContents:GetChildren()) do
+            print(t.Name)
+            if t.Name == tool.Name then
+                if v.Mode.Value == 0 then
+                buy = Instance.new("BoxHandleAdornment")
+                buy.Name = tool.Name.."-ESP"
+            	buy.Parent = v
+    	        buy.Adornee = v
+                buy.AlwaysOnTop = true
+    	        buy.ZIndex = 0
+                buy.Size = v.Size
+    	        buy.Transparency = 0.3
+                buy.Color3 = Color3.fromRGB(100,250,100)
+                elseif v.Mode.Value == 1 then
+                sell = Instance.new("BoxHandleAdornment")
+                sell.Name = tool.Name.."-ESP"
+    	        sell.Parent = v
+    	        sell.Adornee = v
+                sell.AlwaysOnTop = true
+    	        sell.ZIndex = 0
+                sell.Size = v.Size
+    	        sell.Transparency = 0.3
+                sell.Color3 = Color3.fromRGB(250,100,100)
+                else wait()
+                end
+            end
+        end
 	end
-end
-end
-end
 end
 end)
 

@@ -2934,16 +2934,6 @@ Item4.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -2979,16 +2969,6 @@ Item5.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -3023,16 +3003,6 @@ Mob3.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -3070,16 +3040,6 @@ Mob4.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2) then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
@@ -3087,16 +3047,6 @@ Mob4.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy2)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3) then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
@@ -3104,16 +3054,6 @@ Mob4.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy3)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -3986,16 +3926,6 @@ Mob6.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -4030,16 +3960,6 @@ Mob7.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -4074,16 +3994,6 @@ Mob8.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2) then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
@@ -4091,16 +4001,6 @@ Mob8.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy2)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3) then
                 Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3):WaitForChild("HumanoidRootPart").Position
                 Distance = (HR.Position - Point).Magnitude
@@ -4108,16 +4008,6 @@ Mob8.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy3)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -4162,16 +4052,6 @@ Mob9.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -4216,16 +4096,6 @@ Mob10.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-15,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end
@@ -4270,16 +4140,6 @@ Mob11.MouseButton1Click:Connect(function()
                 Time = Distance/Speed
                 tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
                 tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
             end
         end
     end

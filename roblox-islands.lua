@@ -7,8 +7,8 @@ local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
 local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
-local Island = game.Workspace.Islands:GetChildren()[1]
-local island = game.Workspace.Islands:GetChildren()[1]
+local Island = game.Workspace.Islands:GetChildren()[1] or ""
+local island = game.Workspace.Islands:GetChildren()[1] or ""
 local plr = game.Players.LocalPlayer
 local torso = plr.Character.LowerTorso
 local flying = false
@@ -395,13 +395,32 @@ end)
 Item1 = Instance.new("TextButton")
 Item1.Position = UDim2.new(0,1,0,26)
 Item1.Size = UDim2.new(0,100,0,20)
-Item1.BackgroundColor3 = Color3.new(0,0,1)
+Item1.BackgroundColor3 = Color3.fromRGB(50,100,50)
 Item1.BorderColor3 = Color3.new(1,1,1)
 Item1.ZIndex = 2
 Item1.Parent = Background6
-Item1.Text = "Flower"
+Item1.Text = "Follow Cletus"
 Item1.TextColor3 = Color3.new(1,1,1)
 Item1.TextScaled = true
+Item1.MouseButton1Click:Connect(function()
+    if KillCletus then
+        KillCletus = false
+        Item1.BackgroundColor3 = Color3.fromRGB(50,100,50)
+        Item1.Text = "Follow Cletus"
+        Item1.TextColor3 = Color3.new(1,1,1)
+    else
+        KillCletus = true
+        Item1.BackgroundColor3 = Color3.new(0,255,255)
+        Item1.Text = "Farming!"
+        Item1.TextColor3 = Color3.fromRGB(0,0,0)
+        Enemy = "cletusHalloween"
+        while KillCletus == true do
+            if (Entities[Enemy]:WaitForChild("HumanoidRootPart").Position - HR.Position).Magnitude > 10 then
+            Humanoid:MoveTo(Entities[Enemy].HumanoidRootPart.Position + Vector3.new(math.random(0,5), 0, math.random(0,5)))
+            end
+        end
+    end
+end)
 
 Item3 = Instance.new("TextButton")
 Item3.Position = UDim2.new(0,1,0,341)
@@ -7271,7 +7290,7 @@ Item88.MouseButton1Click:Connect(function()
         Item88.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item88.Text = "Composter"
         Item88.TextColor3 = Color3.fromRGB(250,250,250)
-        tween:Cancel()
+        if tween then tween:Cancel() end
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         NoClipping:Disconnect()
     else
@@ -7279,11 +7298,6 @@ Item88.MouseButton1Click:Connect(function()
         Item88.BackgroundColor3 = Color3.new(0,255,255)
         Item88.Text = "Composting"
         Item88.TextColor3 = Color3.fromRGB(0,0,0)
-        local island = ""
-        local Player = game.Players.LocalPlayer
-        local Character = Player.Character
-        local TS = game:GetService("TweenService")
-        local HR = Character.HumanoidRootPart
         local BV = Instance.new("BodyVelocity")
         local Fish = ""
         BV.Velocity = Vector3.new(0,0,0)
@@ -7291,10 +7305,6 @@ Item88.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         noClip = true
         Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-
-        for i,Islands in pairs(Game.workspace.Islands:GetChildren()) do
-            island = Islands
-        end
         while Toggled79 do
             wait()
             for i,Composter in pairs(island.Blocks:GetChildren()) do
@@ -7398,12 +7408,12 @@ end
 end)
 
 local BFly = Instance.new("TextButton")
-BFly.Position = UDim2.new(0,1,0,1)
-BFly.Size = UDim2.new(0,100,0,20)
+BFly.Position = UDim2.new(0,71,1,127)
+BFly.Size = UDim2.new(0,70,0,20)
 BFly.BackgroundColor3 = Color3.fromRGB(63,63,63)
 BFly.BorderSizePixel = 1
 BFly.ZIndex = 2
-BFly.Parent = Background6
+BFly.Parent = Notification3
 BFly.Text = "Catch Butterflies"
 BFly.TextColor3 = Color3.fromRGB(250,250,250)
 BFly.TextScaled = true

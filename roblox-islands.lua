@@ -4,6 +4,7 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 local Character = game.Players.LocalPlayer.Character
+local Humanoid = Character.Humanoid
 local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 local Island = game.Workspace.Islands:GetChildren()[1]
@@ -124,7 +125,7 @@ local HR = getRoot(Character)
 local HttpService = game:GetService("HttpService")
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
-Toggled85 = false Toggled86 = false Toggled87 = false
+Toggled85 = false Toggled86 = false Toggled87 = false KA = false
 
 
 CmdGui.Name = "CmdGui"
@@ -342,7 +343,7 @@ Close.Text = "X"
 Close.TextColor3 = Color3.fromRGB(255, 255, 255)
 Close.TextSize = 14.000
 Close.MouseButton1Click:Connect(function() Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
-Toggled85 = false Toggled86 = false Toggled87 = false
+Toggled85 = false Toggled86 = false Toggled87 = false KA = false
 fly = false
 CmdGui:Destroy()
 end)
@@ -1000,17 +1001,6 @@ Notification6.Text = "Mob Farms"
 Notification6.TextColor3 = Color3.fromRGB(2,2,2)
 Notification6.TextScaled = true
 
-local Notification7 = Instance.new("TextLabel")
-Notification7.Position = UDim2.new(0,0,0,250)
-Notification7.Size = UDim2.new(0,140,0,15)
-Notification7.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
-Notification7.BorderColor3 = Color3.fromRGB(25, 25, 25)
-Notification7.ZIndex = 2
-Notification7.Parent = CmdHandler4
-Notification7.Text = "Bow Aimbot (InProgress)"
-Notification7.TextColor3 = Color3.fromRGB(2,2,2)
-Notification7.TextScaled = true
-
 local Notification8 = Instance.new("TextLabel")
 Notification8.Position = UDim2.new(0,0,0,0)
 Notification8.Size = UDim2.new(0,140,0,15)
@@ -1155,14 +1145,61 @@ God.Text = "Enable God Mode"
 God.TextColor3 = Color3.fromRGB(50,200,100)
 God.TextScaled = true
 
+local KillAura = Instance.new("TextButton")
+KillAura.Position = UDim2.new(0,1,1,180)
+KillAura.Size = UDim2.new(0,135,0,20)
+KillAura.BackgroundColor3 = Color3.fromRGB(70,0,0)
+KillAura.BorderSizePixel = 2
+KillAura.BorderColor3 = Color3.new(1,0,0)
+KillAura.ZIndex = 2
+KillAura.Parent = Notification6
+KillAura.Text = "Kill Aura"
+KillAura.TextColor3 = Color3.fromRGB(250,50,50)
+KillAura.TextScaled = true
+KillAura.Modal = true
+KillAura.MouseButton1Click:Connect(function()
+    if KA then
+        KA = false
+        KillAura.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        KillAura.Text = "Kill Aura"
+        KillAura.TextColor3 = Color3.fromRGB(250,250,250)
+        Pickem:Disconnect()
+    else
+        KA = true
+        KillAura.BackgroundColor3 = Color3.new(0,255,255)
+        KillAura.Text = "Killin"
+        KillAura.TextColor3 = Color3.fromRGB(0,0,0)
+        while KA do
+            wait()
+            for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
+        if v:FindFirstChild("HumanoidRootPart") then
+        if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
+    local args = {
+    [1] = HttpService:GenerateGUID(false),
+    [2] = {
+        [1] = {
+            ["crit"] = true,
+            ["hitUnit"] = v
+        }
+    }
+}
+
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wwhTvbalduMrhkiltmxbglxvsog/hUztewspdFxbkeivwj"):FireServer(unpack(args))
+    end
+    end
+end
+end
+    end
+end)
+
 local Item6 = Instance.new("TextButton")
-Item6.Position = UDim2.new(0,1,1,150)
+Item6.Position = UDim2.new(0,1,1,220)
 Item6.Size = UDim2.new(0,135,0,20)
 Item6.BackgroundColor3 = Color3.fromRGB(70,70,70)
 Item6.BorderSizePixel = 2
 Item6.BorderColor3 = Color3.new(0,1,0)
 Item6.ZIndex = 2
-Item6.Parent = Notification7
+Item6.Parent = Notification6
 Item6.Text = "Fire ProximityPrompts"
 Item6.TextColor3 = Color3.fromRGB(50,250,50)
 Item6.TextScaled = true
@@ -1432,61 +1469,6 @@ Item26.Parent = Notification5
 Item26.Text = "Find Held Item in Vending"
 Item26.TextColor3 = Color3.fromRGB(250,250,250)
 Item26.TextScaled = true
-
-local Item27 = Instance.new("TextButton")
-Item27.Position = UDim2.new(0,0,1,85)
-Item27.Size = UDim2.new(0,70,0,20)
-Item27.BackgroundColor3 = Color3.fromRGB(63,165,63)
-Item27.BorderSizePixel = 0
-Item27.ZIndex = 2
-Item27.Parent = Notification7
-Item27.Text = "Slime King"
-Item27.TextColor3 = Color3.fromRGB(250,250,250)
-Item27.TextScaled = true
-
-local Item28 = Instance.new("TextButton")
-Item28.Position = UDim2.new(0,71,1,85)
-Item28.Size = UDim2.new(0,69,0,20)
-Item28.BackgroundColor3 = Color3.fromRGB(128, 0, 0)
-Item28.BorderSizePixel = 0
-Item28.ZIndex = 2
-Item28.Parent = Notification7
-Item28.Text = "Wizard Boss"
-Item28.TextColor3 = Color3.fromRGB(250,250,250)
-Item28.TextScaled = true
-
-local Item29 = Instance.new("TextButton")
-Item29.Position = UDim2.new(0,0,1,22)
-Item29.Size = UDim2.new(0,70,0,20)
-Item29.BackgroundColor3 = Color3.fromRGB(194,178,128)
-Item29.BorderSizePixel = 0
-Item29.ZIndex = 2
-Item29.Parent = Notification7
-Item29.Text = "Bhaa"
-Item29.TextColor3 = Color3.fromRGB(0,0,0)
-Item29.TextScaled = true
-
-local Item30 = Instance.new("TextButton")
-Item30.Position = UDim2.new(0,71,1,22)
-Item30.Size = UDim2.new(0,69,0,20)
-Item30.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
-Item30.BorderSizePixel = 0
-Item30.ZIndex = 2
-Item30.Parent = Notification7
-Item30.Text = "Kor"
-Item30.TextColor3 = Color3.fromRGB(0,0,0)
-Item30.TextScaled = true
-
-local Item31 = Instance.new("TextButton")
-Item31.Position = UDim2.new(0,0,1,43)
-Item31.Size = UDim2.new(0,70,0,20)
-Item31.BackgroundColor3 = Color3.fromRGB(155,0,0)
-Item31.BorderSizePixel = 0
-Item31.ZIndex = 2
-Item31.Parent = Notification7
-Item31.Text = "Infernal Dragon"
-Item31.TextColor3 = Color3.fromRGB(250,250,250)
-Item31.TextScaled = true
 
 local Item32 = Instance.new("TextButton")
 Item32.Position = UDim2.new(0,0,1,22)
@@ -1840,28 +1822,6 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     YPos = YPos + 15
     end
 end
-
-local Item66 = Instance.new("TextButton")
-Item66.Position = UDim2.new(0,71,1,43)
-Item66.Size = UDim2.new(0,70,0,20)
-Item66.BackgroundColor3 = Color3.fromRGB(124,92,70)
-Item66.BorderSizePixel = 0
-Item66.ZIndex = 2
-Item66.Parent = Notification7
-Item66.Text = "Fhangorn"
-Item66.TextColor3 = Color3.fromRGB(250,250,250)
-Item66.TextScaled = true
-
-local SlimeQueen = Instance.new("TextButton")
-SlimeQueen.Position = UDim2.new(0,1,1,64)
-SlimeQueen.Size = UDim2.new(0,70,0,20)
-SlimeQueen.BackgroundColor3 = Color3.fromRGB(225,50,100)
-SlimeQueen.BorderSizePixel = 0
-SlimeQueen.ZIndex = 2
-SlimeQueen.Parent = Notification7
-SlimeQueen.Text = "Slime Queen"
-SlimeQueen.TextColor3 = Color3.fromRGB(250,250,250)
-SlimeQueen.TextScaled = true
 
 local Item67 = Instance.new("TextButton")
 Item67.Position = UDim2.new(0,1,0,175)
@@ -3960,252 +3920,6 @@ for _,v in pairs(Island.Blocks:GetChildren()) do
         end
 	end
 end
-end)
-
-local BowPower = Instance.new("TextBox")
-BowPower.Position = UDim2.new(0,0,1,0)
-BowPower.Size = UDim2.new(0,140,0,20)
-BowPower.BackgroundColor3 = Color3.fromRGB(50,50,50)
-BowPower.BorderSizePixel = 0
-BowPower.BorderColor3 = Color3.new(1,1,1)
-BowPower.ZIndex = 2
-BowPower.Parent = Notification7
-BowPower.Text = ""
-BowPower.PlaceholderText = "Test Number"
-BowPower.TextColor3 = Color3.fromRGB(250,250,250)
-BowPower.TextScaled = true
-
-Item27.MouseButton1Click:Connect(function()
-    if Toggled14 then
-        Toggled14 = false
-        Item27.BackgroundColor3 = Color3.fromRGB(63,165,63)
-        Item27.Text = "Slime King"
-        Item27.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled14 = true
-        Item27.BackgroundColor3 = Color3.new(1,0,0)
-        Item27.Text = "Pew Pew"
-        Item27.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled14 == true do
-            wait()
-            local Direction = (game:GetService("Workspace").WildernessIsland.Entities:WaitForChild("slimeKing").HumanoidRootPart.Position - HR.Position)
-            local args = {
-            [1] = HttpService:GenerateGUID(false),
-            [2] = {
-            [1] = {
-            ["direction"] = Direction + Vector3.new(0, Direction.Magnitude, 0),
-            ["time"] = tick(),
-            ["charge"] = 1,
-            ["bow"] = Character.bow1,
-            ["arrowName"] = "arrow1"
-        }
-    }
-}
-
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/lbrbzctgokg"):FireServer(unpack(args))
-
-        end
-    end
-end)
-
-SlimeQueen.MouseButton1Click:Connect(function()
-    if Toggled76 then
-        Toggled76 = false
-        SlimeQueen.BackgroundColor3 = Color3.fromRGB(225,50,100)
-        SlimeQueen.Text = "Slime Queen"
-        SlimeQueen.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled76 = true
-        SlimeQueen.BackgroundColor3 = Color3.new(1,0,0)
-        SlimeQueen.Text = "Pew Pew"
-        SlimeQueen.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled76 == true do
-            wait()
-            local Direction = (game:GetService("Workspace").WildernessIsland.Entities:WaitForChild("slimeQueen").HumanoidRootPart.Position - HR.Position)
-            local args = {
-            [1] = HttpService:GenerateGUID(false),
-            [2] = {
-            [1] = {
-            ["direction"] = Direction + Vector3.new(0, Direction.Magnitude/4, 0),
-            ["time"] = tick(),
-            ["charge"] = 1,
-            ["bow"] = Character.bow1,
-            ["arrowName"] = "arrow1"
-        }
-    }
-}
-
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bcglfyfkPjydeYK/lbrbzctgokg"):FireServer(unpack(args))
-
-        end
-    end
-end)
-
-local VoidDog = Instance.new("TextButton")
-VoidDog.Position = UDim2.new(0,1,1,106)
-VoidDog.Size = UDim2.new(0,70,0,20)
-VoidDog.BackgroundColor3 = Color3.fromRGB(150,0,150)
-VoidDog.BorderSizePixel = 0
-VoidDog.ZIndex = 2
-VoidDog.Parent = Notification7
-VoidDog.Text = "Void Dog(Boss)"
-VoidDog.TextColor3 = Color3.fromRGB(250,250,250)
-VoidDog.TextScaled = true
-VoidDog.MouseButton1Click:Connect(function()
-    if Toggled81 then
-        Toggled81 = false
-        VoidDog.BackgroundColor3 = Color3.fromRGB(150,0,150)
-        VoidDog.Text = "Void Dog(Boss)"
-        VoidDog.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled81 = true
-        VoidDog.BackgroundColor3 = Color3.new(1,0,0)
-        VoidDog.Text = "Pew Pew"
-        VoidDog.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled81 == true do
-            wait()
-            for i,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
-                if v.Name == "voidDog" and v:FindFirstChild("HumanoidRootPart") then
-                    if (v.HumanoidRootPart.Position - Vector3.new(-10224, 315, 9321)).Magnitude < 175 then
-            wait()
-                    end
-                end
-            end
-        end
-    end
-end)
-
-local Buff = Instance.new("TextButton")
-Buff.Position = UDim2.new(0,71,1,106)
-Buff.Size = UDim2.new(0,70,0,20)
-Buff.BackgroundColor3 = Color3.fromRGB(150,150,150)
-Buff.BorderSizePixel = 0
-Buff.ZIndex = 2
-Buff.Parent = Notification7
-Buff.Text = "Buffalkor"
-Buff.TextColor3 = Color3.fromRGB(250,250,250)
-Buff.TextScaled = true
-Buff.MouseButton1Click:Connect(function()
-    if Toggled84 then
-        Toggled84 = false
-        Buff.BackgroundColor3 = Color3.fromRGB(150,150,150)
-        Buff.Text = "Buffalkor"
-        Buff.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled84 = true
-        Buff.BackgroundColor3 = Color3.new(1,0,0)
-        Buff.Text = "Pew Pew"
-        Buff.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled84 == true do
-            wait()
-            print("Starting loop for buffs")
-            for i,buffs in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
-                if buffs.Name == "buffalkor" and buffs:FindFirstChild("HumanoidRootPart") and (buffs.HumanoidRootPart.Position - Vector3.new(1288, 395, 279)).Magnitude < 175 then
-            wait()
-                end
-            end
-        end
-    end
-end)
-
-local VoidSerpent = Instance.new("TextButton")
-VoidSerpent.Position = UDim2.new(0,71,1,64)
-VoidSerpent.Size = UDim2.new(0,70,0,20)
-VoidSerpent.BackgroundColor3 = Color3.fromRGB(150,0,150)
-VoidSerpent.BorderSizePixel = 0
-VoidSerpent.ZIndex = 2
-VoidSerpent.Parent = Notification7
-VoidSerpent.Text = "Void Serpent"
-VoidSerpent.TextColor3 = Color3.fromRGB(250,250,250)
-VoidSerpent.TextScaled = true
-VoidSerpent.MouseButton1Click:Connect(function()
-    if Toggled82 then
-        Toggled82 = false
-        VoidSerpent.BackgroundColor3 = Color3.fromRGB(150,0,150)
-        VoidSerpent.Text = "Void Serpent"
-        VoidSerpent.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled82 = true
-        VoidSerpent.BackgroundColor3 = Color3.new(1,0,0)
-        VoidSerpent.Text = "Pew Pew"
-        VoidSerpent.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled82 == true do
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild("voidSerpent").ActiveAnimations:FindFirstChild("10537952778") then
-                wait() 
-            else
-            wait()
-            end
-        end
-    end
-end)
-
-
-Item28.MouseButton1Click:Connect(function()
-    if Toggled15 then
-        Toggled15 = false
-        Item28.BackgroundColor3 = Color3.fromRGB(128, 0, 0)
-        Item28.Text = "Wizard Boss"
-        Item28.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled15 = true
-        Item28.BackgroundColor3 = Color3.new(1,0,0)
-        Item28.Text = "Pew Pew"
-        Item28.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled15 == true do
-            wait()
-        end
-    end
-end)
-
-Item29.MouseButton1Click:Connect(function()
-    if Toggled16 then
-        Toggled16 = false
-        Item29.BackgroundColor3 = Color3.fromRGB(194,178,128)
-        Item29.Text = "Bhaa"
-        Item29.TextColor3 = Color3.fromRGB(0,0,0)
-    else
-        Toggled16 = true
-        Item29.BackgroundColor3 = Color3.new(1,0,0)
-        Item29.Text = "Pew Pew"
-        Item29.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled16 == true do
-            wait()
-        end
-    end
-end)
-
-Item30.MouseButton1Click:Connect(function()
-    if Toggled17 then
-        Toggled17 = false
-        Item30.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
-        Item30.Text = "Kor"
-        Item30.TextColor3 = Color3.fromRGB(0,0,0)
-    else
-        Toggled17 = true
-        Item30.BackgroundColor3 = Color3.new(1,0,0)
-        Item30.Text = "Pew Pew"
-        Item30.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled17 == true do
-            wait()
-        end
-    end
-end)
-
-Item31.MouseButton1Click:Connect(function()
-    if Toggled18 then
-        Toggled18 = false
-        Item31.BackgroundColor3 = Color3.fromRGB(155,0,0)
-        Item31.Text = "Infernal Dragon"
-        Item31.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled18 = true
-        Item31.BackgroundColor3 = Color3.new(1,0,0)
-        Item31.Text = "Pew Pew"
-        Item31.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled18 == true do
-            wait()
-        end
-    end
 end)
 
 Mob5.MouseButton1Click:Connect(function()
@@ -6580,23 +6294,6 @@ for i,v in pairs(game:GetService("CoreGui").CmdGui.Background.Background4.Backgr
     end)
 end
 
-Item66.MouseButton1Click:Connect(function()
-    if Toggled49 then
-        Toggled49 = false
-        Item66.BackgroundColor3 = Color3.fromRGB(124,92,70)
-        Item66.Text = "Fhangorn"
-        Item66.TextColor3 = Color3.fromRGB(0,0,0)
-    else
-        Toggled49 = true
-        Item66.BackgroundColor3 = Color3.new(1,0,0)
-        Item66.Text = "Pew Pew"
-        Item66.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled49 == true do
-            wait()
-        end
-    end
-end)
-
 Item68.MouseButton1Click:Connect(function()
     if Toggled51 then
         Toggled51 = false
@@ -7284,7 +6981,14 @@ God.MouseButton1Click:Connect(function()
         God.BackgroundColor3 = Color3.new(0,255,255)
         God.Text = "Disable God Mode"
         God.TextColor3 = Color3.fromRGB(0,0,0)
+        WS = 30
 		Character.CurrentHealth:Destroy()
+		Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+            if Toggled69 then
+            Humanoid.WalkSpeed = WS
+            end
+        end)
+        Humanoid.WalkSpeed = WS
     end
 end)
 
@@ -7829,51 +7533,6 @@ for i,pond in pairs(Island.Blocks:GetChildren()) do
         end
     end
 end
-        end
-    end
-end)
-
-local MagmaBlob = Instance.new("TextButton")
-MagmaBlob.Position = UDim2.new(0,1,1,127)
-MagmaBlob.Size = UDim2.new(0,70,0,20)
-MagmaBlob.BackgroundColor3 = Color3.fromRGB(250,20,20)
-MagmaBlob.BorderSizePixel = 0
-MagmaBlob.ZIndex = 2
-MagmaBlob.Parent = Notification7
-MagmaBlob.Text = "MagmaMobs"
-MagmaBlob.TextColor3 = Color3.fromRGB(250,250,250)
-MagmaBlob.TextScaled = true
-MagmaBlob.MouseButton1Click:Connect(function()
-    if Toggled88 then
-        Toggled88 = false
-        MagmaBlob.BackgroundColor3 = Color3.fromRGB(250,20,20)
-        MagmaBlob.Text = "MagmaMobs"
-        MagmaBlob.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled88 = true
-        MagmaBlob.BackgroundColor3 = Color3.new(1,0,0)
-        MagmaBlob.Text = "Pew Pew"
-        MagmaBlob.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled88 == true do
-            wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = workspace.WildernessIsland.Entities:WaitForChild(enemy)
-                }
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cfevfavTqnegCGxwuojAqhLdtihky/jdClttxycammwHieaAhrnHfgcfnynKcavxb"):FireServer(unpack(args))
-            end
         end
     end
 end)

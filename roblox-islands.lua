@@ -450,6 +450,56 @@ Item1.MouseButton1Click:Connect(function()
     end
 end)
 
+Candles = Instance.new("TextButton")
+Candles.Position = UDim2.new(0,1,0,1)
+Candles.Size = UDim2.new(0,100,0,20)
+Candles.BackgroundColor3 = Color3.fromRGB(50,100,50)
+Candles.BorderColor3 = Color3.new(1,1,1)
+Candles.ZIndex = 2
+Candles.Parent = Background6
+Candles.Text = "Spider Candles"
+Candles.TextColor3 = Color3.new(1,1,1)
+Candles.TextScaled = true
+Candles.MouseButton1Click:Connect(function()
+    if Candles1 then
+        Candles1 = false
+        Candles.BackgroundColor3 = Color3.fromRGB(63,165,63)
+        Candles.Text = "Spider Candles"
+        Candles.TextColor3 = Color3.fromRGB(250,250,250)
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
+        tween:Cancel()
+    else
+        Candles1 = true
+        Candles.BackgroundColor3 = Color3.new(1,0,0)
+        Candles.Text = "KILL!"
+        Candles.TextColor3 = Color3.fromRGB(0,0,0)
+        local BV = Instance.new("BodyVelocity")
+        BV.Velocity = Vector3.new(0,0,0)
+        BV.MaxForce = Vector3.new(0,math.huge,0)
+        BV.Parent = HR
+        local enemy = "spiderCandle"
+        while Candles1 == true do
+            wait()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
+            end
+        end
+    end
+end)
+
 Item3 = Instance.new("TextButton")
 Item3.Position = UDim2.new(0,1,0,341)
 Item3.Size = UDim2.new(0,100,0,20)
@@ -1231,7 +1281,7 @@ KillAura.MouseButton1Click:Connect(function()
     }
 }
 
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("rtpfduig/rqvbUsTuvIPidigta"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("nzsRiidxxypwczGjtvihpqGp/oNpsJjeirvKnmycwbmkPfmc"):FireServer(unpack(args))
     end
     end
 end

@@ -1231,7 +1231,7 @@ KillAura.MouseButton1Click:Connect(function()
     }
 }
 
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("rtpfduig/rqvbUsTuvIPidigta"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("gexWnihisjnl/rpuxcuh"):FireServer(unpack(args))
     end
     end
 end

@@ -3,6 +3,7 @@ repeat wait()
 	local mouse = game.Players.LocalPlayer:GetMouse() 
 	repeat wait() until mouse
 	print("Loading")
+local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
 local mouse = game.Players.LocalPlayer:GetMouse()
@@ -391,6 +392,33 @@ Minimum.MouseButton1Click:Connect(function()
 		CmdHandler.Visible = true
 	end
 end)
+
+function getMobs()
+	local mobs = {}
+	for k,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
+	    if v:FindFirstChild("HumanoidRootPart") then
+		    local mob = v
+		    table.insert(mobs, mob)
+        end
+	end	
+
+	table.sort(mobs, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
+    for i,v in ipairs(mobs) do
+        print(i,v)
+    end
+    print(mobs)
+	return mobs
+end
+
+function moveToMobs(mob)
+    local distance = Player:DistanceFromCharacter(mob.HumanoidRootPart.Position)
+    local speed = 25
+    local tweenInfo = TweenInfo.new(distance/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
+    local tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
+    tween:Play()
+    return tween, distance, speed
+end
 
 Item1 = Instance.new("TextButton")
 Item1.Position = UDim2.new(0,1,0,26)
@@ -1203,7 +1231,7 @@ KillAura.MouseButton1Click:Connect(function()
     }
 }
 
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("gexWnihisjnl/rpuxcuh"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("rtpfduig/rqvbUsTuvIPidigta"):FireServer(unpack(args))
     end
     end
 end
@@ -2946,13 +2974,19 @@ Item4.MouseButton1Click:Connect(function()
         local enemy = "slime"
         while Toggled1 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -2981,13 +3015,19 @@ Item5.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         while Toggled2 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -3002,7 +3042,6 @@ Mob3.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
-        tween:Cancel()
     else
         Toggled3 = true
         Mob3.BackgroundColor3 = Color3.new(1,0,0)
@@ -3014,14 +3053,19 @@ Mob3.MouseButton1Click:Connect(function()
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
         while Toggled3 == true do
-            wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -3051,28 +3095,19 @@ Mob4.MouseButton1Click:Connect(function()
         enemy3 = "skorpIron"
         while Toggled4 == true do
             wait()
-            print("searching for skorps")
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
-            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
-            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy3 or v.Name == enemy2 or v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -3938,13 +3973,19 @@ Mob6.MouseButton1Click:Connect(function()
         local enemy = "skeletonPirate"
         while Toggled48 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -3972,13 +4013,19 @@ Mob7.MouseButton1Click:Connect(function()
         local enemy = "hostileCrab"
         while Toggled49 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:WaitForChild(enemy):WaitForChild("HumanoidRootPart") then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy).HumanoidRootPart.Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -4006,27 +4053,19 @@ Mob8.MouseButton1Click:Connect(function()
         local enemy3 = "rockMimicCoal"
         while Toggled60 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
-            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy2):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
-            elseif game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy3):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy or v.Name == enemy2 or v.Name == enemy3 then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -4064,13 +4103,19 @@ Mob9.MouseButton1Click:Connect(function()
         local enemy = "voidDog"
         while Toggled49 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):waitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -4108,13 +4153,19 @@ Mob10.MouseButton1Click:Connect(function()
         local enemy = "slimeQueen"
         while Toggled90 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-15,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -4152,13 +4203,19 @@ Mob11.MouseButton1Click:Connect(function()
         local enemy = "slimeKing"
         while Toggled91 == true do
             wait()
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point + Vector3.new(0,-10,0))})
-                tween:Play()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end

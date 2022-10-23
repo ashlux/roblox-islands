@@ -3985,18 +3985,23 @@ Mob5.MouseButton1Click:Connect(function()
         BV.Velocity = Vector3.new(0,0,0)
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
-        local enemy = "magmaBlob"
+        local enemy, enemy2, enemy3 = "magmaBlob", "magmaGolem", "magmaGolemite"
         while Toggled19 == true do
-            if game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy) then
-                Point = game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild(enemy):WaitForChild("HumanoidRootPart").Position
-                Distance = (HR.Position - Point).Magnitude
-                Speed = 20
-                Time = Distance/Speed
-                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                tween:Play()
-                wait(Time - 2)
+            wait()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy or v.Name == enemy2 or v.Name == enemy3 then
+                    local mob = v
+                    local _, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
-	    wait()
         end
     end
 end)
@@ -4431,7 +4436,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Hqre/uxptzzc")
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ooenbk/wfizohcimwmmrdvmdnejeq")
     end
 end
 wait()
@@ -4439,7 +4444,7 @@ wait()
 local args = {
     [1] = HttpService:GenerateGUID(false),
     [2] = {[1] = {["accepted"] = true}}}
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vdSxixakqifrusurgCshjpPyzbE/gcnlqGueYvjqpZbSwbnvl"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ooenbk/eteliKNhlGkniSltt"):FireServer(unpack(args))
 end)
 
 Item44.MouseButton1Click:Connect(function()

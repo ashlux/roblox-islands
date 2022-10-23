@@ -10,6 +10,18 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 local Island = game.Workspace.Islands:GetChildren()[1] or ""
 local island = game.Workspace.Islands:GetChildren()[1] or ""
+local CmdGui = Instance.new("ScreenGui")
+local Background = Instance.new("Frame")
+local CmdHandler = Instance.new("ScrollingFrame")
+local Close = Instance.new("TextButton")
+local Minimum = Instance.new("TextButton")
+local CmdName = Instance.new("TextButton")
+local Plr = game.Players.LocalPlayer
+local GetM = Plr:GetMouse()
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local TS = game:GetService('TweenService')
+local HttpService = game:GetService("HttpService")
+
 local plr = game.Players.LocalPlayer
 local torso = plr.Character.LowerTorso
 local flying = false
@@ -46,7 +58,7 @@ function Fly()
 			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
 				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
 			else 
-				bv.velocity = Vector3.new(0,0.1,0) 
+				bv.velocity = Vector3.new(0,0,0) 
 			end 
 			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame
 		until not flying 
@@ -87,7 +99,7 @@ end
 	end)
 	Fly()
 
-local function NoclipLoop()
+local function NoclipLoop() -- lets you walk through stuff
     if noClip == true then
         for _, child in pairs(Character:GetDescendants()) do
             if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
@@ -97,12 +109,12 @@ local function NoclipLoop()
     end
 end
 
-function getRoot(char)
+function getRoot(char) -- find root part of character if they dont have HR
 	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
 	return rootPart
 end
 
-local function AntiAFK()
+local function AntiAFK() -- keeps you from going afk by clicking corner of screen when player goes "Idled"
   game:GetService('Players').LocalPlayer.Idled:Connect(function()
   game:GetService('VirtualUser'):CaptureController();
   wait();
@@ -111,19 +123,53 @@ local function AntiAFK()
   end
 spawn(AntiAFK)
 
-local CmdGui = Instance.new("ScreenGui")
-local Background = Instance.new("Frame")
-local CmdHandler = Instance.new("ScrollingFrame")
-local Close = Instance.new("TextButton")
-local Minimum = Instance.new("TextButton")
-local CmdName = Instance.new("TextButton")
-local Plr = game.Players.LocalPlayer
-local GetM = Plr:GetMouse()
-local Character = game.Players.LocalPlayer.Character
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local TS = game:GetService('TweenService')
+function Float() -- makes you float using BV
+	BV = Instance.new("BodyVelocity", getRoot(Character))
+	BV.Velocity = Vector3.new(0,0,0)
+	BV.MaxForce = Vector3.new(0,math.huge,0)
+end
+
+function unFloat() -- gets rid of BV so you dont float
+    HR = getRoot(Character)
+    if HR:FindFirstChild("BodyVelocity") then
+        HR.BodyVelocity:Destroy()
+    end
+end
+
+function getMapInfo() -- get treasure map info
+    for i,v in pairs(game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()) do
+        if i == "position" then
+            Point = v
+        else
+            location = v
+        end
+end
+return location, Point
+end
+
+function goToPoint(Point) -- go to "Point" (Vector3)
+    HR = getRoot(Character)
+    if (HR.Position - Point).magnitude > 24 then
+    Distance = (HR.Position - Point).Magnitude
+    Speed = 25
+    Time = Distance/Speed
+    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+    tween:Play()
+    return Time
+    end
+end
+
+function digTreasure() -- Dig treasure
+    local args = {
+    [1] = HttpService:GenerateGUID(false),
+    [2] = {}
+    }
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.PlayerDigTreasure:FireServer(unpack(args))
+end
+
+
+
 local HR = getRoot(Character)
-local HttpService = game:GetService("HttpService")
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
 Toggled85 = false Toggled86 = false Toggled87 = false KA = false
@@ -1577,6 +1623,43 @@ Item32.Parent = Notification3
 Item32.Text = "Send items to Click"
 Item32.TextColor3 = Color3.fromRGB(250,250,250)
 Item32.TextScaled = true
+
+local Treasure = Instance.new("TextButton")
+Treasure.Position = UDim2.new(0,71,1,22)
+Treasure.Size = UDim2.new(0,70,0,20)
+Treasure.BackgroundColor3 = Color3.fromRGB(63,63,63)
+Treasure.BorderSizePixel = 1
+Treasure.ZIndex = 2
+Treasure.Parent = Notification3
+Treasure.Text = "Dig Treasure"
+Treasure.TextColor3 = Color3.fromRGB(250,250,250)
+Treasure.TextScaled = true
+Treasure.MouseButton1Click:Connect(function()
+    if Treasure1 then
+        Treasure1 = false
+        Treasure.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        Treasure.Text = "Dig Treasure"
+        Treasure.TextColor3 = Color3.fromRGB(250,250,250)
+        Noclipping:Disconnect()
+        noClip = false
+        unFloat()
+    else
+        Treasure1 = true
+        Treasure.BackgroundColor3 = Color3.fromRGB(0,255,255)
+        Treasure.Text = "Digging Treasure"
+        Treasure.TextColor3 = Color3.fromRGB(0,0,0)
+        noClip = true
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        Float()
+        while Treasure1 == true do
+            wait()
+            location, Point = getMapInfo()
+            goToPoint(Point)
+            wait(goToPoint(Point) + 0.5)
+            digTreasure()
+        end
+    end
+end)
 
 local Item33 = Instance.new("TextButton")
 Item33.Position = UDim2.new(0,72,1,1)
@@ -4316,13 +4399,6 @@ Item33.MouseButton1Click:Connect(function()
         Item33.BackgroundColor3 = Color3.fromRGB(0,255,255)
         Item33.Text = "Collecting"
         Item33.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
-        print("Found island",Island)
         while Toggled21 == true do
             wait()
             for _,TruffleBarrel in pairs(Island.Blocks:GetChildren()) do

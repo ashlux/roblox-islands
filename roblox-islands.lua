@@ -4436,7 +4436,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ooenbk/wfizohcimwmmrdvmdnejeq")
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ooenbk/wfizohcimwmmrdvmdnejeq"):FireServer(unpack(args))
     end
 end
 wait()

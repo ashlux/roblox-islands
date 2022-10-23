@@ -115,12 +115,12 @@ function getRoot(char) -- find root part of character if they dont have HR
 end
 
 local function AntiAFK() -- keeps you from going afk by clicking corner of screen when player goes "Idled"
-  game:GetService('Players').LocalPlayer.Idled:Connect(function()
-  game:GetService('VirtualUser'):CaptureController();
-  wait();
-  game:GetService('VirtualUser'):ClickButton2(Vector2.new(0,0))
-  end)
-  end
+    game:GetService('Players').LocalPlayer.Idled:Connect(function()
+    game:GetService('VirtualUser'):CaptureController();
+    wait();
+    game:GetService('VirtualUser'):ClickButton2(Vector2.new(0,0))
+    end)
+end
 spawn(AntiAFK)
 
 function Float() -- makes you float using BV
@@ -155,7 +155,7 @@ function goToPoint(Point) -- go to "Point" (Vector3)
     Time = Distance/Speed
     tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
     tween:Play()
-    return Time
+    return tween, Time
     end
 end
 
@@ -167,6 +167,52 @@ function digTreasure() -- Dig treasure
     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.PlayerDigTreasure:FireServer(unpack(args))
 end
 
+function getMobs()
+	local mobs = {}
+	for k,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
+	    if v:FindFirstChild("HumanoidRootPart") then
+		    local mob = v
+		    table.insert(mobs, mob)
+        end
+	end	
+
+	table.sort(mobs, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
+    for i,v in ipairs(mobs) do
+        print(i,v)
+    end
+    print(mobs)
+	return mobs
+end
+
+function moveToMobs(mob)
+    local distance = Player:DistanceFromCharacter(mob.HumanoidRootPart.Position)
+    local speed = 25
+    local tweenInfo = TweenInfo.new(distance/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
+    local tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
+    tween:Play()
+    return tween, distance, speed
+end
+
+function killAura()
+    HR = getRoot(Character)
+    for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
+    if v:FindFirstChild("HumanoidRootPart") then
+        if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["crit"] = true,
+            ["hitUnit"] = v
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("xzuanmhlagjnlkektbIsgk/RhziIraKIvGgrwioc"):FireServer(unpack(args))
+        end
+    end
+end
+end
 
 
 local HR = getRoot(Character)
@@ -439,33 +485,6 @@ Minimum.MouseButton1Click:Connect(function()
 	end
 end)
 
-function getMobs()
-	local mobs = {}
-	for k,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
-	    if v:FindFirstChild("HumanoidRootPart") then
-		    local mob = v
-		    table.insert(mobs, mob)
-        end
-	end	
-
-	table.sort(mobs, function(t1, t2) 
-		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
-    for i,v in ipairs(mobs) do
-        print(i,v)
-    end
-    print(mobs)
-	return mobs
-end
-
-function moveToMobs(mob)
-    local distance = Player:DistanceFromCharacter(mob.HumanoidRootPart.Position)
-    local speed = 25
-    local tweenInfo = TweenInfo.new(distance/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
-    local tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
-    tween:Play()
-    return tween, distance, speed
-end
-
 Item1 = Instance.new("TextButton")
 Item1.Position = UDim2.new(0,1,0,26)
 Item1.Size = UDim2.new(0,100,0,20)
@@ -487,10 +506,23 @@ Item1.MouseButton1Click:Connect(function()
         Item1.BackgroundColor3 = Color3.new(0,255,255)
         Item1.Text = "Farming!"
         Item1.TextColor3 = Color3.fromRGB(0,0,0)
-        Enemy = "cletusHalloween"
+        enemy = "cletusHalloween"
         while KillCletus == true do
-            if (Entities[Enemy]:WaitForChild("HumanoidRootPart").Position - HR.Position).Magnitude > 10 then
-            Humanoid:MoveTo(Entities[Enemy].HumanoidRootPart.Position + Vector3.new(math.random(0,5), 0, math.random(0,5)))
+            wait()
+            wait()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                print("No mobs")
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    tween, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
             end
         end
     end
@@ -536,7 +568,7 @@ Candles.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -1314,24 +1346,8 @@ KillAura.MouseButton1Click:Connect(function()
         KillAura.TextColor3 = Color3.fromRGB(0,0,0)
         while KA do
             wait()
-            for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
-        if v:FindFirstChild("HumanoidRootPart") then
-        if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
-    local args = {
-    [1] = HttpService:GenerateGUID(false),
-    [2] = {
-        [1] = {
-            ["crit"] = true,
-            ["hitUnit"] = v
-        }
-    }
-}
-
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("xzuanmhlagjnlkektbIsgk/RhziIraKIvGgrwioc"):FireServer(unpack(args))
-    end
-    end
-end
-end
+            killAura()
+        end
     end
 end)
 
@@ -1643,6 +1659,7 @@ Treasure.MouseButton1Click:Connect(function()
         Noclipping:Disconnect()
         noClip = false
         unFloat()
+        tween:Cancel()
     else
         Treasure1 = true
         Treasure.BackgroundColor3 = Color3.fromRGB(0,255,255)
@@ -1654,8 +1671,9 @@ Treasure.MouseButton1Click:Connect(function()
         while Treasure1 == true do
             wait()
             location, Point = getMapInfo()
+            tween, Time = goToLocation(Point)
             goToPoint(Point)
-            wait(goToPoint(Point) + 0.5)
+            wait(Time + 0.5)
             digTreasure()
         end
     end
@@ -3115,7 +3133,7 @@ Item4.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -3156,7 +3174,7 @@ Item5.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -3194,7 +3212,7 @@ Mob3.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -3236,7 +3254,7 @@ Mob4.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy3 or v.Name == enemy2 or v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4079,7 +4097,7 @@ Mob5.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy or v.Name == enemy2 or v.Name == enemy3 then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4119,7 +4137,7 @@ Mob6.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4159,7 +4177,7 @@ Mob7.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4199,7 +4217,7 @@ Mob8.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy or v.Name == enemy2 or v.Name == enemy3 then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4249,7 +4267,7 @@ Mob9.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4299,7 +4317,7 @@ Mob10.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4349,7 +4367,7 @@ Mob11.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    local _, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob)
                     wait(distance/speed - 1)
                     break
                     end

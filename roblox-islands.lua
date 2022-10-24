@@ -1618,8 +1618,212 @@ Item2.Text = "Join/Invite"
 Item2.TextColor3 = Color3.fromRGB(250,250,250)
 Item2.TextScaled = true
 
+infos = Instance.new("TextLabel")
+infos.Position = UDim2.new(0,1,1,1)
+infos.Size = UDim2.new(0,70,0,40)
+infos.BackgroundColor3 = Color3.fromRGB(0,0,0)
+infos.BorderSizePixel = 1
+infos.ZIndex = 2
+infos.Parent = Notification5
+infos.Text = "Enter max--> PRICE to fill with coins"
+infos.TextColor3 = Color3.fromRGB(250,250,250)
+infos.TextScaled = true
+
+fillAmount = Instance.new("TextBox")
+fillAmount.Position = UDim2.new(0,71,1,1)
+fillAmount.Size = UDim2.new(0,70,0,20)
+fillAmount.BackgroundColor3 = Color3.fromRGB(50,50,50)
+fillAmount.BorderSizePixel = 1
+fillAmount.BorderColor3 = Color3.fromRGB(200,200,200)
+fillAmount.ZIndex = 2
+fillAmount.Parent = Notification5
+fillAmount.PlaceholderText = "Enter Amount"
+fillAmount.Text = ""
+fillAmount.TextColor3 = Color3.fromRGB(250,250,250)
+fillAmount.TextScaled = true
+
+fillMachines = Instance.new("TextButton")
+fillMachines.Position = UDim2.new(0,71,1,21)
+fillMachines.Size = UDim2.new(0,70,0,20)
+fillMachines.BackgroundColor3 = Color3.fromRGB(63,63,63)
+fillMachines.BorderSizePixel = 1
+fillMachines.ZIndex = 2
+fillMachines.Parent = Notification5
+fillMachines.Text = "Fill Machines"
+fillMachines.TextColor3 = Color3.fromRGB(250,250,250)
+fillMachines.TextScaled = true
+fillMachines.MouseButton1Click:Connect(function()
+local HttpService = game:GetService("HttpService")
+local Island = game.Workspace.Islands:GetChildren()[1]
+
+for i,v in pairs(Island.Blocks:GetChildren()) do
+    if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 1 and v.TransactionPrice.Value <= tonumber(fillAmount.Text) then
+        if v.CoinBalance.Value < ((v.TransactionPrice.Value * 1.07) * 1000) then
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["vendingMachine"] = v
+        }
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+        wait()
+        
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["vendingMachine"] = v,
+        ["player_tracking_category"] = "join_from_web",
+        ["amount"] = v.CoinBalance.Value
+        }
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/ilbxonbelgiJnmzck"):FireServer(unpack(args))
+        wait()
+        print(v.TransactionPrice.Value * 1.07)
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["vendingMachine"] = v,
+        ["player_tracking_category"] = "join_from_web",
+        ["amount"] = (v.TransactionPrice.Value * 1.07) * 1000
+        }
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/fqoylFrqClgOqhkGdkrhqmLyjdaigktzmxf"):FireServer(unpack(args))
+        wait()
+        
+        local args = {
+        [1] = {
+        ["vendingMachine"] = v
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+        print("Finished")
+        end
+    end
+end
+end)
+
+withdrawCoins = Instance.new("TextButton")
+withdrawCoins.Position = UDim2.new(0,1,1,42)
+withdrawCoins.Size = UDim2.new(0,140,0,20)
+withdrawCoins.BackgroundColor3 = Color3.fromRGB(63,63,63)
+withdrawCoins.BorderSizePixel = 1
+withdrawCoins.ZIndex = 2
+withdrawCoins.Parent = Notification5
+withdrawCoins.Text = "Withdraw coins from BUY"
+withdrawCoins.TextColor3 = Color3.fromRGB(250,250,250)
+withdrawCoins.TextScaled = true
+withdrawCoins.MouseButton1Click:Connect(function()
+for i,v in pairs(Island.Blocks:GetChildren()) do
+    if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 0 then
+        if v.CoinBalance.Value > 0 then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["vendingMachine"] = v
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+            wait()
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["vendingMachine"] = v,
+            ["player_tracking_category"] = "join_from_web",
+            ["amount"] = v.CoinBalance.Value
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/ilbxonbelgiJnmzck"):FireServer(unpack(args))
+            wait()
+            local args = {
+            [1] = {
+            ["vendingMachine"] = v
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+        end
+    end
+end
+end)
+
+fillVendings = Instance.new("TextButton")
+fillVendings.Position = UDim2.new(0,1,1,63)
+fillVendings.Size = UDim2.new(0,140,0,20)
+fillVendings.BackgroundColor3 = Color3.fromRGB(63,63,63)
+fillVendings.BorderSizePixel = 1
+fillVendings.ZIndex = 2
+fillVendings.Parent = Notification5
+fillVendings.Text = "Fill BUY Vendings"
+fillVendings.TextColor3 = Color3.fromRGB(250,250,250)
+fillVendings.TextScaled = true
+fillVendings.MouseButton1Click:Connect(function()
+    for i,v in pairs(Island.Blocks:GetChildren()) do
+    if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 0 then
+        contents = v.SellingContents:GetChildren()[1]
+        if contents ~= nil and contents.Amount.Value < 1000 and Player.Backpack:FindFirstChild(contents.Name) then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["vendingMachine"] = v
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+            wait()
+            if Player.Backpack[contents.Name].Amount.Value < (1000 - contents.Amount.Value) then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["player_tracking_category"] = "join_from_web",
+            ["amount"] = Player.Backpack[contents.Name].Amount.Value,
+            ["vendingMachine"] = v,
+            ["tool"] = Player.Backpack[contents.Name],
+            ["action"] = "deposit"
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
+            else
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["player_tracking_category"] = "join_from_web",
+            ["amount"] = 1000 - contents.Amount.Value,
+            ["vendingMachine"] = v,
+            ["tool"] = Player.Backpack[contents.Name],
+            ["action"] = "deposit"
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
+            end
+            wait()
+            local args = {
+            [1] = {
+            ["vendingMachine"] = v
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+        
+        end
+    end
+end
+end)
+
 local Item26 = Instance.new("TextButton")
-Item26.Position = UDim2.new(0,1,1,65)
+Item26.Position = UDim2.new(0,1,1,87)
 Item26.Size = UDim2.new(0,140,0,20)
 Item26.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item26.BorderSizePixel = 1
@@ -1628,6 +1832,48 @@ Item26.Parent = Notification5
 Item26.Text = "Find Held Item in Vending"
 Item26.TextColor3 = Color3.fromRGB(250,250,250)
 Item26.TextScaled = true
+Item26.MouseButton1Click:Connect(function()
+if buy then buy:Destroy() end
+if sell then sell:Destroy() end
+
+for _,t in pairs(Character:GetChildren()) do
+    if t:IsA("Tool") then
+        tool = t
+    end
+end
+
+for _,v in pairs(Island.Blocks:GetChildren()) do
+    if v.Name == "vendingMachine" or v.Name == "vendingMachine1" then
+        for _,t in pairs(v.SellingContents:GetChildren()) do
+            print(t.Name)
+            if t.Name == tool.Name then
+                if v.Mode.Value == 0 then
+                buy = Instance.new("BoxHandleAdornment")
+                buy.Name = tool.Name.."-ESP"
+            	buy.Parent = v
+    	        buy.Adornee = v
+                buy.AlwaysOnTop = true
+    	        buy.ZIndex = 0
+                buy.Size = v.Size
+    	        buy.Transparency = 0.3
+                buy.Color3 = Color3.fromRGB(100,250,100)
+                elseif v.Mode.Value == 1 then
+                sell = Instance.new("BoxHandleAdornment")
+                sell.Name = tool.Name.."-ESP"
+    	        sell.Parent = v
+    	        sell.Adornee = v
+                sell.AlwaysOnTop = true
+    	        sell.ZIndex = 0
+                sell.Size = v.Size
+    	        sell.Transparency = 0.3
+                sell.Color3 = Color3.fromRGB(250,100,100)
+                else wait()
+                end
+            end
+        end
+	end
+end
+end)
 
 local Item32 = Instance.new("TextButton")
 Item32.Position = UDim2.new(0,0,1,22)
@@ -4022,49 +4268,6 @@ Item25.MouseButton1Click:Connect(function()
 			end
         end
     end
-end)
-
-Item26.MouseButton1Click:Connect(function()
-if buy then buy:Destroy() end
-if sell then sell:Destroy() end
-
-for _,t in pairs(Character:GetChildren()) do
-    if t:IsA("Tool") then
-        tool = t
-    end
-end
-
-for _,v in pairs(Island.Blocks:GetChildren()) do
-    if v.Name == "vendingMachine" or v.Name == "vendingMachine1" then
-        for _,t in pairs(v.SellingContents:GetChildren()) do
-            print(t.Name)
-            if t.Name == tool.Name then
-                if v.Mode.Value == 0 then
-                buy = Instance.new("BoxHandleAdornment")
-                buy.Name = tool.Name.."-ESP"
-            	buy.Parent = v
-    	        buy.Adornee = v
-                buy.AlwaysOnTop = true
-    	        buy.ZIndex = 0
-                buy.Size = v.Size
-    	        buy.Transparency = 0.3
-                buy.Color3 = Color3.fromRGB(100,250,100)
-                elseif v.Mode.Value == 1 then
-                sell = Instance.new("BoxHandleAdornment")
-                sell.Name = tool.Name.."-ESP"
-    	        sell.Parent = v
-    	        sell.Adornee = v
-                sell.AlwaysOnTop = true
-    	        sell.ZIndex = 0
-                sell.Size = v.Size
-    	        sell.Transparency = 0.3
-                sell.Color3 = Color3.fromRGB(250,100,100)
-                else wait()
-                end
-            end
-        end
-	end
-end
 end)
 
 Mob5.MouseButton1Click:Connect(function()

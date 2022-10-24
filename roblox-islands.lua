@@ -1133,7 +1133,7 @@ Notification3.TextColor3 = Color3.fromRGB(2,2,2)
 Notification3.TextScaled = true
 
 local Notification4 = Instance.new("TextLabel")
-Notification4.Position = UDim2.new(0,0,0,300)
+Notification4.Position = UDim2.new(0,0,0,450)
 Notification4.Size = UDim2.new(0,150,0,15)
 Notification4.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification4.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1155,7 +1155,7 @@ Notification5.TextColor3 = Color3.fromRGB(2,2,2)
 Notification5.TextScaled = true
 
 local BottomOfMisc = Instance.new("TextLabel") -- Bottom of Misc
-BottomOfMisc.Position = UDim2.new(0,0,0,520)
+BottomOfMisc.Position = UDim2.new(0,0,0,590)
 BottomOfMisc.Size = UDim2.new(0,120,0,15)
 BottomOfMisc.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 BottomOfMisc.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1822,8 +1822,60 @@ fillVendings.MouseButton1Click:Connect(function()
 end
 end)
 
+collectItems = Instance.new("TextButton")
+collectItems.Position = UDim2.new(0,1,1,84)
+collectItems.Size = UDim2.new(0,140,0,20)
+collectItems.BackgroundColor3 = Color3.fromRGB(63,63,63)
+collectItems.BorderSizePixel = 1
+collectItems.ZIndex = 2
+collectItems.Parent = Notification5
+collectItems.Text = "Collect SELL Vending items"
+collectItems.TextColor3 = Color3.fromRGB(250,250,250)
+collectItems.TextScaled = true
+collectItems.MouseButton1Click:Connect(function()
+    for i,v in pairs(Island.Blocks:GetChildren()) do
+    if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 1 then
+        contents = v.SellingContents:GetChildren()[1]
+        if contents ~= nil and contents.Amount.Value > 1 then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["vendingMachine"] = v
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+            
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["player_tracking_category"] = "join_from_web",
+            ["amount"] = contents.Amount.Value - 1,
+            ["vendingMachine"] = v,
+            ["tool"] = v.SellingContents[contents.Name],
+            ["action"] = "withdraw"
+            }
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
+
+            
+            local args = {
+            [1] = {
+            ["vendingMachine"] = v
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+        
+        end
+    end
+end
+end)
+
 local Item26 = Instance.new("TextButton")
-Item26.Position = UDim2.new(0,1,1,87)
+Item26.Position = UDim2.new(0,1,1,129)
 Item26.Size = UDim2.new(0,140,0,20)
 Item26.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item26.BorderSizePixel = 1

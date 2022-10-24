@@ -214,6 +214,10 @@ function killAura()
 end
 end
 
+function round(number)
+    return math.floor(number + 0.5)
+end
+
 
 local HR = getRoot(Character)
 
@@ -1653,9 +1657,6 @@ fillMachines.Text = "Fill Machines"
 fillMachines.TextColor3 = Color3.fromRGB(250,250,250)
 fillMachines.TextScaled = true
 fillMachines.MouseButton1Click:Connect(function()
-local HttpService = game:GetService("HttpService")
-local Island = game.Workspace.Islands:GetChildren()[1]
-
 for i,v in pairs(Island.Blocks:GetChildren()) do
     if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 1 and v.TransactionPrice.Value <= tonumber(fillAmount.Text) then
         if v.CoinBalance.Value < ((v.TransactionPrice.Value * 1.07) * 1000) then
@@ -1668,8 +1669,6 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         }
         }
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
-        wait()
-        
         local args = {
         [1] = HttpService:GenerateGUID(false),
         [2] = {
@@ -1681,20 +1680,18 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         }
         }
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/ilbxonbelgiJnmzck"):FireServer(unpack(args))
-        wait()
-        print(v.TransactionPrice.Value * 1.07)
+        print((v.TransactionPrice.Value * 1.07) * 1000)
         local args = {
         [1] = HttpService:GenerateGUID(false),
         [2] = {
         [1] = {
         ["vendingMachine"] = v,
         ["player_tracking_category"] = "join_from_web",
-        ["amount"] = (v.TransactionPrice.Value * 1.07) * 1000
+        ["amount"] = (round(v.TransactionPrice.Value * 1.07)) * 1000
         }
         }
         }
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/fqoylFrqClgOqhkGdkrhqmLyjdaigktzmxf"):FireServer(unpack(args))
-        wait()
         
         local args = {
         [1] = {
@@ -1731,7 +1728,6 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
             }
             }
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
-            wait()
             local args = {
             [1] = HttpService:GenerateGUID(false),
             [2] = {
@@ -1743,7 +1739,6 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
             }
             }
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/ilbxonbelgiJnmzck"):FireServer(unpack(args))
-            wait()
             local args = {
             [1] = {
             ["vendingMachine"] = v
@@ -1779,7 +1774,6 @@ fillVendings.MouseButton1Click:Connect(function()
             }
             }
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
-            wait()
             if Player.Backpack[contents.Name].Amount.Value < (1000 - contents.Amount.Value) then
             local args = {
             [1] = HttpService:GenerateGUID(false),
@@ -1809,7 +1803,6 @@ fillVendings.MouseButton1Click:Connect(function()
             }
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
             end
-            wait()
             local args = {
             [1] = {
             ["vendingMachine"] = v

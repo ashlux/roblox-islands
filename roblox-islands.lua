@@ -3,8 +3,17 @@ repeat wait()
 	local mouse = game.Players.LocalPlayer:GetMouse() 
 	repeat wait() until mouse
 	print("Loading")
-	
+
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kxNc/etnlckjkG")
+local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/tfyuxzyn")
+local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/jhgxjzqinsiau")
+local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/arvmkmbpeihybCuwivhvaqGbspnzrlbjsbecaptd")
+local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/cftuvfhFUcyguekjhvumjIpNXfaxdDucqrxpgsXxk")
+local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/wnigzimrzxnAIIisufyxnqj")
+local refillItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/wnigzimrzxnAIIisufyxnqj")
+local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/hdpNgsqHrbovfZGfmmw")
+local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/mkjfWpNbrojqbkVuQlmb")
+
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
@@ -1670,7 +1679,7 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+        openVending:FireServer(unpack(args))
         local args = {
         [1] = HttpService:GenerateGUID(false),
         [2] = {
@@ -1681,7 +1690,7 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/ilbxonbelgiJnmzck"):FireServer(unpack(args))
+        takeCoins:FireServer(unpack(args))
         print((v.TransactionPrice.Value * 1.07) * 1000)
         local args = {
         [1] = HttpService:GenerateGUID(false),
@@ -1693,14 +1702,14 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/fqoylFrqClgOqhkGdkrhqmLyjdaigktzmxf"):FireServer(unpack(args))
+        refillCoins:FireServer(unpack(args))
         
         local args = {
         [1] = {
         ["vendingMachine"] = v
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+        closeVending:FireServer(unpack(args))
         print("Finished")
         end
     end
@@ -1729,7 +1738,7 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+            openVending:FireServer(unpack(args))
             local args = {
             [1] = HttpService:GenerateGUID(false),
             [2] = {
@@ -1740,13 +1749,13 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/ilbxonbelgiJnmzck"):FireServer(unpack(args))
+            withdrawCoins:FireServer(unpack(args))
             local args = {
             [1] = {
             ["vendingMachine"] = v
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+            closeVending:FireServer(unpack(args))
         end
     end
 end
@@ -1775,7 +1784,7 @@ fillVendings.MouseButton1Click:Connect(function()
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+            openVending:FireServer(unpack(args))
             if Player.Backpack[contents.Name].Amount.Value < (1000 - contents.Amount.Value) then
             local args = {
             [1] = HttpService:GenerateGUID(false),
@@ -1789,7 +1798,7 @@ fillVendings.MouseButton1Click:Connect(function()
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
+            refillItem:FireServer(unpack(args))
             else
             local args = {
             [1] = HttpService:GenerateGUID(false),
@@ -1803,14 +1812,14 @@ fillVendings.MouseButton1Click:Connect(function()
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
+            refillItem:FireServer(unpack(args))
             end
             local args = {
             [1] = {
             ["vendingMachine"] = v
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+            closeVending:FireServer(unpack(args))
         
         end
     end
@@ -1840,7 +1849,7 @@ collectItems.MouseButton1Click:Connect(function()
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/xqSkokKkqklhftu"):FireServer(unpack(args))
+            openVending:FireServer(unpack(args))
             
             local args = {
             [1] = HttpService:GenerateGUID(false),
@@ -1854,15 +1863,14 @@ collectItems.MouseButton1Click:Connect(function()
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wblUjbgoswcEeytcQcjbveowqk"):FireServer(unpack(args))
+            emptyItem:FireServer(unpack(args))
 
-            
             local args = {
             [1] = {
             ["vendingMachine"] = v
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eOmheqdzddfnoktjpqxsocvovq/wfnmhbpngrOytkIvescd"):FireServer(unpack(args))
+            closeVending:FireServer(unpack(args))
         
         end
     end
@@ -4780,7 +4788,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         }
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ooenbk/wfizohcimwmmrdvmdnejeq"):FireServer(unpack(args))
+        tradeEvent:FireServer(unpack(args))
     end
 end
 wait()
@@ -4788,7 +4796,7 @@ wait()
 local args = {
     [1] = HttpService:GenerateGUID(false),
     [2] = {[1] = {["accepted"] = true}}}
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ooenbk/eteliKNhlGkniSltt"):FireServer(unpack(args))
+tradeAccept:FireServer(unpack(args))
 end)
 
 Item44.MouseButton1Click:Connect(function()

@@ -4,6 +4,11 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 
+updates = "[OWNER] [Matt]: Updated 10/25/2022! Have fun :D"
+
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
+
 --- these items change all the dang time!
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kxNc/etnlckjkG")
 local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/tfyuxzyn")

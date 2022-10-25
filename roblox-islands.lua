@@ -4,6 +4,7 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 
+--- these items change all the dang time!
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kxNc/etnlckjkG")
 local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/tfyuxzyn")
 local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/jhgxjzqinsiau")
@@ -13,7 +14,7 @@ local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_module
 local refillItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/wnigzimrzxnAIIisufyxnqj")
 local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/hdpNgsqHrbovfZGfmmw")
 local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/mkjfWpNbrojqbkVuQlmb")
-
+---
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
@@ -1749,7 +1750,7 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
             }
             }
             }
-            withdrawCoins:FireServer(unpack(args))
+            takeCoins:FireServer(unpack(args))
             local args = {
             [1] = {
             ["vendingMachine"] = v

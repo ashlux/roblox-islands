@@ -3,6 +3,8 @@ repeat wait()
 	local mouse = game.Players.LocalPlayer:GetMouse() 
 	repeat wait() until mouse
 	print("Loading")
+	
+local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kxNc/etnlckjkG")
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
@@ -208,7 +210,7 @@ function killAura()
             }
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("xzuanmhlagjnlkektbIsgk/RhziIraKIvGgrwioc"):FireServer(unpack(args))
+            hitMobEvent:FireServer(unpack(args))
         end
     end
 end

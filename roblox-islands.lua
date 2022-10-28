@@ -4,7 +4,7 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 
-updates = "[OWNER] [Matt]: Updated 10/27/2022! Have fun :D"
+updates = "[OWNER] [Matt]: Updated 10/28/2022! Have fun :D"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -286,6 +286,76 @@ function round(number)
     return math.floor(number + 0.5)
 end
 
+function moveToCrop(Crop)
+    randomCrop = getAllCrops(Crop)
+    print(randomCrop[1], randomCrop[1].Position)
+    tween, Time = goToPoint(randomCrop[1].Position)
+    return tween, Time
+end
+
+function rePlant(Crop)
+local args = {
+    [1] = {
+        ["upperBlock"] = false,
+        ["cframe"] = Crop.CFrame,
+        ["player_tracking_category"] = "join_from_web",
+        ["blockType"] = Crop.Name
+    }
+}
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+end
+
+function sicklePlants(Crop)
+    local Tool = getSickle()
+    print("Got",Tool)
+    Crops = getCrops(Crop)
+    local args = {
+    [1] = Tool.Name,
+    [2] = Crops
+    }
+
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.SwingSickle:InvokeServer(unpack(args))
+end
+
+function getSickle()
+    for i,v in pairs(Character:GetChildren()) do
+        if v:IsA("Tool") and v.Name:find("ickle") then
+            Tool = v
+        end
+    end
+    if not Tool then
+        for i,v in pairs(Player.Backpack:GetChildren()) do
+            if v:IsA("Tool") and v.Name:find("ickle") then
+                Tool = v
+            end
+        end
+    end
+    print("Getting",Tool)
+    return Tool
+end
+
+function getCrops(Crop)
+	local crops = {}
+	for k,v in pairs(Island.Blocks:GetChildren()) do
+	    if v.Name == Crop and Player:DistanceFromCharacter(v.Position) < 24 then
+		    table.insert(crops, v)
+        end
+	end	
+
+	table.sort(crops, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
+	return crops
+end
+
+function getAllCrops(Crop)
+    local crops = {}
+	for k,v in pairs(Island.Blocks:GetChildren()) do
+	    if v.Name == Crop and v.stage.Value == 3 then
+		    table.insert(crops, v)
+        end
+	end
+	return crops
+end
 
 local HR = getRoot(Character)
 
@@ -510,6 +580,7 @@ Close.TextSize = 14.000
 Close.MouseButton1Click:Connect(function() Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
 Toggled85 = false Toggled86 = false Toggled87 = false KA = false
 fly = false
+destroyOrbs = false
 CmdGui:Destroy()
 end)
 
@@ -1101,8 +1172,19 @@ WholesalerScroll.Position = UDim2.new(0, 1, 0, 1)
 WholesalerScroll.Size = UDim2.new(0, 148, 0, 195)
 WholesalerScroll.ScrollBarThickness = 8
 
+local N0 = Instance.new("TextLabel")
+N0.Position = UDim2.new(0,0,0,0)
+N0.Size = UDim2.new(0,150,0,15)
+N0.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
+N0.BorderColor3 = Color3.fromRGB(25, 25, 25)
+N0.ZIndex = 2
+N0.Parent = CmdHandler7
+N0.Text = "FARMFARMFARMFARM"
+N0.TextColor3 = Color3.fromRGB(2,2,2)
+N0.TextScaled = true
+
 local N1 = Instance.new("TextLabel")
-N1.Position = UDim2.new(0,0,0,0)
+N1.Position = UDim2.new(0,0,0,150)
 N1.Size = UDim2.new(0,150,0,15)
 N1.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 N1.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1113,7 +1195,7 @@ N1.TextColor3 = Color3.fromRGB(2,2,2)
 N1.TextScaled = true
 
 local N2 = Instance.new("TextLabel")
-N2.Position = UDim2.new(0,0,0,200)
+N2.Position = UDim2.new(0,0,0,350)
 N2.Size = UDim2.new(0,150,0,15)
 N2.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 N2.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1645,6 +1727,166 @@ Item22.Parent = Notification4
 Item22.Text = "Pick Useless Fertiles"
 Item22.TextColor3 = Color3.fromRGB(250,250,250)
 Item22.TextScaled = true
+
+cropsBackground = Instance.new("Frame")
+cropsBackground.Name = "cropsBackground"
+cropsBackground.Parent = Background10
+cropsBackground.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+cropsBackground.BorderSizePixel = 0
+cropsBackground.BorderColor3 = Color3.new(1,0,1)
+cropsBackground.Position = UDim2.new(1, 0, 0.05, 0)
+cropsBackground.Size = UDim2.new(0, 115, 0, 150)
+cropsBackground.Active = true
+cropsBackground.Visible = false
+
+local cropsHandler = Instance.new("ScrollingFrame")
+cropsHandler.Name = "cropsHandler"
+cropsHandler.Parent = cropsBackground
+cropsHandler.Active = true
+cropsHandler.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+cropsHandler.BackgroundTransparency = 1.000
+cropsHandler.BorderSizePixel = 0
+cropsHandler.AutomaticCanvasSize = "Y"
+cropsHandler.Position = UDim2.new(0, 1, 0, 1)
+cropsHandler.Size = UDim2.new(0, 115, 0, 195)
+cropsHandler.ScrollBarThickness = 8
+
+destroy = false
+game.Workspace.ChildAdded:Connect(function(part)
+    if destroy == true and part.Name == "Part" then
+        part:Destroy()
+    end
+end)
+
+sickleButton = Instance.new("TextButton")
+sickleButton.Position = UDim2.new(0,0,1,21)
+sickleButton.Size = UDim2.new(0,140,0,20)
+sickleButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
+sickleButton.BorderSizePixel = 1
+sickleButton.ZIndex = 2
+sickleButton.Parent = N0
+sickleButton.Text = "Sickle Farm"
+sickleButton.TextColor3 = Color3.fromRGB(250,250,250)
+sickleButton.TextScaled = true
+sickleButton.MouseButton1Click:Connect(function()
+    if sickleFarming then
+        sickleFarming = false
+        sickleButton.Text = "Plant on nearby dirt"
+        sickleButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        unFloat()
+        tween:Cancel()
+        destroyOrbs = false
+    else
+        sickleFarming = true
+        sickleButton.Text = "Planting"
+        sickleButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
+        Float()
+        destroyOrbs = true
+        while sickleFarming do
+            wait()
+            local cropToHarvest = cropSection.Text
+            tween, Time = moveToCrop(cropToHarvest)
+            wait(Time)
+            sicklePlants(cropToHarvest)
+            wait()
+            for i,v in pairs(Crops) do
+                if sickleFarming then
+                rePlant(v)
+                end
+            end
+        end
+    end
+end)
+
+cropSection = Instance.new("TextButton")
+cropSection.Position = UDim2.new(0,0,1,1)
+cropSection.Size = UDim2.new(0,140,0,20)
+cropSection.BackgroundColor3 = Color3.fromRGB(63,63,63)
+cropSection.BorderSizePixel = 1
+cropSection.ZIndex = 2
+cropSection.Parent = N0
+cropSection.Text = "Choose Crop >"
+cropSection.TextColor3 = Color3.fromRGB(250,250,250)
+cropSection.TextScaled = true
+cropSection.MouseButton1Click:Connect(function()
+    if choosingCrop then
+        choosingCrop = false
+        cropsBackground.Visible = false
+        cropSection.Text = "Choose Crop >"
+    else
+        choosingCrop = true
+        cropsBackground.Visible = true
+        cropSection.Text = "Choose Crop <"
+    end
+end)
+
+crops = {"spiritCrop", "chiliPepper", "carrot", "onion", "potato", "spinach", "tomato", "wheat", "melon", "pineapple"}
+NaMe = 0
+YPos = 0
+for i,v in pairs(crops) do
+    Cropz = Instance.new("TextButton")
+    Cropz.Name = NaMe
+    Cropz.Position = UDim2.new(0,1,0,YPos)
+    Cropz.Size = UDim2.new(0,95,0,20)
+    Cropz.BackgroundColor3 = Color3.fromRGB(70,70,70)
+    Cropz.BorderColor3 = Color3.new(1,1,1)
+    Cropz.ZIndex = 2
+    Cropz.Parent = cropsHandler
+    Cropz.Text = v
+    Cropz.TextColor3 = Color3.fromRGB(250,250,250)
+    Cropz.TextScaled = true
+    NaMe = NaMe + 1
+    YPos = YPos + 20
+end
+
+for i,v in pairs(cropsHandler:GetChildren()) do
+    v.MouseButton1Click:Connect(function()
+        CrOp = v.Text
+        cropSection.Text = CrOp
+        cropsBackground.Visible = false
+        choosingCrop = false
+    end)
+end
+
+
+plantCropButton = Instance.new("TextButton")
+plantCropButton.Position = UDim2.new(0,0,1,42)
+plantCropButton.Size = UDim2.new(0,140,0,20)
+plantCropButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
+plantCropButton.BorderSizePixel = 1
+plantCropButton.ZIndex = 2
+plantCropButton.Parent = N0
+plantCropButton.Text = "Plant on nearby dirt"
+plantCropButton.TextColor3 = Color3.fromRGB(250,250,250)
+plantCropButton.TextScaled = true
+plantCropButton.MouseButton1Click:Connect(function()
+    if plantCrop then
+        print("plant crop = false")
+        plantCrop = false
+        plantCropButton.Text = "Plant on nearby dirt"
+        plantCropButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
+    else
+        plantCrop = true
+        print("plant crop = true")
+        plantCropButton.Text = "Planting"
+        plantCropButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
+        while plantCrop do
+            for i,dirt in pairs(Island.Blocks:GetChildren()) do
+                if dirt.Name == "soil" and Player:DistanceFromCharacter(dirt.Position) < 150 then
+                    local args = {
+                    [1] = {
+                    ["upperBlock"] = false,
+                    ["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
+                    ["player_tracking_category"] = "join_from_web",
+                    ["blockType"] = cropSection.Text
+                    }
+                    }
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+                end
+            end
+        end
+    end
+end)
 
 local Item23 = Instance.new("TextButton")
 Item23.Position = UDim2.new(0,0,1,1)

@@ -131,7 +131,7 @@ function getRoot(char) -- find root part of character if they dont have HR
 	return rootPart
 end
 
-HR = getRoot(Character)
+local HR = getRoot(Character)
 
 local function AntiAFK() -- keeps you from going afk by clicking corner of screen when player goes "Idled"
     game:GetService('Players').LocalPlayer.Idled:Connect(function()
@@ -166,8 +166,8 @@ end
 return location, Point
 end
 
-function goToPoint(Point)
-    if (HR.Position - Point).magnitude > 24 then
+function goToPoint(Point, distance)
+    if (HR.Position - Point).magnitude > distance then
     Distance = (HR.Position - Point).Magnitude
     Speed = 25
     Time = Distance/Speed
@@ -289,7 +289,7 @@ end
 function moveToCrop(Crop)
     randomCrop = getAllCrops(Crop)
     print(randomCrop[1], randomCrop[1].Position)
-    tween, Time = goToPoint(randomCrop[1].Position)
+    tween, Time = goToPoint(randomCrop[1].Position, 24)
     return tween, Time
 end
 
@@ -357,7 +357,15 @@ function getAllCrops(Crop)
 	return crops
 end
 
-local HR = getRoot(Character)
+function getIslandEntities()
+    local Entities = {}
+    for i,v in pairs(Island.Entities:GetChildren()) do
+        table.insert(Entities, v)
+    end
+    table.sort(Entities, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
+    return Entities
+end
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
 Toggled85 = false Toggled86 = false Toggled87 = false KA = false
@@ -715,6 +723,52 @@ Candles.MouseButton1Click:Connect(function()
                     wait(distance/speed - 1)
                     break
                     end
+                end
+            end
+        end
+    end
+end)
+
+
+Skulls = Instance.new("TextButton")
+Skulls.Position = UDim2.new(0,1,0,50)
+Skulls.Size = UDim2.new(0,100,0,20)
+Skulls.BackgroundColor3 = Color3.fromRGB(50,100,50)
+Skulls.BorderColor3 = Color3.new(1,1,1)
+Skulls.ZIndex = 2
+Skulls.Parent = Background6
+Skulls.Text = "Catch Skulls"
+Skulls.TextColor3 = Color3.new(1,1,1)
+Skulls.TextScaled = true
+Skulls.MouseButton1Click:Connect(function()
+    if Skulls1 then
+        Skulls = false
+        Skulls.BackgroundColor3 = Color3.fromRGB(63,165,63)
+        Skulls.Text = "Catch Skulls"
+        Skulls.TextColor3 = Color3.fromRGB(250,250,250)
+        unFloat()
+        tween:Cancel()
+    else
+        Skulls1 = true
+        Skulls.BackgroundColor3 = Color3.new(1,0,0)
+        Skulls.Text = "Catching Skulls"
+        Skulls.TextColor3 = Color3.fromRGB(0,0,0)
+        Float()
+        while Skulls1 == true do
+            Entities = getIslandEntities()
+            for i,v in pairs(Entities) do
+                if v.Name == "emberSkull" then
+                    tween, Time = goToPoint(v.HumanoidRootPart.Position, 0)
+                    wait(Time)
+                    local args = {
+                    [1] = HttpService:GenerateGUID(false),
+                    [2] = {
+                    [1] = {
+                    ["entity"] = v
+                    }
+                    }
+                    }
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("WklePmhapvLsoDtyvsqzaAoSmhiuU/pgzttrVxSguzqfonsYnmpHjounsqjnTeefrfykiKbn"):FireServer(unpack(args))
                 end
             end
         end
@@ -2272,7 +2326,7 @@ Treasure.MouseButton1Click:Connect(function()
             wait()
             location, Point = getMapInfo()
             tween, Time = goToLocation(Point)
-            goToPoint(Point)
+            goToPoint(Point, 0)
             wait(Time + 0.5)
             digTreasure()
         end
@@ -2530,7 +2584,7 @@ Item61.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item61.BorderSizePixel = 1
 Item61.ZIndex = 2
 Item61.Parent = Notification3
-Item61.Text = "NONO"
+Item61.Text = "Catch Entities"
 Item61.TextColor3 = Color3.fromRGB(250,250,250)
 Item61.TextScaled = true
 
@@ -4389,7 +4443,7 @@ Item36.MouseButton1Click:Connect(function()
             wait()
 			spawnables = getSpawnables()
             for i,v in pairs(spawnables) do
-                local tween, Time = goToPoint(v.Position)
+                local tween, Time = goToPoint(v.Position, 24)
                 wait(Time - 2)
                 equipTool()
                 hitBlock(v)
@@ -6308,47 +6362,40 @@ end)
 Item61.MouseButton1Click:Connect(function()
     if Toggled44 then
         Toggled44 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item61.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        Item61.Text = "nonono"
+        Item61.Text = "Catch Entities"
         Item61.TextColor3 = Color3.fromRGB(250,250,250)
+        unFloat()
         tween:Cancel()
     else
         Toggled44 = true
         Item61.BackgroundColor3 = Color3.new(0,255,255)
-        Item61.Text = "ANTICHEAT"
+        Item61.Text = "Catching stuff"
         Item61.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
+        Float()
+        while Toggled44 == true do
+            Entities = getIslandEntities()
+            wait()
+            for i,v in pairs(Entities) do
+                if v.Name ~= "villager" and v.Name ~= "bee" and v:FindFirstChild("Sleeping") == nil and v:FindFirstChild("HumanoidRootPart") then
+                    if Toggled44 == true then
+                    tween, Time = goToPoint(v.HumanoidRootPart.Position, 0)
+                    wait(Time)
+                    local args = {
+                    [1] = HttpService:GenerateGUID(false),
+                    [2] = {
+                    [1] = {
+                    ["entity"] = v
+                    }
+                    }
+                    }
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("WklePmhapvLsoDtyvsqzaAoSmhiuU/pgzttrVxSguzqfonsYnmpHjounsqjnTeefrfykiKbn"):FireServer(unpack(args))
+                    break
+                    end
+                end
             end
         end
-        while Toggled44 == true do
-            wait()
-            for i,insect in pairs(Island.Entities:GetChildren()) do
-    if insect.Name == "frog" or insect.Name == "rabbit" or insect.Name == "firefly" then
-        if Toggled44 == true then
-        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - insect:WaitForChild("HumanoidRootPart").Position).magnitude > 24 then
-                    Point = insect:WaitForChild("HumanoidRootPart").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time)
-                end
-        --catch bug here
-        end
     end
-end
-end
-end
 end)
 
 Item62.MouseButton1Click:Connect(function()

@@ -4,7 +4,7 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 
-updates = "[OWNER] [Matt]: Updated 10/25/2022! Have fun :D"
+updates = "[OWNER] [Matt]: Updated 10/27/2022! Have fun :D"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -131,6 +131,8 @@ function getRoot(char) -- find root part of character if they dont have HR
 	return rootPart
 end
 
+HR = getRoot(Character)
+
 local function AntiAFK() -- keeps you from going afk by clicking corner of screen when player goes "Idled"
     game:GetService('Players').LocalPlayer.Idled:Connect(function()
     game:GetService('VirtualUser'):CaptureController();
@@ -164,16 +166,18 @@ end
 return location, Point
 end
 
-function goToPoint(Point) -- go to "Point" (Vector3)
-    HR = getRoot(Character)
+function goToPoint(Point)
     if (HR.Position - Point).magnitude > 24 then
     Distance = (HR.Position - Point).Magnitude
     Speed = 25
     Time = Distance/Speed
     tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
     tween:Play()
-    return tween, Time
+    else
+        Time = 2
+        tween = nil
     end
+    return tween, Time
 end
 
 function digTreasure() -- Dig treasure
@@ -182,6 +186,57 @@ function digTreasure() -- Dig treasure
     [2] = {}
     }
     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.PlayerDigTreasure:FireServer(unpack(args))
+end
+
+function getSpawnables()
+    local spawnables = {}
+    for i,v in pairs(Island.Blocks:GetChildren()) do
+        if v.Name == "naturalRock1" or v.Name == "tallGrass" then
+            table.insert(spawnables, v)
+        end
+    end
+    table.sort(spawnables, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
+    return spawnables
+end
+
+function hitBlock(Block)
+    local args = {
+    [1] = {
+    ["player_tracking_category"] = "join_from_web",
+    ["part"] = Block.MeshPart,
+    ["block"] = Block,
+    ["norm"] = nil --[[Vector3]],
+    ["pos"] = nil --[[Vector3]]
+    }
+    }
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+end
+
+function getPick()
+    for i,v in pairs(Character:GetChildren()) do
+        if v:IsA("Tool") and (v.Name == "voidMattock" or v.Name:find("Pickaxe")) then
+            Tool = v
+        end
+    end
+    if not Tool then
+        for i,v in pairs(Player.Backpack:GetChildren()) do
+            if v:IsA("Tool") and (v.Name == "voidMattock" or v.Name:find("Pickaxe")) then
+                Tool = v
+            end
+        end
+    end
+    print("Getting",Tool)
+    return Tool
+end
+
+function equipTool()
+    Tool = getPick()
+    if Character:FindFirstChild(Tool) then
+        print("already equipped")
+    else
+        Tool.Parent = Character
+    end
 end
 
 function getMobs()
@@ -195,10 +250,6 @@ function getMobs()
 
 	table.sort(mobs, function(t1, t2) 
 		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
-    for i,v in ipairs(mobs) do
-        print(i,v)
-    end
-    print(mobs)
 	return mobs
 end
 
@@ -4083,103 +4134,25 @@ Item36.MouseButton1Click:Connect(function()
         Toggled25 = false
         Item36.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item36.Text = "Clear Grass/Rocks"
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        tween:Cancel()
         Item36.TextColor3 = Color3.fromRGB(250,250,250)
+        unFloat()
+        if tween then tween:Cancel() end
     else
         Toggled25 = true
         Item36.BackgroundColor3 = Color3.new(0,255,255)
         Item36.Text = "clearing spawnables"
         Item36.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        local TS = game:GetService('TweenService')
-        local HR = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
-		local Island = ""
-		for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-			if (island:IsA("Model")) then
-				Island = island
-			end
-		end
-		print("Found island",Island)
+        Float()
         while Toggled25 == true do
-			if Toggled25 == true then
-			    wait()
-			    if Island.Blocks:FindFirstChild("naturalRock1") then
-                    Point = Island.Blocks:FindFirstChild("naturalRock1").Position
-                    if (HR.Position - Point).Magnitude > 23 then
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                    end
-                    local TS = game:GetService('TweenService')
-                    local HR = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
-                    if Plr.Character:FindFirstChild("opalPickaxe") or Plr.Character:FindFirstChild("voidMattock") then
-                        wait()
-                    else
-                        print("equipping tool")
-                        if Plr.Backpack:FindFirstChild("voidMattock") then
-                            Plr.Backpack:FindFirstChild("voidMattock").Parent = game:GetService("Players").LocalPlayer.Character
-                            wait()
-                        elseif Plr.Backpack:FindFirstChild("opalPickaxe") then
-                            Plr.Backpack:FindFirstChild("opalPickaxe").Parent = game:GetService("Players").LocalPlayer.Character
-                            wait()
-                        end
-                    end
-                    print("smack that rock!")
-                    local args = {
-                        [1] = {
-                            ["player_tracking_category"] = "join_from_web",
-                            ["part"] = Island.Blocks:FindFirstChild("naturalRock1").MeshPart,
-                            ["block"] = Island.Blocks:FindFirstChild("naturalRock1"),
-                            ["norm"] = nil --[[Vector3]],
-                            ["pos"] = nil --[[Vector3]]
-                        }
-                    }
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-                    wait()
-                    
-			 elseif Island.Blocks:FindFirstChild("tallGrass") then
-                    Point = Island.Blocks:FindFirstChild("tallGrass").Position
-                    if (HR.Position - Point).Magnitude > 23 then
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                    end
-                    if Plr.Character:FindFirstChild("opalPickaxe") or Plr.Character:FindFirstChild("voidMattock") then
-                        wait()
-                    else
-                        print("equipping tool")
-                        if Plr.Backpack:FindFirstChild("voidMattock") then
-                            Plr.Backpack:FindFirstChild("voidMattock").Parent = game:GetService("Players").LocalPlayer.Character
-                            wait()
-                        elseif Plr.Backpack:FindFirstChild("opalPickaxe") then
-                            Plr.Backpack:FindFirstChild("opalPickaxe").Parent = game:GetService("Players").LocalPlayer.Character
-                            wait()
-                        end
-                    end
-                    local args = {
-                        [1] = {
-                            ["player_tracking_category"] = "join_from_web",
-                            ["part"] = Island.Blocks:FindFirstChild("tallGrass").MeshPart,
-                            ["block"] = Island.Blocks:FindFirstChild("tallGrass"),
-                            ["norm"] = nil --[[Vector3]],
-                            ["pos"] = nil --[[Vector3]]
-                        }
-                    }
-
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-	            end
-			end
+            wait()
+			spawnables = getSpawnables()
+            for i,v in pairs(spawnables) do
+                local tween, Time = goToPoint(v.Position)
+                wait(Time - 2)
+                equipTool()
+                hitBlock(v)
+                break
+            end
         end
     end
 end)

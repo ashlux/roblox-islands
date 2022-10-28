@@ -1771,14 +1771,14 @@ sickleButton.TextScaled = true
 sickleButton.MouseButton1Click:Connect(function()
     if sickleFarming then
         sickleFarming = false
-        sickleButton.Text = "Plant on nearby dirt"
+        sickleButton.Text = "Sickle Farm"
         sickleButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
         unFloat()
         tween:Cancel()
         destroyOrbs = false
     else
         sickleFarming = true
-        sickleButton.Text = "Planting"
+        sickleButton.Text = "Sickling"
         sickleButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
         Float()
         destroyOrbs = true

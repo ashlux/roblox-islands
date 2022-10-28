@@ -173,11 +173,8 @@ function goToPoint(Point, distance)
     Time = Distance/Speed
     tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
     tween:Play()
-    else
-        Time = 2
-        tween = nil
-    end
     return tween, Time
+    end
 end
 
 function digTreasure() -- Dig treasure
@@ -365,6 +362,31 @@ function getIslandEntities()
     table.sort(Entities, function(t1, t2) 
 		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
     return Entities
+end
+
+function getChests()
+    Chests = {}
+    for i,v in pairs(Island.Blocks:GetChildren()) do
+        if v.Name:find("chest") then
+        table.insert(Chests, v)
+        end
+    end
+    return Chests
+end
+
+function withdrawFromChest(chest)
+    for i,b in pairs(chest.Contents:GetChildren()) do
+        local args = {
+        [1] = {
+        ["chest"] = chest,
+        ["player_tracking_category"] = "join_from_web",
+        ["amount"] = b.Amount.Value,
+        ["tool"] = b,
+        ["action"] = "withdraw"
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+    end
 end
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
@@ -4516,26 +4538,10 @@ Item24.MouseButton1Click:Connect(function()
         Item24.TextColor3 = Color3.fromRGB(0,0,0)
         while Toggled11 == true do
             wait()
-            for i,v in pairs(game:GetDescendants()) do
-                if (v:IsA("Part")) and (v.Name == "chestLargeIndustrialIO" or v.Name == "chestMediumIndustrialIO") and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 24 then
-                    wait()
-                    for _, b in pairs(v.Contents:GetChildren()) do
-                        if (b:IsA("Tool")) then
-                            if Toggled11 then
-                                wait()
-                                    local args = {
-                                    [1] = {
-                                    ["chest"] = v,
-                                    ["player_tracking_category"] = "join_from_web",
-                                    ["amount"] = b.Amount.Value,
-                                    ["tool"] = b,
-                                    ["action"] = "withdraw"
-                                    }
-                                    }
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
-                            end
-                        end
-                    end
+            Chests = getChests()
+            for i,v in pairs(Chests) do
+                if (v.Name == "chestLargeIndustrialIO" or v.Name == "chestMediumIndustrialIO" or v.Name == "chestMediumIndustrial") and #v.Contents:GetChildren() > 0 and Player:DistanceFromCharacter(v.Position) < 24 then
+                    withdrawFromChest(v)
                 end
             end
         end

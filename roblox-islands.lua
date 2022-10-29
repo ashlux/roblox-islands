@@ -10,15 +10,15 @@ local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kxNc/etnlckjkG")
-local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/tfyuxzyn")
-local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lxxvJmszjoipOsth/jhgxjzqinsiau")
-local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/arvmkmbpeihybCuwivhvaqGbspnzrlbjsbecaptd")
-local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/cftuvfhFUcyguekjhvumjIpNXfaxdDucqrxpgsXxk")
-local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/wnigzimrzxnAIIisufyxnqj")
-local refillItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/wnigzimrzxnAIIisufyxnqj")
-local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/hdpNgsqHrbovfZGfmmw")
-local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("owbuiGQSzeSbdrq/mkjfWpNbrojqbkVuQlmb")
+local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("bnYxsiwtdmkVvew/UncctuoIf")
+local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("tzjhmgAffmkziWjnSfsfxwtcbdipfbp/otjOirmnbggpkrqC")
+local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("tzjhmgAffmkziWjnSfsfxwtcbdipfbp/mtpybgxbxlhklcitwrIgBahnErreusjsUbiHgwQsdnyu")
+local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/UqmifBvgThcxououphokft")
+local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/nvfyvKrxAsmazgm")
+local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/xuxdPnpzraxGWbVgXeUFJftqofe")
+local refillItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/xuxdPnpzraxGWbVgXeUFJftqofe")
+local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/gigidcJHnjeuygeaEfcsxmwn")
+local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/NnzfCtcpnzechtJcrBgksqMPKmpjl")
 ---
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
@@ -2587,17 +2587,6 @@ Item59.Parent = N1
 Item59.Text = "Cloth Loom"
 Item59.TextColor3 = Color3.fromRGB(250,250,250)
 Item59.TextScaled = true
-
-local Item60 = Instance.new("TextButton")
-Item60.Position = UDim2.new(0,0,1,87)
-Item60.Size = UDim2.new(0,140,0,20)
-Item60.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item60.BorderSizePixel = 1
-Item60.ZIndex = 2
-Item60.Parent = Notification4
-Item60.Text = "Clear ALL but Tulips"
-Item60.TextColor3 = Color3.fromRGB(250,250,250)
-Item60.TextScaled = true
 
 local Item61 = Instance.new("TextButton")
 Item61.Position = UDim2.new(0,0,1,64)
@@ -6191,176 +6180,6 @@ Item59.MouseButton1Click:Connect(function()
                     end
                 end
             end
-        end
-    end
-end)
-
-Item60.MouseButton1Click:Connect(function()
-    if Toggled43 then
-        Toggled43 = false
-        Item60.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        Item60.Text = "Clear ALL but Tulips"
-        Item60.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled43 = true
-        Item60.BackgroundColor3 = Color3.new(0,255,255)
-        Item60.Text = "Picking and Mining"
-        Item60.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
-        while Toggled43 == true do
-            if Island.Blocks:FindFirstChild("flowerHyacinthRedFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerHyacinthRedFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerHyacinthYellowFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerHyacinthYellowFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-           
-            elseif Island.Blocks:FindFirstChild("flowerHyacinthBlueFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerHyacinthBlueFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerDaisyRedFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerDaisyRedFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerDaisyYellowFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerDaisyYellowFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerLilyRedFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerLilyRedFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerLilyYellowFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerLilyYellowFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerLilyBlueFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerLilyBlueFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerHibiscusBlueFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerHibiscusBlueFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerHibiscusLightGreenFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerHibiscusLightGreenFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("flowerHibiscusLightGreenFertile") then
-            local args = {
-                [1] = {
-                    ["flower"] = Island.Blocks.flowerHibiscusLightGreenFertile
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-            wait()
-            elseif Island.Blocks:FindFirstChild("naturalRock1") then
-                if Toggled43 == true then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Island.Blocks:FindFirstChild("naturalRock1").Position + Vector3.new(0,0,0))
-                for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                    if v.Name == "opalPickaxe" then
-                        v.Parent = game:GetService("Players").LocalPlayer.Character
-                        wait()
-                    end
-                end
-                local args = {
-                    [1] = {
-                        ["player_tracking_category"] = "join_from_web",
-                        ["part"] = Island.Blocks:FindFirstChild("naturalRock1").MeshPart,
-                        ["block"] = Island.Blocks:FindFirstChild("naturalRock1"),
-                        ["norm"] = nil --[[Vector3]],
-                        ["pos"] = nil --[[Vector3]]
-                    }
-                }
-
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-                    wait()
-                end
-			elseif Island.Blocks:FindFirstChild("tallGrass") then
-			    if Toggled43 == true then
-			        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Island.Blocks:FindFirstChild("tallGrass").Position + Vector3.new(0,0,0))
-                    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                        if v.Name == "opalPickaxe" then
-                            v.Parent = game:GetService("Players").LocalPlayer.Character
-                            wait()
-                        end
-                    end
-                    local args = {
-                        [1] = {
-                            ["player_tracking_category"] = "join_from_web",
-                            ["part"] = Island.Blocks:FindFirstChild("tallGrass").MeshPart,
-                            ["block"] = Island.Blocks:FindFirstChild("tallGrass"),
-                            ["norm"] = nil --[[Vector3]],
-                            ["pos"] = nil --[[Vector3]]
-                        }
-                    }
-
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-			        wait()
-                end
-            else
-                wait()
-            end
-            wait()
         end
     end
 end)

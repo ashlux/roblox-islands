@@ -1,2 +1,2 @@
 local foobear = "foobear";
-return {foobear};
+return {foobear = foobear};

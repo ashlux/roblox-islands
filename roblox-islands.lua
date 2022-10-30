@@ -4,7 +4,7 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 
-updates = "[OWNER] [Matt]: Updated 10/28/2022! Have fun :D"
+updates = "[OWNER] [Matt]: Updated 10/29/2022! Have fun :D"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -19,6 +19,7 @@ local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_module
 local refillItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/xuxdPnpzraxGWbVgXeUFJftqofe")
 local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/gigidcJHnjeuygeaEfcsxmwn")
 local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fskpFaawkbnna/NnzfCtcpnzechtJcrBgksqMPKmpjl")
+local useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("usuHgCdluf/soiskUrkovyuWddtplgqtN")
 ---
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
@@ -790,7 +791,7 @@ Skulls.MouseButton1Click:Connect(function()
                     }
                     }
                     }
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("WklePmhapvLsoDtyvsqzaAoSmhiuU/pgzttrVxSguzqfonsYnmpHjounsqjnTeefrfykiKbn"):FireServer(unpack(args))
+                    useNet:FireServer(unpack(args))
                 end
             end
         end
@@ -6216,7 +6217,7 @@ Item61.MouseButton1Click:Connect(function()
                     }
                     }
                     }
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("WklePmhapvLsoDtyvsqzaAoSmhiuU/pgzttrVxSguzqfonsYnmpHjounsqjnTeefrfykiKbn"):FireServer(unpack(args))
+                    useNet:FireServer(unpack(args))
                     break
                     end
                 end

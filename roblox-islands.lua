@@ -356,7 +356,6 @@ function getAllCrops(Crop)
 end
 
 Island.Blocks.ChildRemoved:Connect(function(child)
-    print(child)
     if sickleFarming and child.Name == "spiritCrop" then
         wait(0.5)
         rePlant(child)
@@ -396,6 +395,42 @@ function withdrawFromChest(chest)
         }
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
     end
+end
+
+function getTrees()
+	local trees = {}
+	for k,v in pairs(island.Blocks:GetChildren()) do
+		local tree = v
+		if (tree.Name:find("treePine") or 
+	    	tree.Name:find("treeMaple") or
+		    tree.Name:find("treeSpirit") or 
+		    tree.Name:find("treeHickory") or
+		    tree.Name:find("treeBirch") or
+		    tree.Name == "tree1" or 
+               tree.Name == "tree2" or 
+		    tree.Name == "tree3" or 
+		    tree.Name == "tree4") then
+			table.insert(trees, tree)
+		end
+	end	
+
+	table.sort(trees, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
+
+	return trees
+end
+
+function hitTree(tree)
+	local args = {
+		[1] = {
+			["player_tracking_category"] = "join_from_web",
+			["part"] = tree:FindFirstChild("trunk"),
+			["block"] = tree,
+			["norm"] = nil,
+			["pos"] = nil
+		}
+	}
+	return game.ReplicatedStorage.rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
@@ -1873,11 +1908,6 @@ sickleButton.MouseButton1Click:Connect(function()
             tween, Time = moveToCrop(cropToHarvest)
             wait(Time)
             sicklePlants(cropToHarvest)
-            for i,v in pairs(Crops) do
-                if sickleFarming then
-                    rePlant()
-                end
-            end
         end
     end
 end)
@@ -2358,7 +2388,7 @@ Treasure.MouseButton1Click:Connect(function()
         while Treasure1 == true do
             wait()
             location, Point = getMapInfo()
-            tween, Time = goToLocation(Point)
+            tween, Time = goToPoint(Point)
             goToPoint(Point, 0)
             wait(Time + 0.5)
             digTreasure()
@@ -2554,6 +2584,43 @@ Item55.Parent = Notification8
 Item55.Text = "Spirit Wood"
 Item55.TextColor3 = Color3.fromRGB(0,0,0)
 Item55.TextScaled = true
+
+local allWoods = Instance.new("TextButton")
+allWoods.Position = UDim2.new(0,0,1,64)
+allWoods.Size = UDim2.new(0,69,0,20)
+allWoods.BackgroundColor3 = Color3.fromRGB(175,175,175)
+allWoods.BorderSizePixel = 1
+allWoods.ZIndex = 2
+allWoods.Parent = Notification8
+allWoods.Text = "All Woods"
+allWoods.TextColor3 = Color3.fromRGB(0,0,0)
+allWoods.TextScaled = true
+allWoods.MouseButton1Click:Connect(function()
+    if allWoods1 then
+        allWoods1 = false
+        allWoods.BackgroundColor3 = Color3.fromRGB(175,175,175)
+        allWoods.Text = "All Woods"
+        allWoods.TextColor3 = Color3.fromRGB(0,0,0)
+        tween:Cancel()
+        unFloat()
+    else
+        allWoods1 = true
+        allWoods.BackgroundColor3 = Color3.new(200,0,0)
+        allWoods.Text = "Getting Wood"
+        allWoods.TextColor3 = Color3.fromRGB(0,0,0)
+        Float()
+        while allWoods1 == true do
+            wait()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                    tween, Time = goToPoint(v.Position, 24)
+                    wait(Time)
+                    hitTree(v)
+                break
+            end
+        end
+    end
+end)
 
 local Item56 = Instance.new("TextButton")
 Item56.Position = UDim2.new(0,0,1,43)
@@ -5385,119 +5452,27 @@ end)
 Item50.MouseButton1Click:Connect(function()
     if Toggled33 then
         Toggled33 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item50.BackgroundColor3 = Color3.fromRGB(186,164,138)
         Item50.Text = "Oak Wood"
         Item50.TextColor3 = Color3.fromRGB(0,0,0)
+        unFloat()
         tween:Cancel()
     else
         Toggled33 = true
-        local TS = game:GetService('TweenService')
-        local HR = game:GetService('Players').LocalPlayer.Character.HumanoidRootPart
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
         Item50.BackgroundColor3 = Color3.new(200,0,0)
         Item50.Text = "Getting Oak"
         Item50.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
+        Float()
         while Toggled33 == true do
             wait()
-            if Island.Blocks:FindFirstChild("tree1") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("tree1").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("tree1").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name == "tree1" or v.Name == "tree2" or v.Name == "tree3" or v.Name == "tree4" then
+                    tween, Time = goToPoint(v.Position, 24)
+                    wait(Time)
+                    hitTree(v)
+                break
                 end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("tree1"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("tree1"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-
-            elseif Island.Blocks:FindFirstChild("tree3") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("tree3").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("tree3").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("tree3"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("tree3"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-            
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-            
-            elseif Island.Blocks:FindFirstChild("tree2") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("tree2").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("tree2").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("tree2"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("tree2"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-
-            elseif Island.Blocks:FindFirstChild("tree4") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("tree4").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("tree4").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("tree4"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("tree4"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-                wait()
             end
         end
     end
@@ -5506,73 +5481,27 @@ end)
 Item51.MouseButton1Click:Connect(function()
     if Toggled34 then
         Toggled34 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item51.BackgroundColor3 = Color3.fromRGB(248,223,161)
         Item51.Text = "Birch Wood"
         Item51.TextColor3 = Color3.fromRGB(0,0,0)
         tween:Cancel()
+        unFloat()
     else
         Toggled34 = true
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
         Item51.BackgroundColor3 = Color3.new(200,0,0)
         Item51.Text = "Getting Birch"
         Item51.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
+        Float()
         while Toggled34 == true do
             wait()
-            if Island.Blocks:FindFirstChild("treeBirch1") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeBirch1").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeBirch1").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name:find("treeBirch") then
+                    tween, Time = goToPoint(v.Position, 24)
                     wait(Time - 2)
+                    hitTree(v)
+                break
                 end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeBirch1"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeBirch1"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-
-            elseif Island.Blocks:FindFirstChild("treeBirch2") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeBirch2").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeBirch2").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeBirch2"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeBirch2"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-            
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-            wait()
             end
         end
     end
@@ -5581,51 +5510,27 @@ end)
 Item52.MouseButton1Click:Connect(function()
     if Toggled35 then
         Toggled35 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item52.BackgroundColor3 = Color3.fromRGB(85,52,43)
         Item52.Text = "Pine Wood"
         Item52.TextColor3 = Color3.fromRGB(250,250,250)
         tween:Cancel()
+        unFloat()
     else
         Toggled35 = true
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
         Item52.BackgroundColor3 = Color3.new(200,0,0)
         Item52.Text = "Getting Pine"
         Item52.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
+        Float()
         while Toggled35 == true do
             wait()
-            if Island.Blocks:FindFirstChild("treePine1") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treePine1").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treePine1").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name:find("treePine") then
+                    tween, Time = goToPoint(v.Position, 24)
                     wait(Time - 2)
+                    hitTree(v)
+                break
                 end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treePine1"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treePine1"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-            wait()
             end
         end
     end
@@ -5634,73 +5539,27 @@ end)
 Item53.MouseButton1Click:Connect(function()
     if Toggled36 then
         Toggled36 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item53.BackgroundColor3 = Color3.fromRGB(200,111,87)
         Item53.Text = "Maple Wood"
         Item53.TextColor3 = Color3.fromRGB(0,0,0)
         tween:Cancel()
+        unFloat()
     else
         Toggled36 = true
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
         Item53.BackgroundColor3 = Color3.new(200,0,0)
         Item53.Text = "Getting Maple"
         Item53.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
+        Float()
         while Toggled36 == true do
             wait()
-            if Island.Blocks:FindFirstChild("treeMaple1") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeMaple1").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeMaple1").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name:find("treeMaple") then
+                    tween, Time = goToPoint(v.Position, 24)
                     wait(Time - 2)
+                    hitTree(v)
+                break
                 end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeMaple1"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeMaple1"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-
-            elseif Island.Blocks:FindFirstChild("treeMaple2") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeMaple2").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeMaple2").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeMaple2"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeMaple2"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-            
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-            wait()
             end
         end
     end
@@ -5709,73 +5568,27 @@ end)
 Item54.MouseButton1Click:Connect(function()
     if Toggled37 then
         Toggled37 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item54.BackgroundColor3 = Color3.fromRGB(258,233,171)
         Item54.Text = "Hickory Wood"
         Item54.TextColor3 = Color3.fromRGB(0,0,0)
         tween:Cancel()
+        unFloat()
     else
         Toggled37 = true
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
         Item54.BackgroundColor3 = Color3.new(200,0,0)
         Item54.Text = "Getting Hickory"
         Item54.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
+        Float()
         while Toggled37 == true do
             wait()
-            if Island.Blocks:FindFirstChild("treeHickory1") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeHickory1").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeHickory1").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name:find("treeHickory") then
+                    tween, Time = goToPoint(v.Position, 24)
                     wait(Time - 2)
+                    hitTree(v)
+                break
                 end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeHickory1"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeHickory1"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-
-            elseif Island.Blocks:FindFirstChild("treeHickory2") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeHickory2").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeHickory2").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeHickory2"):WaitForChild("trunk"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeHickory2"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-            
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-            wait()
             end
         end
     end
@@ -5784,73 +5597,27 @@ end)
 Item55.MouseButton1Click:Connect(function()
     if Toggled38 then
         Toggled38 = false
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Item55.BackgroundColor3 = Color3.fromRGB(168,105,165)
         Item55.Text = "Spirit Wood"
         Item55.TextColor3 = Color3.fromRGB(0,0,0)
         tween:Cancel()
+        unFloat()
     else
         Toggled38 = true
-        local BV = Instance.new("BodyVelocity")
-		local YSpeed = 0
-		BV.Velocity = Vector3.new(0,0,0)
-		BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
         Item55.BackgroundColor3 = Color3.new(200,0,0)
         Item55.Text = "Getting Spirit"
         Item55.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
+        Float()
         while Toggled38 == true do
             wait()
-            if Island.Blocks:FindFirstChild("treeSpirit1") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeSpirit1").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeSpirit1").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name:find("treeSpirit") then
+                    tween, Time = goToPoint(v.Position, 24)
                     wait(Time - 2)
+                    hitTree(v)
+                break
                 end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeSpirit1"):WaitForChild("MeshPart"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeSpirit1"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-
-            elseif Island.Blocks:FindFirstChild("treeSpirit2") then
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Island.Blocks:FindFirstChild("treeSpirit2").Position).magnitude > 24 then
-                    Point = Island.Blocks:FindFirstChild("treeSpirit2").Position
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    wait(Time - 2)
-                end
-                local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = Island.Blocks:FindFirstChild("treeSpirit2"):WaitForChild("MeshPart"),
-                    ["block"] = Island.Blocks:FindFirstChild("treeSpirit2"),
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-            
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-            wait()
             end
         end
     end

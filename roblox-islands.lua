@@ -4,7 +4,7 @@ repeat wait()
 	repeat wait() until mouse
 	print("Loading")
 
-updates = "[OWNER] [Matt]: Updated 10/29/2022! Have fun :D"
+updates = "[OWNER] [Matt]: Updated 10/30/2022! Have fun :D"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -354,6 +354,14 @@ function getAllCrops(Crop)
 	end
 	return crops
 end
+
+Island.Blocks.ChildRemoved:Connect(function(child)
+    print(child)
+    if sickleFarming and child.Name == "spiritCrop" then
+        wait(0.5)
+        rePlant(child)
+    end
+end)
 
 function getIslandEntities()
     local Entities = {}
@@ -1865,10 +1873,9 @@ sickleButton.MouseButton1Click:Connect(function()
             tween, Time = moveToCrop(cropToHarvest)
             wait(Time)
             sicklePlants(cropToHarvest)
-            wait()
             for i,v in pairs(Crops) do
                 if sickleFarming then
-                rePlant(v)
+                    rePlant()
                 end
             end
         end
@@ -1938,27 +1945,30 @@ plantCropButton.TextColor3 = Color3.fromRGB(250,250,250)
 plantCropButton.TextScaled = true
 plantCropButton.MouseButton1Click:Connect(function()
     if plantCrop then
-        print("plant crop = false")
         plantCrop = false
         plantCropButton.Text = "Plant on nearby dirt"
         plantCropButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
     else
         plantCrop = true
-        print("plant crop = true")
         plantCropButton.Text = "Planting"
         plantCropButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
         while plantCrop do
+            wait()
             for i,dirt in pairs(Island.Blocks:GetChildren()) do
-                if dirt.Name == "soil" and Player:DistanceFromCharacter(dirt.Position) < 150 then
-                    local args = {
-                    [1] = {
-                    ["upperBlock"] = false,
-                    ["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
-                    ["player_tracking_category"] = "join_from_web",
-                    ["blockType"] = cropSection.Text
-                    }
-                    }
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+                if dirt.Name == "soil" and Player:DistanceFromCharacter(dirt.Position) < 150 and plantCrop then
+                    local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
+                    local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
+                    if not hitPart then
+                        local args = {
+                        [1] = {
+                        ["upperBlock"] = false,
+                        ["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
+                        ["player_tracking_category"] = "join_from_web",
+                        ["blockType"] = cropSection.Text
+                        }
+                        }
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+                    end
                 end
             end
         end

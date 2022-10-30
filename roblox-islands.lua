@@ -5469,7 +5469,9 @@ Item50.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                 if v.Name == "tree1" or v.Name == "tree2" or v.Name == "tree3" or v.Name == "tree4" then
                     tween, Time = goToPoint(v.Position, 24)
-                    wait(Time)
+                    if Time then
+                    wait(Time - 2)
+                    end
                     hitTree(v)
                 break
                 end
@@ -5498,7 +5500,9 @@ Item51.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                 if v.Name:find("treeBirch") then
                     tween, Time = goToPoint(v.Position, 24)
+                    if Time then
                     wait(Time - 2)
+                    end
                     hitTree(v)
                 break
                 end
@@ -5527,7 +5531,9 @@ Item52.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                 if v.Name:find("treePine") then
                     tween, Time = goToPoint(v.Position, 24)
+                    if Time then
                     wait(Time - 2)
+                    end
                     hitTree(v)
                 break
                 end
@@ -5556,7 +5562,9 @@ Item53.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                 if v.Name:find("treeMaple") then
                     tween, Time = goToPoint(v.Position, 24)
+                    if Time then
                     wait(Time - 2)
+                    end
                     hitTree(v)
                 break
                 end
@@ -5585,7 +5593,9 @@ Item54.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                 if v.Name:find("treeHickory") then
                     tween, Time = goToPoint(v.Position, 24)
+                    if Time then
                     wait(Time - 2)
+                    end
                     hitTree(v)
                 break
                 end
@@ -5614,7 +5624,9 @@ Item55.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                 if v.Name:find("treeSpirit") then
                     tween, Time = goToPoint(v.Position, 24)
+                    if Time then
                     wait(Time - 2)
+                    end
                     hitTree(v)
                 break
                 end

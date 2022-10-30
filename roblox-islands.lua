@@ -355,12 +355,14 @@ function getAllCrops(Crop)
 	return crops
 end
 
+if Island.Blocks then
 Island.Blocks.ChildRemoved:Connect(function(child)
     if sickleFarming and child.Name == "spiritCrop" then
         wait(0.5)
         rePlant(child)
     end
 end)
+end
 
 function getIslandEntities()
     local Entities = {}

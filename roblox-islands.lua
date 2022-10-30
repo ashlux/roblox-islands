@@ -4455,7 +4455,9 @@ Item36.MouseButton1Click:Connect(function()
 			spawnables = getSpawnables()
             for i,v in pairs(spawnables) do
                 local tween, Time = goToPoint(v.Position, 24)
+                if Time ~= nil then
                 wait(Time - 2)
+                end
                 equipTool()
                 hitBlock(v)
                 break

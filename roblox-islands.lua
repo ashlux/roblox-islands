@@ -1,8 +1,9 @@
-repeat wait() 
-	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
-	local mouse = game.Players.LocalPlayer:GetMouse() 
-	repeat wait() until mouse
-	print("Loading")
+print("Loading")
+repeat wait()
+until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+local mouse = game.Players.LocalPlayer:GetMouse() 
+repeat wait() until mouse
+print("Loading Complete!")
 
 updates = "[OWNER] [Matt]: Updated 10/30/2022! Have fun :D"
 
@@ -24,8 +25,6 @@ local useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.n
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
-local mouse = game.Players.LocalPlayer:GetMouse()
-repeat wait() until mouse
 local Island = game.Workspace.Islands:GetChildren()[1] or ""
 local island = game.Workspace.Islands:GetChildren()[1] or ""
 local CmdGui = Instance.new("ScreenGui")
@@ -286,9 +285,10 @@ end
 
 function moveToCrop(Crop)
     randomCrop = getAllCrops(Crop)
-    print(randomCrop[1], randomCrop[1].Position)
+    if randomCrop[1] then
     tween, Time = goToPoint(randomCrop[1].Position, 24)
     return tween, Time
+    end
 end
 
 function rePlant(Crop)

@@ -223,15 +223,12 @@ function getPick()
             end
         end
     end
-    print("Getting",Tool)
     return Tool
 end
 
 function equipTool()
     Tool = getPick()
-    if Character:FindFirstChild(Tool) then
-        print("already equipped")
-    else
+    if Character:FindFirstChild(Tool) == nil then
         Tool.Parent = Character
     end
 end
@@ -305,7 +302,6 @@ end
 
 function sicklePlants(Crop)
     local Tool = getSickle()
-    print("Got",Tool)
     Crops = getCrops(Crop)
     local args = {
     [1] = Tool.Name,
@@ -328,7 +324,6 @@ function getSickle()
             end
         end
     end
-    print("Getting",Tool)
     return Tool
 end
 
@@ -731,7 +726,6 @@ Item1.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -781,7 +775,6 @@ Candles.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -2318,7 +2311,6 @@ end
 for _,v in pairs(Island.Blocks:GetChildren()) do
     if v.Name == "vendingMachine" or v.Name == "vendingMachine1" then
         for _,t in pairs(v.SellingContents:GetChildren()) do
-            print(t.Name)
             if t.Name == tool.Name then
                 if v.Mode.Value == 0 then
                 buy = Instance.new("BoxHandleAdornment")
@@ -2498,17 +2490,6 @@ Item46.Parent = Notification3
 Item46.Text = "Pickup Drops Aura"
 Item46.TextColor3 = Color3.fromRGB(250,250,250)
 Item46.TextScaled = true
-
-local Item47 = Instance.new("TextButton")
-Item47.Position = UDim2.new(0,0,1,85)
-Item47.Size = UDim2.new(0,140,0,20)
-Item47.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item47.BorderSizePixel = 1
-Item47.ZIndex = 2
-Item47.Parent = Notification3
-Item47.Text = "Destroy Coal /iron /ironOre"
-Item47.TextColor3 = Color3.fromRGB(250,250,250)
-Item47.TextScaled = true
 
 local Item48 = Instance.new("TextButton")
 Item48.Position = UDim2.new(0,0,1,66)
@@ -3476,7 +3457,6 @@ BowBoss.MouseButton1Click:Connect(function()
         Item65.Text = "Auto Eat >"
         Item80.Text = "Hub Shops >"
         Background5.Visible = true
-        print("done")
     end
 end)
 
@@ -3520,7 +3500,6 @@ GUIs.MouseButton1Click:Connect(function()
         GUIs.Text = "Event <"
         Item80.Text = "Hub Shops >"
         Background6.Visible = true
-        print("done")
     end
 end)
 
@@ -3872,7 +3851,6 @@ Item4.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -3913,7 +3891,6 @@ Item5.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -3951,7 +3928,6 @@ Mob3.MouseButton1Click:Connect(function()
         while Toggled3 == true do
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -3993,7 +3969,6 @@ Mob4.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4078,7 +4053,6 @@ Item34.MouseButton1Click:Connect(function()
             end
         end
         while Toggled23 == true do
-            print("picking flower")
             if Island.Blocks:FindFirstChild("flowerHyacinthCyan") then
             local args = {
                 [1] = {
@@ -4465,13 +4439,6 @@ Item35.MouseButton1Click:Connect(function()
             end
         end)
         Humanoid.WalkSpeed = WS
-		local Island = ""
-		for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-			if (island:IsA("Model")) then
-				Island = island
-			end
-		end
-		print("Found island",Island)
         while Toggled24 == true do
 			for _,Fertile in pairs(Island.Blocks:GetChildren()) do
 				if (Fertile:IsA("Part")) and Fertile:FindFirstChild("Watered") and Fertile:FindFirstChild("Top") then
@@ -4636,12 +4603,10 @@ Item25.MouseButton1Click:Connect(function()
 				Island = island
 			end
 		end
-		print("Found island",Island)
         while Toggled12 == true do
             wait()
 			for _,MayoSpinner in pairs(Island.Blocks:GetChildren()) do
 				if (MayoSpinner:IsA("Part")) and MayoSpinner.Name == "churner" then
-					print("Found mayo spinner")
 					wait()
 
 					local args = {
@@ -4658,7 +4623,6 @@ Item25.MouseButton1Click:Connect(function()
 					if MayoSpinner.WorkerContents:FindFirstChild("jarMayonnaise") then
 	
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(MayoSpinner.Position + Vector3.new(0,5,0))
-						print("gettn that mayo")
 						wait()
 						local args = {
 							[1] = {
@@ -4669,7 +4633,6 @@ Item25.MouseButton1Click:Connect(function()
 
 						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						else
-						print("no mayo")
 					end
 				end
 			end
@@ -4701,7 +4664,6 @@ Mob5.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4741,7 +4703,6 @@ Mob6.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4781,7 +4742,6 @@ Mob7.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4821,7 +4781,6 @@ Mob8.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4871,7 +4830,6 @@ Mob9.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4921,7 +4879,6 @@ Mob10.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -4971,7 +4928,6 @@ Mob11.MouseButton1Click:Connect(function()
             wait()
             local mobs = getMobs()
             if #mobs == 0 then
-                print("No mobs")
                 wait()
             else
                 for k,v in pairs(mobs) do
@@ -5172,7 +5128,6 @@ Item44.MouseButton1Click:Connect(function()
         if Island then
         for i,v in pairs(Island.Blocks:GetChildren()) do
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 23 and v:FindFirstChild("CollisionBoxes") and v:FindFirstChild("1") then
-            print("Hitting "..v.Name)
             local args = {
                 [1] = {
                     ["player_tracking_category"] = "join_from_web",
@@ -5189,7 +5144,6 @@ Item44.MouseButton1Click:Connect(function()
         else
         for i,v in pairs(game.Workspace.WildernessBlocks:GetChildren()) do
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 23 and v:FindFirstChild("RockStage") and v:FindFirstChild("1") then
-            print("Hitting "..v.Name)
             local args = {
                 [1] = {
                     ["player_tracking_category"] = "join_from_web",
@@ -5272,37 +5226,6 @@ Item46.MouseButton1Click:Connect(function()
                 game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(Pickup))
             end
         end
-        end
-    end
-end)
-
-Item47.MouseButton1Click:Connect(function()
-    if Toggled31 then
-        Toggled31 = false
-        Item47.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        Item47.Text = "Destroy Coal/iron/ironOre"
-        Item47.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled31 = true
-        Item47.BackgroundColor3 = Color3.new(0,255,255)
-        Item47.Text = "Destroy!"
-        Item47.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            Island = island
-        end
-        while Toggled31 == true do
-            for i,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-                if (island:IsA("Model")) then
-                    for i, tool in pairs(island.Drops:GetChildren()) do
-                        if (tool:IsA("Tool")) and (tool.Name == "coal" or tool.Name == "ironOre" or tool.Name == "iron") then
-                            print(tool.Name)
-                            tool.HandleDisabled.Position = Vector3.new(-3619, -99, -3442)
-                        end
-                    end
-                end
-            end
-            wait(300)
         end
     end
 end)
@@ -5681,7 +5604,6 @@ Item56.MouseButton1Click:Connect(function()
                     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 end
             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
-                print("inserting block")
                 local args = {
                     [1] = {
                         ["amount"] = 1,
@@ -5707,7 +5629,6 @@ Item56.MouseButton1Click:Connect(function()
                 wait()
             end
         else
-            print("putting coal into "..StoneCutter.Name)
             local args = {
                 [1] = {
                     ["amount"] = 1,
@@ -5769,7 +5690,6 @@ Item57.MouseButton1Click:Connect(function()
                     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 end
             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
-                print("inserting block")
                 local args = {
                     [1] = {
                         ["amount"] = 1,
@@ -5795,7 +5715,6 @@ Item57.MouseButton1Click:Connect(function()
                 wait()
             end
         else
-            print("putting coal into "..StoneCutter.Name)
             local args = {
                 [1] = {
                     ["amount"] = 1,
@@ -5879,7 +5798,6 @@ Item58.MouseButton1Click:Connect(function()
                                     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 end
                             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
-                                print("inserting block")
                                 local args = {
                                     [1] = {
                                         ["amount"] = 1,
@@ -5906,7 +5824,6 @@ Item58.MouseButton1Click:Connect(function()
                             end    
                         
                     else
-                        print("putting coal into "..StoneCutter.Name)
                         local args = {
                             [1] = {
                                 ["amount"] = 1,
@@ -6253,7 +6170,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             wait(Time)
         end
     if insect.FoodLevel.Value < 900 then
-        print("petting chicken")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6266,7 +6182,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 wait()
             end
         end
-        print("feeding chicken")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6299,7 +6214,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MILK_COW:InvokeServer(unpack(args))
 		end
     if insect.FoodLevel.Value < 900 then
-        print("petting yak")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6312,7 +6226,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 wait()
             end
         end
-        print("feeding yak")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6331,7 +6244,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             wait(Time)
         end
     if insect.FoodLevel.Value < 900 then
-        print("petting horse")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6344,7 +6256,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 wait()
             end
         end
-        print("feeding yak")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6363,14 +6274,12 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             wait(Time)
         end
 		if insect.AnimalProductReady.Value > 0 then
-		    print("turkey ready")
             local args = {
                 [1] = insect
             }
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.SpookTurkey:FireServer(unpack(args))
         end
     if insect.FoodLevel.Value < 900 then
-        print("petting turkey")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6383,7 +6292,6 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 wait()
             end
         end
-        print("feeding turkey")
         local args = {
             [1] = {
             ["animal"] = insect
@@ -6431,7 +6339,6 @@ for _,itemport in pairs(Island.Blocks:GetChildren()) do
                     tween:Play()
                     wait(Time)
                 end
-                print("picking up egg")
                 local args = {
                     [1] = {
                     ["tool"] = eggs,
@@ -6507,7 +6414,6 @@ for i,v in pairs(game:GetService("CoreGui").CmdGui.Background.Background4.Backgr
             v.BackgroundColor3 = Color3.new(0,1,1)
             ToOl = v.Text
             while Toggled48  do
-                print("eating "..v.Text)
                 wait()
 
                 Plr.Backpack[ToOl].Parent = Plr.Character
@@ -6552,9 +6458,7 @@ for i,trellis in pairs(Island.Blocks:GetChildren()) do
         local hitPart, hitPosition = workspace:FindPartOnRay(ray,trellis)
         if hitPart then
             if hitPart.Name == "candyCaneVine" and hitPart.stage.Value < 3 then
-                print("not ready yet")
             elseif hitPart.Name == "candyCaneVine" and hitPart.stage.Value == 3 then
-                print(hitPart)
                 if Toggled51 == true then
                     if (HR.Position - hitPart.Position).magnitude > 24 then
                         Point = hitPart.Position
@@ -6577,7 +6481,6 @@ for i,trellis in pairs(Island.Blocks:GetChildren()) do
             end
         else
             if Toggled51 == true then
-            print("Planting")
             local args = {
             [1] = {
                 ["upperBlock"] = false,
@@ -6623,9 +6526,7 @@ for i,trellis in pairs(Island.Blocks:GetChildren()) do
         local hitPart, hitPosition = workspace:FindPartOnRay(ray,trellis)
         if hitPart then
             if hitPart.Name == "dragonfruit" and hitPart.stage.Value < 3 then
-                print("not ready yet")
             elseif hitPart.Name == "dragonfruit" and hitPart.stage.Value == 3 then
-                print(hitPart)
                 if Toggled52 == true then
                     if (HR.Position - hitPart.Position).magnitude > 24 then
                         Point = hitPart.Position
@@ -6648,7 +6549,6 @@ for i,trellis in pairs(Island.Blocks:GetChildren()) do
             end
         else
             if Toggled52 == true then
-            print("Planting")
             local args = {
             [1] = {
                 ["upperBlock"] = false,
@@ -6683,12 +6583,10 @@ Item70.MouseButton1Click:Connect(function()
 				Island = island
 			end
 		end
-		print("Found island",Island)
         while Toggled53 == true do
             wait()
 			for _,MayoSpinner in pairs(Island.Blocks:GetChildren()) do
 				if (MayoSpinner:IsA("Part")) and MayoSpinner.Name == "churner" then
-					print("Found churner")
 					wait()
 
 					local args = {
@@ -6705,7 +6603,6 @@ Item70.MouseButton1Click:Connect(function()
 					if MayoSpinner.WorkerContents:FindFirstChild("yakButter") then
 	
 						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(MayoSpinner.Position + Vector3.new(0,5,0))
-						print("gettn that butter")
 						wait()
 						local args = {
 							[1] = {
@@ -6716,7 +6613,6 @@ Item70.MouseButton1Click:Connect(function()
 
 						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						else
-						print("no butter")
 					end
 				end
 			end
@@ -6741,16 +6637,12 @@ Item72.MouseButton1Click:Connect(function()
 				Island = island
 			end
 		end
-		print("Found island",Island)
         while Toggled55 == true do
             wait()
 			for i,b in pairs(Island.Blocks:GetChildren()) do
 				if b.Name == "smallFurnace" then
-					print("found furnace", i)
 					if b.WorkerFuel:FindFirstChild("coal") then
-						print(i, "is working")
 						if #b.WorkerContents:GetChildren() == 0 then
-							print(i, "has no children")
 							local Repeat = 1
 							if Toggled55 == true then
 								local args = {
@@ -6767,7 +6659,6 @@ Item72.MouseButton1Click:Connect(function()
 						if b.WorkerOutputContents:FindFirstChild("iron") then
 						    if b.WorkerOutputContents:FindFirstChild("iron").Amount.Value == 50 then
 						        if Toggled55 == true then
-							        print("withrdawing from", i)
 							            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude > 24 then
 						            		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(b.Position)
 							            	wait(0.3)
@@ -6783,7 +6674,6 @@ Item72.MouseButton1Click:Connect(function()
 						    end
 					    end
 					else
-						print("Fueling", i)
 						local Repeat = 1
 						if Toggled55 == true then
 							local args = {
@@ -6820,16 +6710,12 @@ Item73.MouseButton1Click:Connect(function()
 				Island = island
 			end
 		end
-		print("Found island",Island)
         while Toggled56 == true do
             wait()
 			for i,b in pairs(Island.Blocks:GetChildren()) do
 				if b.Name == "smallFurnace" then
-					print("found furnace", i)
 					if b.WorkerFuel:FindFirstChild("coal") then
-						print(i, "is working")
 						if #b.WorkerContents:GetChildren() == 0 then
-							print(i, "has no children")
 							if Toggled56 == true then
 								local args = {
 									[1] = {
@@ -6847,7 +6733,6 @@ Item73.MouseButton1Click:Connect(function()
 						if b.WorkerOutputContents:FindFirstChild("gold") then
 						    if b.WorkerOutputContents:FindFirstChild("gold").Amount.Value == 50 then
 						        if Toggled56 == true then
-							print("withrdawing from", i)
 							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude > 24 then
 								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(b.Position)
 								wait(0.3)
@@ -6863,7 +6748,6 @@ Item73.MouseButton1Click:Connect(function()
 						    end
 					    end
 					else
-						print("Fueling", i)
 						if Toggled56 == true then
 							local args = {
 							[1] = {
@@ -7004,7 +6888,6 @@ Item76.MouseButton1Click:Connect(function()
     
     for i,smelter in pairs(island.Blocks:GetChildren()) do
         if smelter.Name == "smallFurnace" then
-            print("found "..smelter.Name..i)
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - smelter.Position).magnitude > 23 then
                 Point = smelter.Position
                 Distance = (HR.Position - Point).Magnitude
@@ -7061,7 +6944,6 @@ for i,dirt in pairs(Island.Blocks:GetChildren()) do
         local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
         if hitPart then
             if hitPart.Name == "spiritCrop" and hitPart.stage.Value == 3 then
-                print(hitPart,"is ready")
                 if Toggled59 == true then
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - hitPart.Position).magnitude > 24 then
                         game.Players.LocalPlayer.Character.Humanoid:MoveTo(hitPart.Position)
@@ -7071,7 +6953,6 @@ for i,dirt in pairs(Island.Blocks:GetChildren()) do
             end
         else
             if Toggled59 == true then
-            print("Planting")
             local args = {
             [1] = {
                 ["upperBlock"] = false,
@@ -7247,7 +7128,7 @@ Item85.MouseButton1Click:Connect(function()
             wait()
 Blocks = game.Workspace.WildernessBlocks
 for i,v in pairs(Blocks:GetChildren()) do
-if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then print("on island")
+if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
     if Toggled74 == true then
     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 23 then
         Point = v.Position
@@ -7259,7 +7140,6 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then print("on i
         wait(Time - 2)
     end
     repeat
-    print("Hitting "..v:FindFirstChild("1").Name)
     local args = {[1] = {
     ["player_tracking_category"] = "join_from_web",
     ["part"] = v:FindFirstChild("1"),
@@ -7301,7 +7181,7 @@ Item86.MouseButton1Click:Connect(function()
             wait()
 Blocks = game.Workspace.WildernessBlocks
 for i,v in pairs(Blocks:GetChildren()) do
-if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then print("on island")
+if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
     if Toggled75 == true then
     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 23 then
         Point = v.Position
@@ -7313,7 +7193,6 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then print("on i
         wait(Time - 2)
     end
     repeat
-    print("Hitting "..v:FindFirstChild("1").Name)
     local args = {[1] = {
     ["player_tracking_category"] = "join_from_web",
     ["part"] = v:FindFirstChild("1"),
@@ -7369,7 +7248,7 @@ VoidMining.MouseButton1Click:Connect(function()
             wait()
             Blocks = game.Workspace.WildernessBlocks
             for i,v in pairs(Blocks:GetChildren()) do
-                if (POs - v.Position).magnitude < 200 and v:FindFirstChild("1") then print("on island")
+                if (POs - v.Position).magnitude < 200 and v:FindFirstChild("1") then
                     if Toggled83 == true then
                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 23 then
                             Point = v.Position
@@ -7383,12 +7262,10 @@ VoidMining.MouseButton1Click:Connect(function()
                         repeat
                             Continue = Continue + 1
                         if Pickaxe then
-                            print("equipping pickaxe")
                             Pickaxe.Parent = Character
                             elseif  AltPickaxe then
                             AltPickaxe.Parent = Character
                         end
-                        print("Hitting "..v.Name.." at",v.Position)
                         local args = {[1] = {
                         ["player_tracking_category"] = "join_from_web",
                         ["part"] = v:FindFirstChild("1"),
@@ -7420,7 +7297,6 @@ VoidMining.MouseButton1Click:Connect(function()
                         end
                         repeat
                             Continue = Continue + 1
-                        print("Shoveling")
                         local args = {
                         [1] = {
                             ["shovelType"] = "shovelStone",
@@ -7495,12 +7371,10 @@ ElectriteMining.MouseButton1Click:Connect(function()
                         end
                         repeat
                         if Pickaxe then
-                            print("equipping pickaxe")
                             Pickaxe.Parent = Character
                             elseif  AltPickaxe then
                             AltPickaxe.Parent = Character
                         end
-                        print("Hitting "..v.Name.." at",v.Position)
                         local args = {[1] = {
                         ["player_tracking_category"] = "join_from_web",
                         ["part"] = v:FindFirstChild("1"),
@@ -7722,7 +7596,6 @@ for i,pond in pairs(Island.Blocks:GetChildren()) do
         local hitPart, hitPosition = workspace:FindPartOnRay(ray,pond)
         if hitPart then
             if hitPart.Name == "rice" and hitPart.stage.Value == 3 then
-                print(hitPart)
                 if Toggled80 == true then
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - hitPart.Position).magnitude > 24 then
                     game.Players.LocalPlayer.Character.Humanoid:MoveTo(hitPart.Position)
@@ -7740,7 +7613,6 @@ for i,pond in pairs(Island.Blocks:GetChildren()) do
             end
         else
             if Toggled80 == true then
-            print("Planting")
             local args = {
             [1] = {
                 ["upperBlock"] = false,
@@ -7800,7 +7672,6 @@ for i,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
         repeat
             if Toggled89 == true then
             Tries = Tries + 1
-        print("up n wait")
         wait()
         if v:FindFirstChild("HumanoidRootPart") ~= nil then
             Pointx = v.HumanoidRootPart.Position.X
@@ -7809,7 +7680,6 @@ for i,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
             Speed = 20
             Time = Distance/Speed
             tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Vector3.new(Pointx,HR.Position.Y,Pointz + 6))})
-            print("Playing Tween for "..Time.." Seconds")
             tween:Play()
             wait(Time)
         end
@@ -7820,14 +7690,12 @@ for i,v in pairs(game.Workspace.WildernessIsland.Entities:GetChildren()) do
             wait(0.2)
             HR.CFrame = CFrame.new(v.HumanoidRootPart.Position + Vector3.new(0,0,6))
             wait(0.5)
-            print("I think i caught it!")
             HR.CFrame = CFrame.new(HR.Position + Vector3.new(0,1500,0))
             wait(0.7)
             end)
         end
         end
         until v:FindFirstChild("HumanoidRootPart") == nil or Toggled89 == false or Tries >= 3
-        print("ending loop")
         end
         end
 end

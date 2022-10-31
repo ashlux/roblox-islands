@@ -5,7 +5,7 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 10/30/2022! Have fun :D"
+updates = "[OWNER] [Matt]: Updated 10/31/2022! Have fun 🎃"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -760,7 +760,9 @@ Candles.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Candles1 = true
         Candles.BackgroundColor3 = Color3.new(1,0,0)
@@ -808,7 +810,9 @@ Skulls.MouseButton1Click:Connect(function()
         Skulls.Text = "Catch Skulls"
         Skulls.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
+        if tween then
         tween:Cancel()
+        end
     else
         Skulls1 = true
         Skulls.BackgroundColor3 = Color3.new(1,0,0)
@@ -1889,7 +1893,9 @@ sickleButton.MouseButton1Click:Connect(function()
         sickleButton.Text = "Sickle Farm"
         sickleButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
         unFloat()
+        if tween then
         tween:Cancel()
+        end
         destroyOrbs = false
     else
         sickleFarming = true
@@ -2370,7 +2376,9 @@ Treasure.MouseButton1Click:Connect(function()
         Noclipping:Disconnect()
         noClip = false
         unFloat()
+        if tween then
         tween:Cancel()
+        end
     else
         Treasure1 = true
         Treasure.BackgroundColor3 = Color3.fromRGB(0,255,255)
@@ -2584,7 +2592,9 @@ allWoods.MouseButton1Click:Connect(function()
         allWoods.BackgroundColor3 = Color3.fromRGB(175,175,175)
         allWoods.Text = "All Woods"
         allWoods.TextColor3 = Color3.fromRGB(0,0,0)
+        if tween then
         tween:Cancel()
+        end
         unFloat()
     else
         allWoods1 = true
@@ -3340,7 +3350,9 @@ VoidParasite.MouseButton1Click:Connect(function()
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Noclipping:Disconnect()
         noClip = false
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled87 = true
         VoidParasite.BackgroundColor3 = Color3.new(0,255,255)
@@ -3836,7 +3848,9 @@ Item4.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled1 = true
         Item4.BackgroundColor3 = Color3.new(1,0,0)
@@ -3876,7 +3890,9 @@ Item5.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled2 = true
         Item5.BackgroundColor3 = Color3.new(1,0,0)
@@ -3952,7 +3968,9 @@ Mob4.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled4 = true
         Mob4.BackgroundColor3 = Color3.new(1,0,0)
@@ -4490,7 +4508,9 @@ Item36.MouseButton1Click:Connect(function()
         Item36.Text = "Clear Grass/Rocks"
         Item36.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
-        if tween then tween:Cancel() end
+        if tween then
+        tween:Cancel()
+        end
     else
         Toggled25 = true
         Item36.BackgroundColor3 = Color3.new(0,255,255)
@@ -4649,7 +4669,9 @@ Mob5.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled19 = true
         Mob5.BackgroundColor3 = Color3.new(1,0,0)
@@ -4688,7 +4710,9 @@ Mob6.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled48 = true
         Mob6.BackgroundColor3 = Color3.new(1,0,0)
@@ -4727,7 +4751,9 @@ Mob7.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled49 = true
         Mob7.BackgroundColor3 = Color3.new(1,0,0)
@@ -4765,7 +4791,9 @@ Mob8.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled60 = true
         Mob8.BackgroundColor3 = Color3.new(1,0,0)
@@ -4815,7 +4843,9 @@ Mob9.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled49 = true
         Mob9.BackgroundColor3 = Color3.new(1,0,0)
@@ -4864,7 +4894,9 @@ Mob10.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled90 = true
         Mob10.BackgroundColor3 = Color3.new(1,0,0)
@@ -4913,7 +4945,9 @@ Mob11.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled91 = true
         Mob11.BackgroundColor3 = Color3.new(1,0,0)
@@ -4977,7 +5011,9 @@ Item33.MouseButton1Click:Connect(function()
         Item33.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item33.Text = "Collect Truffles"
         Item33.TextColor3 = Color3.fromRGB(250,250,250)
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled21 = true
         Item33.BackgroundColor3 = Color3.fromRGB(0,255,255)
@@ -5381,7 +5417,9 @@ Item50.MouseButton1Click:Connect(function()
         Item50.Text = "Oak Wood"
         Item50.TextColor3 = Color3.fromRGB(0,0,0)
         unFloat()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled33 = true
         Item50.BackgroundColor3 = Color3.new(200,0,0)
@@ -5411,7 +5449,9 @@ Item51.MouseButton1Click:Connect(function()
         Item51.BackgroundColor3 = Color3.fromRGB(248,223,161)
         Item51.Text = "Birch Wood"
         Item51.TextColor3 = Color3.fromRGB(0,0,0)
+        if tween then
         tween:Cancel()
+        end
         unFloat()
     else
         Toggled34 = true
@@ -5442,7 +5482,9 @@ Item52.MouseButton1Click:Connect(function()
         Item52.BackgroundColor3 = Color3.fromRGB(85,52,43)
         Item52.Text = "Pine Wood"
         Item52.TextColor3 = Color3.fromRGB(250,250,250)
+        if tween then
         tween:Cancel()
+        end
         unFloat()
     else
         Toggled35 = true
@@ -5473,7 +5515,9 @@ Item53.MouseButton1Click:Connect(function()
         Item53.BackgroundColor3 = Color3.fromRGB(200,111,87)
         Item53.Text = "Maple Wood"
         Item53.TextColor3 = Color3.fromRGB(0,0,0)
+        if tween then
         tween:Cancel()
+        end
         unFloat()
     else
         Toggled36 = true
@@ -5504,7 +5548,9 @@ Item54.MouseButton1Click:Connect(function()
         Item54.BackgroundColor3 = Color3.fromRGB(258,233,171)
         Item54.Text = "Hickory Wood"
         Item54.TextColor3 = Color3.fromRGB(0,0,0)
+        if tween then
         tween:Cancel()
+        end
         unFloat()
     else
         Toggled37 = true
@@ -5535,7 +5581,9 @@ Item55.MouseButton1Click:Connect(function()
         Item55.BackgroundColor3 = Color3.fromRGB(168,105,165)
         Item55.Text = "Spirit Wood"
         Item55.TextColor3 = Color3.fromRGB(0,0,0)
+        if tween then
         tween:Cancel()
+        end
         unFloat()
     else
         Toggled38 = true
@@ -5902,7 +5950,9 @@ Item61.MouseButton1Click:Connect(function()
         Item61.Text = "Catch Entities"
         Item61.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled44 = true
         Item61.BackgroundColor3 = Color3.new(0,255,255)
@@ -5940,7 +5990,9 @@ Item62.MouseButton1Click:Connect(function()
         Item62.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item62.Text = "Pick Avocados"
         Item62.TextColor3 = Color3.fromRGB(250,250,250)
+        if tween then
         tween:Cancel()
+        end
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
     else
         Toggled45 = true
@@ -6360,7 +6412,9 @@ Item64.MouseButton1Click:Connect(function()
         Item64.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item64.Text = "Leaf Collector"
         Item64.TextColor3 = Color3.fromRGB(250,250,250)
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled47 = true
         Item64.BackgroundColor3 = Color3.new(0,255,255)
@@ -6437,7 +6491,9 @@ Item68.MouseButton1Click:Connect(function()
         Item68.Text = "Candy Cane"
         Item68.TextColor3 = Color3.new(1,1,1)
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled51 = true
         Item68.BackgroundColor3 = Color3.new(0,255,255)
@@ -6505,7 +6561,9 @@ Item69.MouseButton1Click:Connect(function()
         Item69.Text = "Dragon Fruit"
         Item69.TextColor3 = Color3.new(1,1,1)
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled52 = true
         Item69.BackgroundColor3 = Color3.new(0,255,255)
@@ -6976,7 +7034,9 @@ Item78.MouseButton1Click:Connect(function()
         Item78.BackgroundColor3 = Color3.fromRGB(55,55,55)
         Item78.Text = "Give Fertility Potions"
         Item78.TextColor3 = Color3.new(1,1,1)
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled60 = true
         Item78.BackgroundColor3 = Color3.new(0,255,255)
@@ -7110,7 +7170,9 @@ Item85.MouseButton1Click:Connect(function()
         Item85.Text = "Buffalkor Island"
         Item85.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled74 = true
         Item85.BackgroundColor3 = Color3.new(0,255,255)
@@ -7164,7 +7226,9 @@ Item86.MouseButton1Click:Connect(function()
         Item86.Text = "Diamond Island"
         Item86.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled75 = true
         Item86.BackgroundColor3 = Color3.new(0,255,255)
@@ -7227,7 +7291,9 @@ VoidMining.MouseButton1Click:Connect(function()
         VoidMining.Text = "Void Rocks"
         VoidMining.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled83 = true
         VoidMining.BackgroundColor3 = Color3.new(0,255,255)
@@ -7338,7 +7404,9 @@ ElectriteMining.MouseButton1Click:Connect(function()
         ElectriteMining.Text = "Electrite"
         ElectriteMining.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled85 = true
         ElectriteMining.BackgroundColor3 = Color3.new(0,255,255)
@@ -7411,7 +7479,9 @@ SnowMining.MouseButton1Click:Connect(function()
         SnowMining.Text = "Snow"
         SnowMining.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled86 = true
         SnowMining.BackgroundColor3 = Color3.new(0,255,255)
@@ -7463,7 +7533,9 @@ Item87.MouseButton1Click:Connect(function()
         Item87.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item87.Text = "Pick Berries"
         Item87.TextColor3 = Color3.fromRGB(250,250,250)
+        if tween then
         tween:Cancel()
+        end
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
     else
@@ -7515,7 +7587,9 @@ Item88.MouseButton1Click:Connect(function()
         Item88.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item88.Text = "Composter"
         Item88.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then tween:Cancel() end
+        if tween then
+        tween:Cancel()
+        end
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         NoClipping:Disconnect()
     else
@@ -7649,7 +7723,9 @@ BFly.MouseButton1Click:Connect(function()
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Noclipping:Disconnect()
         noClip = false
+        if tween then
         tween:Cancel()
+        end
     else
         Toggled89 = true
         BFly.BackgroundColor3 = Color3.new(0,255,255)

@@ -5,7 +5,7 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 10/31/2022! Have fun 🎃"
+updates = "[OWNER] [Matt]: Updated 11/1/2022! Have fun! 😊"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -428,6 +428,19 @@ function hitTree(tree)
 		}
 	}
 	return game.ReplicatedStorage.rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+end
+
+function halloweenShop(itemNumber, amount)
+local args = {
+    [1] = {
+        ["merchant"] = "halloweenMercenary",
+        ["offerId"] = itemNumber,
+        ["amount"] = amount
+    }
+}
+
+game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+
 end
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
@@ -902,7 +915,7 @@ Teleports.Visible = false
 
 
 local CmdHandler7 = Instance.new("ScrollingFrame")
-CmdHandler7.Name = "CmdHandler6"
+CmdHandler7.Name = "CmdHandler7"
 CmdHandler7.Parent = Background10
 CmdHandler7.Active = true
 CmdHandler7.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
@@ -949,7 +962,7 @@ LunarScroll.Size = UDim2.new(0, 148, 0, 195)
 LunarScroll.ScrollBarThickness = 8
 
 local Cletus = Instance.new("Frame")
-Cletus.Name = "Cletus"
+Cletus.Name = "Tom"
 Cletus.Parent = Background11
 Cletus.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Cletus.BorderSizePixel = 0
@@ -1280,7 +1293,7 @@ Wholesaler.Active = true
 Wholesaler.Visible = false
 
 local WholesalerScroll = Instance.new("ScrollingFrame")
-WholesalerScroll.Name = "CletusScroll"
+WholesalerScroll.Name = "WholesalerScroll"
 WholesalerScroll.Parent = Wholesaler
 WholesalerScroll.Active = true
 WholesalerScroll.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
@@ -1290,6 +1303,138 @@ WholesalerScroll.AutomaticCanvasSize = "Y"
 WholesalerScroll.Position = UDim2.new(0, 1, 0, 1)
 WholesalerScroll.Size = UDim2.new(0, 148, 0, 195)
 WholesalerScroll.ScrollBarThickness = 8
+
+local WSA = Instance.new("TextBox")
+WSA.Position = UDim2.new(0,20,0,0)
+WSA.Size = UDim2.new(0,100,0,20)
+WSA.BackgroundColor3 = Color3.fromRGB(50,50,50)
+WSA.BorderSizePixel = 1
+WSA.BorderColor3 = Color3.new(1,1,1)
+WSA.ZIndex = 2
+WSA.Parent = WholesalerScroll
+WSA.Text = ""
+WSA.PlaceholderText = "Enter Amount"
+WSA.TextColor3 = Color3.fromRGB(250,250,250)
+WSA.TextScaled = true
+
+local WSWarning = Instance.new("TextLabel")
+WSWarning.Position = UDim2.new(0,1,0,21)
+WSWarning.Size = UDim2.new(0,140,0,20)
+WSWarning.BackgroundColor3 = Color3.fromRGB(0,0,0)
+WSWarning.BorderSizePixel = 0
+WSWarning.BorderColor3 = Color3.new(1,1,1)
+WSWarning.ZIndex = 2
+WSWarning.Parent = WholesalerScroll
+WSWarning.Text = "For SELLING crates"
+WSWarning.TextColor3 = Color3.fromRGB(250,250,250)
+WSWarning.TextScaled = true
+
+local WS1 = Instance.new("TextButton")
+WS1.Position = UDim2.new(0,1,0,42)
+WS1.Size = UDim2.new(0,140,0,20)
+WS1.BackgroundColor3 = Color3.fromRGB(0,0,250)
+WS1.BorderSizePixel = 1
+WS1.BorderColor3 = Color3.new(1,1,1)
+WS1.ZIndex = 2
+WS1.Parent = WholesalerScroll
+WS1.Text = "Large Melon Crates"
+WS1.TextColor3 = Color3.fromRGB(250,250,250)
+WS1.TextScaled = true
+WS1.MouseButton1Click:Connect(function()
+    args = {
+    [1] = {
+    ["merchant"] = "autumn_shop",
+    ["offerId"] = 170,
+    ["amount"] = tonumber(WSA.Text)
+    }}
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+end)
+
+local WS2 = Instance.new("TextButton")
+WS2.Position = UDim2.new(0,1,0,64)
+WS2.Size = UDim2.new(0,140,0,20)
+WS2.BackgroundColor3 = Color3.fromRGB(0,0,250)
+WS2.BorderSizePixel = 1
+WS2.BorderColor3 = Color3.new(1,1,1)
+WS2.ZIndex = 2
+WS2.Parent = WholesalerScroll
+WS2.Text = "Large Pineapple Crates"
+WS2.TextColor3 = Color3.fromRGB(250,250,250)
+WS2.TextScaled = true
+WS2.MouseButton1Click:Connect(function()
+    args = {
+    [1] = {
+    ["merchant"] = "autumn_shop",
+    ["offerId"] = 171,
+    ["amount"] = tonumber(WSA.Text)
+    }}
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+end)
+
+local halloweenVendor = Instance.new("Frame")
+halloweenVendor.Name = "halloweenVendor"
+halloweenVendor.Parent = Background11
+halloweenVendor.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+halloweenVendor.BorderSizePixel = 0
+halloweenVendor.BorderColor3 = Color3.new(1,0,1)
+halloweenVendor.Position = UDim2.new(1, 0, 0.05, 0)
+halloweenVendor.Size = UDim2.new(0, 150, 0, 200)
+halloweenVendor.Active = true
+halloweenVendor.Visible = false
+
+local halloweenVendorScroll = Instance.new("ScrollingFrame")
+halloweenVendorScroll.Name = "WholesalerScroll"
+halloweenVendorScroll.Parent = halloweenVendor
+halloweenVendorScroll.Active = true
+halloweenVendorScroll.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+halloweenVendorScroll.BackgroundTransparency = 1.000
+halloweenVendorScroll.BorderSizePixel = 0
+halloweenVendorScroll.AutomaticCanvasSize = "Y"
+halloweenVendorScroll.Position = UDim2.new(0, 1, 0, 1)
+halloweenVendorScroll.Size = UDim2.new(0, 148, 0, 195)
+halloweenVendorScroll.ScrollBarThickness = 8
+
+halloweenItems = {"Tall Fire Chalice", "Small Fire Chalice", "Skull Gate", "Standing Opened Coffin", "Standing Closed Coffin", "Lying Opened Coffin", "Lying Closed Coffin", "Gravestone", "Gravestone(2)", "Gravestone(3)", "Pumpkin Candle", "Pumpkin Happy", "Pumpkin Angry", "Long Crossbow Bolt", "Cauldron", "Green Eyed Scarecrow", "Yellow Eyed Scarecrow"}
+NaMe = 0
+YPos = 21
+for i,v in pairs(halloweenItems) do
+    Spoopy = Instance.new("TextButton")
+    Spoopy.Name = v
+    Spoopy.Position = UDim2.new(0,1,0,YPos)
+    Spoopy.Size = UDim2.new(0,140,0,20)
+    Spoopy.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    Spoopy.BorderColor3 = Color3.new(1,1,1)
+    Spoopy.ZIndex = 2
+    Spoopy.Parent = halloweenVendorScroll
+    Spoopy.Text = v
+    Spoopy.TextColor3 = Color3.fromRGB(0,250,0)
+    Spoopy.TextScaled = true
+    NaMe = NaMe + 1
+    YPos = YPos + 20
+end
+
+local HWA = Instance.new("TextBox")
+HWA.Position = UDim2.new(0,20,0,0)
+HWA.Size = UDim2.new(0,100,0,20)
+HWA.BackgroundColor3 = Color3.fromRGB(50,50,50)
+HWA.BorderSizePixel = 1
+HWA.BorderColor3 = Color3.new(1,1,1)
+HWA.ZIndex = 2
+HWA.Parent = halloweenVendorScroll
+HWA.Text = ""
+HWA.PlaceholderText = "Enter Amount"
+HWA.TextColor3 = Color3.fromRGB(250,250,250)
+HWA.TextScaled = true
+
+for i,v in pairs(halloweenVendorScroll:GetChildren()) do
+    if not v:IsA("TextBox") then
+    v.MouseButton1Click:Connect(function()
+        print("Buy "..v.Name.." which is number", i)
+        halloweenShop(i, tonumber(HWA.Text))
+        print(i, tonumber(HWA.Text))
+    end)
+    end
+end
 
 local N0 = Instance.new("TextLabel")
 N0.Position = UDim2.new(0,0,0,0)
@@ -1854,7 +1999,7 @@ cropsBackground.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 cropsBackground.BorderSizePixel = 0
 cropsBackground.BorderColor3 = Color3.new(1,0,1)
 cropsBackground.Position = UDim2.new(1, 0, 0.05, 0)
-cropsBackground.Size = UDim2.new(0, 115, 0, 150)
+cropsBackground.Size = UDim2.new(0, 115, 0, 195)
 cropsBackground.Active = true
 cropsBackground.Visible = false
 
@@ -3253,6 +3398,18 @@ Item83.Text = "Wholesaler >"
 Item83.TextColor3 = Color3.fromRGB(250,250,250)
 Item83.TextScaled = true
 
+local HWV = Instance.new("TextButton")
+HWV.Position = UDim2.new(0,1,0,63)
+HWV.Size = UDim2.new(0,100,0,20)
+HWV.BackgroundColor3 = Color3.fromRGB(0,0,250)
+HWV.BorderSizePixel = 1
+HWV.BorderColor3 = Color3.new(1,1,1)
+HWV.ZIndex = 2
+HWV.Parent = CmdHandler8
+HWV.Text = "Halloween >"
+HWV.TextColor3 = Color3.fromRGB(250,250,250)
+HWV.TextScaled = true
+
 local Item84 = Instance.new("TextButton")
 Item84.Position = UDim2.new(0,1,0,126)
 Item84.Size = UDim2.new(0,100,0,20)
@@ -3740,6 +3897,9 @@ Item81.MouseButton1Click:Connect(function() -- lunar
         Toggled73 = false
         Wholesaler.Visible = false
         Item83.Text = "Wholesaler >"
+        HWToggle = false
+        HWV.Text = "Halloween >"
+        halloweenVendor.Visible = false
     end
 end)
 
@@ -3760,10 +3920,13 @@ Item82.MouseButton1Click:Connect(function() -- lunar
         Toggled73 = false
         Wholesaler.Visible = false
         Item83.Text = "Wholesaler >"
+        HWToggle = false
+        HWV.Text = "Halloween >"
+        halloweenVendor.Visible = false
     end
 end)
 
-Item83.MouseButton1Click:Connect(function() -- lunar
+Item83.MouseButton1Click:Connect(function() -- wholesaler
     if Toggled73 then
         Toggled73 = false
         Wholesaler.Visible = false
@@ -3780,6 +3943,32 @@ Item83.MouseButton1Click:Connect(function() -- lunar
         Item82.Text = "Cletus >"
         Toggled71 = false
         Toggled72 = false
+        HWToggle = false
+        HWV.Text = "Halloween >"
+        halloweenVendor.Visible = false
+    end
+end)
+
+HWV.MouseButton1Click:Connect(function() -- Halloween
+    if HWToggle then
+        HWToggle = false
+        halloweenVendor.Visible = false
+        HWV.Text = "Halloween >"
+        HWV.BackgroundColor3 = Color3.new(0,0,1)
+        HWV.TextColor3 = Color3.fromRGB(250,250,250)
+    else
+        HWToggle = true
+        HWV.Text = "Halloween <"
+        Wholesaler.Visible = false
+        Lunar.Visible = false
+        Cletus.Visible = false
+        halloweenVendor.Visible = true
+        Item81.Text = "Lunar >"
+        Item82.Text = "Cletus >"
+        Item83.Text = "Wholesaler >"
+        Toggled71 = false
+        Toggled72 = false
+        Toggled73 = false
     end
 end)
 
@@ -6458,7 +6647,7 @@ Item64.MouseButton1Click:Connect(function()
     end
 end)
 
-for i,v in pairs(game:GetService("CoreGui").CmdGui.Background.Background4.Background9.CmdHandler6:GetChildren()) do
+for i,v in pairs(CmdHandler6:GetChildren()) do
     v.MouseButton1Click:Connect(function()
         if Toggled48 then
             Toggled48 = false
@@ -7153,13 +7342,8 @@ God.MouseButton1Click:Connect(function()
         God.Text = "Disable God Mode"
         God.TextColor3 = Color3.fromRGB(0,0,0)
         WS = 30
+        Health = Character.CurrentHealth:Clone()
 		Character.CurrentHealth:Destroy()
-		Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-            if Toggled69 then
-            Humanoid.WalkSpeed = WS
-            end
-        end)
-        Humanoid.WalkSpeed = WS
     end
 end)
 

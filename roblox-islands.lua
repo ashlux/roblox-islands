@@ -5,7 +5,7 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/1/2022! Have fun! 😊"
+updates = "[OWNER] [Matt]: Updated 11/2/2022! Have fun! 😊"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -34,7 +34,6 @@ local Close = Instance.new("TextButton")
 local Minimum = Instance.new("TextButton")
 local CmdName = Instance.new("TextButton")
 local Plr = game.Players.LocalPlayer
-local GetM = Plr:GetMouse()
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TS = game:GetService('TweenService')
 local HttpService = game:GetService("HttpService")
@@ -438,7 +437,6 @@ local args = {
         ["amount"] = amount
     }
 }
-
 game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 
 end
@@ -631,7 +629,7 @@ CmdName.TextSize = 14.000
 CmdName.TextWrapped = true
 Dragg = false
 
-CmdName.MouseButton1Down:Connect(function()Dragg = true while Dragg do game.TweenService:Create(Background, TweenInfo.new(.06), {Position = UDim2.new(0,GetM.X-40,0,GetM.Y-5)}):Play()wait()end end)
+CmdName.MouseButton1Down:Connect(function()Dragg = true while Dragg do game.TweenService:Create(Background, TweenInfo.new(.06), {Position = UDim2.new(0,mouse.X-40,0,mouse.Y-5)}):Play()wait()end end)
 CmdName.MouseButton1Up:Connect(function()Dragg = false end)
 
 CmdHandler.Name = "CmdHandler"
@@ -5177,7 +5175,7 @@ Item32.MouseButton1Click:Connect(function()
         Item32.BackgroundColor3 = Color3.new(1,0,0)
         Item32.Text = "Click Away"
         Item32.TextColor3 = Color3.fromRGB(0,255,255)
-        local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+        sethiddenproperty(Player, "SimulationRadius", 999999999999)
         mouse.Button1Down:connect(function()
             for i,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
                 if (island:IsA("Model")) then

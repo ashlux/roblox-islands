@@ -31,7 +31,7 @@ end
 
 
 
-Players.PlayerAdded:Connect(player)
+Players.PlayerAdded:Connect(maybeGiveBuild)
 
 for _, player in pairs(Players:GetChildren()) do
 	maybeGiveBuild(player)

@@ -1,11 +1,18 @@
+local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 
 local builderNames = {
   "putthenameofthebuilderhereanditmustmatchcaseexactlykthxbai"
 }
 
+function messageBuildGiven(player)
+		local message = "[OWNER] [Ash]: Build given to " .. player.Name .. "!!!!"
+		StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = message})
+
+end
+
 function giveBuild(player)
-	print("Giving build to", player, "!!!!!!")
+	messageBuildGiven(player)
 	for i = 1,100 do
 		wait(0.5)
 		local args = {[1] = {["accessRank"] = 3, ["player"] = player}}

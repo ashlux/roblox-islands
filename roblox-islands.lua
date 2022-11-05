@@ -5,14 +5,14 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/4/2022! Have fun! 😊"
+updates = "[OWNER] [Matt]: Updated 11/5/2022! Have fun! 😊"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wgxrapfyxjus/xvNyjlcunbs")
-local tradeEvent =game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cMvmsoZkfapndXGbfalhChqvYejomA/ljhTPyndggkklvk")
+local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cMvmsoZkfapndXGbfalhChqvYejomA/ljhTPyndggkklvk")
 local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("cMvmsoZkfapndXGbfalhChqvYejomA/fhwioyooahiedkpiDhjnnotquqjfbwuBapKqavDaBn")
 local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fokeelqbqjuN/sUbztQwdsCwzofoKmsmiAywzQHxqleyryq")
 local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fokeelqbqjuN/xgljmwTXjvugzfphdveqimvjibclyps")
@@ -361,7 +361,9 @@ end
 function getIslandEntities()
     local Entities = {}
     for i,v in pairs(Island.Entities:GetChildren()) do
-        table.insert(Entities, v)
+        if v:FindFirstChild("HumanoidRootPart") then
+            table.insert(Entities, v)
+        end
     end
     table.sort(Entities, function(t1, t2) 
 		return Player:DistanceFromCharacter(t1.HumanoidRootPart.Position) < Player:DistanceFromCharacter(t2.HumanoidRootPart.Position) end)
@@ -5341,14 +5343,9 @@ Item44.MouseButton1Click:Connect(function()
         Item44.BackgroundColor3 = Color3.new(0,0,1)
         Item44.Text = "Breaking Rocks!"
         Item44.TextColor3 = Color3.fromRGB(250,250,0)
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled28 == true do
             wait()
-        if Island then
+        if Island ~= "" then
         for i,v in pairs(Island.Blocks:GetChildren()) do
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 23 and v:FindFirstChild("CollisionBoxes") and v:FindFirstChild("1") then
             local args = {

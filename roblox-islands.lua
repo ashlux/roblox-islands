@@ -1,8 +1,16 @@
 print("Loading")
+
 repeat wait()
 until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
 local mouse = game.Players.LocalPlayer:GetMouse() 
 repeat wait() until mouse
+
+function loadModule(url)
+	return loadstring(game:HttpGet(url))()
+end
+
+local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-trees.lua")
+
 print("Loading Complete!")
 
 updates = "[OWNER] [Matt]: Updated 11/5/2022! Have fun! 😊"
@@ -6596,49 +6604,19 @@ Item64.MouseButton1Click:Connect(function()
         Item64.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item64.Text = "Leaf Collector"
         Item64.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then
-        tween:Cancel()
-        end
+	-- TODO: stop moving tree to tree
+        --if tween then
+        --	tween:Cancel()
+        --end
+	treesModule.stopTrimIslandTreesAura()
     else
         Toggled47 = true
         Item64.BackgroundColor3 = Color3.new(0,255,255)
         Item64.Text = "Collecting Leaves"
         Item64.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
-        while Toggled47 == true do
-            wait()
-            if game.Players.LocalPlayer.Character:FindFirstChild("clippers") then
-                for i,v in pairs(Island.Blocks:GetChildren()) do
-                    if v.Name == "tree1" or v.Name == "tree2" or v.Name == "tree3" or v.Name == "tree4" or v.Name == "treeMaple1" or v.Name == "treeMaple2" then
-                        if Toggled47 == true then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 24 then
-                                Point = v.Position + Vector3.new(0,5,0)
-                                Distance = (HR.Position - Point).Magnitude
-                                Speed = 20
-                                Time = Distance/Speed
-                                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                                tween:Play()
-                                wait(Time)
-                            end
-                            local args = {
-                                [1] = {
-                                ["tree"] = v
-                                }
-                            }
-                            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TRIM_TREE_REQUEST:InvokeServer(unpack(args))
-                        end
-                    end
-                end
-            else
-            game.StarterGui:SetCore("SendNotification", {Title="Retrying in 5 seconds"; Text="NOT HOLDING CLIPPERS!"; Icon ="rbxassetid://62800364"; Duration=5;})
-            wait(5)
-            end
-        end
+	
+	treesModule.startTrimIslandTreesAura()
+	-- TODO: put in moving to the next tree
     end
 end)
 

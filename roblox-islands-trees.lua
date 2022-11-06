@@ -59,14 +59,28 @@ function trimTrees(blocks)
   end
 end
 
-function trimIslandTreesAura()
+function setTrimIslandTrees(value)
+  local player = game.Players.LocalPlayer
+  player:SetAttribute("trimTrees", value or false)	
+end
+
+function stopTrimIslandTreesAura()
+  setTrimIslandTrees(false)
+  wait()
+end
+
+function startTrimIslandTreesAura()
+  stopTrimIslandTreesAura()
+  setTrimIslandTrees(true)
+  
   local player = game.Players.LocalPlayer
   while wait() do
-	  if (player:GetAttribute("trimTrees") == false) then return nil end
-	  trimTrees()
-  end
+    if (player:GetAttribute("trimTrees") == false) then return nil end
+      trimTrees()
+    end
 end
 
 return {
-  trimIslandTreesAura = trimIslandTreesAura
+  startTrimIslandTreesAura = startTrimIslandTreesAura,
+  stopTrimIslandTreesAura = stopTrimIslandTreesAura,
 }

@@ -38,14 +38,15 @@ function getBlocksBy(blocks, maybePredicate)
 end
 
 function goToPoint(Point, distance)
+    local tween, Time = nil, 0
     if (HR.Position - Point).magnitude > distance then
         Distance = (HR.Position - Point).Magnitude
         Speed = 25
         Time = Distance/Speed
         tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
         tween:Play()
-        return tween, Time
     end
+    return tween, Time
 end
 
 function getIsland()

@@ -1,3 +1,5 @@
+local tween
+
 function isBlockATree(block)
     if (block and block.Name and
         (block.Name:find("treePine") or 

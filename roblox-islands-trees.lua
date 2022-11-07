@@ -64,7 +64,11 @@ function getAllTrees(blocks)
 end
 
 function leavesReady(tree)
-    if os.time() - tree.LastTrimmed.Value >= 180 then
+    if tree:FindFirstChild("LastTrimed") then
+        if os.time() - tree.LastTrimmed.Value >= 180 then
+            return true
+        end
+    else
         return true
     end
 end

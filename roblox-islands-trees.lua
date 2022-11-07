@@ -63,6 +63,12 @@ function getAllTrees(blocks)
     return getBlocksBy(blocks, isBlockATree)
 end
 
+function leavesReady(tree)
+    if os.time() - tree.LastTrimmed.Value >= 180 then
+        return true
+    end
+end
+
 function equipTool(tool)
     if Character:FindFirstChild(tool) then
         return
@@ -87,9 +93,11 @@ end
 function trimTrees(blocks)
     local trees = getAllTrees(blocks or getIslandBlocks())
     for _,tree in pairs(trees) do
-        tween, Time = goToPoint(tree.Position, 24)
-        wait(Time - 2)
-        trimTree(tree)
+        if leavesReady(tree) then
+            tween, Time = goToPoint(tree.Position, 24)
+            wait(Time - 2)
+            trimTree(tree)
+        end
     end
 end
 

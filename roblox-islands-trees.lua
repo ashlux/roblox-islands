@@ -1,4 +1,12 @@
+TS = game:GetService("TweenService")
 local tween
+
+function getRoot(char) -- find root part of character if they dont have HR
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+
+HR = getRoot(game.Players.LocalPlayer.Character)
 
 function isBlockATree(block)
     if (block and block.Name and

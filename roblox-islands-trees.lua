@@ -1,17 +1,17 @@
 function isBlockATree(block)
     if (block and block.Name and
-          (block.Name:find("treePine") or 
-           block.Name:find("treeMaple") or
-		       block.Name:find("treeOak") or 
-		       block.Name:find("treeHickory") or
-		       block.Name:find("treeBirch") or
-		       block.Name == "tree1" or 
-           block.Name == "tree2" or 
-		       block.Name == "tree3" or 
-		       block.Name == "tree4")) then
-      return true
+        (block.Name:find("treePine") or 
+        block.Name:find("treeMaple") or
+        block.Name:find("treeOak") or 
+        block.Name:find("treeHickory") or
+        block.Name:find("treeBirch") or
+        block.Name == "tree1" or 
+        block.Name == "tree2" or 
+        block.Name == "tree3" or 
+        block.Name == "tree4")) then
+        return true
     else
-      return false
+        return false
     end
 end
 
@@ -20,67 +20,94 @@ function falsePredicate()
 end
 
 function getBlocksBy(blocks, maybePredicate)
-  local predicate = maybePredicate or falsePredicate
-  local foundBlocks = {}
-  for _,block in pairs(blocks or {}) do
-    if predicate(block) then
-      table.insert(foundBlocks, block)
+    local predicate = maybePredicate or falsePredicate
+    local foundBlocks = {}
+    for _,block in pairs(blocks or {}) do
+        if predicate(block) then
+            table.insert(foundBlocks, block)
+        end
     end
-  end
-  return foundBlocks
+    return foundBlocks
+end
+
+function goToPoint(Point, distance)
+    if (HR.Position - Point).magnitude > distance then
+        Distance = (HR.Position - Point).Magnitude
+        Speed = 25
+        Time = Distance/Speed
+        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+        tween:Play()
+        return tween, Time
+    end
 end
 
 function getIsland()
-  return game.Workspace.Islands:GetChildren()[1]
+    return game.Workspace.Islands:GetChildren()[1]
 end
 
 function getIslandBlocks(island)
-  local island = island or getIsland() 
-  return (island and island.Blocks:GetChildren()) or {}
+    local island = island or getIsland() 
+    return (island and island.Blocks:GetChildren()) or {}
 end
 
 function getAllTrees(blocks)
-  local blocks = blocks or getIslandBlocks()
-  return getBlocksBy(blocks, isBlockATree)
+    local blocks = blocks or getIslandBlocks()
+    return getBlocksBy(blocks, isBlockATree)
+end
+
+function equipTool(tool)
+    if Character:FindFirstChild(tool) then
+        return
+    else
+        local Tool = Player.Backpack:FindFirstChild(tool)
+        if Tool then
+            Tool.Parent = Character
+        end
+        wait()
+    end
 end
 
 function trimTree(tree)
-  if (tree) then
-	  local args = {[1] = {["tree"] = tree}}
-  	game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TRIM_TREE_REQUEST:InvokeServer(unpack(args))
-  end
+    if (tree) then
+        equipTool("clippers")
+        local args = {[1] = {["tree"] = tree}}
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TRIM_TREE_REQUEST:InvokeServer(unpack(args))
+    end
 end
 
 
 function trimTrees(blocks)
-  local trees = getAllTrees(blocks or getIslandBlocks())
-  for _,tree in pairs(trees) do
-    trimTree(tree)
-  end
+    local trees = getAllTrees(blocks or getIslandBlocks())
+    for _,tree in pairs(trees) do
+        tween, Time = goToPoint(tree.Position, 24)
+        wait(Time - 2)
+        trimTree(tree)
+    end
 end
 
 function setTrimIslandTrees(value)
-  local player = game.Players.LocalPlayer
-  player:SetAttribute("trimTrees", value or false)	
+    local player = game.Players.LocalPlayer
+    player:SetAttribute("trimTrees", value or false)	
 end
 
 function stopTrimIslandTreesAura()
-  setTrimIslandTrees(false)
-  wait()
+    setTrimIslandTrees(false)
+    tween:Cancel()
+    wait()
 end
 
 function startTrimIslandTreesAura()
-  stopTrimIslandTreesAura()
-  setTrimIslandTrees(true)
+    stopTrimIslandTreesAura()
+    setTrimIslandTrees(true)
   
-  local player = game.Players.LocalPlayer
-  while wait() do
-    if (player:GetAttribute("trimTrees") == false) then return nil end
-      trimTrees()
+    local player = game.Players.LocalPlayer
+    while wait() do
+        if (player:GetAttribute("trimTrees") == false) then return nil end
+        trimTrees()
     end
 end
 
 return {
-  startTrimIslandTreesAura = startTrimIslandTreesAura,
-  stopTrimIslandTreesAura = stopTrimIslandTreesAura,
+    startTrimIslandTreesAura = startTrimIslandTreesAura,
+    stopTrimIslandTreesAura = stopTrimIslandTreesAura,
 }

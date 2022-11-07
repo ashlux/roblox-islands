@@ -92,7 +92,9 @@ end
 
 function stopTrimIslandTreesAura()
     setTrimIslandTrees(false)
-    tween:Cancel()
+    if tween then
+        tween:Cancel()
+    end
     wait()
 end
 

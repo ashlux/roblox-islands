@@ -101,7 +101,7 @@ end
 local function trimTrees(blocks)
     local trees = getAllTrees(blocks or getIslandBlocks())
     for _,tree in pairs(trees) do
-        if (player:GetAttribute("trimTrees") == false) then return nil end
+        if (Player:GetAttribute("trimTrees") == false) then return nil end
         if leavesReady(tree) then
             tween, Time = goToPoint(tree.Position, 24)
             if tween then
@@ -113,8 +113,7 @@ local function trimTrees(blocks)
 end
 
 local function setTrimIslandTrees(value)
-    local player = game.Players.LocalPlayer
-    player:SetAttribute("trimTrees", value or false)	
+    Player:SetAttribute("trimTrees", value or false)	
 end
 
 local function stopTrimIslandTreesAura()
@@ -129,9 +128,8 @@ local function startTrimIslandTreesAura()
     stopTrimIslandTreesAura()
     setTrimIslandTrees(true)
   
-    local player = game.Players.LocalPlayer
     while wait() do
-        if (player:GetAttribute("trimTrees") == false) then return nil end
+        if (Player:GetAttribute("trimTrees") == false) then return nil end
         trimTrees()
     end
 end

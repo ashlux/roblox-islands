@@ -5445,6 +5445,7 @@ Item46.MouseButton1Click:Connect(function()
             wait()
         for i,v in pairs(Island.Drops:GetChildren()) do
             if v:FindFirstChild("HandleDisabled") and (v:IsA("Tool")) and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HandleDisabled.Position).magnitude < 24 then
+                task.spawn(function()
                 local Pickup = {
                     [1] = {
                         ["tool"] = v,
@@ -5453,6 +5454,7 @@ Item46.MouseButton1Click:Connect(function()
                 }
 
                 game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(Pickup))
+                end)
             end
         end
         end

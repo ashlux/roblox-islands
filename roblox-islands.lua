@@ -13,7 +13,7 @@ local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/5/2022! Have fun! 😊"
+updates = "[OWNER] [Matt]: Updated 11/8/2022! Have fun 🙃"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -121,7 +121,14 @@ end
 			ctrl.r = 0 
 		end 
 	end)
-	Fly()
+Fly()
+
+
+Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+    if RUN then
+        Humanoid.WalkSpeed = 30
+    end
+end)
 
 local function NoclipLoop() -- lets you walk through stuff
     if noClip == true then
@@ -4637,23 +4644,17 @@ end)
 Item35.MouseButton1Click:Connect(function()
     if Toggled24 then
         Toggled24 = false
+        RUN = false
         Item35.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item35.Text = "Water Flowers"
         Item35.TextColor3 = Color3.fromRGB(250,250,250)
     else
         Toggled24 = true
+        RUN = true
+        Humanoid.WalkSpeed = 0
         Item35.BackgroundColor3 = Color3.new(0,255,255)
         Item35.Text = "Waterin"
         Item35.TextColor3 = Color3.fromRGB(0,0,0)
-        WS = 30
-        local Player = game.Players.LocalPlayer
-        local Humanoid = Player.Character.Humanoid
-        Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-            if Toggled24 then
-            Humanoid.WalkSpeed = WS
-            end
-        end)
-        Humanoid.WalkSpeed = WS
         while Toggled24 == true do
 			for _,Fertile in pairs(Island.Blocks:GetChildren()) do
 				if (Fertile:IsA("Part")) and Fertile:FindFirstChild("Watered") and Fertile:FindFirstChild("Top") then
@@ -7305,17 +7306,17 @@ end)
 God.MouseButton1Click:Connect(function()
     if Toggled69 then
         Toggled69 = false
-        God.BackgroundColor3 = Color3.fromRGB(50,50,50)
-        God.Text = "Enable God Mode"
+        RUN = false
+        God.BackgroundColor3 = Color3.fromRGB(0,255,255)
+        God.Text = "God Mode Still Enabled"
         God.TextColor3 = Color3.fromRGB(50,200,100)
-        game.Players.LocalPlayer.Character:BreakJoints()
     else
         Toggled69 = true
+        RUN = true
+        Humanoid.WalkSpeed = 0
         God.BackgroundColor3 = Color3.new(0,255,255)
-        God.Text = "Disable God Mode"
+        God.Text = "God Mode Enabled"
         God.TextColor3 = Color3.fromRGB(0,0,0)
-        WS = 30
-        Health = Character.CurrentHealth:Clone()
 		Character.CurrentHealth:Destroy()
     end
 end)

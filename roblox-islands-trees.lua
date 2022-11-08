@@ -44,7 +44,7 @@ local function goToPoint(Point, distance)
         Speed = 25
         Time = Distance/Speed
         tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-        print("Going to", Point, " (speed =", Speed, ", time=", Time, ", distance", Distance, ")")
+        --print("Going to", Point, " (speed =", Speed, ", time=", Time, ", distance", Distance, ")")
         tween:Play()
 
     end
@@ -81,7 +81,7 @@ local function equipTool(toolName)
     else
         local tool = Player.Backpack:FindFirstChild(toolName)
         if tool then
-		print("Equipping "..tool.Name)
+	    --print("Equipping "..tool.Name)
             tool.Parent = Character
         end
         wait()
@@ -90,7 +90,7 @@ end
 
 local function trimTree(tree)
     if (tree) then
-        print("trimming", tree, "at", tree.Position, "player is at", HR.Position, "distance", (HR.Position - tree.Position).magnitude)
+        --print("trimming", tree, "at", tree.Position, "player is at", HR.Position, "distance", (HR.Position - tree.Position).magnitude)
         equipTool("clippers")
         local args = {[1] = {["tree"] = tree}}
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TRIM_TREE_REQUEST:InvokeServer(unpack(args))

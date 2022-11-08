@@ -79,6 +79,7 @@ function equipTool(tool)
     else
         local Tool = Player.Backpack:FindFirstChild(tool)
         if Tool then
+		print("Equipping "..Tool.Name)
             Tool.Parent = Character
         end
         wait()

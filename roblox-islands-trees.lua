@@ -107,8 +107,8 @@ local function trimTrees(blocks)
             tween, Time = goToPoint(tree.Position, 24)
             if tween then
                 wait(Time - .5)
-            end
-	    tween:Cancel()
+                tween:Cancel()
+	    end
             trimTree(tree)
         end
     end

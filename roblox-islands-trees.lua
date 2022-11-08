@@ -101,7 +101,8 @@ end
 local function trimTrees(blocks)
     local trees = getAllTrees(blocks or getIslandBlocks())
     for _,tree in pairs(trees) do
-        if (Player:GetAttribute("trimTrees") == false) then return nil end
+	local Player = game.Players.LocalPlayer
+	if (Player:GetAttribute("trimTrees") == false) then return nil end
         if leavesReady(tree) then
             tween, Time = goToPoint(tree.Position, 24)
             if tween then

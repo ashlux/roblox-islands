@@ -64,7 +64,7 @@ function getAllTrees(blocks)
 end
 
 function leavesReady(tree)
-    if tree:FindFirstChild("LastTrimed") then
+    if tree:FindFirstChild("LastTrimmed") then
         if os.time() - tree.LastTrimmed.Value >= 180 then
             return true
         end
@@ -100,7 +100,9 @@ function trimTrees(blocks)
     for _,tree in pairs(trees) do
         if leavesReady(tree) then
             tween, Time = goToPoint(tree.Position, 24)
-            wait(Time - 2)
+            if tween then
+                wait(Time - 2)
+            end
             trimTree(tree)
         end
     end

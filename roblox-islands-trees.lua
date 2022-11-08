@@ -108,6 +108,7 @@ local function trimTrees(blocks)
             if tween then
                 wait(Time - .5)
             end
+	    tween:Cancel()
             trimTree(tree)
         end
     end

@@ -65,8 +65,8 @@ end
 
 function leavesReady(tree)
     if tree:FindFirstChild("LastTrimed") then
-        if os.time() - tree.LastTrimmed.Value >= 180 then
-            return true
+        if os.time() - tree.LastTrimmed.Value <= 180 then
+            return false
         end
     else
         return true

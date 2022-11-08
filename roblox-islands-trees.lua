@@ -90,7 +90,7 @@ end
 
 local function trimTree(tree)
     if (tree) then
-        print("trimming", tree, "at", tree.Position)
+        print("trimming", tree, "at", tree.Position, "player is at", HR.Position, "distance", (HR.Position - tree.Position).magnitude)
         equipTool("clippers")
         local args = {[1] = {["tree"] = tree}}
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TRIM_TREE_REQUEST:InvokeServer(unpack(args))

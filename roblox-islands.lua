@@ -233,7 +233,7 @@ function getPick()
     return Tool
 end
 
-function equipTool()
+function equipPick()
     Tool = getPick()
     if Character:FindFirstChild(Tool) == nil then
         Tool.Parent = Character
@@ -4722,7 +4722,7 @@ Item36.MouseButton1Click:Connect(function()
                 if Time ~= nil then
                 wait(Time - 2)
                 end
-                equipTool()
+                equipPick()
                 hitBlock(v)
                 break
             end

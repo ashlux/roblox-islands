@@ -5,7 +5,7 @@ local Character = Player.Character
 local HR = Character:FindFirstChild('HumanoidRootPart') or Character:FindFirstChild('Torso') or Character:FindFirstChild('UpperTorso')
 
 
-function isBlockATree(block)
+local function isBlockATree(block)
     if (block and block.Name and
         (block.Name:find("treePine") or 
         block.Name:find("treeMaple") or
@@ -22,11 +22,11 @@ function isBlockATree(block)
     end
 end
 
-function falsePredicate()
+local function falsePredicate()
 		return false
 end
 
-function getBlocksBy(blocks, maybePredicate)
+local function getBlocksBy(blocks, maybePredicate)
     local predicate = maybePredicate or falsePredicate
     local foundBlocks = {}
     for _,block in pairs(blocks or {}) do
@@ -37,7 +37,7 @@ function getBlocksBy(blocks, maybePredicate)
     return foundBlocks
 end
 
-function goToPoint(Point, distance)
+local function goToPoint(Point, distance)
     local tween, Time = nil, 0
     if (HR.Position - Point).magnitude > distance then
         Distance = (HR.Position - Point).Magnitude
@@ -49,21 +49,21 @@ function goToPoint(Point, distance)
     return tween, Time
 end
 
-function getIsland()
+local function getIsland()
     return game.Workspace.Islands:GetChildren()[1]
 end
 
-function getIslandBlocks(island)
+local function getIslandBlocks(island)
     local island = island or getIsland() 
     return (island and island.Blocks:GetChildren()) or {}
 end
 
-function getAllTrees(blocks)
+local function getAllTrees(blocks)
     local blocks = blocks or getIslandBlocks()
     return getBlocksBy(blocks, isBlockATree)
 end
 
-function leavesReady(tree)
+local function leavesReady(tree)
     if tree:FindFirstChild("LastTrimmed") then
         if os.time() - tree.LastTrimmed.Value >= 180 then
             return true
@@ -73,7 +73,7 @@ function leavesReady(tree)
     end
 end
 
-function equipTool(tool)
+local function equipTool(tool)
     if Character:FindFirstChild(tool) then
         return
     else
@@ -86,7 +86,7 @@ function equipTool(tool)
     end
 end
 
-function trimTree(tree)
+local function trimTree(tree)
     if (tree) then
         equipTool("clippers")
         local args = {[1] = {["tree"] = tree}}
@@ -95,7 +95,7 @@ function trimTree(tree)
 end
 
 
-function trimTrees(blocks)
+local function trimTrees(blocks)
     local trees = getAllTrees(blocks or getIslandBlocks())
     for _,tree in pairs(trees) do
         if leavesReady(tree) then
@@ -108,12 +108,12 @@ function trimTrees(blocks)
     end
 end
 
-function setTrimIslandTrees(value)
+local function setTrimIslandTrees(value)
     local player = game.Players.LocalPlayer
     player:SetAttribute("trimTrees", value or false)	
 end
 
-function stopTrimIslandTreesAura()
+local function stopTrimIslandTreesAura()
     setTrimIslandTrees(false)
     if tween then
         tween:Cancel()
@@ -121,7 +121,7 @@ function stopTrimIslandTreesAura()
     wait()
 end
 
-function startTrimIslandTreesAura()
+local function startTrimIslandTreesAura()
     stopTrimIslandTreesAura()
     setTrimIslandTrees(true)
   

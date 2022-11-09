@@ -397,6 +397,7 @@ end
 
 function withdrawFromChest(chest)
     for i,b in pairs(chest.Contents:GetChildren()) do
+        task.spawn(function()
         local args = {
         [1] = {
         ["chest"] = chest,
@@ -407,6 +408,7 @@ function withdrawFromChest(chest)
         }
         }
         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+        end)
     end
 end
 

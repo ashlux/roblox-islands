@@ -211,17 +211,39 @@ function getSpawnables()
     return spawnables
 end
 
+function getVoidRocks()
+    local Rocks = {}
+    for i,v in pairs(game.Workspace.WildernessBlocks:GetChildren()) do
+        if v.Name == "grassVoid" or v.Name == "sandVoid" or v.Name == "rockAmethystStone" or v.Name == "rockAmethyst" then
+            table.insert(Rocks, v)
+        end
+    end
+    table.sort(Rocks, function(t1, t2) 
+		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
+    return Rocks
+end
+
 function hitBlock(Block)
     local args = {
     [1] = {
     ["player_tracking_category"] = "join_from_web",
-    ["part"] = Block.MeshPart,
+    ["part"] = Block,
     ["block"] = Block,
     ["norm"] = nil --[[Vector3]],
     ["pos"] = nil --[[Vector3]]
     }
     }
     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+end
+
+function digSpot(Spot)
+    local args = {
+    [1] = {
+    ["shovelType"] = "shovelStone",
+    ["block"] = Spot
+    }
+    }
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
 end
 
 function getPick()
@@ -240,8 +262,33 @@ function getPick()
     return Tool
 end
 
+
+
+function getShovel()
+    for i,v in pairs(Character:GetChildren()) do
+        if v:IsA("Tool") and (v.Name:find("shovel")) then
+            Tool = v
+        end
+    end
+    if not Tool then
+        for i,v in pairs(Player.Backpack:GetChildren()) do
+            if v:IsA("Tool") and (v.Name:find("shovel")) then
+                Tool = v
+            end
+        end
+    end
+    return Tool
+end
+
 function equipPick()
-    Tool = getPick()
+    local Tool = getPick()
+    if Character:FindFirstChild(Tool) == nil then
+        Tool.Parent = Character
+    end
+end
+
+function equipShovel()
+    local Tool = getShovel()
     if Character:FindFirstChild(Tool) == nil then
         Tool.Parent = Character
     end
@@ -7452,7 +7499,7 @@ VoidMining.MouseButton1Click:Connect(function()
         VoidMining.BackgroundColor3 = Color3.fromRGB(55,55,55)
         VoidMining.Text = "Void Rocks"
         VoidMining.TextColor3 = Color3.new(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        unFloat()
         if tween then
         tween:Cancel()
         end
@@ -7461,89 +7508,27 @@ VoidMining.MouseButton1Click:Connect(function()
         VoidMining.BackgroundColor3 = Color3.new(0,255,255)
         VoidMining.Text = "Mining!"
         VoidMining.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        local YSpeed = 0
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        POs = Vector3.new(-10026, 163, 9984)
-        local Pickaxe = Plr.Backpack:FindFirstChild("opalPickaxe")
-        local AltPickaxe = Plr.Backpack:FindFirstChild("diamondPickaxe")
-        local Shovel = Plr.Backpack:FindFirstChild("shovelStone")
+        Float()
         local Continue = 0
-        wait(1)
         while Toggled83 == true do
             wait()
-            Blocks = game.Workspace.WildernessBlocks
-            for i,v in pairs(Blocks:GetChildren()) do
-                if (POs - v.Position).magnitude < 200 and v:FindFirstChild("1") then
-                    if Toggled83 == true then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 23 then
-                            Point = v.Position
-                            Distance = (HR.Position - Point).Magnitude
-                            Speed = 20
-                            Time = Distance/Speed
-                            tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                            tween:Play()
-                            wait(Time - 2)
-                        end
-                        repeat
-                            Continue = Continue + 1
-                        if Pickaxe then
-                            Pickaxe.Parent = Character
-                            elseif  AltPickaxe then
-                            AltPickaxe.Parent = Character
-                        end
-                        local args = {[1] = {
-                        ["player_tracking_category"] = "join_from_web",
-                        ["part"] = v:FindFirstChild("1"),
-                        ["block"] = v,
-                        ["norm"] = nil --[[Vector3]],
-                        ["pos"] = nil --[[Vector3]]
-                        }}
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-                        until
-                        v:FindFirstChild("1") == nil or Continue == 20 or Toggled83 == false
+            local Rocks = getVoidRocks()
+            print(Rocks)
+            for i,v in pairs(Rocks) do
+                if Toggled83 == true then
+                    tween, Time = goToPoint(v.Position, 0)
+                    if tween then
+                        wait(Time - 2)
                     end
-                    Point = HR.Position + Vector3.new(0,30,0)
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    Continue = 0
-                    elseif (POs - v.Position).magnitude < 200 and (v.Name == "grassVoid" or v.Name == "sandVoid") then
-                        if Toggled83 == true then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 23 then
-                            Point = v.Position
-                            Distance = (HR.Position - Point).Magnitude
-                            Speed = 20
-                            Time = Distance/Speed
-                            tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                            tween:Play()
-                            wait(Time - 2)
-                        end
-                        repeat
-                            Continue = Continue + 1
-                        local args = {
-                        [1] = {
-                            ["shovelType"] = "shovelStone",
-                            ["block"] = v
-                        }
-                        }
-
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
-                    until
-                        v:FindFirstChild("Targettable") == nil or Continue == 20 or Toggled83 == false
-                        end
-                    Point = HR.Position + Vector3.new(0,30,0)
-                    Distance = (HR.Position - Point).Magnitude
-                    Speed = 20
-                    Time = Distance/Speed
-                    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                    tween:Play()
-                    Continue = 0
+                    if v:FindFirstChild("1") then
+                        equipPick()
+                        hitBlock(v)
+                    else
+                        equipShovel()
+                        digSpot(v)
+                    end
                 end
+                break
             end
         end
     end

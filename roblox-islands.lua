@@ -13,7 +13,7 @@ local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/9/2022! Have fun 🙃"
+updates = "[OWNER] [Matt]: Updated 11/10/2022! Have fun 🙃"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -137,6 +137,24 @@ local function NoclipLoop() -- lets you walk through stuff
                 child.CanCollide = false
             end
     	end
+    end
+end
+
+local function pickWildernessPlantAura(plant)
+    for i,v in pairs(game:GetService("Workspace").WildernessBlocks:GetChildren()) do
+        if v.Name == plant and Player:DistanceFromCharacter(v.Position) < 24 then
+            local args = {
+            [1] = {
+            ["player"] = Player,
+            ["player_tracking_category"] = "join_from_web",
+            ["model"] = v
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
+        end
+    end
+    if pickingPlants == false then
+        return "NOTHING"
     end
 end
 
@@ -508,7 +526,7 @@ game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetMana
 end
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
-Toggled85 = false Toggled86 = false Toggled87 = false KA = false
+Toggled85 = false Toggled86 = false Toggled87 = false KA = false pickingPlants = false RUN = false
 
 
 CmdGui.Name = "CmdGui"
@@ -729,6 +747,7 @@ Close.MouseButton1Click:Connect(function() Toggled1 = false Toggled2 = false Tog
 Toggled85 = false Toggled86 = false Toggled87 = false KA = false
 fly = false
 destroyOrbs = false
+pickingPlants = false
 CmdGui:Destroy()
 end)
 
@@ -7510,6 +7529,13 @@ VoidMining.MouseButton1Click:Connect(function()
         VoidMining.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         local Continue = 0
+        pickingPlants = true
+        coroutine.wrap(function()
+            while pickingPlants do
+                task.wait()
+                pickWildernessPlantAura("voidParasite")
+            end
+        end)()
         while Toggled83 == true do
             wait()
             local Rocks = getVoidRocks()

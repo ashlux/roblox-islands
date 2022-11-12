@@ -22,12 +22,12 @@ StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), 
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wrczVsLcbkEiv/Oyoovaxynj")
 local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wVGoccynvafJoSkqU/WaooxrwtyMYcptMteuagpeadhVaqgzxVftrttad")
 local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wVGoccynvafJoSkqU/dkpzbylrswEpHl")
-local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kkmfehGowngapGogelvNFnfurgymL/admatyypjdshomqJpbvm")
-local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kkmfehGowngapGogelvNFnfurgymL/TcGziafhbYfPmdicnpolvpyoml")
-local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kkmfehGowngapGogelvNFnfurgymL/lvrtapkaifipxygVybvAgppdvwbsrzldlAglj")
+local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/cRwwkLkvIwKakhPthz")
+local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/drwkdWexk")
+local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/pwjkzbxujoedgxxqkdwpjbnJ")
 local refillItem = emptyItem
-local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kkmfehGowngapGogelvNFnfurgymL/Vk")
-local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kkmfehGowngapGogelvNFnfurgymL/YsxzOymnvcwlpv")
+local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/jmcfgejeryesAYjnslcbkSvKpgIcbjdwWixxj")
+local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/svyasaYlbhhnAgfbpmpQhhhhhocfyf")
 local useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Ahlsheojbezr/qvRwzysaogadyQfadRpklcqnopuctlgmgagcgn")
 ---
 local Player = game.Players.LocalPlayer

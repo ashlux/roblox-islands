@@ -13,22 +13,22 @@ local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/10/2022! Have fun 🙃"
+updates = "[OWNER] [Matt]: Updated 11/12/2022! Have fun 🙃"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wrczVsLcbkEiv/Oyoovaxynj")
-local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wVGoccynvafJoSkqU/WaooxrwtyMYcptMteuagpeadhVaqgzxVftrttad")
-local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wVGoccynvafJoSkqU/dkpzbylrswEpHl")
+local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/uUrqXfuimqRtxgkmbhxehQl")
+local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/qtrLlwdsWdcwckXFyd")
 local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/cRwwkLkvIwKakhPthz")
 local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/drwkdWexk")
 local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/pwjkzbxujoedgxxqkdwpjbnJ")
 local refillItem = emptyItem
 local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/jmcfgejeryesAYjnslcbkSvKpgIcbjdwWixxj")
 local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/svyasaYlbhhnAgfbpmpQhhhhhocfyf")
-local useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Ahlsheojbezr/qvRwzysaogadyQfadRpklcqnopuctlgmgagcgn")
+local useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("dhwnqprsyraecmqtzhxnyocYc/mmroFeaguAwnieoeA")
 ---
 local Player = game.Players.LocalPlayer
 local Character = game.Players.LocalPlayer.Character

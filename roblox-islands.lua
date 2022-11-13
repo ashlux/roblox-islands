@@ -13,7 +13,7 @@ local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/12/2022! Have fun 🙃"
+updates = "[OWNER] [Matt]: Updated 11/12/2022! Stay Plush 🧸🐼🙀🐶🦦"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})

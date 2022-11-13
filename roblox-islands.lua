@@ -19,7 +19,7 @@ local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wrczVsLcbkEiv/Oyoovaxynj")
+local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ftgduphhjev/hepcifqBrqhBnokOnOlz")
 local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/uUrqXfuimqRtxgkmbhxehQl")
 local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/qtrLlwdsWdcwckXFyd")
 local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/cRwwkLkvIwKakhPthz")

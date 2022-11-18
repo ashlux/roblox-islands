@@ -2265,6 +2265,7 @@ plantCropButton.MouseButton1Click:Connect(function()
                     local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
                     local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
                     if not hitPart then
+                        task.spawn(function()
                         local args = {
                         [1] = {
                         ["upperBlock"] = false,
@@ -2274,6 +2275,7 @@ plantCropButton.MouseButton1Click:Connect(function()
                         }
                         }
                         game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+                        end)
                     end
                 end
             end

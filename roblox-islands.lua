@@ -13,7 +13,7 @@ local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
-updates = "[OWNER] [Matt]: Updated 11/12/2022! Stay Plush 🧸🐼🙀🐶🦦"
+updates = "[OWNER] [Matt]: Updated 11/18/2022! (Before Friday Update)"
 
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -431,7 +431,7 @@ end
 
 if Island.Blocks then
 Island.Blocks.ChildRemoved:Connect(function(child)
-    if sickleFarming and child.Name == "spiritCrop" then
+    if sickleFarming then
         wait(0.5)
         rePlant(child)
     end
@@ -2163,7 +2163,7 @@ cropSection.MouseButton1Click:Connect(function()
     end
 end)
 
-crops = {"spiritCrop", "chiliPepper", "carrot", "onion", "potato", "spinach", "tomato", "wheat", "melon", "pineapple"}
+crops = {"spiritCrop", "chiliPepper", "carrot", "onion", "potato", "spinach", "tomato", "wheat", "melon", "pineapple", "candyCaneVine", "grapeVine", "dragonfruit", "cactus", "pumpkin", "radish", "rice", "seaweed", "starfruit", "voidParasite"}
 NaMe = 0
 YPos = 0
 for i,v in pairs(crops) do
@@ -2211,10 +2211,19 @@ plantCropButton.MouseButton1Click:Connect(function()
         plantCrop = true
         plantCropButton.Text = "Planting"
         plantCropButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
+        if cropSection.Text == "candyCaneVine" or cropSection.Text == "grapeVine" or cropSection.Text == "dragonfruit" then
+            placeToPlant = "trellis"
+        elseif cropSection.Text == "cactus" then
+            placeToPlant = "sand"
+        elseif cropSection.Text == "rice" or cropSection.Text == "seaweed" then
+            placeToPlant = "pond"
+        else
+            placeToPlant = "soil"
+        end
         while plantCrop do
             wait()
             for i,dirt in pairs(Island.Blocks:GetChildren()) do
-                if dirt.Name == "soil" and Player:DistanceFromCharacter(dirt.Position) < 150 and plantCrop then
+                if dirt.Name == placeToPlant and Player:DistanceFromCharacter(dirt.Position) < 150 and plantCrop then
                     local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
                     local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
                     if not hitPart then

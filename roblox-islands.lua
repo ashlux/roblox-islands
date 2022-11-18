@@ -10,6 +10,7 @@ function loadModule(url)
 end
 
 local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-trees.lua")
+local fruitsModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/Collect-Fruits")
 
 print("Loading Complete!")
 
@@ -1564,9 +1565,20 @@ N0.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 N0.BorderColor3 = Color3.fromRGB(25, 25, 25)
 N0.ZIndex = 2
 N0.Parent = CmdHandler7
-N0.Text = "FARMFARMFARMFARM"
+N0.Text = "Sickle Farm"
 N0.TextColor3 = Color3.fromRGB(2,2,2)
 N0.TextScaled = true
+
+local N3 = Instance.new("TextLabel")
+N3.Position = UDim2.new(0,0,0,85)
+N3.Size = UDim2.new(0,150,0,15)
+N3.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
+N3.BorderColor3 = Color3.fromRGB(25, 25, 25)
+N3.ZIndex = 2
+N3.Parent = CmdHandler7
+N3.Text = "Fruit Farm"
+N3.TextColor3 = Color3.fromRGB(2,2,2)
+N3.TextScaled = true
 
 local N1 = Instance.new("TextLabel")
 N1.Position = UDim2.new(0,0,0,150)
@@ -2179,6 +2191,106 @@ sickleButton.MouseButton1Click:Connect(function()
     end
 end)
 
+fruitsBackground = Instance.new("Frame")
+fruitsBackground.Name = "fruitsBackground"
+fruitsBackground.Parent = Background10
+fruitsBackground.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+fruitsBackground.BorderSizePixel = 0
+fruitsBackground.BorderColor3 = Color3.new(1,0,1)
+fruitsBackground.Position = UDim2.new(1, 0, 0.05, 0)
+fruitsBackground.Size = UDim2.new(0, 115, 0, 195)
+fruitsBackground.Active = true
+fruitsBackground.Visible = false
+
+local fruitsHandler = Instance.new("ScrollingFrame")
+fruitsHandler.Name = "fruitsHandler"
+fruitsHandler.Parent = fruitsBackground
+fruitsHandler.Active = true
+fruitsHandler.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+fruitsHandler.BackgroundTransparency = 1.000
+fruitsHandler.BorderSizePixel = 0
+fruitsHandler.AutomaticCanvasSize = "Y"
+fruitsHandler.Position = UDim2.new(0, 1, 0, 1)
+fruitsHandler.Size = UDim2.new(0, 115, 0, 195)
+fruitsHandler.ScrollBarThickness = 8
+
+fruitSection = Instance.new("TextButton")
+fruitSection.Position = UDim2.new(0,0,1,1)
+fruitSection.Size = UDim2.new(0,140,0,20)
+fruitSection.BackgroundColor3 = Color3.fromRGB(63,63,63)
+fruitSection.BorderSizePixel = 1
+fruitSection.ZIndex = 2
+fruitSection.Parent = N3
+fruitSection.Text = "Choose Fruit >"
+fruitSection.TextColor3 = Color3.fromRGB(250,250,250)
+fruitSection.TextScaled = true
+fruitSection.MouseButton1Click:Connect(function()
+    if choosingFruit then
+        choosingFruit = false
+        fruitsBackground.Visible = false
+        fruitSection.Text = "Choose Fruit >"
+    else
+        choosingFruit = true
+        fruitsBackground.Visible = true
+        fruitSection.Text = "Choose Fruit <"
+        choosingCrop = false
+        cropsBackground.Visible = false
+        cropSection.Text = "Choose Crop >"
+    end
+end)
+
+fruits = {"treeApple", "treeOrange", "treeAvocado", "treeKiwi", "treeCoconut", "treeLemon", "treePlum"}
+NaMe = 0
+YPos = 0
+for i,v in pairs(fruits) do
+    fruitz = Instance.new("TextButton")
+    fruitz.Name = NaMe
+    fruitz.Position = UDim2.new(0,1,0,YPos)
+    fruitz.Size = UDim2.new(0,95,0,20)
+    fruitz.BackgroundColor3 = Color3.fromRGB(70,70,70)
+    fruitz.BorderColor3 = Color3.new(1,1,1)
+    fruitz.ZIndex = 2
+    fruitz.Parent = fruitsHandler
+    fruitz.Text = v
+    fruitz.TextColor3 = Color3.fromRGB(250,250,250)
+    fruitz.TextScaled = true
+    NaMe = NaMe + 1
+    YPos = YPos + 20
+end
+
+for i,v in pairs(fruitsHandler:GetChildren()) do
+    v.MouseButton1Click:Connect(function()
+        CrOp = v.Text
+        fruitSection.Text = CrOp
+        fruitsBackground.Visible = false
+        choosingFruit = false
+    end)
+end
+
+fruitsButton = Instance.new("TextButton")
+fruitsButton.Position = UDim2.new(0,0,1,21)
+fruitsButton.Size = UDim2.new(0,140,0,20)
+fruitsButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
+fruitsButton.BorderSizePixel = 1
+fruitsButton.ZIndex = 2
+fruitsButton.Parent = N3
+fruitsButton.Text = "Farm Fruits"
+fruitsButton.TextColor3 = Color3.fromRGB(250,250,250)
+fruitsButton.TextScaled = true
+fruitsButton.MouseButton1Click:Connect(function()
+    if fruitFarming then
+        fruitFarming = false
+        fruitsButton.Text = "Farm Fruits"
+        fruitsButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        fruitsModule.stopCollectingFruit()
+    else
+        fruitFarming = true
+        fruitsButton.Text = "Farming Fruits"
+        fruitsButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
+        fruitsModule.startCollectingFruit(fruitSection.Text)
+    end
+end)
+
 cropSection = Instance.new("TextButton")
 cropSection.Position = UDim2.new(0,0,1,1)
 cropSection.Size = UDim2.new(0,140,0,20)
@@ -2198,6 +2310,9 @@ cropSection.MouseButton1Click:Connect(function()
         choosingCrop = true
         cropsBackground.Visible = true
         cropSection.Text = "Choose Crop <"
+        choosingFruit = false
+        fruitsBackground.Visible = false
+        fruitSection.Text = "Choose Fruit >"
     end
 end)
 

@@ -7,6 +7,7 @@ end
 seconds = 0
 secondsToTryAgain = 60
 Players = game:GetService("Players")
+LocalPlayer = Players.LocalPlayer
 PlaceId = game.PlaceId
 TeleportService = game:GetService("TeleportService")
 
@@ -16,14 +17,18 @@ until game:GetService("Players").LocalPlayer.SessionLoading.Value == false or se
 
 --if waited for 60 seconds then rejoins the game
 if seconds >= secondsToTryAgain then
-    Players.LocalPlayer:Kick("Attempting to join AGAIN")
-    task.wait()
+    if LocalPlayer then
+        Players.LocalPlayer:Kick("Attempting to join AGAIN")
+        task.wait()
+    end
     TeleportService:Teleport(PlaceId, Players.LocalPlayer)
     
     --waits a while and tries again, just in case it failed
     task.wait(60)
-    Players.LocalPlayer:Kick("Attempting to join AGAIN")
-    task.wait()
+    if LocalPlayer then
+        LocalPlayer:Kick("Attempting to join AGAIN")
+        task.wait()
+    end
     TeleportService:Teleport(PlaceId, Players.LocalPlayer)
 end
 

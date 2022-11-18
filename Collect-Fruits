@@ -30,13 +30,13 @@ function getFruit(block)
     Fruits = {}
     Blocks = getBlocks(block)
     for _,v in pairs(Blocks) do
-        if #v.FruitLocations:GetChildren()[1]:GetChildren() >= 2 then
+        if #v.FruitLocations:GetChildren()[1]:GetChildren() >= 2 and v.FruitLocations:GetChildren()[1]:GetChildren()[2]:FindFirstChild("HandleDisabled") then
             table.insert(Fruits, v.FruitLocations:GetChildren()[1]:GetChildren()[2])
         end
-        if #v.FruitLocations:GetChildren()[2]:GetChildren() >= 2 then
+        if #v.FruitLocations:GetChildren()[2]:GetChildren() >= 2 and v.FruitLocations:GetChildren()[2]:GetChildren()[2]:FindFirstChild("HandleDisabled") then
             table.insert(Fruits, v.FruitLocations:GetChildren()[2]:GetChildren()[2])
         end
-        if #v.FruitLocations:GetChildren()[3]:GetChildren() >= 2 then
+        if #v.FruitLocations:GetChildren()[3]:GetChildren() >= 2 and v.FruitLocations:GetChildren()[3]:GetChildren()[2]:FindFirstChild("HandleDisabled") then
             table.insert(Fruits, v.FruitLocations:GetChildren()[3]:GetChildren()[2])
         end
     end

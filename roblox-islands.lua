@@ -2148,9 +2148,9 @@ cropsHandler.Position = UDim2.new(0, 1, 0, 1)
 cropsHandler.Size = UDim2.new(0, 115, 0, 195)
 cropsHandler.ScrollBarThickness = 8
 
-destroy = false
+destroyOrbs = false
 game.Workspace.ChildAdded:Connect(function(part)
-    if destroy == true and part.Name == "Part" then
+    if destroyOrbs == true and part.Name == "Part" then
         part:Destroy()
     end
 end)

@@ -62,7 +62,6 @@ end
 
 
 local function pickFruits(fruitTree)
-Float()
 Fruits = getFruit(fruitTree)
 for i,v in pairs(Fruits) do
     tween, Time = goToPoint(v.HandleDisabled.Position, 10)
@@ -76,7 +75,6 @@ for i,v in pairs(Fruits) do
     }
     }
     game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
-    unFloat()
     break
 end
 end
@@ -91,8 +89,9 @@ end
 
 local function startCollectingFruit(fruitTree) -- treeApple, treeOrange, treeAvocado, treeKiwi, treeCoconut, treeLemon, treePlum
 setCollectFruit(true)
+Float()
     while wait() do
-        if Player:GetAttribute("pickFruit") == false then return end
+        if Player:GetAttribute("pickFruit") == false then unFloat() return end
         pickFruits(fruitTree)
     end
 end

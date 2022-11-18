@@ -60,21 +60,6 @@ local function setCollectFruit(value)
     Player:SetAttribute("pickFruit", value or false)
 end
 
-local function stopCollectingFruit()
-    setCollectFruit(false)
-    if tween then
-        tween:Cancel()
-    end
-    wait()
-end
-
-local function startCollectingFruit(fruitTree) -- treeApple, treeOrange, treeAvocado, treeKiwi, treeCoconut, treeLemon, treePlum
-setCollectFruit(true)
-    while wait() do
-        if Player:GetAttribute("pickFruit") == false then return end
-        pickFruits(fruitTree)
-    end
-end
 
 local function pickFruits(fruitTree)
 Float()
@@ -94,6 +79,22 @@ for i,v in pairs(Fruits) do
     unFloat()
     break
 end
+end
+
+local function stopCollectingFruit()
+    setCollectFruit(false)
+    if tween then
+        tween:Cancel()
+    end
+    wait()
+end
+
+local function startCollectingFruit(fruitTree) -- treeApple, treeOrange, treeAvocado, treeKiwi, treeCoconut, treeLemon, treePlum
+setCollectFruit(true)
+    while wait() do
+        if Player:GetAttribute("pickFruit") == false then return end
+        pickFruits(fruitTree)
+    end
 end
 
 return{

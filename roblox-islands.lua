@@ -19,35 +19,35 @@ local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ftgduphhjev/hepcifqBrqhBnokOnOlz")
-local tradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/uUrqXfuimqRtxgkmbhxehQl")
-local tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/qtrLlwdsWdcwckXFyd")
-local openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/cRwwkLkvIwKakhPthz")
-local closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/drwkdWexk")
-local emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/pwjkzbxujoedgxxqkdwpjbnJ")
-local refillItem = emptyItem
-local refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/jmcfgejeryesAYjnslcbkSvKpgIcbjdwWixxj")
-local takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/svyasaYlbhhnAgfbpmpQhhhhhocfyf")
-local useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("dhwnqprsyraecmqtzhxnyocYc/mmroFeaguAwnieoeA")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ftgduphhjev/hepcifqBrqhBnokOnOlz")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/boEgmhlzCuhqjuro")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/uUrqXfuimqRtxgkmbhxehQl")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vyvkbfcpXlOpmhuzq/qtrLlwdsWdcwckXFyd")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/cRwwkLkvIwKakhPthz")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/drwkdWexk")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/pwjkzbxujoedgxxqkdwpjbnJ")
+refillItem = emptyItem
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/jmcfgejeryesAYjnslcbkSvKpgIcbjdwWixxj")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kscqxuzwFUeYO/svyasaYlbhhnAgfbpmpQhhhhhocfyf")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("dhwnqprsyraecmqtzhxnyocYc/mmroFeaguAwnieoeA")
+
 ---
-local Player = game.Players.LocalPlayer
-local Character = game.Players.LocalPlayer.Character
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Character = Player.Character
 local Humanoid = Character.Humanoid
 local Island = game.Workspace.Islands:GetChildren()[1] or ""
-local island = Island
 local CmdGui = Instance.new("ScreenGui")
 local Background = Instance.new("Frame")
 local CmdHandler = Instance.new("ScrollingFrame")
 local Close = Instance.new("TextButton")
 local Minimum = Instance.new("TextButton")
 local CmdName = Instance.new("TextButton")
-local Plr = game.Players.LocalPlayer
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TS = game:GetService('TweenService')
 local HttpService = game:GetService("HttpService")
 
-local plr = game.Players.LocalPlayer
-local torso = plr.Character.LowerTorso
+local torso = Player.Character.LowerTorso
 local flying = false
 local deb = true 
 local ctrl = {f = 0, b = 0, l = 0, r = 0} 
@@ -64,7 +64,7 @@ function Fly()
 		bv.velocity = Vector3.new(0,0,0) 
 		bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
 		repeat wait() 
-			plr.Character.Humanoid.PlatformStand = true 
+			Player.Character.Humanoid.PlatformStand = true 
 			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
 				speed = speed + 2
 				if speed > maxspeed then 
@@ -91,7 +91,7 @@ function Fly()
 		speed = 0 
 		bg:Destroy() 
 		bv:Destroy() 
-		plr.Character.Humanoid.PlatformStand = false 
+		Player.Character.Humanoid.PlatformStand = false 
 end 
 	mouse.KeyDown:connect(function(key) 
 		if key:lower() == "v" and fly == true then 
@@ -479,7 +479,7 @@ end
 
 function getTrees()
 	local trees = {}
-	for k,v in pairs(island.Blocks:GetChildren()) do
+	for k,v in pairs(Island.Blocks:GetChildren()) do
 		local tree = v
 		if (tree.Name:find("treePine") or 
 	    	tree.Name:find("treeMaple") or
@@ -584,17 +584,6 @@ Background5.Position = UDim2.new(1, 0, 0.3, 0)
 Background5.Size = UDim2.new(0, 150, 0, 125)
 Background5.Active = true
 Background5.Visible = false
-
-Background6 = Instance.new("Frame")
-Background6.Name = "Background6"
-Background6.Parent = Background
-Background6.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Background6.BorderSizePixel = 0
-Background6.BorderColor3 = Color3.new(1,0,1)
-Background6.Position = UDim2.new(1, 0, 0.2, 0)
-Background6.Size = UDim2.new(0, 110, 0, 90)
-Background6.Active = true
-Background6.Visible = false
 
 Background8 = Instance.new("Frame")
 Background8.Name = "Players"
@@ -768,7 +757,7 @@ Minimum.MouseButton1Click:Connect(function()
 		Background3.Visible = false
 		Background4.Visible = false
 		Background5.Visible = false
-		Background6.Visible = false
+		playersBackground.Visible = false
 		Background7.Visible = false
 		Background8.Visible = false
 		Background9.Visible = false
@@ -793,147 +782,6 @@ Minimum.MouseButton1Click:Connect(function()
 		Background.Size = UDim2.new(0, 120, 0, 220)
 		CmdHandler.Visible = true
 	end
-end)
-
-Item1 = Instance.new("TextButton")
-Item1.Position = UDim2.new(0,1,0,26)
-Item1.Size = UDim2.new(0,100,0,20)
-Item1.BackgroundColor3 = Color3.fromRGB(50,100,50)
-Item1.BorderColor3 = Color3.new(1,1,1)
-Item1.ZIndex = 2
-Item1.Parent = Background6
-Item1.Text = "Follow Cletus"
-Item1.TextColor3 = Color3.new(1,1,1)
-Item1.TextScaled = true
-Item1.MouseButton1Click:Connect(function()
-    if KillCletus then
-        KillCletus = false
-        Item1.BackgroundColor3 = Color3.fromRGB(50,100,50)
-        Item1.Text = "Follow Cletus"
-        Item1.TextColor3 = Color3.new(1,1,1)
-    else
-        KillCletus = true
-        Item1.BackgroundColor3 = Color3.new(0,255,255)
-        Item1.Text = "Farming!"
-        Item1.TextColor3 = Color3.fromRGB(0,0,0)
-        enemy = "cletusHalloween"
-        while KillCletus == true do
-            wait()
-            wait()
-            local mobs = getMobs()
-            if #mobs == 0 then
-                wait()
-            else
-                for k,v in pairs(mobs) do
-                    if v.Name == enemy then
-                    local mob = v
-                    tween, distance, speed = moveToMobs(mob)
-                    wait(distance/speed - 1)
-                    break
-                    end
-                end
-            end
-        end
-    end
-end)
-
-Candles = Instance.new("TextButton")
-Candles.Position = UDim2.new(0,1,0,1)
-Candles.Size = UDim2.new(0,100,0,20)
-Candles.BackgroundColor3 = Color3.fromRGB(50,100,50)
-Candles.BorderColor3 = Color3.new(1,1,1)
-Candles.ZIndex = 2
-Candles.Parent = Background6
-Candles.Text = "Spider Candles"
-Candles.TextColor3 = Color3.new(1,1,1)
-Candles.TextScaled = true
-Candles.MouseButton1Click:Connect(function()
-    if Candles1 then
-        Candles1 = false
-        Candles.BackgroundColor3 = Color3.fromRGB(63,165,63)
-        Candles.Text = "Spider Candles"
-        Candles.TextColor3 = Color3.fromRGB(250,250,250)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
-        if tween then
-        tween:Cancel()
-        end
-    else
-        Candles1 = true
-        Candles.BackgroundColor3 = Color3.new(1,0,0)
-        Candles.Text = "KILL!"
-        Candles.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        BV.Parent = HR
-        local enemy = "spiderCandle"
-        while Candles1 == true do
-            wait()
-            local mobs = getMobs()
-            if #mobs == 0 then
-                wait()
-            else
-                for k,v in pairs(mobs) do
-                    if v.Name == enemy then
-                    local mob = v
-                    tween, distance, speed = moveToMobs(mob)
-                    wait(distance/speed - 1)
-                    break
-                    end
-                end
-            end
-        end
-    end
-end)
-
-
-Skulls = Instance.new("TextButton")
-Skulls.Position = UDim2.new(0,1,0,50)
-Skulls.Size = UDim2.new(0,100,0,20)
-Skulls.BackgroundColor3 = Color3.fromRGB(50,100,50)
-Skulls.BorderColor3 = Color3.new(1,1,1)
-Skulls.ZIndex = 2
-Skulls.Parent = Background6
-Skulls.Text = "Catch Skulls"
-Skulls.TextColor3 = Color3.new(1,1,1)
-Skulls.TextScaled = true
-Skulls.MouseButton1Click:Connect(function()
-    if Skulls1 then
-        Skulls = false
-        Skulls.BackgroundColor3 = Color3.fromRGB(63,165,63)
-        Skulls.Text = "Catch Skulls"
-        Skulls.TextColor3 = Color3.fromRGB(250,250,250)
-        unFloat()
-        if tween then
-        tween:Cancel()
-        end
-    else
-        Skulls1 = true
-        Skulls.BackgroundColor3 = Color3.new(1,0,0)
-        Skulls.Text = "Catching Skulls"
-        Skulls.TextColor3 = Color3.fromRGB(0,0,0)
-        Float()
-        while Skulls1 == true do
-            Entities = getIslandEntities()
-            for i,v in pairs(Entities) do
-                if v.Name == "emberSkull" then
-                    tween, Time = goToPoint(v.HumanoidRootPart.Position, 0)
-                    wait(Time)
-                    local args = {
-                    [1] = HttpService:GenerateGUID(false),
-                    [2] = {
-                    [1] = {
-                    ["entity"] = v
-                    }
-                    }
-                    }
-                    useNet:FireServer(unpack(args))
-                end
-            end
-        end
-    end
 end)
 
 Item3 = Instance.new("TextButton")
@@ -980,9 +828,199 @@ GUIs.BorderColor3 = Color3.new(1,1,1)
 GUIs.ZIndex = 2
 GUIs.LayoutOrder = 2
 GUIs.Parent = CmdHandler
-GUIs.Text = "Events >"
+GUIs.Text = "Players >"
 GUIs.TextColor3 = Color3.fromRGB(250,250,250)
 GUIs.TextScaled = true
+
+playersBackground = Instance.new("Frame")
+playersBackground.Name = "playersBackground"
+playersBackground.Parent = Background
+playersBackground.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+playersBackground.BorderSizePixel = 0
+playersBackground.BorderColor3 = Color3.new(1,0,1)
+playersBackground.Position = UDim2.new(1, 0, 0.1, 0)
+playersBackground.Size = UDim2.new(0, 180, 0, 200)
+playersBackground.Transparency = 0.5
+playersBackground.Active = true
+playersBackground.Visible = false
+
+Hndl = Instance.new("ScrollingFrame")
+Hndl.Name = "Hndl"
+Hndl.Parent = playersBackground
+Hndl.Active = true
+Hndl.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+Hndl.BackgroundTransparency = 1.000
+Hndl.BorderSizePixel = 0
+Hndl.AutomaticCanvasSize = "Y"
+Hndl.Position = UDim2.new(0, 0, 0, 0)
+Hndl.Size = UDim2.new(0, 180, 0, 200)
+Hndl.ScrollBarThickness = 6
+
+local plrGrid = Instance.new("UIGridLayout")
+plrGrid.CellSize = UDim2.new(0.95,0,0,20)
+plrGrid.CellPadding = UDim2.new(0,5,0,5)
+plrGrid.SortOrder = "LayoutOrder"
+plrGrid.Parent = Hndl
+
+playersBackground2 = Instance.new("Frame")
+playersBackground2.Name = "playersBackground2"
+playersBackground2.Parent = playersBackground
+playersBackground2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+playersBackground2.BorderSizePixel = 0
+playersBackground2.BorderColor3 = Color3.new(1,0,1)
+playersBackground2.Position = UDim2.new(1, 0, 0.1, 0)
+playersBackground2.Size = UDim2.new(0, 200, 0, 250)
+playersBackground2.Transparency = 0.5
+playersBackground2.Active = true
+playersBackground2.Visible = false
+
+Hndl2 = Instance.new("ScrollingFrame")
+Hndl2.Name = "Hndl2"
+Hndl2.Parent = playersBackground2
+Hndl2.Active = true
+Hndl2.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+Hndl2.BackgroundTransparency = 1.000
+Hndl2.BorderSizePixel = 0
+Hndl2.AutomaticCanvasSize = "Y"
+Hndl2.Position = UDim2.new(0, 0, 0, 0)
+Hndl2.Size = UDim2.new(0, 200, 0, 240)
+Hndl2.ScrollBarThickness = 6
+
+local plrGrid2 = Instance.new("UIGridLayout")
+plrGrid2.CellSize = UDim2.new(0.95,0,0,20)
+plrGrid2.CellPadding = UDim2.new(0,5,0,5)
+plrGrid2.SortOrder = "LayoutOrder"
+plrGrid2.Parent = Hndl2
+
+local function clearList()
+    for i,v in pairs(Hndl2:GetChildren()) do
+        if v:IsA("TextButton") or v:IsA("TextLabel") then
+            v:Destroy()
+        end
+    end
+end
+
+local function removeName(person)
+    for i,v in pairs(Hndl:GetChildren()) do
+        if v:IsA("TextButton") and v.Text == person.Name then
+            v:Destroy()
+        end
+    end
+end
+
+local function getInfo(person)
+    for i,v in pairs(Players:GetPlayers()) do
+        print(v.Name, person)
+        if v.Name == person then
+            local tradePerson = Instance.new("TextButton")
+            tradePerson.Size = UDim2.new(0,100,0,20)
+            tradePerson.BackgroundColor3 = Color3.fromRGB(50,50,50)
+            tradePerson.BorderColor3 = Color3.new(1,1,1)
+            tradePerson.ZIndex = 2
+            tradePerson.Parent = Hndl2
+            tradePerson.Text = "Send trade to - "..v.Name
+            tradePerson.TextColor3 = Color3.new(1,1,1)
+            tradePerson.TextScaled = true
+            tradePerson.BackgroundTransparency = 0.3
+            tradePerson.MouseButton1Click:Connect(function()
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["targetUserId"] = v.UserId
+                }
+                }
+                }
+                sendTrade:FireServer(unpack(args))
+            end)
+            for _,b in pairs(v:GetChildren()) do
+                if b.Name == "MountedAnimalUUID" or b.Name == "UnlockedRecipies" then wait() else
+                if b:IsA("StringValue") then
+                    personInfo = Instance.new("TextLabel")
+                    personInfo.BackgroundColor3 = Color3.fromRGB(50,50,50)
+                    personInfo.BorderColor3 = Color3.new(1,1,1)
+                    personInfo.ZIndex = 2
+                    personInfo.Parent = Hndl2
+                    personInfo.Text = b.Name.." - "..b.Value
+                    personInfo.TextColor3 = Color3.new(1,1,1)
+                    personInfo.TextScaled = true
+                    personInfo.BackgroundTransparency = 0.6
+                elseif b:IsA("BoolValue") then
+                    personInfo = Instance.new("TextLabel")
+                    personInfo.BackgroundColor3 = Color3.fromRGB(50,50,50)
+                    personInfo.BorderColor3 = Color3.new(1,1,1)
+                    personInfo.ZIndex = 2
+                    personInfo.Parent = Hndl2
+                    if b.Value == true then
+                        personInfo.Text = b.Name.." - True"
+                    elseif b.Value == false then
+                        personInfo.Text = b.Name.." - False"
+                    end
+                    personInfo.TextColor3 = Color3.new(1,1,1)
+                    personInfo.TextScaled = true
+                    personInfo.BackgroundTransparency = 0.6
+                end
+                end    
+            end        
+        end
+    end
+end
+
+local sameName = ""
+
+Players.PlayerAdded:Connect(function(plr)
+    local person = Instance.new("TextButton")
+    person.Size = UDim2.new(0,100,0,20)
+    person.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    person.BorderColor3 = Color3.new(1,1,1)
+    person.ZIndex = 2
+    person.Parent = Hndl
+    person.Text = plr.Name
+    person.TextColor3 = Color3.new(1,1,1)
+    person.TextScaled = true
+    person.BackgroundTransparency = 0.3
+    person.MouseButton1Click:Connect(function()
+        if sameName == plr.Name then
+            playersBackground2.Visible = false
+            sameName = ""
+        else
+            sameName = plr.Name
+            clearList()
+            getInfo(plr.Name)
+            playersBackground2.Visible = true
+        end
+    end)
+    
+end)
+
+for i,v in pairs(Players:GetPlayers()) do
+    local person = Instance.new("TextButton")
+    person.Position = UDim2.new(0,1,0,42)
+    person.Size = UDim2.new(0,100,0,20)
+    person.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    person.BorderColor3 = Color3.new(1,1,1)
+    person.ZIndex = 2
+    person.Parent = Hndl
+    person.Text = v.Name
+    person.TextColor3 = Color3.new(1,1,1)
+    person.TextScaled = true
+    person.BackgroundTransparency = 0.3
+    person.MouseButton1Click:Connect(function()
+        if sameName == v.Name then
+            playersBackground2.Visible = false
+            sameName = ""
+        else
+            sameName = v.Name
+            clearList()
+            getInfo(v.Name)
+            playersBackground2.Visible = true
+        end
+    end)
+end
+
+Players.PlayerRemoving:Connect(function(plr)
+    removeName(plr)
+end)
 
 local Teleports = Instance.new("TextButton")
 Teleports.Position = UDim2.new(0,1,0,243)
@@ -3571,8 +3609,8 @@ Item89.TextColor3 = Color3.fromRGB(250,250,250)
 Item89.TextScaled = true
 
 local function NoclipLoop()
-    if noClip == true and Plr.Character ~= nil then
-        for _, child in pairs(Plr.Character:GetDescendants()) do
+    if noClip == true and Player.Character ~= nil then
+        for _, child in pairs(Player.Character:GetDescendants()) do
             if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
                 child.CanCollide = false
             end
@@ -3659,7 +3697,7 @@ Title.MouseButton1Click:Connect(function()
         Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -3670,7 +3708,7 @@ Title.MouseButton1Click:Connect(function()
         Tests.Text = "Misc >"
         BowBoss.Text = "Wood >"
         Teleports.Text = "Teleports >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Item80.Text = "Hub Shops >"
@@ -3703,7 +3741,7 @@ BowBoss.MouseButton1Click:Connect(function()
         Background3.Visible = false
         Background4.Visible = false
         Background2.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -3713,7 +3751,7 @@ BowBoss.MouseButton1Click:Connect(function()
         Toggled73 = false
         Tests.Text = "Misc >"
         Teleports.Text = "Teleports >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Item80.Text = "Hub Shops >"
@@ -3725,9 +3763,9 @@ GUIs.MouseButton1Click:Connect(function()
     if Toggled22 then
         Toggled22 = false
         GUIs.BackgroundColor3 = Color3.new(0,0,1)
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         GUIs.TextColor3 = Color3.fromRGB(250,250,250)
-        Background6.Visible = false
+        playersBackground.Visible = false
     else
         Toggled22 = true
         Toggled13 = false
@@ -3758,9 +3796,9 @@ GUIs.MouseButton1Click:Connect(function()
         Teleports.Text = "Teleports >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
-        GUIs.Text = "Event <"
+        GUIs.Text = "Players <"
         Item80.Text = "Hub Shops >"
-        Background6.Visible = true
+        playersBackground.Visible = true
     end
 end)
 
@@ -3788,7 +3826,7 @@ Teleports.MouseButton1Click:Connect(function()
         Background2.Visible = false
         Background4.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -3800,7 +3838,7 @@ Teleports.MouseButton1Click:Connect(function()
         Title.Text = "Mob Farms >"
         Tests.Text = "Misc >"
         BowBoss.Text = "Wood >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Background3.Visible = true
@@ -3831,7 +3869,7 @@ Tests.MouseButton1Click:Connect(function()
         Background2.Visible = false
         Background3.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -3842,7 +3880,7 @@ Tests.MouseButton1Click:Connect(function()
         Title.Text = "Mob Farms >"
         Teleports.Text = "Teleports >"
         BowBoss.Text = "Wood >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Item80.Text = "Hub Shops >"
@@ -3871,7 +3909,7 @@ Item65.MouseButton1Click:Connect(function()
         Background2.Visible = false
         Background3.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background11.Visible = false
@@ -3910,7 +3948,7 @@ Item67.MouseButton1Click:Connect(function()
         Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -3921,7 +3959,7 @@ Item67.MouseButton1Click:Connect(function()
         Title.Text = "Mob Farms >"
         Teleports.Text = "Teleports >"
         BowBoss.Text = "Wood >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Tests.Text = "Misc >"
@@ -3954,7 +3992,7 @@ Item80.MouseButton1Click:Connect(function()
         Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -3965,7 +4003,7 @@ Item80.MouseButton1Click:Connect(function()
         Title.Text = "Mob Farms >"
         Teleports.Text = "Teleports >"
         BowBoss.Text = "Wood >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Tests.Text = "Misc >"
@@ -4091,7 +4129,7 @@ Item84.MouseButton1Click:Connect(function()
         Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background8.Visible = false
         Background9.Visible = false
@@ -4100,7 +4138,7 @@ Item84.MouseButton1Click:Connect(function()
         Title.Text = "Mob Farms >"
         Teleports.Text = "Teleports >"
         BowBoss.Text = "Wood >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Item42.Text = "Machines >"
         Item65.Text = "Auto Eat >"
         Tests.Text = "Misc >"
@@ -4345,12 +4383,6 @@ Item34.MouseButton1Click:Connect(function()
         Item34.BackgroundColor3 = Color3.new(0,255,255)
         Item34.Text = "Pickin"
         Item34.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled23 == true do
             if Island.Blocks:FindFirstChild("flowerHyacinthCyan") then
             local args = {
@@ -4811,7 +4843,7 @@ end)
 
 function getHiveTrees()
     local trees = {}
-    for _,tree in pairs(island.Blocks:GetChildren()) do
+    for _,tree in pairs(Island.Blocks:GetChildren()) do
         if tree:FindFirstChild("HiveLocations") then
             table.insert(trees, tree)
         end
@@ -4892,12 +4924,6 @@ Item25.MouseButton1Click:Connect(function()
         Item25.BackgroundColor3 = Color3.new(0,255,255)
         Item25.Text = "Makin' the mayo"
         Item25.TextColor3 = Color3.fromRGB(0,0,0)
-		local Island = ""
-		for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-			if (island:IsA("Model")) then
-				Island = island
-			end
-		end
         while Toggled12 == true do
             wait()
 			for _,MayoSpinner in pairs(Island.Blocks:GetChildren()) do
@@ -5265,14 +5291,10 @@ Item32.MouseButton1Click:Connect(function()
         Item32.TextColor3 = Color3.fromRGB(0,255,255)
         sethiddenproperty(Player, "SimulationRadius", 999999999999)
         mouse.Button1Down:connect(function()
-            for i,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-                if (island:IsA("Model")) then
-                    for i, tool in pairs(island.Drops:GetChildren()) do
-                        if (tool:IsA("Tool")) then
-                            if Toggled20 then
-                            tool.HandleDisabled.Position = mouse.Hit.Position + Vector3.new(0,5,0)
-                            end
-                        end
+            for i, tool in pairs(Island.Drops:GetChildren()) do
+                if (tool:IsA("Tool")) then
+                    if Toggled20 then
+                        tool.HandleDisabled.Position = mouse.Hit.Position + Vector3.new(0,5,0)
                     end
                 end
             end
@@ -5376,7 +5398,7 @@ Item42.MouseButton1Click:Connect(function()
         Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
-        Background6.Visible = false
+        playersBackground.Visible = false
         Background7.Visible = false
         Background9.Visible = false
         Background11.Visible = false
@@ -5386,7 +5408,7 @@ Item42.MouseButton1Click:Connect(function()
         Tests.Text = "Misc >"
         BowBoss.Text = "Wood >"
         Teleports.Text = "Teleports >"
-        GUIs.Text = "Event >"
+        GUIs.Text = "Players >"
         Title.Text = "Mob Farms >"
         Item65.Text = "Auto Eat >"
         Item80.Text = "Hub Shops >"
@@ -5407,7 +5429,7 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         }
         }
         }
-        tradeEvent:FireServer(unpack(args))
+        addTrade:FireServer(unpack(args))
     end
 end
 wait()
@@ -5478,12 +5500,6 @@ Item45.MouseButton1Click:Connect(function()
         Item45.BackgroundColor3 = Color3.new(0,255,255)
         Item45.Text = "Watering Nearby"
         Item45.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled29 == true do
             wait()
             for i,thirsty in pairs(Island.Blocks:GetChildren()) do
@@ -5514,10 +5530,6 @@ Item46.MouseButton1Click:Connect(function()
         Item46.BackgroundColor3 = Color3.new(0,255,255)
         Item46.Text = "Picking up nearby items"
         Item46.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            Island = island
-        end
         while Toggled30 == true do
             wait()
         for i,v in pairs(Island.Drops:GetChildren()) do
@@ -5549,12 +5561,6 @@ Item48.MouseButton1Click:Connect(function()
         Item48.BackgroundColor3 = Color3.new(0,255,255)
         Item48.Text = "Picking"
         Item48.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled32 == true do
             if Island.Blocks:FindFirstChild("flowerHyacinthRedFertile") then
             local args = {
@@ -5891,12 +5897,6 @@ Item56.MouseButton1Click:Connect(function()
         Item56.BackgroundColor3 = Color3.new(200,0,0)
         Item56.Text = "Making Carved Aquamarine"
         Item56.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled39 == true do
             for i,StoneCutter in pairs(Island.Blocks:GetChildren()) do
     if StoneCutter.Name == "stonecutter" then
@@ -5977,12 +5977,6 @@ Item57.MouseButton1Click:Connect(function()
         Item57.BackgroundColor3 = Color3.new(200,0,0)
         Item57.Text = "Making Aquamarine Tiles"
         Item57.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled40 == true do
             for i,StoneCutter in pairs(Island.Blocks:GetChildren()) do
                 if StoneCutter.Name == "stonecutter" then
@@ -6063,12 +6057,6 @@ Item58.MouseButton1Click:Connect(function()
         Item58.BackgroundColor3 = Color3.new(200,0,0)
         Item58.Text = "Making Aquamarine Brick"
         Item58.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled41 == true do
             for i,StoneCutter in pairs(Island.Blocks:GetChildren()) do
                 if StoneCutter.Name == "stonecutter" then
@@ -6173,12 +6161,6 @@ Item59.MouseButton1Click:Connect(function()
         Item59.BackgroundColor3 = Color3.new(200,0,0)
         Item59.Text = "Making Cloth"
         Item59.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled42 == true do
             wait()
             for _,Loom in pairs(Island.Blocks:GetChildren()) do
@@ -6276,12 +6258,6 @@ Item62.MouseButton1Click:Connect(function()
         BV.Velocity = Vector3.new(0,0,0)
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled45 == true do
             wait()
             for i,Avocado in pairs(Island.Blocks:GetDescendants()) do
@@ -6712,11 +6688,11 @@ for i,v in pairs(CmdHandler6:GetChildren()) do
             while Toggled48  do
                 wait()
 
-                Plr.Backpack[ToOl].Parent = Plr.Character
+                Player.Backpack[ToOl].Parent = Player.Character
                 wait()
                 args = {
                     [1] = {
-                    ["tool"] = Plr.Character[ToOl]
+                    ["tool"] = Player.Character[ToOl]
                     }
                 }
                 game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_EAT_FOOD:InvokeServer(unpack(args))
@@ -6742,12 +6718,6 @@ Item68.MouseButton1Click:Connect(function()
         Item68.Text = "Cane!"
         Item68.TextColor3 = Color3.fromRGB(0,0,0)
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        Island = ""
-        for i,island in pairs(game.Workspace.Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled51 == true do
             wait()
 for i,trellis in pairs(Island.Blocks:GetChildren()) do
@@ -6812,12 +6782,6 @@ Item69.MouseButton1Click:Connect(function()
         Item69.Text = "Dragon!"
         Item69.TextColor3 = Color3.fromRGB(0,0,0)
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        Island = ""
-        for i,island in pairs(game.Workspace.Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled52 == true do
             wait()
 for i,trellis in pairs(Island.Blocks:GetChildren()) do
@@ -6877,12 +6841,6 @@ Item70.MouseButton1Click:Connect(function()
         Item70.BackgroundColor3 = Color3.new(0,255,255)
         Item70.Text = "Makin' the Butter"
         Item70.TextColor3 = Color3.fromRGB(0,0,0)
-		local Island = ""
-		for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-			if (island:IsA("Model")) then
-				Island = island
-			end
-		end
         while Toggled53 == true do
             wait()
 			for _,MayoSpinner in pairs(Island.Blocks:GetChildren()) do
@@ -6931,12 +6889,6 @@ Item72.MouseButton1Click:Connect(function()
         Item72.BackgroundColor3 = Color3.new(0,255,255)
         Item72.Text = "Smelting Iron"
         Item72.TextColor3 = Color3.fromRGB(0,0,0)
-		local Island = ""
-		for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-			if (island:IsA("Model")) then
-				Island = island
-			end
-		end
         while Toggled55 == true do
             wait()
 			for i,b in pairs(Island.Blocks:GetChildren()) do
@@ -7004,12 +6956,6 @@ Item73.MouseButton1Click:Connect(function()
         Item73.BackgroundColor3 = Color3.new(0,255,255)
         Item73.Text = "Smelting Gold"
         Item73.TextColor3 = Color3.fromRGB(0,0,0)
-		local Island = ""
-		for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-			if (island:IsA("Model")) then
-				Island = island
-			end
-		end
         while Toggled56 == true do
             wait()
 			for i,b in pairs(Island.Blocks:GetChildren()) do
@@ -7077,12 +7023,6 @@ Item74.MouseButton1Click:Connect(function()
         Item74.BackgroundColor3 = Color3.new(0,255,255)
         Item74.Text = "Plowing"
         Item74.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled57 == true do
             wait()
             for i,Grass in pairs(Island.Blocks:GetChildren()) do
@@ -7110,12 +7050,6 @@ UnPlow.MouseButton1Click:Connect(function()
         UnPlow.BackgroundColor3 = Color3.new(0,255,255)
         UnPlow.Text = "Unplowing"
         UnPlow.TextColor3 = Color3.fromRGB(0,0,0)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled77 == true do
             wait()
             for i,Grass in pairs(Island.Blocks:GetChildren()) do
@@ -7181,12 +7115,8 @@ Item75.MouseButton1Click:Connect(function()
 end)
 
 Item76.MouseButton1Click:Connect(function()
-    island = ""
-    for i,v in pairs(game.Workspace.Islands:GetChildren()) do
-        island = v
-    end
     
-    for i,smelter in pairs(island.Blocks:GetChildren()) do
+    for i,smelter in pairs(Island.Blocks:GetChildren()) do
         if smelter.Name == "smallFurnace" then
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - smelter.Position).magnitude > 23 then
                 Point = smelter.Position
@@ -7284,10 +7214,6 @@ Item78.MouseButton1Click:Connect(function()
         Item78.BackgroundColor3 = Color3.new(0,255,255)
         Item78.Text = "Breeding Animals!"
         Item78.TextColor3 = Color3.fromRGB(0,0,0)
-        Island = ""
-        for i,island in pairs(game.Workspace.Islands:GetChildren()) do
-            Island = island
-        end
         while Toggled60 == true do
             wait()
 for i,Animal in pairs(Island.Entities:GetChildren()) do
@@ -7599,9 +7525,9 @@ ElectriteMining.MouseButton1Click:Connect(function()
         BV.Velocity = Vector3.new(0,0,0)
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
-        local Pickaxe = Plr.Backpack:FindFirstChild("opalPickaxe")
-        local AltPickaxe = Plr.Backpack:FindFirstChild("diamondPickaxe")
-        local Shovel = Plr.Backpack:FindFirstChild("shovelStone")
+        local Pickaxe = Player.Backpack:FindFirstChild("opalPickaxe")
+        local AltPickaxe = Player.Backpack:FindFirstChild("diamondPickaxe")
+        local Shovel = Player.Backpack:FindFirstChild("shovelStone")
         local Continue = 0
         wait(1)
         while Toggled85 == true do
@@ -7731,12 +7657,6 @@ Item87.MouseButton1Click:Connect(function()
         BV.Parent = Character.HumanoidRootPart
         BV.MaxForce = Vector3.new(0,math.huge,0)
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        local Island = ""
-        for _,island in pairs(game:GetService("Workspace").Islands:GetChildren()) do
-            if (island:IsA("Model")) then
-                Island = island
-            end
-        end
         while Toggled78 == true do
             wait()
             for i,Bush in pairs(Island.Blocks:GetDescendants()) do
@@ -7788,7 +7708,7 @@ Item88.MouseButton1Click:Connect(function()
         Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
         while Toggled79 do
             wait()
-            for i,Composter in pairs(island.Blocks:GetChildren()) do
+            for i,Composter in pairs(Island.Blocks:GetChildren()) do
                 if Composter.Name == "composter" then
                     if Player.Backpack:FindFirstChild("fishCarp") then Fish = "fishCarp"
                     elseif Player.Backpack:FindFirstChild("fishTrout") then Fish = "fishTrout"
@@ -7839,10 +7759,6 @@ Item89.MouseButton1Click:Connect(function()
         Item89.BackgroundColor3 = Color3.new(0,255,255)
         Item89.Text = "Farming!"
         Item89.TextColor3 = Color3.fromRGB(0,0,0)
-        Island = ""
-        for i,island in pairs(game.Workspace.Islands:GetChildren()) do
-            Island = island
-        end
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
         while Toggled80 == true do
             wait()

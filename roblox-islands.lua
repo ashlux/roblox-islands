@@ -357,15 +357,16 @@ end
 end
 
 function killPlayersAura()
-    HR = getRoot(Character)
     for i,v in pairs(Players:GetPlayers()) do
-        if (HR.Position - v.Character.HumanoidRootPart.Position).magnitude < 30 then
+        playerCharacter = v.Character
+        if playerCharacter and playerCharacter:FindFirstChild("HumanoidRootPart") and (HR.Position - playerCharacter.HumanoidRootPart.Position).magnitude < 30 then
+            print("nothing")
             local args = {
             [1] = HttpService:GenerateGUID(false),
             [2] = {
             [1] = {
             ["crit"] = true,
-            ["hitUnit"] = v
+            ["hitUnit"] = playerCharacter
             }
             }
             }
@@ -1935,7 +1936,7 @@ KillPlayersAura.MouseButton1Click:Connect(function()
     if KPA then
         KPA = false
         KillPlayersAura.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        KillPlayersAura.Text = "Kill Aura"
+        KillPlayersAura.Text = "Kill Players Aura"
         KillPlayersAura.TextColor3 = Color3.fromRGB(250,250,250)
     else
         KPA = true

@@ -356,6 +356,24 @@ function killAura()
 end
 end
 
+function killPlayersAura()
+    HR = getRoot(Character)
+    for i,v in pairs(Players:GetPlayers()) do
+        if (HR.Position - v.Character.HumanoidRootPart.Position).magnitude < 30 then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["crit"] = true,
+            ["hitUnit"] = v
+            }
+            }
+            }
+            hitMobEvent:FireServer(unpack(args))
+        end
+    end
+end
+
 function round(number)
     return math.floor(number + 0.5)
 end
@@ -1889,7 +1907,6 @@ KillAura.MouseButton1Click:Connect(function()
         KillAura.BackgroundColor3 = Color3.fromRGB(63,63,63)
         KillAura.Text = "Kill Aura"
         KillAura.TextColor3 = Color3.fromRGB(250,250,250)
-        Pickem:Disconnect()
     else
         KA = true
         KillAura.BackgroundColor3 = Color3.new(0,255,255)
@@ -1902,8 +1919,38 @@ KillAura.MouseButton1Click:Connect(function()
     end
 end)
 
+local KillPlayersAura = Instance.new("TextButton")
+KillPlayersAura.Position = UDim2.new(0,1,1,210)
+KillPlayersAura.Size = UDim2.new(0,135,0,20)
+KillPlayersAura.BackgroundColor3 = Color3.fromRGB(70,0,0)
+KillPlayersAura.BorderSizePixel = 2
+KillPlayersAura.BorderColor3 = Color3.new(1,0,0)
+KillPlayersAura.ZIndex = 2
+KillPlayersAura.Parent = Notification6
+KillPlayersAura.Text = "Kill Players Aura"
+KillPlayersAura.TextColor3 = Color3.fromRGB(250,50,50)
+KillPlayersAura.TextScaled = true
+KillPlayersAura.Modal = true
+KillPlayersAura.MouseButton1Click:Connect(function()
+    if KPA then
+        KPA = false
+        KillPlayersAura.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        KillPlayersAura.Text = "Kill Aura"
+        KillPlayersAura.TextColor3 = Color3.fromRGB(250,250,250)
+    else
+        KPA = true
+        KillPlayersAura.BackgroundColor3 = Color3.new(0,255,255)
+        KillPlayersAura.Text = "Killin"
+        KillPlayersAura.TextColor3 = Color3.fromRGB(0,0,0)
+        while KPA do
+            wait()
+            killPlayersAura()
+        end
+    end
+end)
+
 local Item6 = Instance.new("TextButton")
-Item6.Position = UDim2.new(0,1,1,220)
+Item6.Position = UDim2.new(0,1,1,240)
 Item6.Size = UDim2.new(0,135,0,20)
 Item6.BackgroundColor3 = Color3.fromRGB(70,70,70)
 Item6.BorderSizePixel = 2

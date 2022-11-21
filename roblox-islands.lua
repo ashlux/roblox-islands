@@ -2196,12 +2196,12 @@ cropsHandler.Position = UDim2.new(0, 1, 0, 1)
 cropsHandler.Size = UDim2.new(0, 115, 0, 195)
 cropsHandler.ScrollBarThickness = 8
 
-destroyOrbs = false
-game.Workspace.ChildAdded:Connect(function(part)
-    if destroyOrbs == true and part.Name == "Part" then
-        part:Destroy()
-    end
-end)
+--destroyOrbs = false
+--game.Workspace.ChildAdded:Connect(function(part)
+    --if destroyOrbs == true and part.Name == "Part" then -- ORBS ARE BACK BABY!
+        --part:Destroy()
+    --end
+--end)
 
 sickleButton = Instance.new("TextButton")
 sickleButton.Position = UDim2.new(0,0,1,21)

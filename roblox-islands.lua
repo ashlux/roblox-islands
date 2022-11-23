@@ -928,9 +928,43 @@ local function removeName(person)
     end
 end
 
-local function getInfo(person)
+local function createPlayerInfoMenu(person)
+	local function getPlayer(name)
+		return Players:findFirstChild(name)
+	end
+
+	local function getPlayerXp(name)
+		local xp = {}
+		local player = getPlayer(name)
+		for _, xpDetails in pairs(name and player:GetChildren() or {}) do
+			local xpGained = xpDetails:FindFirstChild("ExperienceGained")
+			local xpLevel = xpDetails:FindFirstChild("StartLevel")
+			
+			if xpGained and xpLevel then
+				table.insert(xp, {name = xpLevel.Parent.Name, points = xpGained.Value, level = xpLevel.Value})
+			end
+		end
+		return xp
+	end
+
+	local function getPlayerCoins(name)
+		local player = getPlayer(name)
+		local coins = player and player.leaderstats and player.leaderstats.Coins
+		return coins and coins.Value or 0
+	end
+
+	local function getPlayerMetaInfo(name)
+		local player = getPlayer(name)
+		local metaInfo = {}
+		for k,v in pairs(Players.LocalPlayer:GetChildren()) do
+			if (v:IsA("BoolValue") or v:IsA("IntValue") or v:isA("StringValue")) then
+				table.insert(metaInfo, {name = v.Name, value = v.Value})
+			end
+		end
+		return metaInfo
+	end
+
     for i,v in pairs(Players:GetPlayers()) do
-        print(v.Name, person)
         if v.Name == person then
             local tradePerson = Instance.new("TextButton")
             tradePerson.Size = UDim2.new(0,100,0,20)
@@ -953,36 +987,50 @@ local function getInfo(person)
                 }
                 sendTrade:FireServer(unpack(args))
             end)
-            for _,b in pairs(v:GetChildren()) do
-                if b.Name == "MountedAnimalUUID" or b.Name == "UnlockedRecipies" then wait() else
-                if b:IsA("StringValue") then
-                    personInfo = Instance.new("TextLabel")
-                    personInfo.BackgroundColor3 = Color3.fromRGB(50,50,50)
-                    personInfo.BorderColor3 = Color3.new(1,1,1)
-                    personInfo.ZIndex = 2
-                    personInfo.Parent = Hndl2
-                    personInfo.Text = b.Name.." - "..b.Value
-                    personInfo.TextColor3 = Color3.new(1,1,1)
-                    personInfo.TextScaled = true
-                    personInfo.BackgroundTransparency = 0.6
-                elseif b:IsA("BoolValue") then
-                    personInfo = Instance.new("TextLabel")
-                    personInfo.BackgroundColor3 = Color3.fromRGB(50,50,50)
-                    personInfo.BorderColor3 = Color3.new(1,1,1)
-                    personInfo.ZIndex = 2
-                    personInfo.Parent = Hndl2
-                    if b.Value == true then
-                        personInfo.Text = b.Name.." - True"
-                    elseif b.Value == false then
-                        personInfo.Text = b.Name.." - False"
-                    end
-                    personInfo.TextColor3 = Color3.new(1,1,1)
-                    personInfo.TextScaled = true
-                    personInfo.BackgroundTransparency = 0.6
-                end
+			
+
+			local playerCoins = getPlayerCoins(person)
+			local personCoinsLabel = Instance.new("TextLabel")
+            personCoinsLabel.BackgroundColor3 = Color3.fromRGB(50,60,50)
+            personCoinsLabel.BorderColor3 = Color3.new(1,1,1)
+            personCoinsLabel.ZIndex = 2
+            personCoinsLabel.Parent = Hndl2
+            personCoinsLabel.Text = "Coins - " .. tostring(playerCoins)
+            personCoinsLabel.TextColor3 = Color3.new(1,1,1)
+            personCoinsLabel.TextScaled = true
+            personCoinsLabel.BackgroundTransparency = 0.6
+			
+			local playerMetaInfo = getPlayerMetaInfo(person)
+			for _,metaInfo in pairs(playerMetaInfo) do
+				if metaInfo.name ~= "MountedAnimalUUID" or 
+				   metaInfo.Name ~= "UnlockedRecipies" then
+				   
+					local personInfoLabel = Instance.new("TextLabel")
+                    personInfoLabel.BackgroundColor3 = Color3.fromRGB(50,50,50)
+                    personInfoLabel.BorderColor3 = Color3.new(1,1,1)
+                    personInfoLabel.ZIndex = 2
+                    personInfoLabel.Parent = Hndl2
+                    personInfoLabel.Text = metaInfo.name .. " - " .. tostring(metaInfo.value)
+                    personInfoLabel.TextColor3 = Color3.new(1,1,1)
+                    personInfoLabel.TextScaled = true
+                    personInfoLabel.BackgroundTransparency = 0.6
+					
                 end    
-            end        
-        end
+            end
+			
+			local playerXp = getPlayerXp(person)
+			for _,xp in pairs(playerXp) do
+				local personXpLabel = Instance.new("TextLabel")
+				personXpLabel.BackgroundColor3 = Color3.fromRGB(50,50,60)
+				personXpLabel.BorderColor3 = Color3.new(1,1,1)
+				personXpLabel.ZIndex = 2
+				personXpLabel.Parent = Hndl2
+				personXpLabel.Text = xp.name .. " - " .. tostring(xp.level) .. " (" .. tostring(xp.points) .. ")"
+				personXpLabel.TextColor3 = Color3.new(1,1,1)
+				personXpLabel.TextScaled = true
+				personXpLabel.BackgroundTransparency = 0.6
+            end
+		end
     end
 end
 
@@ -1006,7 +1054,7 @@ Players.PlayerAdded:Connect(function(plr)
         else
             sameName = plr.Name
             clearList()
-            getInfo(plr.Name)
+            createPlayerInfoMenu(plr.Name)
             playersBackground2.Visible = true
         end
     end)
@@ -1032,7 +1080,7 @@ for i,v in pairs(Players:GetPlayers()) do
         else
             sameName = v.Name
             clearList()
-            getInfo(v.Name)
+            createPlayerInfoMenu(v.Name)
             playersBackground2.Visible = true
         end
     end)

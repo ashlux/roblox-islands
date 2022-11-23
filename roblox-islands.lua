@@ -141,6 +141,17 @@ local function NoclipLoop() -- lets you walk through stuff
     end
 end
 
+function addComma(amount) -- add commas to numbers
+    while true do
+        amount, k = string.gsub(amount, "^(-?%d+)(%d%d%d)", '%1,%2')
+        if (k==0) then
+            break
+        end
+    end
+    return amount
+end
+
+
 local function pickWildernessPlantAura(plant)
     for i,v in pairs(game:GetService("Workspace").WildernessBlocks:GetChildren()) do
         if v.Name == plant and Player:DistanceFromCharacter(v.Position) < 24 then
@@ -1079,7 +1090,7 @@ local function createPlayerInfoMenu(person)
             personCoinsLabel.BorderColor3 = Color3.new(1,1,1)
             personCoinsLabel.ZIndex = 2
             personCoinsLabel.Parent = Hndl2
-            personCoinsLabel.Text = "Coins - " .. tostring(playerCoins)
+            personCoinsLabel.Text = "Coins - " .. tostring(addComma(playerCoins))
             personCoinsLabel.TextColor3 = Color3.new(1,1,1)
             personCoinsLabel.TextScaled = true
             personCoinsLabel.BackgroundTransparency = 0.6

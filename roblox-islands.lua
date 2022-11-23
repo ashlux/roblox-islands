@@ -964,7 +964,16 @@ function fillBackpackBackground(player) -- Background = Hndl3
     end
 end
 
+function ClearBackpackBackground()
+    for i,v in pairs(Hndl3:GetChildren()) do
+        if v:IsA("TextButton") or v:IsA("TextLabel") then
+            v:Destroy()
+        end
+    end
+end
+
 local function clearList()
+    ClearBackpackBackground()
     for i,v in pairs(Hndl2:GetChildren()) do
         if v:IsA("TextButton") or v:IsA("TextLabel") then
             v:Destroy()
@@ -1055,6 +1064,7 @@ local function createPlayerInfoMenu(person)
                     backpackVisible = false
                     playersBackground3.Visible = false
                     backpackShower.Text = "Show Backpack >"
+                    ClearBackpackBackground()
                 else
                     backpackVisible = true
                     playersBackground3.Visible = true
@@ -1125,6 +1135,7 @@ Players.PlayerAdded:Connect(function(plr)
         if sameName == plr.Name then
             playersBackground2.Visible = false
             playersBackground3.Visible = false
+            backpackVisible = false
             sameName = ""
         else
             sameName = plr.Name
@@ -1152,6 +1163,7 @@ for i,v in pairs(Players:GetPlayers()) do
         if sameName == v.Name then
             playersBackground2.Visible = false
             playersBackground3.Visible = false
+            backpackVisible = false
             sameName = ""
         else
             sameName = v.Name

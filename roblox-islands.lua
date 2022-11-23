@@ -547,9 +547,15 @@ end
 
 Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = false Toggled6 = false Toggled7 = false Toggled8 = false Toggled9 = false Toggled10 = false Toggled11 = false Toggled12 = false Toggled13 = false Toggled14 = false Toggled15 = false Toggled16 = false Toggled17 = false Toggled18 = false Toggled19 = false Toggled20 = false Toggled21 = false Toggled22 = false Toggled23 = false Toggled24 = false Toggled25 = false Toggled26 = false Toggled27 = false Toggled28 = false Toggled29 = false Toggled30 = false Toggled31 = false Toggled32 = false Toggled33 = false Toggled34 = false Toggled35 = false Toggled36 = false Toggled37 = false Toggled38 = false Toggled39 = false Toggled40 = false Toggled41 = false Toggled42 = false Toggled43 = false Toggled44 = false Toggled45 = false Toggled46 = false Toggled47 = false Toggled48 = false Toggled49 = false Toggled50 = false Toggled51 = false Toggled52 = false Toggled53 = false Toggled54 = false Toggled55 = false Toggled56 = false Toggled57 = false Toggled58 = false Toggled59 = false Toggled60 = false Toggled61 = false Toggled62 = false Toggled63 = false Toggled64 = false Toggled65 = false Toggled66 = false Toggled67 = false Toggled68 = false Toggled69 = false Toggled70 = false Toggled71 = false Toggled72 = false Toggled73 = false Toggled74 = false Toggled75 = false Toggled76 = false Toggled77 = false Toggled78 = false Toggled79 = false Toggled80 = false Toggled81 = false Toggled82 = false Toggled83 = false Toggled84 = false
 Toggled85 = false Toggled86 = false Toggled87 = false KA = false pickingPlants = false RUN = false
+backpackVisible = false -- i've forgotten to add a lot here and idk if its really that nessicary
+
+--destroy old gui if still active
+if game:GetService("CoreGui"):FindFirstChild("IGUI") then
+    game.CoreGui.IGUI:Destroy()
+end
 
 
-CmdGui.Name = "CmdGui"
+CmdGui.Name = "IGUI"
 CmdGui.Parent = game:GetService("CoreGui")
 
 Background.Name = "Background"
@@ -740,7 +746,7 @@ local Grid = Instance.new("UIGridLayout")
 Grid.CellSize = UDim2.new(0.95,0,0.1,0)
 Grid.CellPadding = UDim2.new(0,1,0,5)
 Grid.SortOrder = "LayoutOrder"
-Grid.Parent = game:GetService("CoreGui").CmdGui.Background.CmdHandler
+Grid.Parent = CmdGui.Background.CmdHandler
 
 Close.Name = "Close"
 Close.Parent = Background
@@ -757,6 +763,7 @@ Toggled85 = false Toggled86 = false Toggled87 = false KA = false
 fly = false
 destroyOrbs = false
 pickingPlants = false
+backpackVisible = false
 CmdGui:Destroy()
 end)
 
@@ -906,11 +913,56 @@ Hndl2.Position = UDim2.new(0, 0, 0, 0)
 Hndl2.Size = UDim2.new(0, 200, 0, 240)
 Hndl2.ScrollBarThickness = 6
 
-local plrGrid2 = Instance.new("UIGridLayout")
+plrGrid2 = Instance.new("UIGridLayout")
 plrGrid2.CellSize = UDim2.new(0.95,0,0,20)
 plrGrid2.CellPadding = UDim2.new(0,5,0,5)
 plrGrid2.SortOrder = "LayoutOrder"
 plrGrid2.Parent = Hndl2
+
+playersBackground3 = Instance.new("Frame")
+playersBackground3.Name = "playersBackground3"
+playersBackground3.Parent = playersBackground2
+playersBackground3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+playersBackground3.BorderSizePixel = 0
+playersBackground3.BorderColor3 = Color3.new(1,0,1)
+playersBackground3.Position = UDim2.new(1, 0, 0, 0)
+playersBackground3.Size = UDim2.new(0, 200, 0, 250)
+playersBackground3.Transparency = 0.5
+playersBackground3.Active = true
+playersBackground3.Visible = false
+
+Hndl3 = Instance.new("ScrollingFrame")
+Hndl3.Name = "Hndl3"
+Hndl3.Parent = playersBackground3
+Hndl3.Active = true
+Hndl3.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+Hndl3.BackgroundTransparency = 1.000
+Hndl3.BorderSizePixel = 0
+Hndl3.AutomaticCanvasSize = "Y"
+Hndl3.Position = UDim2.new(0, 0, 0, 0)
+Hndl3.Size = UDim2.new(0, 200, 0, 240)
+Hndl3.ScrollBarThickness = 6
+
+plrGrid3 = Instance.new("UIGridLayout")
+plrGrid3.CellSize = UDim2.new(0.95,0,0,20)
+plrGrid3.CellPadding = UDim2.new(0,5,0,5)
+plrGrid3.SortOrder = "Name"
+plrGrid3.Parent = Hndl3
+
+function fillBackpackBackground(player) -- Background = Hndl3
+    for i,v in pairs(player.Backpack:GetChildren()) do
+        local personBackpackLabel = Instance.new("TextLabel")
+        personBackpackLabel.Name = tostring(v.DisplayName.Value)
+        personBackpackLabel.BackgroundColor3 = Color3.fromRGB(50,50,50)
+        personBackpackLabel.BorderColor3 = Color3.new(1,1,1)
+        personBackpackLabel.ZIndex = 2
+        personBackpackLabel.Parent = Hndl3
+        personBackpackLabel.Text = tostring(v.DisplayName.Value).." - "..tostring(v.Amount.Value)
+        personBackpackLabel.TextColor3 = Color3.new(1,1,1)
+        personBackpackLabel.TextScaled = true
+        personBackpackLabel.BackgroundTransparency = 0.6
+    end
+end
 
 local function clearList()
     for i,v in pairs(Hndl2:GetChildren()) do
@@ -987,7 +1039,29 @@ local function createPlayerInfoMenu(person)
                 }
                 sendTrade:FireServer(unpack(args))
             end)
-			
+            
+            backpackShower = Instance.new("TextButton")
+            backpackShower.Size = UDim2.new(0,100,0,20)
+            backpackShower.BackgroundColor3 = Color3.fromRGB(50,50,50)
+            backpackShower.BorderColor3 = Color3.new(1,1,1)
+            backpackShower.ZIndex = 2
+            backpackShower.Parent = Hndl2
+            backpackShower.Text = "Show Backpack >"
+            backpackShower.TextColor3 = Color3.new(1,1,1)
+            backpackShower.TextScaled = true
+            backpackShower.BackgroundTransparency = 0.3
+            backpackShower.MouseButton1Click:Connect(function()
+                if backpackVisible == true then
+                    backpackVisible = false
+                    playersBackground3.Visible = false
+                    backpackShower.Text = "Show Backpack >"
+                else
+                    backpackVisible = true
+                    playersBackground3.Visible = true
+                    backpackShower.Text = "Hide Backpack <"
+                    fillBackpackBackground(v)
+                end
+            end)
 
 			local playerCoins = getPlayerCoins(person)
 			local personCoinsLabel = Instance.new("TextLabel")
@@ -1050,6 +1124,7 @@ Players.PlayerAdded:Connect(function(plr)
     person.MouseButton1Click:Connect(function()
         if sameName == plr.Name then
             playersBackground2.Visible = false
+            playersBackground3.Visible = false
             sameName = ""
         else
             sameName = plr.Name
@@ -1076,6 +1151,7 @@ for i,v in pairs(Players:GetPlayers()) do
     person.MouseButton1Click:Connect(function()
         if sameName == v.Name then
             playersBackground2.Visible = false
+            playersBackground3.Visible = false
             sameName = ""
         else
             sameName = v.Name
@@ -1089,6 +1165,7 @@ end
 Players.PlayerRemoving:Connect(function(plr)
     removeName(plr)
 end)
+
 
 local Teleports = Instance.new("TextButton")
 Teleports.Position = UDim2.new(0,1,0,243)

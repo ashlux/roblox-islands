@@ -942,6 +942,33 @@ playersBackground3.Transparency = 0.5
 playersBackground3.Active = true
 playersBackground3.Visible = false
 
+searchBackpack = Instance.new("TextBox")
+searchBackpack.Size = UDim2.new(1,0,0,20)
+searchBackpack.BackgroundColor3 = Color3.fromRGB(50,50,50)
+searchBackpack.Position = UDim2.new(0,0,0,-21)
+searchBackpack.BorderColor3 = Color3.new(1,1,1)
+searchBackpack.ZIndex = 2
+searchBackpack.Parent = playersBackground3
+searchBackpack.Text = ""
+searchBackpack.PlaceholderText = "Search"
+searchBackpack.TextColor3 = Color3.new(1,1,1)
+searchBackpack.TextScaled = true
+searchBackpack.BackgroundTransparency = 0.3
+
+function updateBackpack()
+    local inputText = string.upper(searchBackpack.Text)
+    for _,button in pairs(Hndl3:GetChildren()) do
+        if button:IsA("TextLabel") then
+            if inputText == "" or string.find(string.upper(button.Name),inputText) ~= nil then
+                button.Visible = true
+            else
+                button.Visible = false
+            end
+        end
+    end
+end
+searchBackpack.Changed:Connect(updateBackpack)
+
 Hndl3 = Instance.new("ScrollingFrame")
 Hndl3.Name = "Hndl3"
 Hndl3.Parent = playersBackground3

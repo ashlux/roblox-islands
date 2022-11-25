@@ -4,8 +4,13 @@ local function isSpecialEntity(entity)
     local color = entity:GetAttribute("color")
     local name = entity.Name
     
-return (name == "frog" and color == "yellow") or
-       (name == "rabbit" and color == "pink")
+	-- yes there are case differences in the color depending on the critter...
+	return (name == "frog" and color == "yellow") or
+           (name == "rabbit" and color == "pink") or
+	   (name == "firefly" and color == "Purple") or
+	   (name == "firefly" and color == "Red") or
+	   (name == "firefly" and color == "Blue") or 
+	   (name == "firefly" and color == "Green")
 end
 
 

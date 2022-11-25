@@ -10,28 +10,23 @@ end
 
 
 local function notifySpecialEntity(entity)
-		print("Entity found!", entity, entity:GetAttribute("color"))
-		local sound = Instance.new("Sound")
-		sound.SoundId = "rbxassetid://1788243907"
-		sound.Looped = false
-		sound.Parent = workspace
-		sound:Play()
-		wait(.5)
-		sound:Play()
-		wait(.5)
-		sound:Play()
-		wait(.5)
-
-end
-
-for k,entity in pairs(island.Entities:GetChildren()) do
-		if (isSpecialEntity(entity)) then
-			notifySpecialEntity(entity)
-		end
+	print("Entity found!", entity, entity:GetAttribute("color"))
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://1788243907"
+	sound.Looped = false
+	sound.Parent = workspace
+	sound:Play()
 end
 
 island.Entities.ChildAdded:Connect(function(child)
-		if (isSpecialEntity(child)) then
-			notifySpecialEntity(entity)
-		end
+	if (isSpecialEntity(child)) then
+		notifySpecialEntity(entity)
+	end
 end)
+
+-- Notify about existing critters
+for k,entity in pairs(island.Entities:GetChildren()) do
+	if (isSpecialEntity(entity)) then
+		notifySpecialEntity(entity)
+	end
+end

@@ -12,7 +12,7 @@ local args = {
         ["amount"] = 40,
         ["block"] = v,
         ["player_tracking_category"] = "join_from_web",
-        ["toolName"] = "coal" -- or "mapleWood" or whatever
+        ["toolName"] = "coal" -- or "woodMaple" or whatever
     }
 }
 

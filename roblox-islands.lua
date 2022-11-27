@@ -141,6 +141,12 @@ local function NoclipLoop() -- lets you walk through stuff
     end
 end
 
+local function iOwnTheWorld() -- own it up own it up own it up own it up own it up own it up
+    if owning == true then
+        sethiddenproperty(Player, "SimulationRadius", 999999999999)
+    end
+end
+
 function addComma(amount) -- add commas to numbers
     while true do
         amount, k = string.gsub(amount, "^(-?%d+)(%d%d%d)", '%1,%2')
@@ -5624,16 +5630,19 @@ Item32.MouseButton1Click:Connect(function()
         Item32.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item32.Text = "Send items to Click"
         Item32.TextColor3 = Color3.fromRGB(250,250,250)
+        reallyOwning:Disconnect()
+        owning = false
     else
         Toggled20 = true
         Item32.BackgroundColor3 = Color3.new(1,0,0)
         Item32.Text = "Click Away"
         Item32.TextColor3 = Color3.fromRGB(0,255,255)
-        sethiddenproperty(Player, "SimulationRadius", 999999999999)
+        reallyOwning = game:GetService('RunService').Stepped:Connect(iOwnTheWorld)
+        owning = true
         mouse.Button1Down:connect(function()
             for i, tool in pairs(Island.Drops:GetChildren()) do
                 if (tool:IsA("Tool")) then
-                    if Toggled20 then
+                    if Toggled20 and tool:FindFirstChild("HandleDisabled") then
                         tool.HandleDisabled.Position = mouse.Hit.Position + Vector3.new(0,5,0)
                     end
                 end

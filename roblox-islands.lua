@@ -14,6 +14,7 @@ local fruitsModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox
 
 print("Loading Complete!")
 
+local StarterGui = game:GetService("StarterGui")
 if game.PlaceVersion == 212 then
     updates = "THIS IS AN OLD SERVER, try finding a new one"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
@@ -21,7 +22,6 @@ end
 
 updates = "[NOOB] [Matt]: Updated 11/28"
 
-local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!

@@ -21,6 +21,11 @@ local function notifySpecialEntity(entity)
 	sound.Looped = false
 	sound.Parent = workspace
 	sound:Play()
+	game.StarterGui:SetCore("SendNotification",{
+    Title = "Found rare entity!",
+    Text = entity:GetAttribute("color").." "..entity.Name,
+    Duration = 7
+    })
 end
 
 island.Entities.ChildAdded:Connect(function(child)

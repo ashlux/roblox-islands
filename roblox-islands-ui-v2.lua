@@ -115,7 +115,7 @@ function buildPlayerPage()
     Callback = function(newValue) -- optional: function that will be called whenever slider flag is changed
         if RUN == nil or RUN == false then RUN = true end
         WS = newValue
-        print(RUN, WS, newValue)
+        Humanoid.WalkSpeed = newValue
     end;
     -- Scroll to the bottom of the page to read more about the following two:
     Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
@@ -198,9 +198,9 @@ function buildPlayerPage()
     Callback = function(newValue) -- optional: function that will be called whenever slider flag is changed
         timeDesired = newValue
         local number = tonumber(newValue)
-        if number > 7 and number > 18 then
+        if number < 7 and number > 18 then
             game.Lighting.Brightness = 12
-        elseif number >= 7 and number <= 18 then
+        else
             game.Lighting.Brightness = 2.7
         end
     end;

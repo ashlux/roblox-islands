@@ -276,9 +276,6 @@ function buildPlayerPage()
     Callback = function(newValue) -- optional: function that will be called whenever slider flag is changed
         Player.CameraMaxZoomDistance = newValue
     end;
-    -- Scroll to the bottom of the page to read more about the following two:
-    Warning = "This has a warning" -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
-    WarningIcon = 12345;
     })
 
 

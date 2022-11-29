@@ -24,6 +24,14 @@ function buildMain()
 	local performanceSection = page:CreateSection("Performance")
 
 	performanceSection:CreateToggle({
+		Name = "Render 3D";
+		Flag = "render3D";
+		Default = true;
+		CallbackOnCreation = true;
+		Callback = function(newValue) game.RunService:Set3dRenderingEnabled(newValue) end;
+	})
+
+	performanceSection:CreateToggle({
 		Name = "Render XP Orbs";
 		Flag = "renderXpOrbs";
 		Default = true;
@@ -48,7 +56,7 @@ function buildTreePage()
 	local page = UI:CreatePage("Trees")
 
 	local leavesSection = page:CreateSection("Leaves")
-end)()
+end
 
 -- BUILD MINING PAGE --
 function bulidMiningPage()

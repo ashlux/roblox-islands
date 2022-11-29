@@ -106,9 +106,9 @@ function buildMiningPage()
 		end
 	end
 	
-	local function collectFromFurnace(furnace)
+	local function collectFromFurnace(furnace, inOrOut) -- (furnace, WorkerOutputContents or WorkerContents)
 		if Player:DistanceFromCharacter(furnace.Position) < 24 then
-			local itemToCollect = furnace.WorkerOutputContents and furnace.WorkerOutputContents:GetChildren()[1]
+			local itemToCollect = furnace[inOrOut] and furnace[inOrOut]:GetChildren()[1]
 			if itemToCollect then
 				local args = {
 								[1] = {
@@ -152,7 +152,7 @@ function buildMiningPage()
 		Callback = function()
 			for _,furnace in pairs(Island.Blocks:GetChildren()) do
 				if (furnace.Name == "smallFurnace" or furnace.Name == "blastFurnace") then
-					collectFromFurnace(furnace)
+					collectFromFurnace(furnace, "WorkerOutputContents")
 				end
 			end
 		end
@@ -181,7 +181,7 @@ function buildMiningPage()
 	})
 	
 	furnaceSection:CreateDropdown({
-    Name = "item to cook"; -- required: name of element
+    Name = "Item to cook"; -- required: name of element
     Callback = function(item) -- required: function to be called an item in the dropdown is activated
         itemToCook = item
     end;
@@ -208,6 +208,17 @@ function buildMiningPage()
 			for _,furnace in pairs(Island.Blocks:GetChildren()) do
 				if (furnace.Name == "blastFurnace") then
 					fillFurnaceWith(furnace, "iron")
+				end
+			end
+		end
+	})
+	
+	furnaceSection:CreateButton({
+		Name = "Empty Inputs";
+		Callback = function()
+			for _,furnace in pairs(Island.Blocks:GetChildren()) do
+				if (furnace.Name == "smallFurnace" or furnace.Name == "blastFurnace") then
+					collectFromFurnace(furnace, "WorkerContents")
 				end
 			end
 		end

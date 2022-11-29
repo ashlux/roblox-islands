@@ -97,7 +97,7 @@ function buildMiningPage()
 					["amount"] = refuelAmount,
 					["block"] = furnace,
 					["player_tracking_category"] = "join_from_web",
-					["toolName"] = "coal"
+					["toolName"] = furnaceFuel
 					}
 				}
 		
@@ -157,6 +157,17 @@ function buildMiningPage()
 			end
 		end
 	})
+	
+	local fuelSelector = furnaceSection:CreateDropdown({
+    Name = "Fuel to use"; -- required: name of element
+    Callback = function(item) -- required: function to be called an item in the dropdown is activated
+        furnaceFuel = item
+    end;
+    Options = {"coal","petrifiedPetroleum","wood","woodHickory","woodMaple","woodPine","woodBirch","woodSpirit"}; -- required: dropdown options
+    ItemSelecting = true; -- optional: whether to control item selecting behavior in dropdowns (see showcase video), is false by default
+    DefaultItemSelected = ""; -- optional: default item selected, will not run the callback and does not need to be from options table. This will be ignored if ItemSelecting is not true.
+    })
+	
 	
 	furnaceSection:CreateButton({
 		Name = "Fuel Furnaces";

@@ -106,9 +106,9 @@ function buildMiningPage()
 		end
 	end
 	
-	local function collectFromFurnace(furnace)
+	local function collectFromFurnace(furnace, inOrOut) -- (furnace, WorkerOutputContents or WorkerContents)
 		if Player:DistanceFromCharacter(furnace.Position) < 24 then
-			local itemToCollect = furnace.WorkerOutputContents and furnace.WorkerOutputContents:GetChildren()[1]
+			local itemToCollect = furnace[inOrOut] and furnace[inOrOut]:GetChildren()[1]
 			if itemToCollect then
 				local args = {
 								[1] = {
@@ -152,13 +152,13 @@ function buildMiningPage()
 		Callback = function()
 			for _,furnace in pairs(Island.Blocks:GetChildren()) do
 				if (furnace.Name == "smallFurnace" or furnace.Name == "blastFurnace") then
-					collectFromFurnace(furnace)
+					collectFromFurnace(furnace, "WorkerOutputContents")
 				end
 			end
 		end
 	})
 	
-	local fuelSelector = furnaceSection:CreateDropdown({
+	furnaceSection:CreateDropdown({
     Name = "Fuel to use"; -- required: name of element
     Callback = function(item) -- required: function to be called an item in the dropdown is activated
         furnaceFuel = item
@@ -179,25 +179,24 @@ function buildMiningPage()
 			end
 		end
 	})
+	
+	furnaceSection:CreateDropdown({
+    Name = "Item to cook"; -- required: name of element
+    Callback = function(item) -- required: function to be called an item in the dropdown is activated
+        itemToCook = item
+    end;
+    Options = {"ironOre","goldOre","blueberryDough","clay","grass","bamboo"};
+    ItemSelecting = true; -- optional: whether to control item selecting behavior in dropdowns (see showcase video), is false by default
+    DefaultItemSelected = ""; -- optional: default item selected, will not run the callback and does not need to be from options table. This will be ignored if ItemSelecting is not true.
+    })
 
 	
 	furnaceSection:CreateButton({
-		Name = "Fill with Iron Ore";
+		Name = "Fill with selected";
 		Callback = function()
 			for _,furnace in pairs(Island.Blocks:GetChildren()) do
 				if (furnace.Name == "smallFurnace") then
-					fillFurnaceWith(furnace, "ironOre")
-				end
-			end
-		end
-	})
-	
-	furnaceSection:CreateButton({
-		Name = "Fill with Gold Ore";
-		Callback = function()
-			for _,furnace in pairs(Island.Blocks:GetChildren()) do
-				if (furnace.Name == "smallFurnace") then
-					fillFurnaceWith(furnace, "goldOre")
+					fillFurnaceWith(furnace, itemToCook)
 				end
 			end
 		end
@@ -209,6 +208,17 @@ function buildMiningPage()
 			for _,furnace in pairs(Island.Blocks:GetChildren()) do
 				if (furnace.Name == "blastFurnace") then
 					fillFurnaceWith(furnace, "iron")
+				end
+			end
+		end
+	})
+	
+	furnaceSection:CreateButton({
+		Name = "Empty Inputs";
+		Callback = function()
+			for _,furnace in pairs(Island.Blocks:GetChildren()) do
+				if (furnace.Name == "smallFurnace" or furnace.Name == "blastFurnace") then
+					collectFromFurnace(furnace, "WorkerContents")
 				end
 			end
 		end
@@ -277,27 +287,21 @@ function buildPlayerPage()
     Callback = function(newValue) -- optional: function that will be called whenever slider flag is changed
         Player.CameraMaxZoomDistance = newValue
     end;
-    -- Scroll to the bottom of the page to read more about the following two:
-    Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
-    WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
     })
 
 
     -- FOV --
-    modifyStats:CreateSlider({ -- IMPORTANT: This function does not return anything, please modify flags directly in order to read or update toggle values. SCROLL TO BOTTOM OF PAGE TO SEE HOW TO MODIFY FLAGS
-    Name = "FOV (default:70)"; -- required: name of element
-    Flag = "FOV"; -- required: unique flag name to use
-    Min = 0; -- required: slider minimum drag
-    Max = 120; -- required: slider maximum drag (Max>Min or else script will error)
-    AllowOutOfRange = true; -- optional: determines whether the player can enter values outside of range Min:Max when typing in the TextBox. If left nil, this is false
-    Digits = 0; -- optional: digits for rounding when dragging or entering values, default is 0 (whole numbers)
-    Default = 70; -- optional: default value for slider, will be used if config saving is disabled and there is no saved data, will be the Min value if left nil
-    Callback = function(newValue) -- optional: function that will be called whenever slider flag is changed
+    modifyStats:CreateSlider({
+    Name = "FOV (default:70)";
+    Flag = "FOV";
+    Min = 0;
+    Max = 120;
+    AllowOutOfRange = true;
+    Digits = 0;
+    Default = 70;
+    Callback = function(newValue)
         game.Workspace.Camera.FieldOfView = newValue
     end;
-    -- Scroll to the bottom of the page to read more about the following two:
-    Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
-    WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
     })
 
 
@@ -323,15 +327,15 @@ function buildPlayerPage()
 	})
 
     -- Time of day --
-    modifyStats:CreateSlider({ -- IMPORTANT: This function does not return anything, please modify flags directly in order to read or update toggle values. SCROLL TO BOTTOM OF PAGE TO SEE HOW TO MODIFY FLAGS
-    Name = "Time"; -- required: name of element
-    Flag = "ToD"; -- required: unique flag name to use
-    Min = 0; -- required: slider minimum drag
-    Max = 24; -- required: slider maximum drag (Max>Min or else script will error)
-    AllowOutOfRange = true; -- optional: determines whether the player can enter values outside of range Min:Max when typing in the TextBox. If left nil, this is false
-    Digits = 0; -- optional: digits for rounding when dragging or entering values, default is 0 (whole numbers)
-    Default = 0; -- optional: default value for slider, will be used if config saving is disabled and there is no saved data, will be the Min value if left nil
-    Callback = function(newValue) -- optional: function that will be called whenever slider flag is changed
+    modifyStats:CreateSlider({
+    Name = "Time";
+    Flag = "ToD";
+    Min = 0;
+    Max = 24;
+    AllowOutOfRange = true;
+    Digits = 0;
+    Default = 0;
+    Callback = function(newValue)
         timeDesired = newValue
         local number = tonumber(newValue)
         if number < 7 and number > 18 then
@@ -340,9 +344,6 @@ function buildPlayerPage()
             game.Lighting.Brightness = 2.7
         end
     end;
-    -- Scroll to the bottom of the page to read more about the following two:
-    Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
-    WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
     })
 end
 

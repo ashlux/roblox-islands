@@ -49,21 +49,20 @@ function buildMain()
 	local developmentSection = page:CreateSection("Development")
 	
 	developmentSection:CreateInteractable({
-    Name = "destroyUi";
-    ActionText = "Destroy UI";
-    Callback = function() UI:Destroy() end;
-    Warning = "Do not unless you know what you're doing.";
-	-- TODO: Somehow need to tell executing process to stop?
+		Name = "destroyUi";
+		ActionText = "Destroy UI";
+		Callback = function() UI:Destroy() end;
+		Warning = "Do not unless you know what you're doing.";
+		-- TODO: Somehow need to tell executing process to stop?
+	})
 	
 	local serverSection = page:CreateSection("Server")
-	
 	serverSection:CreateParagraph("Game ID: " .. game.GameId)
 	serverSection:CreateParagraph("Job ID: " .. game.JobId)
 	serverSection:CreateParagraph("Place ID: " .. game.PlaceId)
 	serverSection:CreateParagraph("Place Version: " .. game.PlaceVersion)
 	serverSection:CreateParagraph("Blocks (At Join): " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
 	
-})
 end
 
 --BUILD TREE PAGE--

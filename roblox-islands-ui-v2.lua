@@ -185,7 +185,7 @@ function buildMiningPage()
     Callback = function(item) -- required: function to be called an item in the dropdown is activated
         itemToCook = item
     end;
-    Options = {"ironOre","goldOre","copperOre","clay","grass","bamboo"}; -- required: dropdown options
+    Options = {"ironOre","goldOre","blueberryDough","clay","grass","bamboo"};
     ItemSelecting = true; -- optional: whether to control item selecting behavior in dropdowns (see showcase video), is false by default
     DefaultItemSelected = ""; -- optional: default item selected, will not run the callback and does not need to be from options table. This will be ignored if ItemSelecting is not true.
     })

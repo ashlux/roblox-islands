@@ -23,15 +23,11 @@ local UI = Atlas.new({
 -- BUILD MAIN PAGE --
 function buildMain()
 	local page = UI:CreatePage("Main")
-
-	local infoSection = page:CreateSection("Info")
-	infoSection:CreateParagraph("NaN")
+	
 	-- TODO: pull useful information from here: https://api.github.com/repos/ashlux/roblox-islands/branches/main
 	-- TODO: Add ability to switch versions based on tags and branches and commit sha
 	
 	local performanceSection = page:CreateSection("Performance")
-
-	-- TODO: Show count of drops and blocks on the island
 	
 	performanceSection:CreateToggle({
 		Name = "Render 3D";
@@ -58,6 +54,15 @@ function buildMain()
     Callback = function() UI:Destroy() end;
     Warning = "Do not unless you know what you're doing.";
 	-- TODO: Somehow need to tell executing process to stop?
+	
+	local serverSection = page:CreateSection("Server")
+	
+	serverSection:CreateParagraph("Game ID: " .. game.GameId)
+	serverSection:CreateParagraph("Job ID: " .. game.JobId)
+	serverSection:CreateParagraph("Place ID: " .. game.PlaceId)
+	serverSection:CreateParagraph("Place Version: " .. game.PlaceVersion)
+	serverSection:CreateParagraph("Blocks (At Join): " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
+	
 })
 end
 

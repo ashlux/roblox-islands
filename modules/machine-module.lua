@@ -1,3 +1,5 @@
+local Player = game.Players.LocalPlayer
+
 local MAX_FILL_AMOUNT = 50
 
 local function refuel(machineBlock, fuelName)

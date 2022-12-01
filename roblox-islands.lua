@@ -9,8 +9,8 @@ function loadModule(url)
 	return loadstring(game:HttpGet(url))()
 end
 
-local treesModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-trees.lua")
-local fruitsModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/Collect-Fruits")
+local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
+local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/fruit-module.lua")
 
 print("Loading Complete!")
 
@@ -2517,12 +2517,12 @@ fruitsButton.MouseButton1Click:Connect(function()
         fruitFarming = false
         fruitsButton.Text = "Farm Fruits"
         fruitsButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        fruitsModule.stopCollectingFruit()
+        fruitModule.stopCollectingFruit()
     else
         fruitFarming = true
         fruitsButton.Text = "Farming Fruits"
         fruitsButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
-        fruitsModule.startCollectingFruit(fruitSection.Text)
+        fruitModule.startCollectingFruit(fruitSection.Text)
     end
 end)
 
@@ -7019,14 +7019,14 @@ Item64.MouseButton1Click:Connect(function()
         --if tween then
         --	tween:Cancel()
         --end
-	treesModule.stopTrimIslandTreesAura()
+	treeModule.stopTrimIslandTreesAura()
     else
         Toggled47 = true
         Item64.BackgroundColor3 = Color3.new(0,255,255)
         Item64.Text = "Collecting Leaves"
         Item64.TextColor3 = Color3.fromRGB(0,0,0)
 	
-	treesModule.startTrimIslandTreesAura()
+	treeModule.startTrimIslandTreesAura()
 	-- TODO: put in moving to the next tree
     end
 end)

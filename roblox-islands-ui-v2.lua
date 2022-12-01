@@ -61,7 +61,26 @@ function buildMain()
 	serverSection:CreateParagraph("Job ID: " .. game.JobId)
 	serverSection:CreateParagraph("Place ID: " .. game.PlaceId)
 	serverSection:CreateParagraph("Place Version: " .. game.PlaceVersion)
-	serverSection:CreateParagraph("Blocks (At Join): " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
+	
+	
+	local blockCounter = serverSection:CreateParagraph("Island blocks: " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
+	local dropCounter = serverSection:CreateParagraph("Island Drops: ")
+	
+	local function dropAddedRemoved()
+        dropCount = #Island.Drops:GetChildren() or 0
+        dropCounter.Set("Drops: "..tostring(dropCount))
+	end
+
+    local function blockAddedRemoved()
+        blockCount = #Island.Blocks:GetChildren() or 0
+        blockCounter.Set("Blocks: "..tostring(blockCount))
+    end
+    
+    --keeps track of drops and blocks
+    local counter1 = Island.Drops.ChildAdded:Connect(dropAddedRemoved)
+    local counter2 = Island.Drops.ChildRemoved:Connect(dropAddedRemoved)
+    local counter3 = Island.Blocks.ChildAdded:Connect(blockAddedRemoved)
+    local counter4 = Island.Blocks.ChildRemoved:Connect(blockAddedRemoved)
 	
 end
 

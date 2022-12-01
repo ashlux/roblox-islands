@@ -12,7 +12,7 @@ end
 
 local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
-local machineModule = loadmodule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/machine-module.lua")
+local machineModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/machine-module.lua")
 
 local UI = Atlas.new({
 	Name = "Roblox Islands";

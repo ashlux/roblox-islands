@@ -208,7 +208,7 @@ local function buildMiningPage()
 			for _,machine in pairs(Island.Blocks:GetChildren()) do
 				if (machine.Name == "smallFurnace" or machine.Name == "blastFurnace" or
 					machine.Name == "sawmill" or machine.Name == "stonecutter") then
-					machineModule.collectInputs(machine)
+					machineModule.collectInput(machine)
 				end
 			end
 		end

@@ -1,4 +1,5 @@
 local Player = game.Players.LocalPlayer
+local WorkerBlockMeta = require(game:GetService("ReplicatedStorage").TS.crafting["worker-block-meta"]).WorkerBlockMeta
 
 local MAX_FILL_AMOUNT = 50
 
@@ -70,9 +71,23 @@ local function fillWith(machineBlock, itemName)
 	end
 end
 
+local function getIngredientNamesByMachineName(machineName)
+	local MachineMeta = WorkerBlockMeta[machineName]
+	local ingredients = MachineMeta.ingredients
+	local ingredientNames = {}
+	for _,ingredient in pairs(ingredients) do
+		table.insert(ingredientNames, ingredient.toolName)
+	end
+	
+	table.sort(ingredientNames)
+	return ingredientNames
+end
+
 return {
 	collectInput = collectInput,
 	collectOutput = collectOutput,
 	refuel = refuel,
 	fillWith = fillWith,
+	getIngredientNamesByMachineName = getIngredientNamesByMachineName,
+
 }

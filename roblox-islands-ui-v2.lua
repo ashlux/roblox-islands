@@ -100,16 +100,13 @@ local function buildTreePage()
 	})
 end
 
--- BUILD MINING PAGE --
-local function buildMiningPage()
+-- BUILD Machine PAGE --
+local function buildMachinePage()
 
-	local page = UI:CreatePage("Mining")
-	local machineSection = page:CreateSection("Furnaces / Sawmills / Stonecutters")
-	
-	local selectedFuelName = "coal"
-	local selectItemToCookName = nil
-		
-	machineSection:CreateButton({
+	local page = UI:CreatePage("Machines")
+
+	local allMachinesSection = page:CreateSection("Machines")
+	allMachinesSection:CreateButton({
 		Name = "Collect Nearby";
 		Callback = function()
 			for _,machine in pairs(Island.Blocks:GetChildren()) do
@@ -120,102 +117,8 @@ local function buildMiningPage()
 			end
 		end
 	})
-	
-	machineSection:CreateDropdown({
-		Name = "Fuel to use";
-		Callback = function(item) selectedFuelName = item end;
-		Options = {"coal","petrifiedPetroleum","wood","woodHickory","woodMaple","woodPine","woodBirch","woodSpirit"}; -- required: dropdown options
-		ItemSelecting = true;
-		DefaultItemSelected = selectedFuelName;
-	})
-	
-	
-	machineSection:CreateButton({
-		Name = "Fuel Furnaces";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "smallFurnace" or machine.Name == "blastFurnace") then
-					machineModule.refuel(machine, selectedFuelName)
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateButton({
-		Name = "Fuel Sawmills";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "sawmill") then
-					machineModule.refuel(machine, selectedFuelName)
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateButton({
-		Name = "Fuel Stonecutter";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "stonecutter") then
-					machineModule.refuel(machine, selectedFuelName)
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateDropdown({
-		Name = "Item to cook";
-		Callback = function(item) selectItemToCookName = item end;
-		Options = {"ironOre","goldOre","blueberryDough","clay","grass","bamboo","prismarineBlock", "marbleBlock"};
-		ItemSelecting = true;
-		DefaultItemSelected = selectItemToCookName 
-	})
 
-	machineSection:CreateButton({
-		Name = "Fill Furnaces with selected";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "smallFurnace") then
-					machineModule.fillWith(machine, selectItemToCookName)
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateButton({
-		Name = "Fill Sawmills with selected";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "sawmill") then
-					machineModule.fillWith(machine, selectItemToCookName)
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateButton({
-		Name = "Fill Stonecutters with selected";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "stonecutter") then
-					machineModule.fillWith(machine, selectItemToCookName)
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateButton({
-		Name = "Fill Blast Furnace with Iron";
-		Callback = function()
-			for _,machine in pairs(Island.Blocks:GetChildren()) do
-				if (machine.Name == "blastFurnace") then
-					machineModule.fillWith(machine, "iron")
-				end
-			end
-		end
-	})
-	
-	machineSection:CreateButton({
+	allMachinesSection:CreateButton({
 		Name = "Empty Inputs";
 		Callback = function()
 			for _,machine in pairs(Island.Blocks:GetChildren()) do
@@ -226,6 +129,56 @@ local function buildMiningPage()
 			end
 		end
 	})
+
+	local fuelOptions = {"coal","petrifiedPetroleum"}
+
+	local function createMachineSection(options)
+		local machineName = options.machineName
+		local displayName = options.displayName
+		local pluralDisplayName = options.pluralDisplayName
+		local selectedFuelName = "coal"
+		local selectIngredientName = nil or options.defaultIngredient
+		local machineSection = page:CreateSection(pluralDisplayName)
+		machineSection:CreateDropdown({
+			Name = "Select Fuel";
+			Callback = function(item) selectedFuelName = item end;
+			Options = fuelOptions;
+			ItemSelecting = true;
+			DefaultItemSelected = selectedFuelName;
+		})
+		machineSection:CreateDropdown({
+			Name = "Select Ingredient";
+			Callback = function(item) selectIngredientName = item end;
+			Options = machineModule.getIngredientNamesByMachineName(machineName);
+			ItemSelecting = true;
+			DefaultItemSelected = selectIngredientName 
+		})
+		machineSection:CreateButton({
+			Name = "Fuel";
+			Callback = function()
+				for _,machine in pairs(Island.Blocks:GetChildren()) do
+					if (machine.Name == machineName) then
+						machineModule.refuel(machine, selectedFuelName)
+					end
+				end
+			end
+		})
+		machineSection:CreateButton({
+			Name = "Fill";
+			Callback = function()
+				for _,machine in pairs(Island.Blocks:GetChildren()) do
+					if (machine.Name == machineName) then
+						machineModule.fillWith(machine, selectIngredientName)
+					end
+				end
+			end
+		})
+	end
+
+	createMachineSection({machineName = "smallFurnace", displayName = "Furnace", pluralDisplayName = "Furnaces", defaultIngredient = "ironOre"})
+	createMachineSection({machineName = "blastFurnace", displayName = "Blast Furnace", pluralDisplayName = "Blast Furnaces", defaultIngredient = "iron"})
+	createMachineSection({machineName = "stonecutter", displayName = "Stonecutter", pluralDisplayName = "Stonecutters"})
+	createMachineSection({machineName = "sawmill", displayName = "Sawmill", pluralDisplayName = "Sawmills"})
 end
 
 -- BUILD PLAYER PAGE --
@@ -342,5 +295,5 @@ end
 
 buildMain()
 buildTreePage()
-buildMiningPage()
+buildMachinePage()
 buildPlayerPage()

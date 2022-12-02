@@ -62,7 +62,20 @@ local function buildMain()
 	serverSection:CreateParagraph("Job ID: " .. game.JobId)
 	serverSection:CreateParagraph("Place ID: " .. game.PlaceId)
 	serverSection:CreateParagraph("Place Version: " .. game.PlaceVersion)
-	serverSection:CreateParagraph("Blocks (At Join): " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
+	
+	
+	local blockCounter = serverSection:CreateParagraph("Island blocks: " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
+	local dropCounter = serverSection:CreateParagraph("Island Drops: ")
+	
+	task.spawn(function()
+	    while wait(5) do
+        dropCount = #Island.Drops:GetChildren() or 0
+        dropCounter.Set("Drops: "..tostring(dropCount))
+
+        blockCount = #Island.Blocks:GetChildren() or 0
+        blockCounter.Set("Blocks: "..tostring(blockCount))
+        end
+    end)
 	
 end
 

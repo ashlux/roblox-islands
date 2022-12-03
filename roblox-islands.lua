@@ -20,7 +20,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 996) or (game.PlaceId ==
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[NOOB] [Matt]: Updated 12/3"
+updates = "[NOOB] [Matt]: Updated 12/2"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -2933,7 +2933,7 @@ Item26.TextColor3 = Color3.fromRGB(250,250,250)
 Item26.TextScaled = true
 Item26.MouseButton1Click:Connect(function()
 for _,esp in pairs(game.Workspace:GetChildren()) do
-    if esp.Name == "vendingESP" or esp.Name == "vendingESP2" then
+    if esp.Name == "vendingESP" or esp.Name == "vendingESP1" then
         esp:Destroy()
     end
 end
@@ -2951,7 +2951,7 @@ for _,v in pairs(Island.Blocks:GetChildren()) do
                 if v.Mode.Value == 0 then
                 buy = Instance.new("BoxHandleAdornment")
                 buy.Name = "vendingESP"
-            	buy.Parent = v
+            	buy.Parent = game.Workspace
     	        buy.Adornee = v
                 buy.AlwaysOnTop = true
     	        buy.ZIndex = 0
@@ -2961,7 +2961,7 @@ for _,v in pairs(Island.Blocks:GetChildren()) do
                 elseif v.Mode.Value == 1 then
                 sell = Instance.new("BoxHandleAdornment")
                 sell.Name = "vendingESP1"
-    	        sell.Parent = v
+    	        sell.Parent = game.Workspace
     	        sell.Adornee = v
                 sell.AlwaysOnTop = true
     	        sell.ZIndex = 0

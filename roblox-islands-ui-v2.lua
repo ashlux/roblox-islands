@@ -13,6 +13,8 @@ end
 local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
 local machineModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/machine-module.lua")
+local stringUtils = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/string-utils.lua")
+local vendingModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/vending-module.lua")
 
 local UI = Atlas.new({
 	Name = "Roblox Islands";
@@ -64,19 +66,49 @@ local function buildMain()
 	serverSection:CreateParagraph("Place Version: " .. game.PlaceVersion)
 	
 	
-	local blockCounter = serverSection:CreateParagraph("Island blocks: " .. tostring(Island and #Island.Blocks:GetChildren() or 0))
-	local dropCounter = serverSection:CreateParagraph("Island Drops: ")
+	local blockCount = serverSection:CreateParagraph("")
+	local dropCount = serverSection:CreateParagraph("")
+	local vendingMonies = serverSection:CreateParagraph("")
+	
+	function updateDropCount(paragraph)
+		count = Island and Island.Drops and #Island.Drops:GetChildren() or 0
+		paragraph.Set("Drops: " .. stringUtils.formatInt(count))
+	end
+	
+	function updateBlockCount(paragraph)
+		local count = Island and Island.Blocks and #Island.Blocks:GetChildren() or 0
+		paragraph.Set("Blocks: " .. stringUtils.formatInt(count))
+	end
 	
 	task.spawn(function()
-	    while wait(5) do
-        dropCount = #Island.Drops:GetChildren() or 0
-        dropCounter.Set("Drops: "..tostring(dropCount))
-
-        blockCount = #Island.Blocks:GetChildren() or 0
-        blockCounter.Set("Blocks: "..tostring(blockCount))
+		updateBlockCount(blockCount)
+		updateDropCount(dropCount)
+		
+		while wait(5) do
+			updateBlockCount(blockCount)
+			updateDropCount(dropCount)
         end
     end)
 	
+	function updateVendingMonies(paragraph)
+		local count = vendingModule.getTotalVendingMonies()
+		paragraph.Set("Vending: $" .. stringUtils.formatInt(count))
+	end
+	
+	task.spawn(function()
+		updateVendingMonies(vendingMonies)
+		while wait(30) do
+			updateVendingMonies(vendingMonies)
+		end
+	end)
+	
+	serverSection:CreateParagraph("") -- fixes Atlas cutting off part of the last part of the page00
+end
+
+local function buildVendingPage()
+	local page = UI:CreatePage("Vending")
+	
+	local meta
 end
 
 --BUILD TREE PAGE--

@@ -13,5 +13,5 @@ local function formatInt(amount)
 end
 
 return {
-  intToString = intToString
+  formatInt = formatInt
 }

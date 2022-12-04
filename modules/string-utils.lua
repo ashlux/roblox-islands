@@ -1,4 +1,4 @@
-local function intToString(amount)
+local function formatInt(amount)
     if (not amount) then
       return "NaN"
     end

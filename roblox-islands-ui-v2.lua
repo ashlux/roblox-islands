@@ -15,6 +15,7 @@ local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 local machineModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/machine-module.lua")
 local stringUtils = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/string-utils.lua")
 local vendingModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/vending-module.lua")
+local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
 
 local UI = Atlas.new({
 	Name = "Roblox Islands";
@@ -109,6 +110,38 @@ local function buildVendingPage()
 	local page = UI:CreatePage("Vending")
 	
 	local meta
+end
+
+--BUILD CROP PAGE--
+local function buildCropPage()
+	local page = UI:CreatePage("Crop")
+	
+	local cropFarmSection = page:CreateSection("Crop Farming")
+	
+	local selectedCropName = nil
+	cropFarmSection:CreateDropdown({
+		Name = "Select Crop";
+		Callback = function(item) selectedCropName = item end;
+		Options = {"spiritCrop", "chiliPepper", "carrot", "onion", "potato", "spinach", "tomato", "wheat", "melon", "pineapple", "candyCaneVine", "grapeVine", "dragonfruit", "cactus", "pumpkin", "radish", "rice", "seaweed", "starfruit", "voidParasite"};
+		ItemSelecting = true;
+		DefaultItemSelected = selectedCropName;
+	})
+	
+	cropFarmSection:CreateButton({
+		Name = "Start Autofarming";
+		Callback = function()
+			cropModule.stopSicklingAndReplanting()
+			if (selectedCropName) then
+				cropModule.startSicklingAndReplanting(selectedCropName)
+			end
+		end
+	})
+
+	cropFarmSection:CreateButton({
+		Name = "Stop Autofarming";
+		Callback = cropModule.stopSicklingAndReplanting
+	})
+
 end
 
 --BUILD TREE PAGE--
@@ -326,6 +359,7 @@ local function buildPlayerPage()
 end
 
 buildMain()
+buildCropPage()
 buildTreePage()
 buildMachinePage()
 buildPlayerPage()

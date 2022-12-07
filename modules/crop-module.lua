@@ -71,7 +71,7 @@ end
 
 local function moveToRandomHarvestableCropByName(cropName)
     local cropBlocks = getHarvestableCropsByName(cropName)
-    if (#cropBlocks == 0)
+    if (#cropBlocks == 0) then
 	return nil, 0
     end
     local randomCropBlock = cropBlocks[math.random(1, #cropBlocks)]

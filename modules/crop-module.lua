@@ -71,7 +71,7 @@ end
 
 local function moveToRandomHarvestableCropByName(cropName)
     local cropBlocks = getHarvestableCropsByName(cropName)
-	local randomCropBlock = cropBlocks[math.random(1, #cropBlocks)]
+	local randomCropBlock = cropBlocks[math.random(0, #cropBlocks) + 1]
     if randomCropBlock then
 		tween, Time = goToPoint(randomCropBlock.Position, 24)
 		return tween, Time

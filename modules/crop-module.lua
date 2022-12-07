@@ -158,7 +158,59 @@ local function stopSicklingAndReplanting()
 	end
 end
 
+local function sicklingAndDoNotReplant(cropNameToHarvest)
+	while wait() do
+		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		wait(movementTime)
+		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
+		if (#cropsBlocksToSickle == 0) then
+			return nil;
+		end
+		sickleCrops(cropsBlocksToSickle)
+	end
+end
+
+local function plantCropsOnce(cropNameToPlant)
+	function plantCropOnDirt(cropNameToPlant, plantLocation)
+		for i,dirt in pairs(Island and Island.Blocks and Island.Blocks:GetChildren() or {}) do
+			if dirt.Name == plantLocation and Player:DistanceFromCharacter(dirt.Position) < 150 then
+				local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
+                local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
+                if not hitPart then
+					task.spawn(function()
+						local args = {
+							[1] = {
+								["upperBlock"] = false,
+								["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
+								["player_tracking_category"] = "join_from_web",
+								["blockType"] = cropNameToPlant
+							}
+                        }
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+							.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+                   end)
+			   end
+		   end
+	   end
+   end
+
+	if cropNameToPlant == "candyCaneVine" or 
+		cropNameToPlant == "grapeVine" or 
+		cropNameToPlant == "dragonfruit" then
+		plantCropOnDirt(cropNameToPlant, "trellis")
+	elseif cropNameToPlant == "cactus" then
+		plantCropOnDirt(cropNameToPlant, "sand")
+	elseif cropNameToPlant == "rice"or
+			cropNameToPlant == "seaweed" then
+		plantCropOnDirt(cropNameToPlant, "pond")
+	else
+		plantCropOnDirt(cropNameToPlant, "soil")
+	end
+end
+
 return {
 	startSicklingAndReplanting = startSicklingAndReplanting,
-	stopSicklingAndReplanting = stopSicklingAndReplanting
+	stopSicklingAndReplanting = stopSicklingAndReplanting,
+	sicklingAndDoNotReplant = sicklingAndDoNotReplant,
+	plantCropsOnce = plantCropsOnce,
 }

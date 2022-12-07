@@ -141,7 +141,27 @@ local function buildCropPage()
 		Name = "Stop Autofarming";
 		Callback = cropModule.stopSicklingAndReplanting
 	})
-
+	
+	cropFarmSection:CreateButton({
+		Name = "Sickle Crop";
+		Callback = function()
+			cropModule.stopSicklingAndReplanting()
+			if (selectedCropName) then
+				cropModule.startSicklingAndReplanting(selectedCropName)
+			end
+		end
+	})
+	
+		
+	cropFarmSection:CreateButton({
+		Name = "Plant Crop";
+		Callback = function()
+			cropModule.stopSicklingAndReplanting()
+			if (selectedCropName) then
+				cropModule.plantCropsOnce(selectedCropName)
+			end
+		end
+	})
 end
 
 --BUILD TREE PAGE--

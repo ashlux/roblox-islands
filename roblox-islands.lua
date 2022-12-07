@@ -21,7 +21,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 996) or (game.PlaceId ==
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[NOOB] [Matt]: Updated 12/2"
+updates = "[NOOB] [Matt]: Updated 12/7"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -54,6 +54,7 @@ local CmdName = Instance.new("TextButton")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local TS = game:GetService('TweenService')
 local HttpService = game:GetService("HttpService")
+local uis = game:GetService("UserInputService")
 
 local torso = Player.Character.LowerTorso
 local flying = false
@@ -3300,6 +3301,65 @@ Item61.Parent = Notification3
 Item61.Text = "Catch Entities"
 Item61.TextColor3 = Color3.fromRGB(250,250,250)
 Item61.TextScaled = true
+
+
+local function onInputBegan(input, gp)
+    
+    if gp then return end -- if clicking chat
+    
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        SMACKING = true
+        while SMACKING do
+            task.wait()
+            if mouse.Target ~= nil then
+                pcall(function()
+                local args = {
+                [1] = {
+                ["player_tracking_category"] = "join_from_web",
+                ["part"] = mouse.Target,
+                ["block"] = mouse.Target,
+                ["norm"] = mouse.Target:FindFirstChild("Position"),
+                ["pos"] = mouse.Target:FindFirstChild("Position")
+                }
+                }
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                end)
+            end
+        end
+    end
+end
+
+local function onInputEnd(input, gp)
+    if gp then wait() end
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        SMACKING = false
+    end
+end
+
+local fastPick = Instance.new("TextButton")
+fastPick.Position = UDim2.new(0,0,1,85)
+fastPick.Size = UDim2.new(0,70,0,20)
+fastPick.BackgroundColor3 = Color3.fromRGB(63,63,63)
+fastPick.BorderSizePixel = 1
+fastPick.ZIndex = 2
+fastPick.Parent = Notification3
+fastPick.Text = "Fast Mining"
+fastPick.TextColor3 = Color3.fromRGB(250,250,250)
+fastPick.TextScaled = true
+fastPick.MouseButton1Click:Connect(function()
+    if fastPickToggle then
+        fastPickToggle = false
+        fastPick.BackgroundColor3 = Color3.new(63,63,63)
+        clicks:Disconnect()
+        unclicks:Disconnect()
+    else
+        fastPickToggle = true
+        fastPick.BackgroundColor3 = Color3.new(0,255,255)
+        
+        clicks = uis.InputBegan:Connect(onInputBegan)
+        unclicks = uis.InputEnded:Connect(onInputEnd)
+    end
+end)
 
 local Item62 = Instance.new("TextButton")
 Item62.Position = UDim2.new(0,0,1,127)

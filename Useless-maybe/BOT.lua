@@ -46,6 +46,17 @@ function getUserIdFromUsername(name)
     return id
 end
 
+function getPlayerFromDisplayName(displayName) -- Call this function with the beginning of the name to get the player from displayname
+	local Players = game:GetService('Players')
+	for i, Player in pairs(Players:GetPlayers()) do
+		if Player.DisplayName:lower(displayName):sub(1, #displayName) == displayName:lower() then
+		    playerFound = true
+			return Player
+		end
+	end
+	return nil
+end
+
 --for inviting person who makes bot join someone
 if not isfolder("Bot Info") then
     makefolder("Bot Info")
@@ -73,16 +84,16 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
     local message = string.lower(data.Message)
     
     if game.Players.LocalPlayer.Name == botName then
-        
+        print(message)
         if message == "^help" then
             local args = {
-            [1] = "Commands: ^rps, ^flip, ^joke, ^submitjoke [joke], ^joinme, ^bp [player] [item], ^leavemealone, ^pricecheck [item], ^invite [player], ^help2",
+            [1] = "Commands: ^rps, ^flip, ^joke, ^insult, ^joinme, ^bp [player] [item], ^leavemealone, ^pricecheck [item], ^invite [player], ^help2",
             [2] = "All"
             }
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-        elseif message == "^help2" then
+        elseif message == "^help2" or "^help 2" then
             local args = {
-            [1] = "Commands: ^countdrops, ^countvendings, ^countblocks, ^thanks, ^join [player], ^hi, ^rpg step, more to come",
+            [1] = "Commands: ^countdrops, ^countvendings, ^countblocks,  ^submitjoke [joke], ^join [player], ^rpg step, more to come",
             [2] = "All"
             }
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -123,9 +134,9 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             }
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
         
-        elseif message == "bp osu friends" then
+        elseif message == "^bp osu friends" then
             local args = {
-            [1] = "Osuwizzard has no friends",
+            [1] = "Osuwizzard has no friends.",
             [2] = "All"
             }
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -253,7 +264,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
 			    RS.rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHANGE_ISLAND_ACCESS_LEVEL:InvokeServer(unpack(args))
             end
         
-        elseif message == "^countdrops" then
+        elseif message == "^countdrops" or message == "^count drops" then
             if Island:FindFirstChild("Drops") then
                 local args = {
                 [1] = "There are "..tostring(#Island.Drops:GetChildren()).." items dropped at this island",
@@ -268,7 +279,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
             end
         
-        elseif message == "^countvendings" or message == "^countvend" or message == "^countv" then
+        elseif message == "^countvendings" or message == "^count vendings" or message == "^countvend" or message == "^countv" then
             amount = 0
             for i,v in pairs(Island.Blocks:GetChildren()) do
                 if v.Name:find("vendingMachine") then
@@ -281,7 +292,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             }
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
         
-        elseif message == "^countblocks" or message == "^countb" then
+        elseif message == "^countblocks" or message == "^count blocks" or message == "^countb" then
             Blocks = #Island.Blocks:GetChildren() or 0
             if Blocks == 0 then
                 local args = {
@@ -297,6 +308,32 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
             end
             
+        elseif message:sub(0,8) == "^insult " then
+            local NAME = data.Message:sub(9,-1)
+            print("this is before playertocheck is called")
+            local playerToCheck = getPlayerFromDisplayName(NAME)
+            print("generating insult")
+            local insults = {
+                "I hear "..playerToCheck.Name.." likes pineapple on their pizza",
+                "WOW "..playerToCheck.Name..", have you gained a few pounds?",
+                playerToCheck.Name.." has 0 friends, and it shows",
+                "I looked up noob in the dictionary and found a picture of "..playerToCheck.Name,
+                "If laughter is the best medicine, "..playerToCheck.Name.."'s face must be curing the world.",
+                "It's better to let someone think you are an Idiot than to open your mouth and prove it.",
+                "If I had a face like "..playerToCheck.Name"'s, I'd sue my parents.",
+                "I guess "..playerToCheck.Name" proves that even god makes mistakes sometimes."
+            }
+            local insultInfo = math.random(1,#insults)
+            for i,text in pairs(insults) do
+                if i == insultInfo then
+                    local args = {
+                    [1] = text,
+                    [2] = "All"
+                    }
+                    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+                end
+            end
+        
         elseif message:sub(0,4) == "^bp "then
             --finds spaces to get player name and item
             local space = 0
@@ -312,12 +349,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 end
             end
             --convert player name into actual name
-            for i,v in pairs(Players:GetPlayers()) do
-                if string.lower(v.Name):find(playerName) then
-                    playerFound = true
-                    playerToCheck = v.Name
-                end
-            end
+            playerToCheck = getPlayerFromDisplayName(playerName)
             
             if playerFound == false then
                 local args = {
@@ -326,11 +358,11 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 }
                 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
             else
-                for i,v in pairs(Players[playerToCheck].Backpack:GetChildren()) do
+                for i,v in pairs(playerToCheck.Backpack:GetChildren()) do
                     if string.lower(tostring(v.DisplayName.Value)) == itemToCheck then
                         foundOne = true
                         local args = {
-                        [1] = playerToCheck.." has "..tostring(v.Amount.Value).." "..v.DisplayName.Value,
+                        [1] = playerToCheck.Name.." has "..tostring(v.Amount.Value).." "..v.DisplayName.Value,
                         [2] = "All"
                         }
                         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -353,7 +385,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
                     else
                         local args = {
-                        [1] = playerToCheck.." has no "..itemToCheck,
+                        [1] = playerToCheck.Name.." has no "..itemToCheck,
                         [2] = "All"
                         }
                         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
@@ -443,7 +475,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
             end
         
-        elseif message == "^ty" or message:find("thank") then
+        elseif message == "^ty" or message == "^tyy" or message == "^thanks" or message == "^thank you" then
             local args = {
             [1] = "You're welcome "..data.FromSpeaker,
             [2] = "All"
@@ -479,7 +511,39 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
                 "What do you call a pencil without lead?  Pointless.",
                 "Never trust an atom...They make up everything!",
                 "When I found out my toaster wasnt waterproof...I was shocked!",
-                "My boss told me to attach two pieces of wood together...I totally nailed it."
+                "My boss told me to attach two pieces of wood together...I totally nailed it.",
+                "What do you call a fish without eyes? Fsh.",
+                "Why did the scarecrow win an award? Because he was outstanding in his field.",
+                "What did the policeman say to his bellybutton? You’re under a vest.",
+                "Why do people say “break a leg” when you go on stage? Because every play has a cast.",
+                "What do you call a pig that does karate? A pork chop.",
+                "Why are there gates around cemeteries? Because people are dying to get in.",
+                "Why do seagulls fly over the sea? Because if they flew over a bay, they would be bagels.",
+                "When do computers overheat? When they need to vent.",
+                "Why do bees have sticky hair? Because they use honeycombs.",
+                "How do you tell if a vampire is sick? By how much he is coffin.",
+                "How do you stop a bull from charging? Cancel its credit card.",
+                "Why did the mushroom go to the party? Because he was a fungi.",
+                "What do sea monsters eat? Fish and ships.",
+                "Why can’t your nose be 12 inches long? Because then it would be a foot",
+                "What did the ocean say to the shore? Nothing…It just waved.",
+                "Why did the golfer bring two pairs of pants? In case he got a hole in one.",
+                "What did the tomato say to the other tomato during a race? Ketchup!",
+                "What has four wheels and flies? A garbage truck.",
+                "What did one hat say to the other? You stay here. I’ll go on ahead.",
+                "What do you do with a sick boat? Take it to the doc.",
+                "Why did the picture go to jail? Because it was framed.",
+                "Why did the robber jump in the shower? He wanted to make a clean getaway.",
+                "What did the elevator say when it sneezed? I think I’m coming down with something.",
+                "Why did the bicycle collapse? It was two tired.",
+                "What do you call a bear with no teeth? A gummy bear.",
+                "Why did the restaurant hire a pig? He was good at bacon.",
+                "Did you hear about the man who got hit by the same bike every morning? It was a vicious cycle.",
+                "Why did the invisible man turn down the job offer? He couldn’t see himself doing it.",
+                "Did you hear about the kidnapping at school? It was fine, he woke up.",
+                "A termite walks into the bar and asks, ”Is the bar tender here?” ",
+                "I told my doctor that I broke my arm in two places.  He told me to stop going to those places.",
+                "What do you call a priest that becomes a lawyer? A father-in-law."
             }
         
             local jokeInfo = math.random(1,#jokeTexts)
@@ -495,8 +559,19 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.OnMessageDoneFi
             
         elseif message:sub(0,12) == "^submitjoke " then
             if isfile("Bot Info/Joke submission.txt") then
-                Joke = data.Message:sub(12,-1)
+                local Joke = data.Message:sub(12,-1)
                 appendfile("Bot Info/Joke submission.txt", (Time().." "..data.FromSpeaker.." - "..Joke.."\n"))
+                local args = {
+                [1] = "*BLEEP BLOOP* I'll archive that to add later.",
+                [2] = "All"
+                }
+                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+            end
+        
+        elseif message:sub(0,12) == "^submitinsult " then
+            if isfile("Bot Info/Insult submission.txt") then
+                local Insult = data.Message:sub(12,-1)
+                appendfile("Bot Info/Insult submission.txt", (Time().." "..data.FromSpeaker.." - "..Insult.."\n"))
                 local args = {
                 [1] = "*BLEEP BLOOP* I'll archive that to add later.",
                 [2] = "All"

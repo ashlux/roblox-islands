@@ -153,9 +153,7 @@ end
 local function stopSicklingAndReplanting()
 	setSickleAndReplanting(false)
 	stopFloating()
-	if tween then
-		tween:Cancel()
-	end
+	stopMoving()
 end
 
 local function sicklingAndDoNotReplant(cropNameToHarvest)

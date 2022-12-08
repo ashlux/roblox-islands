@@ -36,7 +36,6 @@ local function goToPoint(Point, distance)
         tween:Play()
 		return tween, Time
     end
-    return nil, 2
 end
 
 local function stopMoving()
@@ -76,7 +75,7 @@ local function moveToRandomHarvestableCropByName(cropName)
     end
     local randomCropBlock = cropBlocks[math.random(1, #cropBlocks)]
     if randomCropBlock then
-		tween, Time = goToPoint(randomCropBlock.Position, 24)
+		tween, Time = goToPoint(randomCropBlock.Position, 2)
 		return tween, Time
     end
 end
@@ -153,9 +152,7 @@ end
 local function stopSicklingAndReplanting()
 	setSickleAndReplanting(false)
 	stopFloating()
-	if tween then
-		tween:Cancel()
-	end
+	stopMoving()
 end
 
 local function sicklingAndDoNotReplant(cropNameToHarvest)

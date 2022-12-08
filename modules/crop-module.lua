@@ -141,7 +141,7 @@ local function startSicklingAndReplanting(cropNameToHarvest)
 	setSickleAndReplanting(true)
 	startFloating()
     while Player:GetAttribute("sickleAndReplanting") and wait() do
-		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
 		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
 		sickleCrops(cropsBlocksToSickle)
@@ -157,7 +157,7 @@ end
 
 local function sicklingAndDoNotReplant(cropNameToHarvest)
 	while wait() do
-		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
 		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
 		if (#cropsBlocksToSickle == 0) then

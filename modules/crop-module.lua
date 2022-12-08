@@ -36,7 +36,7 @@ local function goToPoint(Point, distance)
         tween:Play()
 		return tween, Time
     end
-    return nil, 0
+    return nil, 2
 end
 
 local function stopMoving()

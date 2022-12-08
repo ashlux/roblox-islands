@@ -34,7 +34,7 @@ local function goToPoint(Point, distance)
         local Time = Distance/Speed
         local tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
         tween:Play()
-		return tween, Time
+	return tween, Time
     end
     return nil, 0
 end
@@ -56,7 +56,7 @@ local function getAllHarvestableCrops()
 	return cropBlocks
 end
 
-local function getHarvestableCropsByName(cropName, maxDistance)
+local function getHarvestableCropsByNameOrderedByClosest(cropName, maxDistance)
 	local cropBlocks = {}
 	for _,cropBlock in pairs(getAllHarvestableCrops()) do
 	    if cropBlock.Name == cropName and Player:DistanceFromCharacter(cropBlock.Position) < (maxDistance or math.huge) then
@@ -69,12 +69,9 @@ local function getHarvestableCropsByName(cropName, maxDistance)
 	return cropBlocks
 end
 
-local function moveToRandomHarvestableCropByName(cropName)
-    local cropBlocks = getHarvestableCropsByName(cropName)
-    if (#cropBlocks == 0) then
-	return nil, 0
-    end
-    local randomCropBlock = cropBlocks[math.random(1, #cropBlocks)]
+local function moveToClosestHarvestableCropByName(cropName)
+    local cropBlocks = getHarvestableCropsByNameOrderedByClosest(cropName)
+    local randomCropBlock = cropBlocks[1]
     if randomCropBlock then
 		tween, Time = goToPoint(randomCropBlock.Position, 24)
 		return tween, Time
@@ -142,9 +139,9 @@ local function startSicklingAndReplanting(cropNameToHarvest)
 	setSickleAndReplanting(true)
 	startFloating()
     while Player:GetAttribute("sickleAndReplanting") and wait() do
-		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		local tween movementTime = moveToClosestHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
-		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
+		local cropsBlocksToSickle = getHarvestableCropsByNameOrderedByClosest(cropNameToHarvest, 24)
 		sickleCrops(cropsBlocksToSickle)
 		replantCropBlocks(cropsBlocksToSickle)
 	end	
@@ -160,9 +157,9 @@ end
 
 local function sicklingAndDoNotReplant(cropNameToHarvest)
 	while wait() do
-		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		local tween movementTime = moveToClosestHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
-		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
+		local cropsBlocksToSickle = getHarvestableCropsByNameOrderedByClosest(cropNameToHarvest, 24)
 		if (#cropsBlocksToSickle == 0) then
 			return nil;
 		end

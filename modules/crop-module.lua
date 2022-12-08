@@ -36,7 +36,7 @@ local function goToPoint(Point, distance)
         tween:Play()
 		return tween, Time
     end
-    return nil, 0
+    return nil,0
 end
 
 local function stopMoving()
@@ -133,7 +133,7 @@ local function replantCropBlocks(cropBlocks)
 			if not Player:GetAttribute("sickleAndReplanting") then
 				return nil;
 			end
-			replantCrop(cropBlock.Name, cropBlock.CFrame)
+			task.spawn(replantCrop, cropBlock.Name, cropBlock.CFrame)
 		end
 	end)
 end
@@ -142,7 +142,7 @@ local function startSicklingAndReplanting(cropNameToHarvest)
 	setSickleAndReplanting(true)
 	startFloating()
     while Player:GetAttribute("sickleAndReplanting") and wait() do
-		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
 		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
 		sickleCrops(cropsBlocksToSickle)
@@ -158,7 +158,7 @@ end
 
 local function sicklingAndDoNotReplant(cropNameToHarvest)
 	while wait() do
-		local tween movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
+		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
 		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
 		if (#cropsBlocksToSickle == 0) then

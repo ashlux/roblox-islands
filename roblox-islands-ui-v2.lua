@@ -4,9 +4,9 @@ local Player = game.Players.LocalPlayer
 local Island = game.Workspace.Islands:GetChildren()[1]
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
-local stopstopstop = false
-
 local MAIN_VERSION = table.pack(...)[1] or "main"
+
+local stopstopstop = false
 
 local function loadModule(moduleFile, desiredVersion)
 	local version = desiredVersion or MAIN_VERSION
@@ -56,8 +56,43 @@ local function buildMain()
 	
 	local developmentSection = page:CreateSection("Development")
 	
+	local selectedVersionNumber = MAIN_VERSION
+	local selectVersionDropdown = developmentSection:CreateDropdown({
+		Name = "Select Version";
+		Callback = function(item) selectedVersionNumber = item end;
+		Options = {MAIN_VERSION};
+		ItemSelecting = true;
+		DefaultItemSelected = selectedVersionNumber
+	})
+	
+	task.spawn(function()
+		local function updateVersions()
+			local HttpService = game:GetService("HttpService")
+			local branches = HttpService:JSONDecode(game:HttpGet("https://api.github.com/repos/ashlux/roblox-islands/branches"))
+			local branchNames = {}
+			for _,branch in pairs(branches) do
+				table.insert(branchNames, branch.name)
+			end
+			selectVersionDropdown:Update (branchNames)
+		end
+		
+		updateVersions()
+		while wait(60) do updateVersions() end
+	end)
+	
 	developmentSection:CreateInteractable({
-		Name = "destroyUi";
+		Name = "Load Version";
+		ActionText = "Load Version";
+		Callback = function()
+			loadModule("roblox-islands-ui-v2.lua", selectedVersionNumber)
+			UI:Destroy()
+		end;
+		Warning = "Do not unless you know what you're doing.";
+		-- TODO: Somehow need to tell executing process to stop?
+	})
+	
+	developmentSection:CreateInteractable({
+		Name = "XXX - Destroy UI";
 		ActionText = "Destroy UI";
 		Callback = function() UI:Destroy() end;
 		Warning = "Do not unless you know what you're doing.";

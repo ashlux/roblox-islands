@@ -21,7 +21,7 @@ local UI = Atlas.new({
 	Name = "Roblox Islands";
 	ConfigFolder = "RobloxIslandsAtlasConfig-" .. game.Players.LocalPlayer.Name;
 	Color = Color3.fromRGB(255, 124, 25);
-	Bind = "F1";
+	Bind = "RightShift";
 });
 
 -- BUILD MAIN PAGE --

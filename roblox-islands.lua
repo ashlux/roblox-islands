@@ -11,6 +11,7 @@ end
 
 local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
+local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
 
 print("Loading Complete!")
 
@@ -603,17 +604,6 @@ Background2.Size = UDim2.new(0, 150, 0, 165)
 Background2.Active = true
 Background2.Visible = false
 
-Background3 = Instance.new("Frame")
-Background3.Name = "Background3"
-Background3.Parent = Background
-Background3.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Background3.BorderSizePixel = 0
-Background3.BorderColor3 = Color3.new(1,0,1)
-Background3.Position = UDim2.new(1, 0, 0.3, 0)
-Background3.Size = UDim2.new(0, 120, 0, 125)
-Background3.Active = true
-Background3.Visible = false
-
 Background4 = Instance.new("Frame")
 Background4.Name = "Background4"
 Background4.Parent = Background
@@ -806,7 +796,6 @@ Minimum.MouseButton1Click:Connect(function()
 	if Background.BackgroundTransparency == 0 then
 		Background.BackgroundTransparency = 1
 		Background2.Visible = false
-		Background3.Visible = false
 		Background4.Visible = false
 		Background5.Visible = false
 		playersBackground.Visible = false
@@ -1810,18 +1799,6 @@ N2.Text = "Wilderness Islands"
 N2.TextColor3 = Color3.fromRGB(2,2,2)
 N2.TextScaled = true
 
-local CmdHandler2 = Instance.new("ScrollingFrame")
-CmdHandler2.Name = "CmdHandler2"
-CmdHandler2.Parent = Background3
-CmdHandler2.Active = true
-CmdHandler2.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-CmdHandler2.BackgroundTransparency = 1.000
-CmdHandler2.BorderSizePixel = 0
-CmdHandler2.AutomaticCanvasSize = "Y"
-CmdHandler2.Position = UDim2.new(0, 1, 0, 0)
-CmdHandler2.Size = UDim2.new(0, 118, 0, 125)
-CmdHandler2.ScrollBarThickness = 10
-
 local CmdHandler3 = Instance.new("ScrollingFrame")
 CmdHandler3.Name = "CmdHandler3"
 CmdHandler3.Parent = Background4
@@ -1869,16 +1846,6 @@ CmdHandler9.AutomaticCanvasSize = "Y"
 CmdHandler9.Position = UDim2.new(0, 1, 0, 1)
 CmdHandler9.Size = UDim2.new(0, 148, 0, 195)
 CmdHandler9.ScrollBarThickness = 8
-
-local Notification2 = Instance.new("TextLabel")
-Notification2.Size = UDim2.new(0,120,0,15)
-Notification2.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
-Notification2.BorderColor3 = Color3.fromRGB(25, 25, 25)
-Notification2.ZIndex = 2
-Notification2.Parent = CmdHandler2
-Notification2.Text = "Teleports"
-Notification2.TextColor3 = Color3.fromRGB(2,2,2)
-Notification2.TextScaled = true
 
 local Notification3 = Instance.new("TextLabel")
 Notification3.Position = UDim2.new(0,0,0,0)
@@ -2152,193 +2119,6 @@ Item6.TextColor3 = Color3.fromRGB(50,250,50)
 Item6.TextScaled = true
 Item6.Modal = true
 
-local Item7 = Instance.new("TextButton")
-Item7.Position = UDim2.new(0,0,1,1)
-Item7.Size = UDim2.new(0,54,0,20)
-Item7.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item7.BorderSizePixel = 1
-Item7.ZIndex = 2
-Item7.Parent = Notification2
-Item7.Text = "Hub Island"
-Item7.TextColor3 = Color3.fromRGB(250,250,250)
-Item7.TextScaled = true
-
-local Item8 = Instance.new("TextButton")
-Item8.Position = UDim2.new(0,0,1,21)
-Item8.Size = UDim2.new(0,54,0,20)
-Item8.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item8.BorderSizePixel = 1
-Item8.ZIndex = 2
-Item8.Parent = Notification2
-Item8.Text = "Slime Island"
-Item8.TextColor3 = Color3.fromRGB(250,250,250)
-Item8.TextScaled = true
-
-local Item9 = Instance.new("TextButton")
-Item9.Position = UDim2.new(0,54,1,22)
-Item9.Size = UDim2.new(0,54,0,20)
-Item9.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item9.BorderSizePixel = 1
-Item9.ZIndex = 2
-Item9.Parent = Notification2
-Item9.Text = "Slime Boss"
-Item9.TextColor3 = Color3.fromRGB(250,250,250)
-Item9.TextScaled = true
-
-local Item10 = Instance.new("TextButton")
-Item10.Position = UDim2.new(0,54,1,1)
-Item10.Size = UDim2.new(0,54,0,20)
-Item10.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item10.BorderSizePixel = 1
-Item10.ZIndex = 2
-Item10.Parent = Notification2
-Item10.Text = "Buffalkor Island"
-Item10.TextColor3 = Color3.fromRGB(250,250,250)
-Item10.TextScaled = true
-
-local Item11 = Instance.new("TextButton")
-Item11.Position = UDim2.new(0,0,1,41)
-Item11.Size = UDim2.new(0,54,0,20)
-Item11.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item11.BorderSizePixel = 1
-Item11.ZIndex = 2
-Item11.Parent = Notification2
-Item11.Text = "Wizard Island"
-Item11.TextColor3 = Color3.fromRGB(250,250,250)
-Item11.TextScaled = true
-
-local Item12 = Instance.new("TextButton")
-Item12.Position = UDim2.new(0,54,1,41)
-Item12.Size = UDim2.new(0,54,0,20)
-Item12.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item12.BorderSizePixel = 1
-Item12.ZIndex = 2
-Item12.Parent = Notification2
-Item12.Text = "Wizard Boss"
-Item12.TextColor3 = Color3.fromRGB(250,250,250)
-Item12.TextScaled = true
-
-local Item13 = Instance.new("TextButton")
-Item13.Position = UDim2.new(0,0,1,61)
-Item13.Size = UDim2.new(0,54,0,20)
-Item13.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item13.BorderSizePixel = 1
-Item13.ZIndex = 2
-Item13.Parent = Notification2
-Item13.Text = "Desert Island"
-Item13.TextColor3 = Color3.fromRGB(250,250,250)
-Item13.TextScaled = true
-
-local Item14 = Instance.new("TextButton")
-Item14.Position = UDim2.new(0,54,1,61)
-Item14.Size = UDim2.new(0,54,0,20)
-Item14.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item14.BorderSizePixel = 1
-Item14.ZIndex = 2
-Item14.Parent = Notification2
-Item14.Text = "Bhaa Boss"
-Item14.TextColor3 = Color3.fromRGB(250,250,250)
-Item14.TextScaled = true
-
-local Item15 = Instance.new("TextButton")
-Item15.Position = UDim2.new(0,0,1,81)
-Item15.Size = UDim2.new(0,54,0,20)
-Item15.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item15.BorderSizePixel = 1
-Item15.ZIndex = 2
-Item15.Parent = Notification2
-Item15.Text = "Diamond Mines"
-Item15.TextColor3 = Color3.fromRGB(250,250,250)
-Item15.TextScaled = true
-
-local Item16 = Instance.new("TextButton")
-Item16.Position = UDim2.new(0,54,1,81)
-Item16.Size = UDim2.new(0,54,0,20)
-Item16.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item16.BorderSizePixel = 1
-Item16.ZIndex = 2
-Item16.Parent = Notification2
-Item16.Text = "Kor Boss"
-Item16.TextColor3 = Color3.fromRGB(250,250,250)
-Item16.TextScaled = true
-
-local Item17 = Instance.new("TextButton")
-Item17.Position = UDim2.new(0,0,1,121)
-Item17.Size = UDim2.new(0,54,0,20)
-Item17.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item17.BorderSizePixel = 1
-Item17.ZIndex = 2
-Item17.Parent = Notification2
-Item17.Text = "Spirit Island"
-Item17.TextColor3 = Color3.fromRGB(250,250,250)
-Item17.TextScaled = true
-
-local TP1 = Instance.new("TextButton")
-TP1.Position = UDim2.new(0,0,1,141)
-TP1.Size = UDim2.new(0,54,0,20)
-TP1.BackgroundColor3 = Color3.fromRGB(63,63,63)
-TP1.BorderSizePixel = 1
-TP1.ZIndex = 2
-TP1.Parent = Notification2
-TP1.Text = "PVP Island"
-TP1.TextColor3 = Color3.fromRGB(250,250,250)
-TP1.TextScaled = true
-
-local TP2 = Instance.new("TextButton")
-TP2.Position = UDim2.new(0,54,1,141)
-TP2.Size = UDim2.new(0,54,0,20)
-TP2.BackgroundColor3 = Color3.fromRGB(63,63,63)
-TP2.BorderSizePixel = 1
-TP2.ZIndex = 1
-TP2.Parent = Notification2
-TP2.Text = "Fish Festival"
-TP2.TextColor3 = Color3.fromRGB(250,250,250)
-TP2.TextScaled = true
-
-local TP3 = Instance.new("TextButton")
-TP3.Position = UDim2.new(0,0,1,161)
-TP3.Size = UDim2.new(0,54,0,20)
-TP3.BackgroundColor3 = Color3.fromRGB(63,63,63)
-TP3.BorderSizePixel = 1
-TP3.ZIndex = 2
-TP3.Parent = Notification2
-TP3.Text = "Cletus Farm"
-TP3.TextColor3 = Color3.fromRGB(250,250,250)
-TP3.TextScaled = true
-
-local Item18 = Instance.new("TextButton")
-Item18.Position = UDim2.new(0,54,1,121)
-Item18.Size = UDim2.new(0,54,0,20)
-Item18.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item18.BorderSizePixel = 1
-Item18.ZIndex = 2
-Item18.Parent = Notification2
-Item18.Text = "Pirate Isle"
-Item18.TextColor3 = Color3.fromRGB(250,250,250)
-Item18.TextScaled = true
-
-local Item19 = Instance.new("TextButton")
-Item19.Position = UDim2.new(0,0,1,101)
-Item19.Size = UDim2.new(0,54,0,20)
-Item19.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item19.BorderSizePixel = 1
-Item19.ZIndex = 2
-Item19.Parent = Notification2
-Item19.Text = "Underworld"
-Item19.TextColor3 = Color3.fromRGB(250,250,250)
-Item19.TextScaled = true
-
-local Item20 = Instance.new("TextButton")
-Item20.Position = UDim2.new(0,54,1,101)
-Item20.Size = UDim2.new(0,54,0,20)
-Item20.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item20.BorderSizePixel = 1
-Item20.ZIndex = 2
-Item20.Parent = Notification2
-Item20.Text = "Dragon Boss"
-Item20.TextColor3 = Color3.fromRGB(250,250,250)
-Item20.TextScaled = true
-
 local Tests = Instance.new("TextButton")
 Tests.Position = UDim2.new(0,1,0,151)
 Tests.Size = UDim2.new(0,100,0,20)
@@ -2373,7 +2153,7 @@ cropsBackground.Size = UDim2.new(0, 115, 0, 195)
 cropsBackground.Active = true
 cropsBackground.Visible = false
 
-local cropsHandler = Instance.new("ScrollingFrame")
+cropsHandler = Instance.new("ScrollingFrame")
 cropsHandler.Name = "cropsHandler"
 cropsHandler.Parent = cropsBackground
 cropsHandler.Active = true
@@ -2407,23 +2187,15 @@ sickleButton.MouseButton1Click:Connect(function()
         sickleFarming = false
         sickleButton.Text = "Sickle Farm"
         sickleButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        unFloat()
-        if tween then
-        tween:Cancel()
-        end
-        destroyOrbs = false
+        cropModule.stopSicklingAndReplanting()
     else
         sickleFarming = true
         sickleButton.Text = "Sickling"
         sickleButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
-        Float()
-        destroyOrbs = true
-        while sickleFarming do
-            wait()
-            local cropToHarvest = cropSection.Text
-            tween, Time = moveToCrop(cropToHarvest)
-            wait(Time)
-            sicklePlants(cropToHarvest)
+        cropModule.stopSicklingAndReplanting()
+        local cropToHarvest = cropSection.Text
+        if cropToHarvest then
+            cropModule.startSicklingAndReplanting(cropToHarvest)
         end
     end
 end)
@@ -2593,46 +2365,11 @@ plantCropButton.Text = "Plant on nearby dirt"
 plantCropButton.TextColor3 = Color3.fromRGB(250,250,250)
 plantCropButton.TextScaled = true
 plantCropButton.MouseButton1Click:Connect(function()
-    if plantCrop then
-        plantCrop = false
-        plantCropButton.Text = "Plant on nearby dirt"
-        plantCropButton.BackgroundColor3 = Color3.fromRGB(63,63,63)
-    else
-        plantCrop = true
-        plantCropButton.Text = "Planting"
-        plantCropButton.BackgroundColor3 = Color3.fromRGB(150,150,150)
-        if cropSection.Text == "candyCaneVine" or cropSection.Text == "grapeVine" or cropSection.Text == "dragonfruit" then
-            placeToPlant = "trellis"
-        elseif cropSection.Text == "cactus" then
-            placeToPlant = "sand"
-        elseif cropSection.Text == "rice" or cropSection.Text == "seaweed" then
-            placeToPlant = "pond"
-        else
-            placeToPlant = "soil"
-        end
-        while plantCrop do
-            wait()
-            for i,dirt in pairs(Island.Blocks:GetChildren()) do
-                if dirt.Name == placeToPlant and Player:DistanceFromCharacter(dirt.Position) < 150 and plantCrop then
-                    local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
-                    local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
-                    if not hitPart then
-                        task.spawn(function()
-                        local args = {
-                        [1] = {
-                        ["upperBlock"] = false,
-                        ["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
-                        ["player_tracking_category"] = "join_from_web",
-                        ["blockType"] = cropSection.Text
-                        }
-                        }
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
-                        end)
-                    end
-                end
-            end
-        end
-    end
+    local cropToHarvest = cropSection.Text
+    cropModule.stopSicklingAndReplanting()
+	if (cropToHarvest) then
+	    cropModule.plantCropsOnce(cropToHarvest)
+	end
 end)
 
 local Item23 = Instance.new("TextButton")
@@ -4110,7 +3847,6 @@ Title.MouseButton1Click:Connect(function()
         Background10.Visible = false
         Item67.Text = "Farming >"
         Title.Text = "Mob Farms <"
-        Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false
@@ -4154,7 +3890,6 @@ BowBoss.MouseButton1Click:Connect(function()
         Item67.Text = "Farming >"
         BowBoss.Text = "Wood <"
         Title.Text = "Mob Farms >"
-        Background3.Visible = false
         Background4.Visible = false
         Background2.Visible = false
         playersBackground.Visible = false
@@ -4197,7 +3932,6 @@ GUIs.MouseButton1Click:Connect(function()
         Item67.Text = "Farming >"
         BowBoss.Text = "Wood >"
         Title.Text = "Mob Farms >"
-        Background3.Visible = false
         Background4.Visible = false
         Background2.Visible = false
         Background5.Visible = false
@@ -4215,49 +3949,6 @@ GUIs.MouseButton1Click:Connect(function()
         GUIs.Text = "Players <"
         Item80.Text = "Hub Shops >"
         playersBackground.Visible = true
-    end
-end)
-
-Teleports.MouseButton1Click:Connect(function()
-    if Toggled6 then
-        Toggled6 = false
-        Teleports.BackgroundColor3 = Color3.new(0,0,1)
-        Teleports.Text = "Teleports >"
-        Teleports.TextColor3 = Color3.fromRGB(250,250,250)
-        Background3.Visible = false
-    else
-        Toggled6 = true
-        Toggled5 = false
-        Toggled8 = false
-        Toggled13 = false
-        Toggled22 = false
-        Toggled26 = false
-        Toggled27 = false
-        Toggled47 = false
-        Toggled50 = false
-        Toggled70 = false
-        Background10.Visible = false
-        Item67.Text = "Farming >"
-        Teleports.Text = "Teleports <"
-        Background2.Visible = false
-        Background4.Visible = false
-        Background5.Visible = false
-        playersBackground.Visible = false
-        Background7.Visible = false
-        Background8.Visible = false
-        Background9.Visible = false
-        Background11.Visible = false
-        Background12.Visible = false
-        Item84.Text = "Mining >"
-        Toggled73 = false
-        Item80.Text = "Hub Shops >"
-        Title.Text = "Mob Farms >"
-        Tests.Text = "Misc >"
-        BowBoss.Text = "Wood >"
-        GUIs.Text = "Players >"
-        Item42.Text = "Machines >"
-        Item65.Text = "Auto Eat >"
-        Background3.Visible = true
     end
 end)
 
@@ -4283,7 +3974,6 @@ Tests.MouseButton1Click:Connect(function()
         Item67.Text = "Farming >"
         Tests.Text = "Misc <"
         Background2.Visible = false
-        Background3.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false
         Background7.Visible = false
@@ -4323,7 +4013,6 @@ Item65.MouseButton1Click:Connect(function()
         Item65.Text = "Auto Eat <"
         Item80.Text = "Hub Shops >"
         Background2.Visible = false
-        Background3.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false
         Background7.Visible = false
@@ -4361,7 +4050,6 @@ Item67.MouseButton1Click:Connect(function()
         Item67.Text = "Farming <"
         Background10.Visible = true
         Background2.Visible = false
-        Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false
@@ -4405,7 +4093,6 @@ Item80.MouseButton1Click:Connect(function()
         Item67.Text = "Farming >"
         Background10.Visible = false
         Background2.Visible = false
-        Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false
@@ -4542,7 +4229,6 @@ Item84.MouseButton1Click:Connect(function()
         Item84.Text = "Mining <"
         Background10.Visible = false
         Background2.Visible = false
-        Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false
@@ -5814,7 +5500,6 @@ Item42.MouseButton1Click:Connect(function()
         Item67.Text = "Farming >"
         Item42.Text = "Machines <"
         Background2.Visible = false
-        Background3.Visible = false
         Background4.Visible = false
         Background5.Visible = false
         playersBackground.Visible = false

@@ -6,16 +6,20 @@ local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
 local stopstopstop = false
 
-local function loadModule(url)
-	return loadstring(game:HttpGet(url))()
+local MAIN_VERSION = table.pack(...)[1] or "main"
+
+local function loadModule(moduleFile, desiredVersion)
+	local version = desiredVersion or MAIN_VERSION
+	local url = "https://raw.githubusercontent.com/ashlux/roblox-islands/" .. version .. "/" .. moduleFile
+	return loadstring(game:HttpGet(url))(version)
 end
 
-local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
-local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
-local machineModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/machine-module.lua")
-local stringUtils = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/string-utils.lua")
-local vendingModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/vending-module.lua")
-local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
+local treeModule = loadModule("modules/tree-module.lua")
+local fruitModule = loadModule("modules/fruit-module.lua")
+local machineModule = loadModule("modules/machine-module.lua")
+local stringUtils = loadModule("modules/string-utils.lua")
+local vendingModule = loadModule("modules/vending-module.lua")
+local cropModule = loadModule("modules/crop-module.lua")
 
 local UI = Atlas.new({
 	Name = "Roblox Islands";
@@ -109,7 +113,7 @@ end
 local function buildVendingPage()
 	local page = UI:CreatePage("Vending")
 	
-	local meta
+	local page
 end
 
 --BUILD CROP PAGE--

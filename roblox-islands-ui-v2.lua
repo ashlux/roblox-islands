@@ -4,18 +4,22 @@ local Player = game.Players.LocalPlayer
 local Island = game.Workspace.Islands:GetChildren()[1]
 local Character = game.Players.LocalPlayer.Character
 local Humanoid = Character.Humanoid
+local MAIN_VERSION = table.pack(...)[1] or "main"
+
 local stopstopstop = false
 
-local function loadModule(url)
-	return loadstring(game:HttpGet(url))()
+local function loadModule(moduleFile, desiredVersion)
+	local version = desiredVersion or MAIN_VERSION
+	local url = "https://raw.githubusercontent.com/ashlux/roblox-islands/" .. version .. "/" .. moduleFile
+	return loadstring(game:HttpGet(url))(version)
 end
 
-local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
-local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
-local machineModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/machine-module.lua")
-local stringUtils = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/string-utils.lua")
-local vendingModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/vending-module.lua")
-local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
+local treeModule = loadModule("modules/tree-module.lua")
+local fruitModule = loadModule("modules/fruit-module.lua")
+local machineModule = loadModule("modules/machine-module.lua")
+local stringUtils = loadModule("modules/string-utils.lua")
+local vendingModule = loadModule("modules/vending-module.lua")
+local cropModule = loadModule("modules/crop-module.lua")
 
 local UI = Atlas.new({
 	Name = "Roblox Islands";
@@ -52,8 +56,43 @@ local function buildMain()
 	
 	local developmentSection = page:CreateSection("Development")
 	
+	local selectedVersionNumber = MAIN_VERSION
+	local selectVersionDropdown = developmentSection:CreateDropdown({
+		Name = "Select Version";
+		Callback = function(item) selectedVersionNumber = item end;
+		Options = {MAIN_VERSION};
+		ItemSelecting = true;
+		DefaultItemSelected = selectedVersionNumber
+	})
+	
+	task.spawn(function()
+		local function updateVersions()
+			local HttpService = game:GetService("HttpService")
+			local branches = HttpService:JSONDecode(game:HttpGet("https://api.github.com/repos/ashlux/roblox-islands/branches"))
+			local branchNames = {}
+			for _,branch in pairs(branches) do
+				table.insert(branchNames, branch.name)
+			end
+			selectVersionDropdown:Update (branchNames)
+		end
+		
+		updateVersions()
+		while wait(60) do updateVersions() end
+	end)
+	
 	developmentSection:CreateInteractable({
-		Name = "destroyUi";
+		Name = "Load Version";
+		ActionText = "Load Version";
+		Callback = function()
+			loadModule("roblox-islands-ui-v2.lua", selectedVersionNumber)
+			UI:Destroy()
+		end;
+		Warning = "Do not unless you know what you're doing.";
+		-- TODO: Somehow need to tell executing process to stop?
+	})
+	
+	developmentSection:CreateInteractable({
+		Name = "XXX - Destroy UI";
 		ActionText = "Destroy UI";
 		Callback = function() UI:Destroy() end;
 		Warning = "Do not unless you know what you're doing.";
@@ -109,7 +148,7 @@ end
 local function buildVendingPage()
 	local page = UI:CreatePage("Vending")
 	
-	local meta
+	local page
 end
 
 --BUILD CROP PAGE--

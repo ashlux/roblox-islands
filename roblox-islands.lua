@@ -590,7 +590,7 @@ Background.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Background.BorderSizePixel = 0
 Background.BorderColor3 = Color3.new(1,0,1)
 Background.Position = UDim2.new(0.06, 0, 0.20, 0)
-Background.Size = UDim2.new(0, 120, 0, 220)
+Background.Size = UDim2.new(0, 120, 0, 275)
 Background.Active = true
 
 Background2 = Instance.new("Frame")
@@ -753,12 +753,12 @@ CmdHandler.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
 CmdHandler.BackgroundTransparency = 1.000
 CmdHandler.BorderSizePixel = 0
 CmdHandler.AutomaticCanvasSize = "Y"
-CmdHandler.Position = UDim2.new(0.05, 0, 0.08, 0)
-CmdHandler.Size = UDim2.new(0, 113, 0, 200)
+CmdHandler.Position = UDim2.new(0, 5, 0, 19)
+CmdHandler.Size = UDim2.new(0, 113, 0, 250)
 CmdHandler.ScrollBarThickness = 4
 
 local Grid = Instance.new("UIGridLayout")
-Grid.CellSize = UDim2.new(0.95,0,0.1,0)
+Grid.CellSize = UDim2.new(0.95,0,0.095,0)
 Grid.CellPadding = UDim2.new(0,1,0,5)
 Grid.SortOrder = "LayoutOrder"
 Grid.Parent = CmdGui.Background.CmdHandler
@@ -831,11 +831,18 @@ Item3.Size = UDim2.new(0,100,0,20)
 Item3.BackgroundColor3 = Color3.new(0,0,1)
 Item3.BorderColor3 = Color3.new(1,1,1)
 Item3.ZIndex = 2
-Item3.Text = "Copy Discord link to Clipboard"
+Item3.Text = "Islands GUI V2 (Beta)"
 Item3.TextColor3 = Color3.fromRGB(250,250,250)
 Item3.TextScaled = true
 Item3.LayoutOrder = 10
 Item3.Parent = CmdHandler
+Item3.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-ui-v2.lua'))()
+Item3.Text = "Discord link copied!"
+wait(3)
+Item3.Text = "Copy Discord link to Clipboard"
+
+end)
 
 Title = Instance.new("TextButton")
 Title.Position = UDim2.new(0,1,0,101)
@@ -4250,14 +4257,6 @@ end)
 
 Item2.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('https://pastebin.com/raw/3MYQCdby'))()
-end)
-
-Item3.MouseButton1Click:Connect(function()
-setclipboard("https://discord.gg/VxqpSsQ5")
-Item3.Text = "Discord link copied!"
-wait(3)
-Item3.Text = "Copy Discord link to Clipboard"
-
 end)
 
 Item4.MouseButton1Click:Connect(function()

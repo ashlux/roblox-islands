@@ -838,10 +838,9 @@ Item3.LayoutOrder = 10
 Item3.Parent = CmdHandler
 Item3.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-ui-v2.lua'))()
-Item3.Text = "Discord link copied!"
-wait(3)
-Item3.Text = "Copy Discord link to Clipboard"
-
+Item3.Text = "Loading V2"
+wait(5)
+Item3.Text = "Islands GUI V2 (Beta)"
 end)
 
 Title = Instance.new("TextButton")

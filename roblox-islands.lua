@@ -6788,9 +6788,11 @@ for i,v in pairs(CmdHandler6:GetChildren()) do
             v.BackgroundColor3 = Color3.new(0,1,1)
             ToOl = v.Text
             while Toggled48  do
-                wait()
-
-                Player.Backpack[ToOl].Parent = Player.Character
+                
+                if Player.Backpack:FindFirstChild(ToOl) then
+                    Player.Backpack[ToOl].Parent = Player.Character
+                end
+                
                 wait()
                 args = {
                     [1] = {

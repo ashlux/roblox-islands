@@ -25,17 +25,19 @@ end
 local function collect(machineBlock, inOrOut)
 	local whatToCollect = inOrOut or "WorkerOutputContents" -- WorkerOutputContents or WorkerContents
 	if Player:DistanceFromCharacter(machineBlock.Position) < 24 then
-		local itemToCollect = machineBlock[inOrOut] and machineBlock[inOrOut]:GetChildren()[1]
-		if itemToCollect then
-			local args = {
-							[1] = {
-								["tool"] = itemToCollect,
-								["player_tracking_category"] = "join_from_web"
+		task.spawn(function()
+			local itemToCollect = machineBlock[inOrOut] and machineBlock[inOrOut]:GetChildren()[1]
+			if itemToCollect then
+				local args = {
+								[1] = {
+									["tool"] = itemToCollect,
+									["player_tracking_category"] = "join_from_web"
+								}
 							}
-						}
-			game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
-				.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
-		end
+				game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+					.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+			end
+		end)
 	end
 end
 

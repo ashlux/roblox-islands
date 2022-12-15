@@ -1,18 +1,25 @@
-local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
-
-local Player = game.Players.LocalPlayer
-local Island = game.Workspace.Islands:GetChildren()[1]
-local Character = game.Players.LocalPlayer.Character
-local Humanoid = Character.Humanoid
 local MAIN_VERSION = table.pack(...)[1] or "main"
-
-local stopstopstop = false
 
 local function loadModule(moduleFile, desiredVersion)
 	local version = desiredVersion or MAIN_VERSION
 	local url = "https://raw.githubusercontent.com/ashlux/roblox-islands/" .. version .. "/" .. moduleFile
 	return loadstring(game:HttpGet(url))(version)
 end
+
+-- Needs to be loaded FIRST THING for disabling XP orbs to work
+local animationModule = loadModule("modules/animation-module.lua")
+
+game.Loaded:Wait()
+
+local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
+
+
+local Player = game.Players.LocalPlayer
+local Island = game.Workspace.Islands:GetChildren()[1]
+local Character = game.Players.LocalPlayer.Character
+local Humanoid = Character.Humanoid
+
+local stopstopstop = false
 
 local treeModule = loadModule("modules/tree-module.lua")
 local fruitModule = loadModule("modules/fruit-module.lua")
@@ -42,35 +49,20 @@ local function buildMain()
 		Flag = "render3D";
 		Default = true;
 		CallbackOnCreation = true;
-		Callback = function(newValue) game.RunService:Set3dRenderingEnabled(newValue) end;
+		Callback = function(render3D) animationModule.render3D(render3D) end;
 	})
-	
-	local AnimationService = require(game:GetService("ReplicatedStorage").
-									TS.animation["animation-service"]).AnimationService
-	local originalPlayAnimationFn = AnimationService.playAnimation
-	local originalPlayAnimationHumanoid = AnimationService.playAnimationHumanoid
-	
-	function restoreToolAnimations()
-		AnimationService.playAnimation = originalPlayAnimationFn
-		AnimationService.playAnimationHumanoid = originalPlayAnimationHumanoid
-	end
-	
-	function disableToolAnimations()
-		AnimationService.playAnimation = function() end
-		AnimationService.playAnimationHumanoid = function() end
-	end
-	
+
 	performanceSection:CreateToggle({
-		Name = "Disable Tool Animations";
-		Flag = "disableToolAnimations";
+		Name = "Render Tool Animations";
+		Flag = "renderToolAnimations";
 		Default = true;
 		Warning = "Experimental";
 		CallbackOnCreation = true;
-		Callback = function(disableFlag)
-			if (disableFlag) then
-				disableToolAnimations()
+		Callback = function(renderToolAnimations)
+			if (renderToolAnimations) then
+				animationModule.restoreToolAnimations()
 			else
-				restoreToolAnimations()
+				animationModule.disableToolAnimations()
 			end
 		end;
 	})
@@ -79,9 +71,15 @@ local function buildMain()
 		Name = "Render XP Orbs";
 		Flag = "renderXpOrbs";
 		Default = true;
+		Warning = "EXTREMELY Experimental!";
 		CallbackOnCreation = true;
-		Callback = function(newValue) print("renderXpOrbs new value:",newValue) end;
-		-- TODO Actually do this duh
+		Callback = function(renderXpOrbs)
+			if (renderXpOrbs) then
+				animationModule.enableXpOrbs()
+			else
+				animationModule.disableXpOrbs()
+			end
+		end
 	})
 	
 	local developmentSection = page:CreateSection("Development")

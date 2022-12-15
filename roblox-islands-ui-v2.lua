@@ -1,18 +1,30 @@
-local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
-
-local Player = game.Players.LocalPlayer
-local Island = game.Workspace.Islands:GetChildren()[1]
-local Character = game.Players.LocalPlayer.Character
-local Humanoid = Character.Humanoid
 local MAIN_VERSION = table.pack(...)[1] or "main"
-
-local stopstopstop = false
 
 local function loadModule(moduleFile, desiredVersion)
 	local version = desiredVersion or MAIN_VERSION
 	local url = "https://raw.githubusercontent.com/ashlux/roblox-islands/" .. version .. "/" .. moduleFile
 	return loadstring(game:HttpGet(url))(version)
 end
+
+-- Needs to be loaded FIRST THING for disabling XP orbs to work
+local animationModule = loadModule("modules/animation-module.lua")
+
+local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
+
+function waitUntilLoaded()
+	repeat wait()
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+	local mouse = game.Players.LocalPlayer:GetMouse() 
+	repeat wait() until mouse
+end
+waitUntilLoaded()
+
+local Player = game.Players.LocalPlayer
+local Island = game.Workspace.Islands:GetChildren()[1]
+local Character = game.Players.LocalPlayer.Character
+local Humanoid = Character.Humanoid
+
+local stopstopstop = false
 
 local treeModule = loadModule("modules/tree-module.lua")
 local fruitModule = loadModule("modules/fruit-module.lua")
@@ -42,16 +54,37 @@ local function buildMain()
 		Flag = "render3D";
 		Default = true;
 		CallbackOnCreation = true;
-		Callback = function(newValue) game.RunService:Set3dRenderingEnabled(newValue) end;
+		Callback = function(render3D) animationModule.render3D(render3D) end;
+	})
+
+	performanceSection:CreateToggle({
+		Name = "Render Tool Animations";
+		Flag = "renderToolAnimations";
+		Default = true;
+		Warning = "Experimental";
+		CallbackOnCreation = true;
+		Callback = function(renderToolAnimations)
+			if (renderToolAnimations) then
+				animationModule.restoreToolAnimations()
+			else
+				animationModule.disableToolAnimations()
+			end
+		end;
 	})
 
 	performanceSection:CreateToggle({
 		Name = "Render XP Orbs";
 		Flag = "renderXpOrbs";
 		Default = true;
+		Warning = "EXTREMELY Experimental!";
 		CallbackOnCreation = true;
-		Callback = function(newValue) print("renderXpOrbs new value:",newValue) end;
-		-- TODO Actually do this duh
+		Callback = function(renderXpOrbs)
+			if (renderXpOrbs) then
+				animationModule.enableXpOrbs()
+			else
+				animationModule.disableXpOrbs()
+			end
+		end
 	})
 	
 	local developmentSection = page:CreateSection("Development")
@@ -73,19 +106,24 @@ local function buildMain()
 			for _,branch in pairs(branches) do
 				table.insert(branchNames, branch.name)
 			end
-			selectVersionDropdown:Update (branchNames)
+			selectVersionDropdown:Update(branchNames)
 		end
 		
 		updateVersions()
-		while wait(60) do updateVersions() end
+		while wait(60) do pcall(updateVersions) end
 	end)
+	
+	function destroyUI()
+		restoreToolAnimations()
+		UI:Destroy()
+	end
 	
 	developmentSection:CreateInteractable({
 		Name = "Load Version";
 		ActionText = "Load Version";
 		Callback = function()
 			loadModule("roblox-islands-ui-v2.lua", selectedVersionNumber)
-			UI:Destroy()
+			destroyUI()
 		end;
 		Warning = "Do not unless you know what you're doing.";
 		-- TODO: Somehow need to tell executing process to stop?
@@ -94,7 +132,7 @@ local function buildMain()
 	developmentSection:CreateInteractable({
 		Name = "XXX - Destroy UI";
 		ActionText = "Destroy UI";
-		Callback = function() UI:Destroy() end;
+		Callback = destroyUI;
 		Warning = "Do not unless you know what you're doing.";
 		-- TODO: Somehow need to tell executing process to stop?
 	})

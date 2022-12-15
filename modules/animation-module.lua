@@ -56,9 +56,14 @@ function disableToolAnimations()
 	AnimationService.playAnimationHumanoid = function() end
 end
 
+function render3D(shouldRender3D)
+	game.RunService:Set3dRenderingEnabled(shouldRender3D)
+end
+
 return {
 	enableXpOrbs = enableXpOrbs,
 	disableXpOrbs = disableXpOrbs,
 	restoreToolAnimations = restoreToolAnimations,
 	disableToolAnimations = disableToolAnimations,
+	render3D = render3D,
 }

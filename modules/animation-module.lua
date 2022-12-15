@@ -8,8 +8,12 @@ local originalPlayAnimationFn = AnimationService.playAnimation
 local originalPlayAnimationHumanoid = AnimationService.playAnimationHumanoid
 local originalXpOrbEventListenerFn = function() end -- can only be known when the event listener is registered
 
+local function areXpOrbsDisabled()
+	return Player:GetAttribute("disableXpOrbs") or false
+end
+
 local function newXpOrbEventListener(event)
-	if not areXpOrbsDisabled() then
+	if not areXpOrbsDisabled() and originalXpOrbEventListenerFn then
 		originalXpOrbEventListenerFn(event)
 	end
 	
@@ -29,10 +33,6 @@ NetworkService.registerServerToClientEventListener = function(tbl, eventId, fn)
 		end
 		return originalRegisterListenerFn(tbl,eventId,fn)
 end 
-
-local function areXpOrbsDisabled()
-	return Player:GetAttribute("disableXpOrbs") or false
-end
 
 local function setDisableXpOrbs(value)
     Player:SetAttribute("disableXpOrbs", value or false)	

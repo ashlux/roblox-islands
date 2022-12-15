@@ -11,6 +11,13 @@ local animationModule = loadModule("modules/animation-module.lua")
 
 local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
 
+function waitUntilLoaded()
+	repeat wait()
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+	local mouse = game.Players.LocalPlayer:GetMouse() 
+	repeat wait() until mouse
+end
+waitUntilLoaded()
 
 local Player = game.Players.LocalPlayer
 local Island = game.Workspace.Islands:GetChildren()[1]

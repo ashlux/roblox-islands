@@ -204,36 +204,32 @@ local function buildCropPage()
 		DefaultItemSelected = selectedCropName;
 	})
 	
-	cropFarmSection:CreateButton({
-		Name = "Start Autofarming";
-		Callback = function()
+	cropFarmSection:CreateToggle({
+		Name = "Autofarm Crop";
+		Flag = "autofarm";
+		Default = false;
+		CallbackOnCreation = false;
+		SavingDisabled = true;
+		Callback = function(shouldAutofarm)
 			cropModule.stopSicklingAndReplanting()
-			if (selectedCropName) then
+			if shouldAutofarm and selectedCropName then
 				cropModule.startSicklingAndReplanting(selectedCropName)
 			end
-		end
-	})
-
-	cropFarmSection:CreateButton({
-		Name = "Stop Autofarming";
-		Callback = cropModule.stopSicklingAndReplanting
+	  end
 	})
 	
 	cropFarmSection:CreateButton({
-		Name = "Sickle Crop";
+		Name = "Sickle Crop (No Replant)";
 		Callback = function()
-			cropModule.stopSicklingAndReplanting()
 			if (selectedCropName) then
-				cropModule.startSicklingAndReplanting(selectedCropName)
+				cropModule.sicklingAndDoNotReplant(selectedCropName)
 			end
 		end
 	})
 	
-		
 	cropFarmSection:CreateButton({
-		Name = "Plant Crop";
+		Name = "Plant Crop (No Sickling)";
 		Callback = function()
-			cropModule.stopSicklingAndReplanting()
 			if (selectedCropName) then
 				cropModule.plantCropsOnce(selectedCropName)
 			end
@@ -252,6 +248,7 @@ local function buildTreePage()
 		Flag = "cutLeaves";
 		Default = false;
 		CallbackOnCreation = false;
+		SavingDisabled = true;
 		Callback = function(newValue)
 			if newValue == true and stopstopstop == false then
 				treeModule.startTrimIslandTreesAura()
@@ -425,6 +422,7 @@ local function buildPlayerPage()
 		Flag = "SetToD";
 		Default = false;
 		CallbackOnCreation = false;
+		SavingDisabled = true;
 		Callback = function(newValue)
 			if newValue == true and stopstopstop == false then
 				settingTime = game:GetService('RunService').Stepped:Connect(setTime)

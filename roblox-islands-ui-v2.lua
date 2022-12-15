@@ -9,8 +9,6 @@ end
 -- Needs to be loaded FIRST THING for disabling XP orbs to work
 local animationModule = loadModule("modules/animation-module.lua")
 
-game.Loaded:Wait()
-
 local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
 
 

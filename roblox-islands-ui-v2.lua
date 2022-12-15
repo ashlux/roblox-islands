@@ -44,6 +44,36 @@ local function buildMain()
 		CallbackOnCreation = true;
 		Callback = function(newValue) game.RunService:Set3dRenderingEnabled(newValue) end;
 	})
+	
+	local AnimationService = require(game:GetService("ReplicatedStorage").
+									TS.animation["animation-service"]).AnimationService
+	local originalPlayAnimationFn = AnimationService.playAnimation
+	local originalPlayAnimationHumanoid = AnimationService.playAnimationHumanoid
+	
+	function restoreToolAnimations()
+		AnimationService.playAnimation = originalPlayAnimationFn
+		AnimationService.playAnimationHumanoid = originalPlayAnimationHumanoid
+	end
+	
+	function disableToolAnimations()
+		AnimationService.playAnimation = function() end
+		AnimationService.playAnimationHumanoid = function() end
+	end
+	
+	performanceSection:CreateToggle({
+		Name = "Disable Tool Animations";
+		Flag = "disableToolAnimations";
+		Default = true;
+		Warning = "Experimental";
+		CallbackOnCreation = true;
+		Callback = function(disableFlag)
+			if (disableFlag) then
+				disableToolAnimations()
+			else
+				restoreToolAnimations()
+			end
+		end;
+	})
 
 	performanceSection:CreateToggle({
 		Name = "Render XP Orbs";
@@ -73,19 +103,24 @@ local function buildMain()
 			for _,branch in pairs(branches) do
 				table.insert(branchNames, branch.name)
 			end
-			selectVersionDropdown:Update (branchNames)
+			selectVersionDropdown:Update(branchNames)
 		end
 		
 		updateVersions()
-		while wait(60) do updateVersions() end
+		while wait(60) do pcall(updateVersions) end
 	end)
+	
+	function destroyUI()
+		restoreToolAnimations()
+		UI:Destroy()
+	end
 	
 	developmentSection:CreateInteractable({
 		Name = "Load Version";
 		ActionText = "Load Version";
 		Callback = function()
 			loadModule("roblox-islands-ui-v2.lua", selectedVersionNumber)
-			UI:Destroy()
+			destroyUI()
 		end;
 		Warning = "Do not unless you know what you're doing.";
 		-- TODO: Somehow need to tell executing process to stop?
@@ -94,7 +129,7 @@ local function buildMain()
 	developmentSection:CreateInteractable({
 		Name = "XXX - Destroy UI";
 		ActionText = "Destroy UI";
-		Callback = function() UI:Destroy() end;
+		Callback = destroyUI;
 		Warning = "Do not unless you know what you're doing.";
 		-- TODO: Somehow need to tell executing process to stop?
 	})

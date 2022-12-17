@@ -17,7 +17,7 @@ print("Loading Complete!")
 
 local StarterGui = game:GetService("StarterGui")
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1002) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 655) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 578) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 222) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1002) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 655) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 579) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 222) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
@@ -27,7 +27,7 @@ updates = "[Matt]: ❄️GUI Updated 12/16❄️"
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("dgSHboicbwtkcaWtqSf/zarwl")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("iQeodftghckbfyrdbWenfkLlkdtVtKsmjwGmq/dcgrzXtdppAzmmmhluaogqWjPdutyvTlvyopluus")
 sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("JwfvyHldz/nVFNBlheerqKedtebvumiuxWvznSiiYtVteun")
 addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("JwfvyHldz/nevnfOcnkvdNj")
 tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("JwfvyHldz/nhzdzqkfb")

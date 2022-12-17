@@ -17,28 +17,28 @@ print("Loading Complete!")
 
 local StarterGui = game:GetService("StarterGui")
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 997) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 650) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 574) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 218) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 998) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 651) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 575) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 219) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 12/11"
+updates = "[Matt]: ❄️GUI Updated 12/16❄️"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
 hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("hkqljwkbzEkbeCb/yohoZzPgrmlCdfjmoXiDkneyb")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("DdoeturtniUyyduzwdHkqze/iVrkccGrldbAte")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("DdoeturtniUyyduzwdHkqze/fscVjieNyabubimdfyzpbbntfhi")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("DdoeturtniUyyduzwdHkqze/zxYeQVpAnydrlqrefWonQWkvXom")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("pebngDirtflddoyadbattyauvpmMjroikvhsynte/pidlziNivkqghya")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("pebngDirtflddoyadbattyauvpmMjroikvhsynte/HvJKYijlxtfauyvekhCibUnga")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("pebngDirtflddoyadbattyauvpmMjroikvhsynte/xxrjwrxlwdiTnceuqpjzfibQnmobrSahwG")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kgXofx/ixdlTvicayfwmCrdbYrpc")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kgXofx/YWixhlkrttrzvoutyTwnEukdclnaddvs")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("kgXofx/oxnjuzntq")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eeduwgbqfNrlnppxytiN/zgaqtUua")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eeduwgbqfNrlnppxytiN/edymjzwfxxemoirniTdplka")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eeduwgbqfNrlnppxytiN/qadQbqdmqemaojccjmefvdsccCmkrbplxqLaJwoCopqn")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("pebngDirtflddoyadbattyauvpmMjroikvhsynte/lsfXrxxhukctfpMpLtmbpcGyxVqRnhmgmyecvyzcgpXvShiyif")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("pebngDirtflddoyadbattyauvpmMjroikvhsynte/pfkwkslRyzshRjjijfNgdyugbxfoNrAQsRs")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("pebngDirtflddoyadbattyauvpmMjroikvhsynte/KgCamrbvgFzclffSwmfiuaetgrwjshuiUOxrH")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("camrFaiimcoWw/qounrkTzwcjqryb")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eeduwgbqfNrlnppxytiN/byyZivjaentpiiYq")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eeduwgbqfNrlnppxytiN/iuwbpgf")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("eeduwgbqfNrlnppxytiN/dEegrnw")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("sNjfjqMl/JdoiWygwcapFerm")
 
 ---
 local Players = game:GetService("Players")
@@ -5360,6 +5360,57 @@ Mob11.MouseButton1Click:Connect(function()
         BV.MaxForce = Vector3.new(0,math.huge,0)
         local enemy = "slimeKing"
         while Toggled91 == true do
+            wait()
+            local mobs = getMobs()
+            if #mobs == 0 then
+                wait()
+            else
+                for k,v in pairs(mobs) do
+                    if v.Name == enemy then
+                    local mob = v
+                    tween, distance, speed = moveToMobs(mob)
+                    wait(distance/speed - 1)
+                    break
+                    end
+                end
+            end
+        end
+    end
+end)
+
+local Mob12 = Instance.new("TextButton")
+Mob12.Position = UDim2.new(0,71,1,106)
+Mob12.Size = UDim2.new(0,70,0,20)
+Mob12.BackgroundColor3 = Color3.fromRGB(85,52,43)
+Mob12.BorderSizePixel = 0
+Mob12.ZIndex = 2
+Mob12.Parent = Notification6
+Mob12.Text = "Gingerbread"
+Mob12.TextColor3 = Color3.new(1,1,1)
+Mob12.TextScaled = true
+Mob12.MouseButton1Click:Connect(function()
+    if Toggled92 then
+        Toggled92 = false
+        Mob12.BackgroundColor3 = Color3.fromRGB(85,52,43)
+        Mob12.Text = "Gingerbread"
+        Mob12.TextColor3 = Color3.fromRGB(255,200,1)
+        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        end
+        if tween then
+        tween:Cancel()
+        end
+    else
+        Toggled92 = true
+        Mob12.BackgroundColor3 = Color3.new(1,0,0)
+        Mob12.Text = "KILL"
+        Mob12.TextColor3 = Color3.fromRGB(0,0,0)
+        local BV = Instance.new("BodyVelocity")
+        BV.Velocity = Vector3.new(0,0,0)
+        BV.Parent = Character.HumanoidRootPart
+        BV.MaxForce = Vector3.new(0,math.huge,0)
+        local enemy = "evilGingerbread"
+        while Toggled92 == true do
             wait()
             local mobs = getMobs()
             if #mobs == 0 then

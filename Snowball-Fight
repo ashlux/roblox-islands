@@ -75,7 +75,7 @@ local function createMainBackground()
     local Background = Instance.new("Frame")
     Background.Name = "mainPage"
     Background.Parent = CmdGui
-    Background.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     Background.BorderSizePixel = 0
     Background.BorderColor3 = Color3.new(1,0,1)
     Background.Position = UDim2.new(0.12, 0, 0.5, 0)
@@ -83,13 +83,14 @@ local function createMainBackground()
     Background.Active = true
     
     local hideFromGrid = Instance.new("Folder")
+    hideFromGrid.Name = "Top Bar"
     hideFromGrid.Parent = Background
     
     local CmdName = Instance.new("TextButton")
     CmdName.Name = "Drag Bar"
     CmdName.AutoButtonColor = false
     CmdName.Parent = hideFromGrid
-    CmdName.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    CmdName.BackgroundColor3 = Color3.fromRGB(100, 100, 250)
     CmdName.BorderSizePixel = 0
     CmdName.Size = UDim2.new(0.9, 0, 0.1, 0)
     CmdName.Font = Enum.Font.GothamBlack
@@ -120,7 +121,7 @@ local function createMainBackground()
     local Background2 = Instance.new("Frame")
     Background2.Name = "mainPage"
     Background2.Parent = Background
-    Background2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Background2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     Background2.BorderSizePixel = 0
     Background2.BorderColor3 = Color3.new(1,0,1)
     Background2.Position = UDim2.new(0, 0, 0.15, 0)
@@ -134,23 +135,25 @@ local function createMainBackground()
     Grid.Parent = Background2
     
     local snowballThrow = Instance.new("TextButton")
-    snowballThrow.BackgroundColor3 = Color3.fromRGB(50,100,50)
+    snowballThrow.BackgroundColor3 = Color3.fromRGB(0,0,150)
     snowballThrow.BorderColor3 = Color3.new(1,1,1)
     snowballThrow.ZIndex = 2
+    snowballThrow.Font = Enum.Font.Antique
     snowballThrow.Parent = Background2
     snowballThrow.Text = "Throw Snowball"
-    snowballThrow.TextColor3 = Color3.new(1,1,1)
+    snowballThrow.TextColor3 = Color3.fromRGB(200,200,250)
     snowballThrow.TextScaled = true
     snowballThrow.MouseButton1Click:Connect(throwSnowball)
     
     local God = Instance.new("TextButton")
-    God.BackgroundColor3 = Color3.fromRGB(50,50,50)
+    God.BackgroundColor3 = Color3.fromRGB(0,0,150)
     God.BorderSizePixel = 1
-    God.BorderColor3 = Color3.fromRGB(200,100,100)
+    God.BorderColor3 = Color3.fromRGB(250,250,250)
     God.ZIndex = 2
+    God.Font = Enum.Font.Antique
     God.Parent = Background2
     God.Text = "Enable God Mode"
-    God.TextColor3 = Color3.fromRGB(50,200,100)
+    God.TextColor3 = Color3.fromRGB(200,200,150)
     God.TextScaled = true
     God.MouseButton1Click:Connect(function()
         Character.CurrentHealth:Destroy()

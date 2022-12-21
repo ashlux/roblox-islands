@@ -12,6 +12,7 @@ end
 local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
 local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
+local breakModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/break-blocks-module.lua")
 
 print("Loading Complete!")
 
@@ -230,7 +231,7 @@ end
 return location, Point
 end
 
-function goToPoint(Point, distance)
+local function goToPoint(Point, distance)
     if (HR.Position - Point).magnitude > distance then
     Distance = (HR.Position - Point).Magnitude
     Speed = 25
@@ -1882,7 +1883,7 @@ Notification4.TextScaled = true
 
 local Notification5 = Instance.new("TextLabel")
 Notification5.Size = UDim2.new(0,150,0,15)
-Notification5.Position = UDim2.new(0,0,0,170)
+Notification5.Position = UDim2.new(0,0,0,190)
 Notification5.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification5.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification5.ZIndex = 2
@@ -3154,7 +3155,7 @@ Item64.TextColor3 = Color3.fromRGB(250,250,250)
 Item64.TextScaled = true
 
 local Item65 = Instance.new("TextButton")
-Item65.Position = UDim2.new(0,71,1,106)
+Item65.Position = UDim2.new(0,71,1,85)
 Item65.Size = UDim2.new(0,70,0,20)
 Item65.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item65.BorderSizePixel = 1
@@ -3286,6 +3287,59 @@ Item75.Text = "Auto-Fish"
 Item75.TextColor3 = Color3.fromRGB(250,250,250)
 Item75.TextScaled = true
 
+local presentOpener = Instance.new("TextButton")
+presentOpener.Position = UDim2.new(0,71,1,106)
+presentOpener.Size = UDim2.new(0,70,0,20)
+presentOpener.BackgroundColor3 = Color3.fromRGB(63,63,63)
+presentOpener.BorderSizePixel = 1
+presentOpener.ZIndex = 2
+presentOpener.Parent = Notification3
+presentOpener.Text = "Open Presents"
+presentOpener.TextColor3 = Color3.fromRGB(250,250,250)
+presentOpener.TextScaled = true
+presentOpener.MouseButton1Click:Connect(function()
+    if openingPresents then
+        openingPresents = false
+        presentOpener.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        presentOpener.Text = "Open Presents"
+        presentOpener.TextColor3 = Color3.fromRGB(250,250,250)
+    else
+        openingPresents = true
+        presentOpener.BackgroundColor3 = Color3.fromRGB(250,250,250)
+        presentOpener.Text = "Opening"
+        presentOpener.TextColor3 = Color3.fromRGB(0,0,0)
+        while openingPresents and task.wait() do
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_22:InvokeServer()
+        end
+    end
+end)
+
+local presentBreaker = Instance.new("TextButton")
+presentBreaker.Position = UDim2.new(0,0,1,127)
+presentBreaker.Size = UDim2.new(0,140,0,20)
+presentBreaker.BackgroundColor3 = Color3.fromRGB(63,63,63)
+presentBreaker.BorderSizePixel = 1
+presentBreaker.ZIndex = 2
+presentBreaker.Parent = Notification3
+presentBreaker.Text = "Present Breaker"
+presentBreaker.TextColor3 = Color3.fromRGB(250,250,250)
+presentBreaker.TextScaled = true
+presentBreaker.MouseButton1Click:Connect(function()
+    if breakingPresents then
+        breakingPresents = false
+        presentBreaker.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        presentBreaker.Text = "Present Breaker"
+        presentBreaker.TextColor3 = Color3.fromRGB(250,250,250)
+        breakModule.stopBreaking()
+    else
+        breakingPresents = true
+        presentBreaker.BackgroundColor3 = Color3.fromRGB(250,250,250)
+        presentBreaker.Text = "Breaking Presents"
+        presentBreaker.TextColor3 = Color3.fromRGB(0,0,0)
+        breakModule.breakThisBlock("christmasPresent3")
+    end
+end)
+
 local Item76 = Instance.new("TextButton")
 Item76.Position = UDim2.new(0,0,1,21)
 Item76.Size = UDim2.new(0,141,0,20)
@@ -3320,7 +3374,7 @@ Item78.TextColor3 = Color3.fromRGB(250,250,250)
 Item78.TextScaled = true
 
 local Item79 = Instance.new("TextButton")
-Item79.Position = UDim2.new(0,0,1,127)
+Item79.Position = UDim2.new(0,0,1,148)
 Item79.Size = UDim2.new(0,70,0,20)
 Item79.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item79.BorderSizePixel = 1
@@ -7963,7 +8017,7 @@ end
 end)
 
 local BFly = Instance.new("TextButton")
-BFly.Position = UDim2.new(0,71,1,127)
+BFly.Position = UDim2.new(0,71,1,148)
 BFly.Size = UDim2.new(0,70,0,20)
 BFly.BackgroundColor3 = Color3.fromRGB(63,63,63)
 BFly.BorderSizePixel = 1

@@ -58,22 +58,18 @@ local function breakThisBlock(Block)
         local Blocks = getBlocks(Block)
         for i,v in pairs(Blocks) do
             tween, Time = goToPoint(v.Position)
+            print(tween, Time)
             wait(Time)
-            local tooMuch = 0
-            repeat
-                local args = {
-                [1] = {
-                ["player_tracking_category"] = "join_from_web",
-                ["part"] = v,
-                ["block"] = v,
-                ["norm"] = v.Position,
-                ["pos"] = Vector3.new(0, 1, 0)
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-                tooMuch = tooMuch + 1
-            until v:FindFirstChild("Health") == nil or tooMuch == 20 or Player:GetAttribute("breaking") == false
-        break
+            local args = {
+            [1] = {
+            ["player_tracking_category"] = "join_from_web",
+            ["part"] = v,
+            ["block"] = v,
+            ["norm"] = v.Position,
+            ["pos"] = Vector3.new(0, 1, 0)
+            }
+            }
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
         end
     end
 end
@@ -82,6 +78,7 @@ local function stopBreaking()
     setBreaking(false)
     unFloat()
     if tween then
+        print("stopping", tween)
         tween:Cancel()
     end
 end

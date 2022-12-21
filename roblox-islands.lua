@@ -33,7 +33,7 @@ updates = "[Matt]: ❄️GUI Updated 12/19❄️"
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wmfdebhrw/xahnPEtlzmnsBqqbrcvwzjXjwtNnTifa")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vbqphqyGdarxizgccd/gtoQI")
 sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("aozcuRyFeejt/sKwfghtkzGbIilfonptlamkssvuaoaKxV")
 addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("aozcuRyFeejt/npswnaKnS")
 tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("aozcuRyFeejt/UyoqvazdkzfmtPecrpabbxJ")

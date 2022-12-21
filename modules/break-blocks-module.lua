@@ -85,6 +85,6 @@ local function stopBreaking()
 end
 
 return {
-    breakThisBlock = breakThisBlock
+    breakThisBlock = breakThisBlock,
     stopBreaking = stopBreaking
 }

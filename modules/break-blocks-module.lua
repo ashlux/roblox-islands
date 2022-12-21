@@ -76,12 +76,14 @@ local function breakThisBlock(Block)
         break
         end
     end
-    tween:Cancel()
-    unFloat()
 end
 
 local function stopBreaking()
     setBreaking(false)
+    unFloat()
+    if tween then
+        tween:Cancel()
+    end
 end
 
 return {

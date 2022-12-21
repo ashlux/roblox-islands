@@ -23,7 +23,7 @@ end
 
 local StarterGui = game:GetService("StarterGui")
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1006) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 659) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 583) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 227) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1007) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 660) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 584) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 228) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
@@ -34,17 +34,17 @@ StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), 
 
 --- these items change all the dang time!
 hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("vbqphqyGdarxizgccd/gtoQI")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("aozcuRyFeejt/sKwfghtkzGbIilfonptlamkssvuaoaKxV")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("aozcuRyFeejt/npswnaKnS")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("aozcuRyFeejt/UyoqvazdkzfmtPecrpabbxJ")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("teiejiqUZgd/tRxoadafd")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("QzLqgDuiqnlkpyWWPegmyfpvrrHxf/vqxshzBEsqhxl")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("QzLqgDuiqnlkpyWWPegmyfpvrrHxf/kdtkbstcCzazyOlHajflsCdx")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("QzLqgDuiqnlkpyWWPegmyfpvrrHxf/ztrOrbmplnfabl")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ynnopTkz/UsookoskklebhlgsmtbcvowsatVCLmwaomvznl")
 closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("teiejiqUZgd/ipeoujzSktJfxirJhAzuwtnrxvpRwb")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("teiejiqUZgd/gieebrzfybogwcschuclYxm")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ynnopTkz/qCeyfdpaIevrt")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("teiejiqUZgd/LbasrqjbfwwfNtbryfblVyb")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("teiejiqUZgd/vgAqdpzpxuBfdnl")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("teiejiqUZgd/shzrSwXonsvzue")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("fFozdsrqjjEdjOmqeTfKlyu/cpykiuyevjZchswqQnikBhRatu")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ynnopTkz/nWjuqcbnk")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ynnopTkz/cgqmketicihkylwvuhdfeqcjqulcaQwstvcn")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ynnopTkz/ocsGtqjywesizfxlAszwh")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Hosuekixogjuf/yYzde")
 
 ---
 local Players = game:GetService("Players")

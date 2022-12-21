@@ -17,6 +17,8 @@ local HR = Character.HumanoidRootPart
 local Mouse = Player:GetMouse()
 local RUN = true
 
+local shootEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("wmfdebhrw/tLkjbvaynQlkJuvsupehWmcSybtehf")
+
 local function getClosestPlayer()
     local playerRoots = {}
     for i,v in pairs(Players:GetPlayers()) do
@@ -39,7 +41,6 @@ end
 
 local function throwSnowball()
     local HttpService = game:GetService("HttpService")
-    local shootEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("qBhbrQqzapAlaccSn/bZzcenijvpytaviwfoLqwetpcyxIkpmjymx")
     local direction = getDirection()
     local snowball = Character:FindFirstChild("snowball") or Player.Backpack:FindFirstChild("snowball")
 

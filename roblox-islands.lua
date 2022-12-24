@@ -42,8 +42,8 @@ closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.n
 emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ygizocfsdjcdelkcrysNxmx/agbnec")
 refillItem = emptyItem
 refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ygizocfsdjcdelkcrysNxmx/mjaJowSgmosdbjTakskzfKiiqeIgoaHsbdFxdzgp")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ygizocfsdjcdelkcrysNxmx/mjaJowSgmosdbjTakskzfKiiqeIgoaHsbdFxdzgp")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ygizocfsdjcdelkcrysNxmx/jipptouzdv")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ygizocfsdjcdelkcrysNxmx/jipptouzdv")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ygizocfsdjcdelkcrysNxmx/KDZetaOdlwOxuckuqqbvwzdghyEyo")
 useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("LxMbPxbpehnTfxfrbtfdvjubku/oxmcejrqrIRahfwJanPaoNjzuEovahjrVhfpjoi")
 
 ---

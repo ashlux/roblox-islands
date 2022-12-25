@@ -69,6 +69,6 @@ local function stopWaterClosestFlower()
 end
 
 return {
-    waterClosestFlower = startWaterClosestFlower
+    waterClosestFlower = startWaterClosestFlower,
     stopWaterClosestFlower = stopWaterClosestFlower
 }

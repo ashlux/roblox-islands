@@ -2,7 +2,7 @@ print("Loading")
 
 repeat wait()
 until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
-local mouse = game.Players.LocalPlayer:GetMouse() 
+local mouse = game.Players.LocalPlayer:GetMouse()
 repeat wait() until mouse
 
 function loadModule(url)
@@ -13,6 +13,7 @@ local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-i
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
 local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
 local breakModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/break-blocks-module.lua")
+local flowerWaterModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/flower-water-module.lua")
 
 print("Loading Complete!")
 
@@ -2868,6 +2869,9 @@ Item45.Parent = Notification4
 Item45.Text = "Water Nearby"
 Item45.TextColor3 = Color3.fromRGB(250,250,250)
 Item45.TextScaled = true
+Item45.MouseButton1Click:Connect(function()
+    flowerWaterModule.waterOnlyNearby()
+end)
 
 local Item46 = Instance.new("TextButton")
 Item46.Position = UDim2.new(0,71,1,43)
@@ -4912,37 +4916,16 @@ end)
 Item35.MouseButton1Click:Connect(function()
     if Toggled24 then
         Toggled24 = false
-        RUN = false
         Item35.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item35.Text = "Water Flowers"
         Item35.TextColor3 = Color3.fromRGB(250,250,250)
+        flowerWaterModule.stopWaterClosestFlower()
     else
         Toggled24 = true
-        RUN = true
-        Humanoid.WalkSpeed = 0
         Item35.BackgroundColor3 = Color3.new(0,255,255)
         Item35.Text = "Waterin"
         Item35.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled24 == true and task.wait() do
-			for _,Fertile in pairs(Island.Blocks:GetChildren()) do
-				if (Fertile:IsA("Part")) and Fertile:FindFirstChild("Watered") and Fertile:FindFirstChild("Top") and Fertile.Watered.Value == false then
-					if Toggled24 == true then
-                        if (HR.Position - Fertile.Position).magnitude > 24 then
-                            Humanoid:MoveTo(Fertile.Position)
-                            Humanoid.MoveToFinished:wait()
-                        end
-                        if Player.Backpack:FindFirstChild("wateringCan") then
-                            Player.Backpack.wateringCan.Parent = Character
-                            task.wait()
-                        end
-                        local args = {
-                            [1] = {["block"] = Fertile}
-                        }
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer(unpack(args))
-					end
-				end
-			end
-        end
+        flowerWaterModule.startWaterClosestFlower()
     end
 end)
 
@@ -5676,34 +5659,6 @@ Item44.MouseButton1Click:Connect(function()
             end
         end
         end
-        end
-    end
-end)
-
-Item45.MouseButton1Click:Connect(function()
-    if Toggled29 then
-        Toggled29 = false
-        Item45.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        Item45.Text = "Water Nearby"
-        Item45.TextColor3 = Color3.fromRGB(250,250,250)
-    else
-        Toggled29 = true
-        Item45.BackgroundColor3 = Color3.new(0,255,255)
-        Item45.Text = "Watering Nearby"
-        Item45.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled29 == true do
-            task.wait()
-            for i,thirsty in pairs(Island.Blocks:GetChildren()) do
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - thirsty.Position).magnitude < 25 and thirsty:FindFirstChild("Watered") and thirsty.Watered.Value == false then
-                    if Player.Backpack:FindFirstChild("wateringCan") then
-                        Player.Backpack.wateringCan.Parent = Character
-                        task.wait()
-                    end
-                    local args =
-                    {[1] = {["block"] = thirsty}}
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer(unpack(args))
-                end
-            end
         end
     end
 end)

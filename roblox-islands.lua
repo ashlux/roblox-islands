@@ -826,7 +826,7 @@ Minimum.MouseButton1Click:Connect(function()
         Toggled73 = false
 	elseif Background.BackgroundTransparency == 1 then
 		Background.BackgroundTransparency = 0
-		Background.Size = UDim2.new(0, 120, 0, 220)
+		Background.Size = UDim2.new(0, 120, 0, 275)
 		CmdHandler.Visible = true
 	end
 end)

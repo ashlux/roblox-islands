@@ -24,7 +24,7 @@ local function getClosestFlower()
     end
     table.sort(flowers, function(t1, t2) 
 		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
-    return flowers:GetChildren()[1]
+    return flowers
 end
 
 local function runFaster()
@@ -56,10 +56,13 @@ local function startWaterClosestFlower()
     setWateringFertiles(true)
     runFaster()
     while Player:GetAttribute("wateringFertiles") and task.wait() do
-        local flower = getClosestFlower()
-        walkToFlower(flower)
-        equipWateringCan()
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
+        local flowers = getClosestFlower()
+        for _,flower in pairs(flowers) do
+            walkToFlower(flower)
+            equipWateringCan()
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
+            break
+        end
     end
 end
 
@@ -69,6 +72,6 @@ local function stopWaterClosestFlower()
 end
 
 return {
-    startWaterClosestFlower = startWaterClosestFlower,
+    waterClosestFlower = startWaterClosestFlower,
     stopWaterClosestFlower = stopWaterClosestFlower
 }

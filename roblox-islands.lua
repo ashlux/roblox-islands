@@ -4923,7 +4923,7 @@ Item35.MouseButton1Click:Connect(function()
         Item35.BackgroundColor3 = Color3.new(0,255,255)
         Item35.Text = "Waterin"
         Item35.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled24 == true do
+        while Toggled24 == true and task.wait() do
 			for _,Fertile in pairs(Island.Blocks:GetChildren()) do
 				if (Fertile:IsA("Part")) and Fertile:FindFirstChild("Watered") and Fertile:FindFirstChild("Top") and Fertile.Watered.Value == false then
 					if Toggled24 == true then

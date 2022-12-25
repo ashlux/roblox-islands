@@ -17,7 +17,7 @@ local HR = Character.HumanoidRootPart
 local Mouse = Player:GetMouse()
 local RUN = true
 
-local shootEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ugdLur/qPby")
+local shootEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("ugdLur/kvtdslIpnnpzjfvuFhslbnod")
 
 local function getClosestPlayer()
     local playerRoots = {}

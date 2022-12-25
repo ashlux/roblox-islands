@@ -4925,41 +4925,20 @@ Item35.MouseButton1Click:Connect(function()
         Item35.TextColor3 = Color3.fromRGB(0,0,0)
         while Toggled24 == true do
 			for _,Fertile in pairs(Island.Blocks:GetChildren()) do
-				if (Fertile:IsA("Part")) and Fertile:FindFirstChild("Watered") and Fertile:FindFirstChild("Top") then
-					if Fertile.Watered.Value == true then
-					    wait()
-					elseif Fertile.Watered.Value == false then
-					    if Toggled24 == true then
-					        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Fertile.Position).magnitude > 24 then
-                                game.Players.LocalPlayer.Character.Humanoid:MoveTo(Fertile.Position)
-                                game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
-                                for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                                    if v.Name == "wateringCan" then
-                                        v.Parent = game:GetService("Players").LocalPlayer.Character
-                                        wait()
-                                    end
-                                end
-                                local args = {
-                                    [1] = {
-                                    ["block"] = Fertile
-                                    }
-                                }
-                                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer(unpack(args))
-						    else
-                                for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                                    if v.Name == "wateringCan" then
-                                        v.Parent = game:GetService("Players").LocalPlayer.Character
-                                        wait()
-                                    end
-                                end
-                                local args = {
-                                [1] = {
-                                ["block"] = Fertile
-                                }
-                                }
-                                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer(unpack(args))
-                            end
+				if (Fertile:IsA("Part")) and Fertile:FindFirstChild("Watered") and Fertile:FindFirstChild("Top") and Fertile.Watered.Value == false then
+					if Toggled24 == true then
+                        if (HR.Position - Fertile.Position).magnitude > 24 then
+                            Humanoid:MoveTo(Fertile.Position)
+                            Humanoid.MoveToFinished:wait()
                         end
+                        if Player.Backpack:FindFirstChild("wateringCan") then
+                            Player.Backpack.wateringCan.Parent = Character
+                            task.wait()
+                        end
+                        local args = {
+                            [1] = {["block"] = Fertile}
+                        }
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer(unpack(args))
 					end
 				end
 			end
@@ -5713,14 +5692,12 @@ Item45.MouseButton1Click:Connect(function()
         Item45.Text = "Watering Nearby"
         Item45.TextColor3 = Color3.fromRGB(0,0,0)
         while Toggled29 == true do
-            wait()
+            task.wait()
             for i,thirsty in pairs(Island.Blocks:GetChildren()) do
                 if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - thirsty.Position).magnitude < 25 and thirsty:FindFirstChild("Watered") and thirsty.Watered.Value == false then
-                    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                        if v.Name == "wateringCan" then
-                            v.Parent = game:GetService("Players").LocalPlayer.Character
-                            wait()
-                        end
+                    if Player.Backpack:FindFirstChild("wateringCan") then
+                        Player.Backpack.wateringCan.Parent = Character
+                        task.wait()
                     end
                     local args =
                     {[1] = {["block"] = thirsty}}

@@ -27,6 +27,17 @@ local function getClosestFlower()
     return flowers
 end
 
+local function runFaster()
+    runFast = Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+        Humanoid.WalkSpeed = 30
+    end)
+    Humanoid.WalkSpeed = 30 -- this activates the initial change in walkspeed
+end
+
+local function unRunFaster()
+    runFast:Disconnect()
+end
+
 local function walkToFlower(flower)
     if (HR.Position - flower.Position).magnitude > 24 then
         Humanoid:MoveTo(flower.Position)
@@ -43,6 +54,7 @@ end
 
 local function startWaterClosestFlower()
     setWateringFertiles(true)
+    runFaster()
     while Player:GetAttribute("wateringFertiles") and task.wait() do
         local flower = getClosestFlower()
         walkToFlower(flower)
@@ -53,6 +65,7 @@ end
 
 local function stopWaterClosestFlower()
     setWateringFertiles(false)
+    unRunFaster()
 end
 
 return {

@@ -15,7 +15,7 @@ local function setWateringFertiles(value)
     Player:SetAttribute("wateringFertiles", value or false)
 end
 
-local function getClosestFlower()
+local function getClosestFlowerS()
     local flowers = {}
     for i,v in pairs(Island.Blocks:GetChildren()) do
         if (v:IsA("Part")) and v:FindFirstChild("Watered") and v:FindFirstChild("Top") and v.Watered.Value == false then
@@ -56,12 +56,11 @@ local function startWaterClosestFlower()
     setWateringFertiles(true)
     runFaster()
     while Player:GetAttribute("wateringFertiles") and task.wait() do
-        local flowers = getClosestFlower()
+        local flowers = getClosestFlowerS()
         for _,flower in pairs(flowers) do
             walkToFlower(flower)
             equipWateringCan()
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
-            break
         end
     end
 end

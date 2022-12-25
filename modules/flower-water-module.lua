@@ -42,7 +42,7 @@ local function walkToFlower(flower)
     local mag = (HR.Position - flower.Position).magnitude
     if mag > 24 then
         Humanoid:MoveTo(flower.Position)
-        wait((mag/30) - 0.9)
+        Humanoid.MoveToFinished:wait()
     end
 end
 
@@ -58,7 +58,7 @@ local function startWaterClosestFlower()
     runFaster()
     while Player:GetAttribute("wateringFertiles") and task.wait() do
         local flowers = getClosestFlowers()
-        for _,flower in pairs(flowers) do
+        for i,flower in pairs(flowers) do
             local mag = (HR.Position - flower.Position).magnitude
             walkToFlower(flower)
             equipWateringCan()

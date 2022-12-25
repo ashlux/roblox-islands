@@ -39,9 +39,10 @@ local function unRunFaster()
 end
 
 local function walkToFlower(flower)
-    if (HR.Position - flower.Position).magnitude > 24 then
+    local mag = (HR.Position - flower.Position).magnitude
+    if mag > 24 then
         Humanoid:MoveTo(flower.Position)
-        Humanoid.MoveToFinished:wait()
+        wait((mag/30) - 0.9)
     end
 end
 

@@ -58,11 +58,12 @@ local function startWaterClosestFlower()
     runFaster()
     while Player:GetAttribute("wateringFertiles") and task.wait() do
         local flowers = getClosestFlowers()
-        for i,flower in pairs(flowers) do
+        for _,flower in pairs(flowers) do
+            local mag = (HR.Position - flower.Position).magnitude
             walkToFlower(flower)
             equipWateringCan()
             game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
-            if i >= 30 then break end
+            if mag > 24 then break end
         end
     end
 end

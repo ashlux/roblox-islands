@@ -24,7 +24,7 @@ local function getClosestFlower()
     end
     table.sort(flowers, function(t1, t2) 
 		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
-    return flowers
+    return flowers:GetChildren()[1]
 end
 
 local function runFaster()
@@ -69,6 +69,6 @@ local function stopWaterClosestFlower()
 end
 
 return {
-    startWaterClosestFlower = startWaterClosestFlower,
+    waterClosestFlower = startWaterClosestFlower
     stopWaterClosestFlower = stopWaterClosestFlower
 }

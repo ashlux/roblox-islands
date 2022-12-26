@@ -13,7 +13,7 @@ local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-i
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
 local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
 local breakModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/break-blocks-module.lua")
-local flowerWaterModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/flower-water-module.lua")
+local flowerWaterModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/flower-module.lua")
 
 print("Loading Complete!")
 

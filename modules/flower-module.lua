@@ -73,7 +73,19 @@ local function stopWaterClosestFlower()
     unRunFaster()
 end
 
+local function waterOnlyNearby()
+    local flowers = getClosestFlowers()
+    for i,flower in pairs(flowers) do
+        local mag = (HR.Position - flower.Position).magnitude
+        if mag < 24 then
+        equipWateringCan()
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
+        end
+    end
+end
+
 return {
     startWaterClosestFlower = startWaterClosestFlower,
-    stopWaterClosestFlower = stopWaterClosestFlower
+    stopWaterClosestFlower = stopWaterClosestFlower,
+    waterOnlyNearby = waterOnlyNearby
 }

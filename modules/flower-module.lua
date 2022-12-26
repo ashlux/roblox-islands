@@ -15,7 +15,11 @@ local function setWateringFertiles(value)
     Player:SetAttribute("wateringFertiles", value or false)
 end
 
-local function getClosestFlowers()
+local function setPickingUnfertiles(value)
+    Player:SetAttribute("pickingUnfertiles", value or false)
+end
+
+local function getClosestFertileFlowers()
     local flowers = {}
     for i,v in pairs(Island.Blocks:GetChildren()) do
         if (v:IsA("Part")) and v:FindFirstChild("Watered") and v:FindFirstChild("Top") and v.Watered.Value == false then
@@ -57,7 +61,7 @@ local function startWaterClosestFlower()
     setWateringFertiles(true)
     runFaster()
     while Player:GetAttribute("wateringFertiles") and task.wait() do
-        local flowers = getClosestFlowers()
+        local flowers = getClosestFertileFlowers()
         for i,flower in pairs(flowers) do
             local mag = (HR.Position - flower.Position).magnitude
             walkToFlower(flower)
@@ -74,7 +78,7 @@ local function stopWaterClosestFlower()
 end
 
 local function waterOnlyNearby()
-    local flowers = getClosestFlowers()
+    local flowers = getClosestFertileFlowers()
     for i,flower in pairs(flowers) do
         local mag = (HR.Position - flower.Position).magnitude
         if mag < 24 then
@@ -84,8 +88,36 @@ local function waterOnlyNearby()
     end
 end
 
+local function getUnfertiles()
+    local flowers = {}
+    for i,v in pairs(Island.Blocks:GetChildren()) do
+        if (v:IsA("Part")) and v:FindFirstChild("Watered") and v:FindFirstChild("Top") == nil then
+            table.insert(flowers, v)
+        end
+    end
+    return flowers
+end
+
+local function startPickUnfertiles()
+    setPickingUnfertiles(true)
+    while Player:GetAttribute("pickingUnfertiles") and task.wait() do
+        local flowers = getUnfertiles()
+        for _,v in pairs(flowers) do
+            if Player:GetAttribute("pickingUnfertiles") then
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer({["flower"] = v})
+            end
+        end
+    end
+end
+
+local function stopPickUnfertiles()
+    setPickingUnfertiles(false)
+end
+
 return {
     startWaterClosestFlower = startWaterClosestFlower,
     stopWaterClosestFlower = stopWaterClosestFlower,
-    waterOnlyNearby = waterOnlyNearby
+    waterOnlyNearby = waterOnlyNearby,
+    startPickUnfertiles = startPickUnfertiles,
+    stopPickUnfertiles = stopPickUnfertiles
 }

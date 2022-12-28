@@ -14,6 +14,7 @@ local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
 local breakModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/break-blocks-module.lua")
 local flowerWaterModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/flower-module.lua")
+local animalModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/animal-module.lua")
 
 print("Loading Complete!")
 
@@ -1802,7 +1803,7 @@ N1.TextColor3 = Color3.fromRGB(2,2,2)
 N1.TextScaled = true
 
 local N2 = Instance.new("TextLabel")
-N2.Position = UDim2.new(0,0,0,350)
+N2.Position = UDim2.new(0,0,0,320)
 N2.Size = UDim2.new(0,150,0,15)
 N2.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 N2.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1928,12 +1929,12 @@ Notification8.TextScaled = true
 
 local Notification9 = Instance.new("TextLabel")
 Notification9.Position = UDim2.new(0,0,0,0)
-Notification9.Size = UDim2.new(0,140,0,15)
+Notification9.Size = UDim2.new(0,140,0,50)
 Notification9.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification9.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification9.ZIndex = 2
 Notification9.Parent = MachineHandler
-Notification9.Text = "Stonecutter (broken)"
+Notification9.Text = "Just use V2 for these things, im lazy"
 Notification9.TextColor3 = Color3.fromRGB(2,2,2)
 Notification9.TextScaled = true
 
@@ -1947,6 +1948,7 @@ Notification10.Parent = MachineHandler
 Notification10.Text = "Small Furnace"
 Notification10.TextColor3 = Color3.fromRGB(2,2,2)
 Notification10.TextScaled = true
+Notification10.Visible = false
 
 local Notification11 = Instance.new("TextLabel")
 Notification11.Position = UDim2.new(0,0,0,0)
@@ -3010,6 +3012,7 @@ Item56.Parent = Notification9
 Item56.Text = "aquaBlock -> aquaCarved"
 Item56.TextColor3 = Color3.fromRGB(0,0,0)
 Item56.TextScaled = true
+Item56.Visible = false
 
 local Item57 = Instance.new("TextButton")
 Item57.Position = UDim2.new(0,0,1,22)
@@ -3021,6 +3024,7 @@ Item57.Parent = Notification9
 Item57.Text = "aquaBlock -> aquaTiles"
 Item57.TextColor3 = Color3.fromRGB(0,0,0)
 Item57.TextScaled = true
+Item57.Visible = false
 
 local Item58 = Instance.new("TextButton")
 Item58.Position = UDim2.new(0,0,1,1)
@@ -3032,6 +3036,7 @@ Item58.Parent = Notification9
 Item58.Text = "aquaBlock -> aquaBrick"
 Item58.TextColor3 = Color3.fromRGB(0,0,0)
 Item58.TextScaled = true
+Item58.Visible = false
 
 local Item59 = Instance.new("TextButton")
 Item59.Position = UDim2.new(0,72,1,22)
@@ -3113,17 +3118,6 @@ fastPick.MouseButton1Click:Connect(function()
         unclicks = uis.InputEnded:Connect(onInputEnd)
     end
 end)
-
-local Item62 = Instance.new("TextButton")
-Item62.Position = UDim2.new(0,0,1,127)
-Item62.Size = UDim2.new(0,70,0,20)
-Item62.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item62.BorderSizePixel = 1
-Item62.ZIndex = 2
-Item62.Parent = N1
-Item62.Text = "Pick Avocados"
-Item62.TextColor3 = Color3.fromRGB(250,250,250)
-Item62.TextScaled = true
 
 local Item63 = Instance.new("TextButton")
 Item63.Position = UDim2.new(0,72,1,43)
@@ -3214,30 +3208,19 @@ Item67.Text = "Farming >"
 Item67.TextColor3 = Color3.fromRGB(250,250,250)
 Item67.TextScaled = true
 
-local Item68 = Instance.new("TextButton")
-Item68.Position = UDim2.new(0,71,1,106)
-Item68.Size = UDim2.new(0,70,0,20)
-Item68.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item68.BorderSizePixel = 1
-Item68.ZIndex = 2
-Item68.Parent = N1
-Item68.Text = "Candy Cane"
-Item68.TextColor3 = Color3.fromRGB(250,250,250)
-Item68.TextScaled = true
-
 local Item69 = Instance.new("TextButton")
-Item69.Position = UDim2.new(0,0,1,85)
+Item69.Position = UDim2.new(0,72,1,85)
 Item69.Size = UDim2.new(0,70,0,20)
 Item69.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item69.BorderSizePixel = 1
 Item69.ZIndex = 2
 Item69.Parent = N1
-Item69.Text = "Dragon Fruit"
+Item69.Text = "Fertility Potion Aura"
 Item69.TextColor3 = Color3.fromRGB(250,250,250)
 Item69.TextScaled = true
 
 local Item70 = Instance.new("TextButton")
-Item70.Position = UDim2.new(0,72,1,85)
+Item70.Position = UDim2.new(0,0,1,106)
 Item70.Size = UDim2.new(0,70,0,20)
 Item70.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item70.BorderSizePixel = 1
@@ -3354,17 +3337,7 @@ Item76.Parent = Notification10
 Item76.Text = "Clear Small Furnace"
 Item76.TextColor3 = Color3.new(1,1,1)
 Item76.TextScaled = true
-
-local Item77 = Instance.new("TextButton")
-Item77.Position = UDim2.new(0,0,1,106)
-Item77.Size = UDim2.new(0,71,0,20)
-Item77.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item77.BorderSizePixel = 1
-Item77.ZIndex = 2
-Item77.Parent = N1
-Item77.Text = "Spirit Crystals"
-Item77.TextColor3 = Color3.new(1,1,1)
-Item77.TextScaled = true
+Item76.Visible = false
 
 local Item78 = Instance.new("TextButton")
 Item78.Position = UDim2.new(0,72,1,64)
@@ -3809,7 +3782,7 @@ Item87.TextColor3 = Color3.fromRGB(250,250,250)
 Item87.TextScaled = true
 
 local Item88 = Instance.new("TextButton")
-Item88.Position = UDim2.new(0,1,1,148)
+Item88.Position = UDim2.new(0,1,1,85)
 Item88.Size = UDim2.new(0,70,0,20)
 Item88.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item88.BorderSizePixel = 1
@@ -3818,17 +3791,6 @@ Item88.Parent = N1
 Item88.Text = "Composter"
 Item88.TextColor3 = Color3.fromRGB(250,250,250)
 Item88.TextScaled = true
-
-local Item89 = Instance.new("TextButton")
-Item89.Position = UDim2.new(0,71,1,148)
-Item89.Size = UDim2.new(0,70,0,20)
-Item89.BackgroundColor3 = Color3.fromRGB(63,63,63)
-Item89.BorderSizePixel = 1
-Item89.ZIndex = 2
-Item89.Parent = N1
-Item89.Text = "Rice"
-Item89.TextColor3 = Color3.fromRGB(250,250,250)
-Item89.TextScaled = true
 
 local function NoclipLoop()
     if noClip == true and Player.Character ~= nil then
@@ -3842,57 +3804,14 @@ end
 
 local VoidParasite = Instance.new("TextButton")
 VoidParasite.Position = UDim2.new(0,0,1,1)
-VoidParasite.Size = UDim2.new(0,70,0,20)
+VoidParasite.Size = UDim2.new(0,140,0,40)
 VoidParasite.BackgroundColor3 = Color3.fromRGB(150,63,150)
 VoidParasite.BorderSizePixel = 1
 VoidParasite.ZIndex = 2
 VoidParasite.Parent = N2
-VoidParasite.Text = "Void Parasite"
+VoidParasite.Text = "Use Void Rocks under mining for VoidParasite"
 VoidParasite.TextColor3 = Color3.fromRGB(250,250,250)
 VoidParasite.TextScaled = true
-VoidParasite.MouseButton1Click:Connect(function()
-    if Toggled87 then
-        Toggled87 = false
-        VoidParasite.BackgroundColor3 = Color3.fromRGB(150,63,150)
-        VoidParasite.Text = "Void Parasite"
-        VoidParasite.TextColor3 = Color3.new(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        Noclipping:Disconnect()
-        noClip = false
-        if tween then
-        tween:Cancel()
-        end
-    else
-        Toggled87 = true
-        VoidParasite.BackgroundColor3 = Color3.new(0,255,255)
-        VoidParasite.Text = "Farming!"
-        VoidParasite.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        noClip = true
-        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-        while Toggled87 == true do
-            wait()
-            Point = game:GetService("Workspace").WildernessBlocks:WaitForChild("voidParasite").Position
-            Distance = (HR.Position - Point).Magnitude
-            Speed = 20
-            Time = Distance/Speed
-            tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-            tween:Play()
-            wait(Time - 2)
-            args = {
-            [1] = {
-            ["player"] = game:GetService("Players").LocalPlayer,
-            ["player_tracking_category"] = "join_from_web",
-            ["model"] = game:GetService("Workspace").WildernessBlocks:FindFirstChild("voidParasite")
-            }
-            }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
-        end
-    end
-end)
 
 
 Title.MouseButton1Click:Connect(function()
@@ -6020,53 +5939,6 @@ Item61.MouseButton1Click:Connect(function()
     end
 end)
 
-Item62.MouseButton1Click:Connect(function()
-    if Toggled45 then
-        Toggled45 = false
-        Item62.BackgroundColor3 = Color3.fromRGB(63,63,63)
-        Item62.Text = "Pick Avocados"
-        Item62.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then
-        tween:Cancel()
-        end
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-    else
-        Toggled45 = true
-        Item62.BackgroundColor3 = Color3.new(0,255,255)
-        Item62.Text = "Picking Fruit"
-        Item62.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        local YSpeed = 0
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        while Toggled45 == true do
-            wait()
-            for i,Avocado in pairs(Island.Blocks:GetDescendants()) do
-    if (Avocado:IsA("Tool")) and Avocado.Name == "avocado" then
-        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Avocado.Parent.Position).magnitude > 24 then
-            Point = Avocado.Parent.Position
-            Distance = (HR.Position - Point).Magnitude
-            Speed = 20
-            Time = Distance/Speed
-            tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-            tween:Play()
-            wait(Time - 1)
-        end
-        local args = {
-            [1] = {
-                ["tool"] = Avocado,
-                ["player_tracking_category"] = "join_from_web"
-            }
-        }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
-
-    end
-end
-end
-end
-end)
-
 Item63.MouseButton1Click:Connect(function()
     if Toggled46 then
         Toggled46 = false
@@ -6486,131 +6358,19 @@ for i,v in pairs(CmdHandler6:GetChildren()) do
     end)
 end
 
-Item68.MouseButton1Click:Connect(function()
-    if Toggled51 then
-        Toggled51 = false
-        Item68.BackgroundColor3 = Color3.fromRGB(55,55,55)
-        Item68.Text = "Candy Cane"
-        Item68.TextColor3 = Color3.new(1,1,1)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
-        if tween then
-        tween:Cancel()
-        end
-    else
-        Toggled51 = true
-        Item68.BackgroundColor3 = Color3.new(0,255,255)
-        Item68.Text = "Cane!"
-        Item68.TextColor3 = Color3.fromRGB(0,0,0)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        while Toggled51 == true do
-            wait()
-for i,trellis in pairs(Island.Blocks:GetChildren()) do
-    if trellis.Name == "trellis" then
-        local ray = Ray.new(trellis.Position, Vector3.new(0,3,0))
-        local hitPart, hitPosition = workspace:FindPartOnRay(ray,trellis)
-        if hitPart then
-            if hitPart.Name == "candyCaneVine" and hitPart.stage.Value < 3 then
-            elseif hitPart.Name == "candyCaneVine" and hitPart.stage.Value == 3 then
-                if Toggled51 == true then
-                    if (HR.Position - hitPart.Position).magnitude > 24 then
-                        Point = hitPart.Position
-                        Distance = (HR.Position - Point).Magnitude
-                        Speed = 20
-                        Time = Distance/Speed
-                        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                        tween:Play()
-                        wait(Time - 1)
-                    end
-                local args = {
-                [1] = {
-                    ["player"] = game:GetService("Players").LocalPlayer,
-                    ["player_tracking_category"] = "join_from_web",
-                    ["model"] = hitPart
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
-                end
-            end
-        else
-            if Toggled51 == true then
-            local args = {
-            [1] = {
-                ["upperBlock"] = false,
-                ["cframe"] = CFrame.new((trellis.Position + Vector3.new(0,3,0)), (trellis.Position + Vector3.new(0,0,3))),
-                ["player_tracking_category"] = "join_from_web",
-                ["blockType"] = "candyCaneVine"
-            }
-            }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
-            end
-        end
-    end
-end
-        end
-    end
-end)
-
 Item69.MouseButton1Click:Connect(function()
     if Toggled52 then
         Toggled52 = false
         Item69.BackgroundColor3 = Color3.fromRGB(55,55,55)
-        Item69.Text = "Dragon Fruit"
+        Item69.Text = "Fertility Potion Aura"
         Item69.TextColor3 = Color3.new(1,1,1)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
-        if tween then
-        tween:Cancel()
-        end
+        animalModule.stopFertilityLoop()
     else
         Toggled52 = true
         Item69.BackgroundColor3 = Color3.new(0,255,255)
-        Item69.Text = "Dragon!"
+        Item69.Text = "Giving Potions"
         Item69.TextColor3 = Color3.fromRGB(0,0,0)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        while Toggled52 == true do
-            wait()
-for i,trellis in pairs(Island.Blocks:GetChildren()) do
-    if trellis.Name == "trellis" then
-        local ray = Ray.new(trellis.Position, Vector3.new(0,3,0))
-        local hitPart, hitPosition = workspace:FindPartOnRay(ray,trellis)
-        if hitPart then
-            if hitPart.Name == "dragonfruit" and hitPart.stage.Value < 3 then
-            elseif hitPart.Name == "dragonfruit" and hitPart.stage.Value == 3 then
-                if Toggled52 == true then
-                    if (HR.Position - hitPart.Position).magnitude > 24 then
-                        Point = hitPart.Position
-                        Distance = (HR.Position - Point).Magnitude
-                        Speed = 20
-                        Time = Distance/Speed
-                        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-                        tween:Play()
-                        wait(Time - 1)
-                    end
-                local args = {
-                [1] = {
-                    ["player"] = game:GetService("Players").LocalPlayer,
-                    ["player_tracking_category"] = "join_from_web",
-                    ["model"] = hitPart
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
-                end
-            end
-        else
-            if Toggled52 == true then
-            local args = {
-            [1] = {
-                ["upperBlock"] = false,
-                ["cframe"] = CFrame.new((trellis.Position + Vector3.new(0,3,0)), (trellis.Position + Vector3.new(0,0,3))),
-                ["player_tracking_category"] = "join_from_web",
-                ["blockType"] = "dragonfruit"
-            }
-            }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
-            end
-        end
-    end
-end
-        end
+        animalModule.fertilityAura()
     end
 end)
 
@@ -6933,116 +6693,19 @@ Item76.MouseButton1Click:Connect(function()
     end
 end)
 
-Item77.MouseButton1Click:Connect(function()
-    if Toggled59 then
-        Toggled59 = false
-        Item77.BackgroundColor3 = Color3.fromRGB(55,55,55)
-        Item77.Text = "Spirit Crystals"
-        Item77.TextColor3 = Color3.new(1,1,1)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
-        NoClipping:Disconnect()
-        noClip = false
-    else
-        Toggled59 = true
-        Item77.BackgroundColor3 = Color3.new(0,255,255)
-        Item77.Text = "Farming!"
-        Item77.TextColor3 = Color3.fromRGB(0,0,0)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        noClip = true
-        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-        while Toggled59 == true do
-            wait()
-for i,dirt in pairs(Island.Blocks:GetChildren()) do
-    if dirt.Name == "soil" then
-        local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
-        local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
-        if hitPart then
-            if hitPart.Name == "spiritCrop" and hitPart.stage.Value == 3 then
-                if Toggled59 == true then
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - hitPart.Position).magnitude > 24 then
-                        game.Players.LocalPlayer.Character.Humanoid:MoveTo(hitPart.Position)
-                        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
-                    end
-                end
-            end
-        else
-            if Toggled59 == true then
-            local args = {
-            [1] = {
-                ["upperBlock"] = false,
-                ["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
-                ["player_tracking_category"] = "join_from_web",
-                ["blockType"] = "spiritCrop"
-            }
-            }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
-            end
-        end
-    end
-end
-        end
-    end
-end)
-
 Item78.MouseButton1Click:Connect(function()
     if Toggled60 then
         Toggled60 = false
         Item78.BackgroundColor3 = Color3.fromRGB(55,55,55)
         Item78.Text = "Give Fertility Potions"
         Item78.TextColor3 = Color3.new(1,1,1)
-        if tween then
-        tween:Cancel()
-        end
+        animalModule.stopFertilityLoop()
     else
         Toggled60 = true
         Item78.BackgroundColor3 = Color3.new(0,255,255)
         Item78.Text = "Breeding Animals!"
         Item78.TextColor3 = Color3.fromRGB(0,0,0)
-        while Toggled60 == true do
-            wait()
-for i,Animal in pairs(Island.Entities:GetChildren()) do
-    if (Animal.Name == "horse" or Animal.Name == "sheep" or Animal.Name == "pig" or Animal.Name == "cow" or Animal.Name == "chicken" or Animal.Name == "duck" or Animal.Name == "yak" or Animal.Name == "turkey") and Animal.BreedSearch.Value == false then
-        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Animal.Position).magnitude > 23 then
-        Point = Animal.Position
-        Distance = (HR.Position - Point).Magnitude
-        Speed = 20
-        Time = Distance/Speed
-        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
-        tween:Play()
-        wait(Time - 2)
-    end
-        if Toggled60 == true then
-        for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-            if v.Name == "potionFertility" then
-                v.Parent = game:GetService("Players").LocalPlayer.Character
-                wait()
-            end
-        end
-        end
-    local args = {
-    [1] = {
-        ["animal"] = Animal
-    }
-    }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
-    end
-end
-wait(6)
-if Toggled60 == true then
-for i,spawneggs in pairs(Island.Blocks:GetDescendants()) do
-    if spawneggs.Name == "spawnEggSheepT1" or spawneggs.Name == "spawnEggSheepT2" or spawneggs.Name == "spawnEggSheepT3" or spawneggs.Name == "spawnEggCowT1" or spawneggs.Name == "spawnEggCowT2" or spawneggs.Name == "spawnEggCowT3" or spawneggs.Name == "spawnEggHorseT1" or spawneggs.Name == "spawnEggHorseT2" or spawneggs.Name == "spawnEggHorseT3" or spawneggs.Name == "spawnEggPigT1" or spawneggs.Name == "spawnEggPigT2" or spawneggs.Name == "spawnEggPigT3" or spawneggs.Name == "spawnEggChickenT1" or spawneggs.Name == "spawnEggChickenT2" or spawneggs.Name == "spawnEggChickenT3" or spawneggs.Name == "spawnEggYakT1" or spawneggs.Name == "spawnEggYakT2" or spawneggs.Name == "spawnEggYakT3" or spawneggs.Name == "spawnEggTurkeyT1" or spawneggs.Name == "spawnEggTurkeyT2" or spawneggs.Name == "spawnEggTurkeyT3" then
-        local args = {
-    [1] = {
-        ["tool"] = spawneggs,
-        ["player_tracking_category"] = "join_from_web"
-    }
-    }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
-    end
-end
-end
-wait(146)
-        end
+        animalModule.startFertilityLoop()
     end
 end)
 
@@ -7526,62 +7189,6 @@ Item88.MouseButton1Click:Connect(function()
                     end
                 end
             end
-        end
-    end
-end)
-
-
-Item89.MouseButton1Click:Connect(function()
-    if Toggled80 then
-        Toggled80 = false
-        Item89.BackgroundColor3 = Color3.fromRGB(55,55,55)
-        Item89.Text = "Rice"
-        Item89.TextColor3 = Color3.new(1,1,1)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
-    else
-        Toggled80 = true
-        Item89.BackgroundColor3 = Color3.new(0,255,255)
-        Item89.Text = "Farming!"
-        Item89.TextColor3 = Color3.fromRGB(0,0,0)
-        VirtualInputManager:SendMouseButtonEvent(0,0, 0, true, game, 1)
-        while Toggled80 == true do
-            wait()
-for i,pond in pairs(Island.Blocks:GetChildren()) do
-    if pond.Name == "pond" then
-        local ray = Ray.new(pond.Position, Vector3.new(0,3,0))
-        local hitPart, hitPosition = workspace:FindPartOnRay(ray,pond)
-        if hitPart then
-            if hitPart.Name == "rice" and hitPart.stage.Value == 3 then
-                if Toggled80 == true then
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - hitPart.Position).magnitude > 24 then
-                    game.Players.LocalPlayer.Character.Humanoid:MoveTo(hitPart.Position)
-                    game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
-                    end
-                local args = {
-                [1] = {
-                    ["player"] = game:GetService("Players").LocalPlayer,
-                    ["player_tracking_category"] = "join_from_web",
-                    ["model"] = hitPart
-                }
-                }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
-                end
-            end
-        else
-            if Toggled80 == true then
-            local args = {
-            [1] = {
-                ["upperBlock"] = false,
-                ["cframe"] = CFrame.new((pond.Position + Vector3.new(0,3,0)), (pond.Position + Vector3.new(0,0,3))),
-                ["player_tracking_category"] = "join_from_web",
-                ["blockType"] = "rice"
-            }
-            }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
-            end
-        end
-    end
-end
         end
     end
 end)

@@ -34,12 +34,6 @@ local function goToPoint(Point, distance)
     return nil,0
 end
 
-local function stopMoving()
-	if tween then
-		tween:Cancel()
-	end
-end
-
 local function startFloating()
 	local BV = Instance.new("BodyVelocity", getRoot(Character))
 	BV.Velocity = Vector3.new(0, 0, 0)

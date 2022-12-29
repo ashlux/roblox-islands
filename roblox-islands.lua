@@ -585,7 +585,7 @@ backpackVisible = false -- i've forgotten to add a lot here and idk if its reall
 
 
 local ex = identifyexecutor()
-if ex == "Synapse" then
+if ex == "Synapse X" then
     --destroy old gui if still active
     if game:GetService("CoreGui"):FindFirstChild("IGUI") then
         game.CoreGui.IGUI:Destroy()
@@ -595,12 +595,12 @@ if ex == "Synapse" then
     CmdGui.Parent = game:GetService("CoreGui")
 else
     --destroy old gui if still active
-    if game:GetService("PlayerGui"):FindFirstChild("IGUI") then
-        game.PlayerGui.IGUI:Destroy()
+    if Player.PlayerGui:FindFirstChild("IGUI") then
+        Player.PlayerGui.IGUI:Destroy()
     end
 
     CmdGui.Name = "IGUI"
-    CmdGui.Parent = game:GetService("PlayerGui")
+    CmdGui.Parent = Player.PlayerGui
     
     game.StarterGui:SetCore("SendNotification",{
     Title = "Synapse is better!",

@@ -1885,7 +1885,7 @@ Notification4.TextScaled = true
 
 local Notification5 = Instance.new("TextLabel")
 Notification5.Size = UDim2.new(0,150,0,15)
-Notification5.Position = UDim2.new(0,0,0,190)
+Notification5.Position = UDim2.new(0,0,0,210)
 Notification5.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification5.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification5.ZIndex = 2
@@ -2730,8 +2730,22 @@ for _,v in pairs(Island.Blocks:GetChildren()) do
 end
 end)
 
+local blockFiller = Instance.new("TextButton")
+blockFiller.Position = UDim2.new(0,0,1,21)
+blockFiller.Size = UDim2.new(0,70,0,20)
+blockFiller.BackgroundColor3 = Color3.fromRGB(63,63,63)
+blockFiller.BorderSizePixel = 1
+blockFiller.ZIndex = 2
+blockFiller.Parent = Notification3
+blockFiller.Text = "Block Filler"
+blockFiller.TextColor3 = Color3.fromRGB(250,250,250)
+blockFiller.TextScaled = true
+blockFiller.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/islands%20FillBlocks.lua'))()
+end)
+
 local Item32 = Instance.new("TextButton")
-Item32.Position = UDim2.new(0,0,1,22)
+Item32.Position = UDim2.new(0,0,1,169)
 Item32.Size = UDim2.new(0,70,0,20)
 Item32.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item32.BorderSizePixel = 1

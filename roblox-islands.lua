@@ -583,14 +583,31 @@ Toggled1 = false Toggled2 = false Toggled3 = false Toggled4 = false Toggled5 = f
 Toggled85 = false Toggled86 = false Toggled87 = false KA = false pickingPlants = false RUN = false
 backpackVisible = false -- i've forgotten to add a lot here and idk if its really that nessicary
 
---destroy old gui if still active
-if game:GetService("CoreGui"):FindFirstChild("IGUI") then
-    game.CoreGui.IGUI:Destroy()
+
+local ex = identifyexecutor()
+if ex == "Synapse" then
+    --destroy old gui if still active
+    if game:GetService("CoreGui"):FindFirstChild("IGUI") then
+        game.CoreGui.IGUI:Destroy()
+    end
+
+    CmdGui.Name = "IGUI"
+    CmdGui.Parent = game:GetService("CoreGui")
+else
+    --destroy old gui if still active
+    if game:GetService("PlayerGui"):FindFirstChild("IGUI") then
+        game.PlayerGui.IGUI:Destroy()
+    end
+
+    CmdGui.Name = "IGUI"
+    CmdGui.Parent = game:GetService("PlayerGui")
+    
+    game.StarterGui:SetCore("SendNotification",{
+    Title = "Synapse is better!",
+    Text = "Some things might not work on yours",
+    Duration = 10
+}) 
 end
-
-
-CmdGui.Name = "IGUI"
-CmdGui.Parent = game:GetService("CoreGui")
 
 Background.Name = "Background"
 Background.Parent = CmdGui

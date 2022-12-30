@@ -19,19 +19,27 @@ if (not isfile(filename)) then
 	writefile(filename, "")
 end
 
+local function nameToDisplay(name)
+    for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
+        if v == name then
+            return v.DisplayName.Value
+        end
+    end
+    return name
+end
 
 for k,vm in pairs(Island.Blocks:GetChildren()) do
 	if (vm.Name:find("vendingMachine") and vm.SellingContents and #vm.SellingContents:GetChildren() == 1) then	
-		local item = vm.SellingContents:GetChildren()[1]		
+		local item = vm.SellingContents:GetChildren()[1]
 		local amount = item.Amount.Value
 		local price = vm.TransactionPrice.Value
 		local mode = vm.Mode.Value
 		if mode == 0 then
 			--print("SELLING " .. amount .. " " .. item.Name .. " for " .. price)
-			appendfile(filename, "sell," .. joinCodes .. "," .. amount	 .. "," .. item.Name .. "," .. price .. "\n")
+			appendfile(filename, "sell," .. joinCodes .. "," .. amount	 .. "," .. nameToDisplay(item.Name) .. "," .. price .. "\n")
 		elseif mode == 1 then
 			--print("BUYING " .. item.Name .. " for " .. price)
-			appendfile(filename, "buy," .. joinCodes .. "," .. amount .. "," .. item.Name .. "," .. price .. "\n")
+			appendfile(filename, "buy," .. joinCodes .. "," .. amount .. "," .. nameToDisplay(item.Name) .. "," .. price .. "\n")
 		end
 	end
 end

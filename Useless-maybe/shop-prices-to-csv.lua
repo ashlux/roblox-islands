@@ -21,7 +21,7 @@ end
 
 local function nameToDisplay(name)
     for i,v in pairs(game.ReplicatedStorage.Tools:GetChildren()) do
-        if v == name and v:FindFirstChild("DisplayName") then
+        if v.Name == name and v:FindFirstChild("DisplayName") then
             return v.DisplayName.Value
         end
     end

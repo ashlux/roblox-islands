@@ -14,9 +14,13 @@ end
 
 
 local filename = dt.year .. "-" .. dt.month .. "-" .. dt.day .. ".csv"
-print(filename)
-if (not isfile(filename)) then
-	writefile(filename, "")
+local foldername = "Average prices"
+print(foldername, filename)
+if not isfolder(foldername) then
+    makefolder(foldername)
+end
+if (not isfile(foldername.."/"..filename)) then
+	writefile(foldername.."/"..filename, "")
 end
 
 local function nameToDisplay(name)
@@ -36,10 +40,10 @@ for k,vm in pairs(Island.Blocks:GetChildren()) do
 		local mode = vm.Mode.Value
 		if mode == 0 then
 			--print("SELLING " .. amount .. " " .. item.Name .. " for " .. price)
-			appendfile(filename, "sell," .. joinCodes .. "," .. amount	 .. "," .. item.Name .. "," .. nameToDisplay(item.Name) .. "," .. price .. "\n")
+			appendfile(foldername.."/"..filename, "sell," .. joinCodes .. "," .. amount	 .. "," .. item.Name .. "," .. nameToDisplay(item.Name) .. "," .. price .. "\n")
 		elseif mode == 1 then
 			--print("BUYING " .. item.Name .. " for " .. price)
-			appendfile(filename, "buy," .. joinCodes .. "," .. amount .. "," .. item.Name .. "," .. nameToDisplay(item.Name) .. "," .. price .. "\n")
+			appendfile(foldername.."/"..filename, "buy," .. joinCodes .. "," .. amount .. "," .. item.Name .. "," .. nameToDisplay(item.Name) .. "," .. price .. "\n")
 		end
 	end
 end

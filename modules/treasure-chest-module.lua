@@ -135,6 +135,7 @@ local function startFarmingChests()
         digTreasure()
         task.wait(0.5)
         dropIntoVoid()
+	task.wait(1)
     end
 end
 

@@ -88,17 +88,19 @@ local function getIslandPortal()
     end
 end
 
+local function goToHub()
+    local portal = getIslandPortal()
+    local tween, Time = goToPoint(portal.Position, 0)
+    task.wait(Time)
+end
+
 local function teleport()
     local teleporters = getTeleporters()
     print(teleporters[1], teleporters[1].Position)
     
     if Player:DistanceFromCharacter(teleporters[1].Position) > 2000 then
-        local teleport = getIslandPortal()
-        local oldPos = teleport.CFrame
-        local newPos = HR.CFrame
-        teleport.CFrame = newPos
+        goToHub()
         wait(1)
-        teleport.CFrame = oldPos
     end
     
     local tween, Time = goToPoint(teleporters[1].Position, 0)

@@ -149,7 +149,7 @@ local function startFarmingChests()
         local location, Point = getMapInfo()
 	    Float()
         teleport()
-        wait(0.5)
+        wait(2) -- freaking islands man, stop pulling me back!!!
         if Player:GetAttribute("hunting") then
             local tween, Time = goToPoint(Point, 0)
             wait(Time)

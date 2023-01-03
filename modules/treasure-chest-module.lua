@@ -2,7 +2,6 @@ local HttpService = game:GetService("HttpService")
 local Player = game.Players.LocalPlayer
 local Character = Player.Character
 local TS = game:GetService('TweenService')
-local tween
 local Noclipping
 
 function getRoot(char) -- find root part of character if they dont have HR
@@ -136,7 +135,7 @@ local function startFarmingChests()
         task.wait(0.5)
         dropIntoVoid()
 	unFloat()
-	task.wait(1)
+	task.wait(2)
     end
 end
 

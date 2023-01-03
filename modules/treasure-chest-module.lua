@@ -3,6 +3,7 @@ local Player = game.Players.LocalPlayer
 local Character = Player.Character
 local TS = game:GetService('TweenService')
 local Noclipping
+local tween
 
 function getRoot(char) -- find root part of character if they dont have HR
 	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
@@ -129,13 +130,13 @@ local function startFarmingChests()
 	Float()
         teleport()
         wait(0.5)
-        tween, Time = goToPoint(Point, 0)
+        local tween, Time = goToPoint(Point, 0)
         wait(Time)
         digTreasure()
         task.wait(0.5)
         dropIntoVoid()
 	unFloat()
-	task.wait(2)
+	task.wait(3)
     end
 end
 

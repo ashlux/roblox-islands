@@ -83,7 +83,7 @@ local function teleport()
     local teleporters = getTeleporters()
     print(teleporters[1], teleporters[1].Position)
 
-    tween, Time = goToPoint(teleporters[1].Position, 0)
+    local tween, Time = goToPoint(teleporters[1].Position, 0)
     task.wait(Time)
     
     local location, Point = getMapInfo()
@@ -121,13 +121,13 @@ end
 
 local function startFarmingChests()
     setTreasureHunter(true)
+    redeemMap()
     noClip = true
     Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-    Float()
     
     while Player:GetAttribute("hunting") and wait() do
         local location, Point = getMapInfo()
-        redeemMap()
+	Float()
         teleport()
         wait(0.5)
         tween, Time = goToPoint(Point, 0)
@@ -135,6 +135,7 @@ local function startFarmingChests()
         digTreasure()
         task.wait(0.5)
         dropIntoVoid()
+	unFloat()
 	task.wait(1)
     end
 end

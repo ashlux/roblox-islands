@@ -95,7 +95,7 @@ local function startPickingWildFruit()
     Float()
     noClip = true
     Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-    while Player:GetAttribute("pickFruit") do
+    while Player:GetAttribute("pickWildFruit") do
         local Fruits = getFruit()
         local tween, Time = goToPoint(Fruits[1].HandleDisabled.Position, 0)
         task.wait(Time)

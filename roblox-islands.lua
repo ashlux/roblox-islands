@@ -15,6 +15,8 @@ local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-i
 local breakModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/break-blocks-module.lua")
 local flowerWaterModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/flower-module.lua")
 local animalModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/animal-module.lua")
+local treasureModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/treasure-chest-module.lua")
+
 
 print("Loading Complete!")
 
@@ -30,7 +32,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1011) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: ❄️GUI Updated 12/19❄️"
+updates = "[Matt]: ❄️GUI Updated ️1/2❄️"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -242,14 +244,6 @@ local function goToPoint(Point, distance)
     tween:Play()
     return tween, Time
     end
-end
-
-function digTreasure() -- Dig treasure
-    local args = {
-    [1] = HttpService:GenerateGUID(false),
-    [2] = {}
-    }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.PlayerDigTreasure:FireServer(unpack(args))
 end
 
 function getSpawnables()
@@ -2788,28 +2782,13 @@ Treasure.MouseButton1Click:Connect(function()
         Treasure.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Treasure.Text = "Dig Treasure"
         Treasure.TextColor3 = Color3.fromRGB(250,250,250)
-        Noclipping:Disconnect()
-        noClip = false
-        unFloat()
-        if tween then
-        tween:Cancel()
-        end
+        treasureModule.stopFarmingChests()
     else
         Treasure1 = true
         Treasure.BackgroundColor3 = Color3.fromRGB(0,255,255)
         Treasure.Text = "Digging Treasure"
         Treasure.TextColor3 = Color3.fromRGB(0,0,0)
-        noClip = true
-        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-        Float()
-        while Treasure1 == true do
-            wait()
-            location, Point = getMapInfo()
-            tween, Time = goToPoint(Point)
-            goToPoint(Point, 0)
-            wait(Time + 0.5)
-            digTreasure()
-        end
+        treasureModule.startFarmingChests()
     end
 end)
 

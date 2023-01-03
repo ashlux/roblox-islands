@@ -150,8 +150,10 @@ local function startFarmingChests()
 	    Float()
         teleport()
         wait(0.5)
-        local tween, Time = goToPoint(Point, 0)
-        wait(Time)
+        if Player:GetAttribute("hunting") then
+            local tween, Time = goToPoint(Point, 0)
+            wait(Time)
+        end
         digTreasure()
         task.wait(0.5)
         dropIntoVoid()

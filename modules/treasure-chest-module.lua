@@ -164,7 +164,7 @@ local function stopFarmingChests()
     noClip = false
     unFloat()
     if tween then
-        tween:Disconnect()
+        tween:Cancel()
     end
 end
 

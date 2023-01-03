@@ -152,7 +152,7 @@ local function startFarmingChests()
     redeemMap()
     noClip = true
     Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
-    noSit = Character.Humanoid.Sit.Changed:Connect(stopSitting)
+    noSit = Character.Humanoid:GetPropertyChangedSignal("Sit"):Connect(stopSitting)
     
     while Player:GetAttribute("hunting") and wait() do
         local location, Point = getMapInfo()

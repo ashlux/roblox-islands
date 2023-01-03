@@ -5,6 +5,7 @@ local Island = game.Workspace.Islands:GetChildren()[1]
 local TS = game:GetService('TweenService')
 local Noclipping
 local tween
+local noSit
 
 function getRoot(char) -- find root part of character if they dont have HR
 	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
@@ -94,6 +95,13 @@ local function goToHub()
     task.wait(Time)
 end
 
+local function stopSitting()
+    if Character.Humanoid.Sit == true then
+        task.wait()
+        Character.Humanoid.Sit = false
+    end
+end
+
 local function teleport()
     local teleporters = getTeleporters()
     print(teleporters[1], teleporters[1].Position)
@@ -144,12 +152,13 @@ local function startFarmingChests()
     redeemMap()
     noClip = true
     Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+    noSit = Character.Humanoid.Sit.Changed:Connect(stopSitting)
     
     while Player:GetAttribute("hunting") and wait() do
         local location, Point = getMapInfo()
 	    Float()
         teleport()
-        wait(2) -- freaking islands man, stop pulling me back!!!
+        task.wait(2)
         if Player:GetAttribute("hunting") then
             local tween, Time = goToPoint(Point, 0)
             wait(Time)
@@ -166,6 +175,7 @@ local function stopFarmingChests()
     setTreasureHunter(false)
     Noclipping:Disconnect()
     noClip = false
+    noSit:Disconnect()
     unFloat()
     if tween then
         tween:Cancel()

@@ -1,6 +1,7 @@
 local HttpService = game:GetService("HttpService")
 local Player = game.Players.LocalPlayer
 local Character = Player.Character
+local Island = game.Workspace.Islands:GetChildren()[1]
 local TS = game:GetService('TweenService')
 local Noclipping
 local tween
@@ -79,10 +80,27 @@ local function goToPoint(Point, distance)
     end
 end
 
+local function getIslandPortal()
+    for i,v in pairs(Island.Blocks:GetChildren()) do
+        if v.Name:find("portalToSpawn") then
+            return v
+        end
+    end
+end
+
 local function teleport()
     local teleporters = getTeleporters()
     print(teleporters[1], teleporters[1].Position)
-
+    
+    if Player:DistanceFromCharacter(teleporters[1].Position) > 2000 then
+        local teleport = getIslandPortal()
+        local oldPos = teleport.CFrame
+        local newPos = HR.CFrame
+        teleport.CFrame = newPos
+        wait(1)
+        teleport.CFrame = oldPos
+    end
+    
     local tween, Time = goToPoint(teleporters[1].Position, 0)
     task.wait(Time)
     
@@ -127,7 +145,7 @@ local function startFarmingChests()
     
     while Player:GetAttribute("hunting") and wait() do
         local location, Point = getMapInfo()
-	Float()
+	    Float()
         teleport()
         wait(0.5)
         local tween, Time = goToPoint(Point, 0)
@@ -135,8 +153,8 @@ local function startFarmingChests()
         digTreasure()
         task.wait(0.5)
         dropIntoVoid()
-	unFloat()
-	task.wait(3)
+	    unFloat()
+	    task.wait(3)
     end
 end
 

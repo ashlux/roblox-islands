@@ -16,7 +16,8 @@ local breakModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 local flowerWaterModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/flower-module.lua")
 local animalModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/animal-module.lua")
 local treasureModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/treasure-chest-module.lua")
-
+local wildFruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/wild-fruit-module.lua")
+local wildCropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/wild-crops-module.lua")
 
 print("Loading Complete!")
 
@@ -32,7 +33,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1011) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: ❄️GUI Updated ️1/2❄️"
+updates = "[Matt]: ❄️GUI Updated ️1/3❄️"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -2803,6 +2804,30 @@ Item33.Text = "Collect Truffles"
 Item33.TextColor3 = Color3.fromRGB(250,250,250)
 Item33.TextScaled = true
 
+local wildCrops = Instance.new("TextButton")
+wildCrops.Position = UDim2.new(0,72,1,22)
+wildCrops.Size = UDim2.new(0,70,0,20)
+wildCrops.BackgroundColor3 = Color3.fromRGB(63,63,63)
+wildCrops.BorderSizePixel = 1
+wildCrops.ZIndex = 2
+wildCrops.Parent = N1
+wildCrops.Text = "Wilderness Crops"
+wildCrops.TextColor3 = Color3.fromRGB(250,250,250)
+wildCrops.TextScaled = true
+wildCrops.MouseButton1Click:Connect(function()
+    if pickingWildCrops then
+        pickingWildCrops = false
+        wildCrops.Text = "Wilderness Crops"
+        wildCrops.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        wildCropModule.stopHarvestingWild()
+    else
+        pickingWildCrops = true
+        wildCrops.Text = "Picking!"
+        wildCrops.BackgroundColor3 = Color3.fromRGB(0,200,200)
+        wildCropModule.startHarvestingWild()
+    end
+end)
+
 local Item34 = Instance.new("TextButton")
 Item34.Position = UDim2.new(0,71,1,1)
 Item34.Size = UDim2.new(0,70,0,20)
@@ -3049,7 +3074,7 @@ Item58.TextScaled = true
 Item58.Visible = false
 
 local Item59 = Instance.new("TextButton")
-Item59.Position = UDim2.new(0,72,1,22)
+Item59.Position = UDim2.new(0,72,1,106)
 Item59.Size = UDim2.new(0,70,0,20)
 Item59.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item59.BorderSizePixel = 1
@@ -3791,8 +3816,32 @@ Item87.Text = "Pick Berries"
 Item87.TextColor3 = Color3.fromRGB(250,250,250)
 Item87.TextScaled = true
 
+local kiwiPicker = Instance.new("TextButton")
+kiwiPicker.Position = UDim2.new(0,1,1,85)
+kiwiPicker.Size = UDim2.new(0,70,0,20)
+kiwiPicker.BackgroundColor3 = Color3.fromRGB(63,63,63)
+kiwiPicker.BorderSizePixel = 1
+kiwiPicker.ZIndex = 2
+kiwiPicker.Parent = N1
+kiwiPicker.Text = "Pirate Kiwi"
+kiwiPicker.TextColor3 = Color3.fromRGB(250,250,250)
+kiwiPicker.TextScaled = true
+kiwiPicker.MouseButton1Click:Connect(function()
+    if pickingKiwis then
+        pickingKiwis = false
+        kiwiPicker.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        kiwiPicker.Text = "Pirate Kiwi"
+        wildFruitModule.stopPickingWildFruit()
+    else
+        pickingKiwis = true
+        kiwiPicker.BackgroundColor3 = Color3.fromRGB(0,200,200)
+        kiwiPicker.Text = "Picking!"
+        wildFruitModule.startPickingWildFruit()
+    end
+end)
+
 local Item88 = Instance.new("TextButton")
-Item88.Position = UDim2.new(0,1,1,85)
+Item88.Position = UDim2.new(0,1,1,127)
 Item88.Size = UDim2.new(0,70,0,20)
 Item88.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item88.BorderSizePixel = 1

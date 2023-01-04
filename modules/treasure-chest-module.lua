@@ -49,9 +49,8 @@ end
 
 local function getMapInfo()
     
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer() -- has to run twice some reason
     local infos = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()
-    print(infos.location, infos.position)
     return infos.location, infos.position
 
 end
@@ -92,7 +91,7 @@ end
 local function goToHub()
     local portal = getIslandPortal()
     local tween, Time = goToPoint(portal.Position, 0)
-    task.wait(Time)
+    task.wait(Time + 3)
 end
 
 local function stopSitting()
@@ -104,37 +103,34 @@ end
 
 local function teleport()
     local teleporters = getTeleporters()
-    print(teleporters[1], teleporters[1].Position)
+    local location, Point = getMapInfo()
     
     if Player:DistanceFromCharacter(teleporters[1].Position) > 2000 then
         goToHub()
-        wait(1)
     end
     
-    local tween, Time = goToPoint(teleporters[1].Position, 0)
-    task.wait(Time)
-    
-    local location, Point = getMapInfo()
-    
-    local args = {
-    [1] = HttpService:GenerateGUID(false),
-    [2] = {
+    if Player:DistanceFromCharacter(point) > 500 then
+        local tween, Time = goToPoint(teleporters[1].Position, 0)
+        task.wait(Time + 0.5)
+      
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
         [1] = {
-            ["target"] = {
-                ["islandId"] = location,
-                ["type"] = "Island"
-            }
+        ["target"] = {
+        ["islandId"] = location,
+        ["type"] = "Island"
         }
-    }
-    }
-
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Teleporters/UseHubTeleporter"):FireServer(unpack(args))
-
+        }
+        }
+        }
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Teleporters/UseHubTeleporter"):FireServer(unpack(args))
+    end
 end
 
 local function dropIntoVoid()
     if Player:GetAttribute("hunting") then
-        HR.CFrame = CFrame.new(HR.Position + Vector3.new(0,-200,0))
+        HR.CFrame = CFrame.new(HR.Position.X, -101, HR.Position.Z)
     end
 end
 
@@ -166,8 +162,7 @@ local function startFarmingChests()
         digTreasure()
         task.wait(0.5)
         dropIntoVoid()
-	    unFloat()
-	    task.wait(3)
+	    task.wait(1)
     end
 end
 

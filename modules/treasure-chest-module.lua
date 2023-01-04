@@ -109,7 +109,7 @@ local function teleport()
         goToHub()
     end
     
-    if Player:DistanceFromCharacter(point) > 500 then
+    if Player:DistanceFromCharacter(Point) > 500 then
         local tween, Time = goToPoint(teleporters[1].Position, 0)
         task.wait(Time + 0.5)
       

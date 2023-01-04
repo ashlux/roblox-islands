@@ -9,7 +9,7 @@ waitUntilLoaded()
 local StarterGui = game:GetService("StarterGui")
 local Player = game.Players.LocalPlayer
 
--- TODO: CHeck coins too!
+-- TODO: CHeck coins too!, only notifiy once.
 
 local MAX_ITEM_MAP = {
 -- TODO: DV, Legacy Food Processor, Fish Trophy, Arrows
@@ -20,7 +20,7 @@ local MAX_ITEM_MAP = {
 	["bucketWater"] = 2000,
 	["stickyGearPink"] = 10000,
 	["smelterIndustrial"] = 10000,
-	--["washingStationIndustrial"] = 1000, -- or just regular washign machine?
+	["washingStationIndustrial"] = 1000, -- its definetly the industrial, tested.
 	["propeller"] = 1000,
 	["ironCrystal"] = 5000,
 	["baitT2"] = 2000,
@@ -33,7 +33,7 @@ local MAX_ITEM_MAP = {
 while wait(5) do
 	for _,item in pairs(Player.Backpack:GetChildren()) do
 		local amount = item.Amount.Value
-		local maxAmount = MAX_ITEM_MAP[item.Name] or 1000000
+		local maxAmount = MAX_ITEM_MAP[item.Name] + 1 or 1000001
 		if amount >= maxAmount then	
 			local warningMsg = "[!!!]: " .. item.Name .. " is over the limit of " .. maxAmount .. " (you have " .. amount .. ")!";	
 			StarterGui:SetCore("ChatMakeSystemMessage", {

@@ -109,23 +109,21 @@ local function teleport()
         goToHub()
     end
     
-    if Player:DistanceFromCharacter(Point) > 500 then
-        local tween, Time = goToPoint(teleporters[1].Position, 0)
-        task.wait(Time + 0.5)
+    local tween, Time = goToPoint(teleporters[1].Position, 0)
+    task.wait(Time + 0.5)
       
-        local args = {
-        [1] = HttpService:GenerateGUID(false),
-        [2] = {
-        [1] = {
-        ["target"] = {
-        ["islandId"] = location,
-        ["type"] = "Island"
-        }
-        }
-        }
-        }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Teleporters/UseHubTeleporter"):FireServer(unpack(args))
-    end
+    local args = {
+    [1] = HttpService:GenerateGUID(false),
+    [2] = {
+    [1] = {
+    ["target"] = {
+    ["islandId"] = location,
+    ["type"] = "Island"
+    }
+    }
+    }
+    }
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Teleporters/UseHubTeleporter"):FireServer(unpack(args))
 end
 
 local function dropIntoVoid()

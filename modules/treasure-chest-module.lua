@@ -146,13 +146,13 @@ end
 local function startFarmingChests()
     setTreasureHunter(true)
     redeemMap()
+    Float()
     noClip = true
     Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
     noSit = Character.Humanoid:GetPropertyChangedSignal("Sit"):Connect(stopSitting)
     
     while Player:GetAttribute("hunting") and wait() do
         local location, Point = getMapInfo()
-	    Float()
         teleport()
         task.wait(2)
         if Player:GetAttribute("hunting") then

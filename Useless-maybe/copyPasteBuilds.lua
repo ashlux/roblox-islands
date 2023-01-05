@@ -10,15 +10,77 @@ local Blocks = Island.Blocks
 local lastDragDist = 0
 local redToggled = false
 local blueToggled = false
+local activePreview = false
+
+local function destroyPreview()
+    if game.Workspace:FindFirstChild("Preview") then
+        game.Workspace.Preview:Destroy()
+    end
+end
+
+local function closeActiveThingies()
+    destroyPreview()
+
+    local redPart = game.Workspace:FindFirstChild("redPart")
+    local bluePart = game.Workspace:FindFirstChild("bluePart")
+    if redPart then redPart:Destroy() game.CoreGui.redHandles:Destroy() end
+    if bluePart then bluePart:Destroy() game.CoreGui.blueHandles:Destroy() end
+
+    if CoreGui:FindFirstChild("Draggable") then
+        CoreGui.Draggable:Destroy()
+    end
+    
+    redToggled = false
+    blueToggled = false
+    lastDragDist = 0
+    redToggled = false
+    blueToggled = false
+    activePreview = false
+end
+
+closeActiveThingies()
 
 local function notification(title, text, duration)
     game.StarterGui:SetCore("SendNotification", {Title=title; Text=text; Duration=duration;})
     local Player = game.Players.LocalPlayer
 end
 
-if CoreGui:FindFirstChild("Draggable") then
-    CoreGui.Draggable:Destroy()
+local function Float() -- makes you float using BV
+	local BV = Instance.new("BodyVelocity", HR)
+	BV.Velocity = Vector3.new(0,0,0)
+	BV.MaxForce = Vector3.new(0,math.huge,0)
 end
+
+local function unFloat() -- gets rid of BV so you dont float
+    if HR:FindFirstChild("BodyVelocity") then
+        HR.BodyVelocity:Destroy()
+    end
+end
+
+local function goToPoint(Point, distance)
+    if (HR.Position - Point).magnitude > distance then
+    local Distance = (HR.Position - Point).Magnitude
+    local Speed = 25
+    local Time = Distance/Speed
+    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+    tween:Play()
+    return tween, Time
+    end
+end
+
+local function placeBlock(upperBlock, cframe, block)
+    local args = {
+    [1] = {
+    ["upperBlock"] = upperBlock,
+    ["cframe"] = cframe,
+    ["player_tracking_category"] = "join_from_web",
+    ["blockType"] = block
+    }
+    }
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+end
+
+notification("I worked very hard on this😊", "Please feel free to buy more stuff from me to support 😁", 5)
 
 local CmdGui = Instance.new("ScreenGui")
 CmdGui.Name = "Draggable"
@@ -40,9 +102,9 @@ Drag.Parent = Background
 Drag.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Drag.Size = UDim2.new(1, 0, 0.150000006, 0)
 Drag.Font = Enum.Font.SourceSans
-Drag.Text = "Build Copier"
+Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.8"
 Drag.TextColor3 = Color3.fromRGB(0, 0, 0)
-Drag.TextSize = 14.000
+Drag.TextSize = 15.000
 Dragg = false
 Drag.MouseButton1Down:Connect(function()Dragg = true while Dragg do TS:Create(Background, TweenInfo.new(.06), {Position = UDim2.new(0,Mouse.X - 50,0,Mouse.Y - 11)}):Play()wait()end end)
 Drag.MouseButton1Up:Connect(function()Dragg = false end)
@@ -59,8 +121,8 @@ Close.Text = "X"
 Close.TextColor3 = Color3.fromRGB(255, 255, 255)
 Close.TextSize = 14.000
 Close.MouseButton1Click:Connect(function()
-    redToggled = false blueToggled = false
     CmdGui:Destroy()
+    closeActiveThingies()
 end)
 
 local Red = Instance.new("TextButton")
@@ -246,6 +308,7 @@ local function getBlocksBetween(A,B)
     
     table.sort(actualBlocks, function(t1, t2) 
 		return Player:DistanceFromCharacter(t1.Position) < Player:DistanceFromCharacter(t2.Position) end)
+    table.insert(actualBlocks, 1, B)
     return actualBlocks
 end
 
@@ -275,6 +338,7 @@ copyButton.Text = "Copy"
 copyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 copyButton.TextSize = 14.000
 copyButton.MouseButton1Click:Connect(function()
+    
     local fileName = nameBox.Text
     if fileName == "" then
         local dt = "%m-%d-%y %H-%M-%S"
@@ -283,23 +347,36 @@ copyButton.MouseButton1Click:Connect(function()
     if not isfolder("Saved Builds") then
         makefolder("Saved Builds")
     end
+    
     writefile("Saved Builds/"..fileName..".txt", "")
     readfile("Saved Builds/"..fileName..".txt")
-    local A = game.Workspace.bluePart
-    local B = game.Workspace.redPart
+    
+    local A = game.Workspace:FindFirstChild("bluePart")
+    local B = game.Workspace:FindFirstChild("redPart")
+    if A == nil and B == nil then
+        notification("Error","You Need to lay down the corners first")
+        return
+    elseif A == nil then
+        notification("Error","You Need to lay down the Blue corner")
+        return
+    elseif B == nil then
+        notification("Error","You Need to lay down the Red corner")
+        return
+    end
+    
     local allBlocksBetween = getBlocksBetween(A,B)
 
     for i,v in pairs(allBlocksBetween) do
-        if v ~= A and v ~= B then
+        if v ~= A then
             appendfile("Saved Builds/"..fileName..".txt", v.Name..", "..tostring(v.Position)..", "..tostring(v.CFrame.LookVector).."\n")
         end
     end
     notification("Success!", "file named "..fileName.." was created", 5)
 end)
 
+
 local function toVector3(String, Separator)
     local Separator = Separator or ','
-
     local axes = {}
 
     for axis in String:gmatch('[^'..Separator..']+') do
@@ -318,43 +395,70 @@ local function generatePreview(item, position, lookVector)
     for i,v in pairs(game.ReplicatedStorage.Blocks:GetChildren()) do
         if v.Name == item then
             local itemClone = v:Clone()
-            itemClone.Name = "item preview"
-            itemClone.PrimaryPart.CFrame = CFrame.new(position * lookVector) -- this part is messed up.  I'm making the CFrame wrong or something
-            print(CFrame.new(position, lookVector))
+            itemClone.Name = v.Name
+            itemClone.PrimaryPart.CFrame = CFrame.new(position, position + lookVector)
+            itemClone.Root.Transparency = 0
+            itemClone.Root.CanCollide = false
             itemClone.Parent = game.Workspace.Preview
         end
     end
 end
 
-local pasteButton = Instance.new("TextButton")
-pasteButton.Name = "pasteButton"
-pasteButton.Parent = Background
-pasteButton.AnchorPoint = Vector2.new(0.5, 0.5)
-pasteButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-pasteButton.BackgroundTransparency = 0.500
-pasteButton.Position = UDim2.new(0.5, 0, 0.85, 0)
-pasteButton.Size = UDim2.new(0.5, 0, 0.1, 0)
-pasteButton.Font = Enum.Font.SourceSans
-pasteButton.Text = "Paste"
-pasteButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-pasteButton.TextSize = 14.000
-pasteButton.MouseButton1Click:Connect(function()
+local previewButton = Instance.new("TextButton")
+previewButton.Name = "previewButton"
+previewButton.Parent = Background
+previewButton.AnchorPoint = Vector2.new(0.5, 0.5)
+previewButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+previewButton.BackgroundTransparency = 0.500
+previewButton.Position = UDim2.new(0.5, 0, 0.815, 0)
+previewButton.Size = UDim2.new(0.5, 0, 0.1, 0)
+previewButton.Font = Enum.Font.SourceSans
+previewButton.Text = "Preview"
+previewButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+previewButton.TextSize = 14.000
+previewButton.MouseButton1Click:Connect(function()
+    activePreview = true
+    
     local fileName = nameBox.Text
     if not isfile("Saved Builds/"..fileName..".txt") then
-        notification("Error", "file name "..fileName.." doesnt exsist", 5)
+        if nameBox.Text == "" then
+            notification("Error", "You have to type the file name first!")
+        else
+            notification("Error", "file name "..fileName.." doesnt exsist", 5)
         return
+        end
     end
     
-    local B = game.Workspace.redPart
+    local B = game.Workspace:FindFirstChild("redPart")
     if not B then
         notification("Error", "Place down Red Corner first!", 5)
         return
     end
     
+    B.Transparency = 0.8
+    
+    destroyPreview()
+    
     local info = readfile("Saved Builds/"..fileName..".txt")
     local comma = 0
     local beginning = 1
     
+    local middleOfBuild = ""
+    for i = 1,35 do
+        if string.sub(info, i, i) == "," then
+            comma = comma + 1
+            if comma == 1 then
+                start = i
+            elseif comma == 4 then
+                number1 = i
+            elseif comma == 6 then
+                middleOfBuild = toVector3(string.sub(info, start+1, number1-1))
+            end
+        end
+    end
+    
+    comma = 0
+
     for i = 1,#info do
         if string.sub(info, i, i) == "," then
             comma = comma + 1
@@ -370,11 +474,15 @@ pasteButton.MouseButton1Click:Connect(function()
                 local positionVector3 = toVector3(Position, ", ")
                 local lookVector3 = toVector3(lookVector, ", ")
                 
-                local positionFromRed = positionVector3 - B.Position
+                local positionFromRed = positionVector3 - middleOfBuild
+                print("Position -", Position)
+                print("positionFromRed -",positionVector3 - middleOfBuild)
                 
                 local newPosition = B.Position + positionFromRed
                 
-                print(newPosition)
+                print("newPosition -",newPosition)
+                
+                print(CFrame.new(newPosition, newPosition + lookVector3))
                 
                 generatePreview(blockName, newPosition, lookVector3)
                 
@@ -383,4 +491,46 @@ pasteButton.MouseButton1Click:Connect(function()
             end
         end
     end
+    
+    comma = 0
+end)
+
+
+local function getPreviewBlocks()
+    local previewBlocks = {}
+    for i,v in pairs(game.Workspace.Preview:GetChildren()) do
+        table.insert(previewBlocks, v)
+    end
+
+    return previewBlocks
+end
+
+local pasteButton = Instance.new("TextButton")
+pasteButton.Name = "pasteButton"
+pasteButton.Parent = Background
+pasteButton.AnchorPoint = Vector2.new(0.5, 1)
+pasteButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+pasteButton.BackgroundTransparency = 0.500
+pasteButton.Position = UDim2.new(0.5, 0, 0.98, 0)
+pasteButton.Size = UDim2.new(0.5, 0, 0.1, 0)
+pasteButton.Font = Enum.Font.SourceSans
+pasteButton.Text = "Paste"
+pasteButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+pasteButton.TextSize = 14.000
+pasteButton.MouseButton1Click:Connect(function()
+    if activePreview == false then
+        notification("Error", "Generate a Preview first!!", 5)
+        return
+    end
+    
+    local previewBlocks = getPreviewBlocks()
+    for i,v in pairs(previewBlocks) do
+        tween, Time = goToPoint(v.Root.Position, 200)
+        local upperBlock = false
+        local cframe = v.Root.CFrame
+        local block = v.Name
+        task.spawn(placeBlock, upperBlock, cframe, block)
+    end
+    
+    destroyPreview()
 end)

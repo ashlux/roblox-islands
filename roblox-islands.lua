@@ -220,8 +220,10 @@ end
 
 function unFloat() -- gets rid of BV so you dont float
     HR = getRoot(Character)
-    if HR:FindFirstChild("BodyVelocity") then
-        HR.BodyVelocity:Destroy()
+    for i,v in pairs(HR:GetChildren()) do
+        if v.Name == "BodyVelocity" then
+            v:Destroy()
+        end
     end
 end
 
@@ -360,7 +362,12 @@ function moveToMobs(mob)
     local distance = Player:DistanceFromCharacter(mob.HumanoidRootPart.Position)
     local speed = 25
     local tweenInfo = TweenInfo.new(distance/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
-    local tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
+    local tween
+    if mob.Name == "buffalkor" then
+        tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-12,0))})
+    else
+        tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
+    end
     tween:Play()
     return tween, distance, speed
 end
@@ -2062,7 +2069,7 @@ Mob8.TextColor3 = Color3.fromRGB(0,0,0)
 Mob8.TextScaled = true
 
 local God = Instance.new("TextButton")
-God.Position = UDim2.new(0,1,1,140)
+God.Position = UDim2.new(0,1,1,150)
 God.Size = UDim2.new(0,138,0,20)
 God.BackgroundColor3 = Color3.fromRGB(50,50,50)
 God.BorderSizePixel = 1
@@ -4305,9 +4312,8 @@ Item4.MouseButton1Click:Connect(function()
         Item4.BackgroundColor3 = Color3.fromRGB(63,165,63)
         Item4.Text = "Slimes"
         Item4.TextColor3 = Color3.fromRGB(250,250,250)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4316,10 +4322,8 @@ Item4.MouseButton1Click:Connect(function()
         Item4.BackgroundColor3 = Color3.new(1,0,0)
         Item4.Text = "KILL!"
         Item4.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        BV.Parent = HR
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "slime"
         while Toggled1 == true do
             wait()
@@ -4346,12 +4350,12 @@ Item5.MouseButton1Click:Connect(function()
         Item5.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
         Item5.Text = "Buffalkor"
         Item5.TextColor3 = Color3.fromRGB(1,1,1)
-        b1.CanCollide = false
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        Noclipping:Disconnect()
+        killEverything:Disconnect()
+        noClip = false
         if tween then
-        tween:Cancel()
+            tween:Cancel()
         end
     else
         Toggled2 = true
@@ -4359,10 +4363,10 @@ Item5.MouseButton1Click:Connect(function()
         Item5.Text = "KILL"
         Item5.TextColor3 = Color3.fromRGB(0,0,0)
         local enemy = "buffalkor"
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         while Toggled2 == true do
             wait()
             local mobs = getMobs()
@@ -4388,8 +4392,10 @@ Mob3.MouseButton1Click:Connect(function()
         Mob3.BackgroundColor3 = Color3.fromRGB(128,0,0)
         Mob3.Text = "Wizard"
         Mob3.TextColor3 = Color3.fromRGB(250,250,250)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        unFloat()
+        killEverything:Disconnect()
+        if tween then
+            tween:Cancel()
         end
     else
         Toggled3 = true
@@ -4397,10 +4403,8 @@ Mob3.MouseButton1Click:Connect(function()
         Mob3.Text = "KILL!"
         Mob3.TextColor3 = Color3.fromRGB(0,0,0)
         local enemy = "wizardLizard"
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         while Toggled3 == true do
             local mobs = getMobs()
             if #mobs == 0 then
@@ -4425,9 +4429,8 @@ Mob4.MouseButton1Click:Connect(function()
         Mob4.BackgroundColor3 = Color3.fromRGB(194,178,128)
         Mob4.Text = "Skorps"
         Mob4.TextColor3 = Color3.fromRGB(1,1,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4436,10 +4439,8 @@ Mob4.MouseButton1Click:Connect(function()
         Mob4.BackgroundColor3 = Color3.new(1,0,0)
         Mob4.Text = "KILL!"
         Mob4.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         enemy = "skorpRuby"
         enemy2 = "skorpGold"
         enemy3 = "skorpIron"
@@ -4745,9 +4746,8 @@ Mob6.MouseButton1Click:Connect(function()
         Mob6.BackgroundColor3 = Color3.fromRGB(200,200,200)
         Mob6.Text = "Skeleton Pirate"
         Mob6.TextColor3 = Color3.new(0,0,0)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4756,10 +4756,8 @@ Mob6.MouseButton1Click:Connect(function()
         Mob6.BackgroundColor3 = Color3.new(1,0,0)
         Mob6.Text = "KILL"
         Mob6.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "skeletonPirate"
         while Toggled48 == true do
             wait()
@@ -4786,9 +4784,8 @@ Mob7.MouseButton1Click:Connect(function()
         Mob7.BackgroundColor3 = Color3.fromRGB(200,50,50)
         Mob7.Text = "Crabs"
         Mob7.TextColor3 = Color3.fromRGB(255,200,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4797,10 +4794,8 @@ Mob7.MouseButton1Click:Connect(function()
         Mob7.BackgroundColor3 = Color3.new(1,0,0)
         Mob7.Text = "KILL"
         Mob7.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "hostileCrab"
         while Toggled49 == true do
             wait()
@@ -4826,9 +4821,8 @@ Mob8.MouseButton1Click:Connect(function()
         Toggled60 = false
         Mob8.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
         Mob8.Text = "Rock Mimic"
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4836,10 +4830,8 @@ Mob8.MouseButton1Click:Connect(function()
         Toggled60 = true
         Mob8.BackgroundColor3 = Color3.new(1,0,0)
         Mob8.Text = "KILL"
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "rockMimicGold"
         local enemy2 = "rockMimicIron"
         local enemy3 = "rockMimicCoal"
@@ -4878,9 +4870,8 @@ Mob9.MouseButton1Click:Connect(function()
         Mob9.BackgroundColor3 = Color3.fromRGB(150,0,150)
         Mob9.Text = "Void Dog"
         Mob9.TextColor3 = Color3.fromRGB(255,200,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4889,10 +4880,8 @@ Mob9.MouseButton1Click:Connect(function()
         Mob9.BackgroundColor3 = Color3.new(1,0,0)
         Mob9.Text = "KILL"
         Mob9.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "voidDog"
         while Toggled49 == true do
             wait()
@@ -4929,9 +4918,8 @@ Mob10.MouseButton1Click:Connect(function()
         Mob10.BackgroundColor3 = Color3.fromRGB(250,150,150)
         Mob10.Text = "Slime Queen"
         Mob10.TextColor3 = Color3.fromRGB(255,200,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4940,10 +4928,8 @@ Mob10.MouseButton1Click:Connect(function()
         Mob10.BackgroundColor3 = Color3.new(1,0,0)
         Mob10.Text = "KILL"
         Mob10.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "slimeQueen"
         while Toggled90 == true do
             wait()
@@ -4980,9 +4966,8 @@ Mob11.MouseButton1Click:Connect(function()
         Mob11.BackgroundColor3 = Color3.fromRGB(0,150,0)
         Mob11.Text = "Slime King"
         Mob11.TextColor3 = Color3.fromRGB(255,200,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        unFloat()
+        killEverything:Disconnect()
         if tween then
         tween:Cancel()
         end
@@ -4991,63 +4976,10 @@ Mob11.MouseButton1Click:Connect(function()
         Mob11.BackgroundColor3 = Color3.new(1,0,0)
         Mob11.Text = "KILL"
         Mob11.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "slimeKing"
         while Toggled91 == true do
-            wait()
-            local mobs = getMobs()
-            if #mobs == 0 then
-                wait()
-            else
-                for k,v in pairs(mobs) do
-                    if v.Name == enemy then
-                    local mob = v
-                    tween, distance, speed = moveToMobs(mob)
-                    wait(distance/speed - 1)
-                    break
-                    end
-                end
-            end
-        end
-    end
-end)
-
-local Mob12 = Instance.new("TextButton")
-Mob12.Position = UDim2.new(0,71,1,106)
-Mob12.Size = UDim2.new(0,70,0,20)
-Mob12.BackgroundColor3 = Color3.fromRGB(85,52,43)
-Mob12.BorderSizePixel = 0
-Mob12.ZIndex = 2
-Mob12.Parent = Notification6
-Mob12.Text = "Gingerbread"
-Mob12.TextColor3 = Color3.new(1,1,1)
-Mob12.TextScaled = true
-Mob12.MouseButton1Click:Connect(function()
-    if Toggled92 then
-        Toggled92 = false
-        Mob12.BackgroundColor3 = Color3.fromRGB(85,52,43)
-        Mob12.Text = "Gingerbread"
-        Mob12.TextColor3 = Color3.fromRGB(255,200,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
-        if tween then
-        tween:Cancel()
-        end
-    else
-        Toggled92 = true
-        Mob12.BackgroundColor3 = Color3.new(1,0,0)
-        Mob12.Text = "KILL"
-        Mob12.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
-        local enemy = "evilGingerbread"
-        while Toggled92 == true do
             wait()
             local mobs = getMobs()
             if #mobs == 0 then

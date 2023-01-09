@@ -870,6 +870,24 @@ wait(5)
 Item3.Text = "Islands GUI V2 (Beta)"
 end)
 
+Copypaste = Instance.new("TextButton")
+Copypaste.Position = UDim2.new(0,1,0,341)
+Copypaste.Size = UDim2.new(0,100,0,20)
+Copypaste.BackgroundColor3 = Color3.new(0,0,1)
+Copypaste.BorderColor3 = Color3.new(1,1,1)
+Copypaste.ZIndex = 2
+Copypaste.Text = "Copy/Paste v0.8"
+Copypaste.TextColor3 = Color3.fromRGB(250,250,250)
+Copypaste.TextScaled = true
+Copypaste.LayoutOrder = 10
+Copypaste.Parent = CmdHandler
+Copypaste.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/copyPasteBuilds.lua'))()
+Copypaste.Text = "Loading"
+wait(5)
+Copypaste.Text = "Copy/Paste v0.8"
+end)
+
 Title = Instance.new("TextButton")
 Title.Position = UDim2.new(0,1,0,101)
 Title.Size = UDim2.new(0,100,0,20)

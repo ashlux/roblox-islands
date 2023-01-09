@@ -481,10 +481,11 @@ previewButton.MouseButton1Click:Connect(function()
                 
                 local newPosition = B.Position + positionFromRed
                 
+                if blockName == "dirt" then blockName = "grass" end
                 generatePreview(blockName, newPosition, lookVector3)
                 
                 comma = 0
-                if lookVector3.Z == -1 then
+                if lookVector3.Z == -1 or lookVector3.Z == -0 then
                     beginning = i+5
                 else
                     beginning = i + 4
@@ -526,7 +527,7 @@ pasteButton.MouseButton1Click:Connect(function()
     
     local previewBlocks = getPreviewBlocks()
     for i,v in pairs(previewBlocks) do
-        tween, Time = goToPoint(v.Root.Position, 200)
+        --tween, Time = goToPoint(v.Root.Position, 200)
         local upperBlock = false
         local cframe = v.Root.CFrame
         local block = v.Name

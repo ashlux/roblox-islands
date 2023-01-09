@@ -102,7 +102,7 @@ Drag.Parent = Background
 Drag.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Drag.Size = UDim2.new(1, 0, 0.150000006, 0)
 Drag.Font = Enum.Font.SourceSans
-Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.8"
+Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.85"
 Drag.TextColor3 = Color3.fromRGB(0, 0, 0)
 Drag.TextSize = 15.000
 Dragg = false
@@ -364,6 +364,9 @@ copyButton.MouseButton1Click:Connect(function()
         return
     end
     
+    notification("Please wait.", "Saving to "..fileName, 2)
+    task.wait(0.3)
+    
     local allBlocksBetween = getBlocksBetween(A,B)
 
     for i,v in pairs(allBlocksBetween) do
@@ -371,6 +374,7 @@ copyButton.MouseButton1Click:Connect(function()
             appendfile("Saved Builds/"..fileName..".txt", v.Name..", "..tostring(v.Position)..", "..tostring(v.CFrame.LookVector).."\n")
         end
     end
+    
     notification("Success!", "file named "..fileName.." was created", 5)
 end)
 
@@ -448,11 +452,10 @@ previewButton.MouseButton1Click:Connect(function()
         if string.sub(info, i, i) == "," then
             comma = comma + 1
             if comma == 1 then
-                start = i
+                start = i + 1
             elseif comma == 4 then
-                number1 = i
-            elseif comma == 6 then
-                middleOfBuild = toVector3(string.sub(info, start+1, number1-1))
+                theEnd = i
+                middleOfBuild = toVector3(string.sub(info, start+1, theEnd-1))
             end
         end
     end
@@ -475,19 +478,17 @@ previewButton.MouseButton1Click:Connect(function()
                 local lookVector3 = toVector3(lookVector, ", ")
                 
                 local positionFromRed = positionVector3 - middleOfBuild
-                print("Position -", Position)
-                print("positionFromRed -",positionVector3 - middleOfBuild)
                 
                 local newPosition = B.Position + positionFromRed
-                
-                print("newPosition -",newPosition)
-                
-                print(CFrame.new(newPosition, newPosition + lookVector3))
                 
                 generatePreview(blockName, newPosition, lookVector3)
                 
                 comma = 0
-                beginning = i+5
+                if lookVector3.Z == -1 then
+                    beginning = i+5
+                else
+                    beginning = i + 4
+                end
             end
         end
     end

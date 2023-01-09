@@ -876,7 +876,7 @@ Copypaste.Size = UDim2.new(0,100,0,20)
 Copypaste.BackgroundColor3 = Color3.new(0,0,1)
 Copypaste.BorderColor3 = Color3.new(1,1,1)
 Copypaste.ZIndex = 2
-Copypaste.Text = "Copy/Paste v0.8"
+Copypaste.Text = "Copy/Paste (Beta)"
 Copypaste.TextColor3 = Color3.fromRGB(250,250,250)
 Copypaste.TextScaled = true
 Copypaste.LayoutOrder = 10
@@ -885,7 +885,7 @@ Copypaste.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/copyPasteBuilds.lua'))()
 Copypaste.Text = "Loading"
 wait(5)
-Copypaste.Text = "Copy/Paste v0.8"
+Copypaste.Text = "Copy/Paste (Beta)"
 end)
 
 Title = Instance.new("TextButton")

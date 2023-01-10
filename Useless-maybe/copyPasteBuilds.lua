@@ -14,17 +14,26 @@ local activePreview = false
 
 local function destroyPreview()
     if game.Workspace:FindFirstChild("Preview") then
-        game.Workspace.Preview:Destroy()
+        for i,v in pairs(game.Workspace.Preview:GetChildren()) do
+            if v.Name == "redPart" then
+                task.wait() -- idk why i couldnt get this to work as v.Name ~= "redPart"
+            else
+                v:Destroy()
+                activePreview = false
+            end
+        end
     end
 end
 
 local function closeActiveThingies()
     destroyPreview()
 
-    local redPart = game.Workspace:FindFirstChild("redPart")
-    local bluePart = game.Workspace:FindFirstChild("bluePart")
+    if game.Workspace:FindFirstChild("Preview") then
+    local redPart = game.Workspace.Preview:FindFirstChild("redPart")
+    local bluePart = game.Workspace.Preview:FindFirstChild("bluePart")
     if redPart then redPart:Destroy() game.CoreGui.redHandles:Destroy() end
     if bluePart then bluePart:Destroy() game.CoreGui.blueHandles:Destroy() end
+    end
 
     if CoreGui:FindFirstChild("Draggable") then
         CoreGui.Draggable:Destroy()
@@ -93,16 +102,16 @@ Background.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Background.BorderSizePixel = 0
 Background.BorderColor3 = Color3.new(1,0,1)
 Background.Position = UDim2.new(0.06, 0, 0.20, 0)
-Background.Size = UDim2.new(0, 120, 0, 275)
+Background.Size = UDim2.new(0, 120, 0, 350)
 Background.Active = true
 
 local Drag = Instance.new("TextButton")
 Drag.Name = "Drag"
 Drag.Parent = Background
 Drag.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Drag.Size = UDim2.new(1, 0, 0.150000006, 0)
+Drag.Size = UDim2.new(1, 0, 0.12, 0)
 Drag.Font = Enum.Font.SourceSans
-Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.85"
+Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.9"
 Drag.TextColor3 = Color3.fromRGB(0, 0, 0)
 Drag.TextSize = 15.000
 Dragg = false
@@ -132,7 +141,7 @@ Red.Parent = Background
 Red.AnchorPoint = Vector2.new(0, 0.5)
 Red.BackgroundColor3 = Color3.fromRGB(255, 200, 200)
 Red.BackgroundTransparency = 0.500
-Red.Position = UDim2.new(0, 0, 0.3, 0)
+Red.Position = UDim2.new(0, 0, 0.27, 0)
 Red.Size = UDim2.new(0.5, 0, 0.3, 0)
 Red.Font = Enum.Font.SourceSans
 Red.Text = "Red Corner"
@@ -155,7 +164,7 @@ Blue.Parent = Background
 Blue.AnchorPoint = Vector2.new(1, 0.5)
 Blue.BackgroundColor3 = Color3.fromRGB(200, 200, 255)
 Blue.BackgroundTransparency = 0.500
-Blue.Position = UDim2.new(1, 0, 0.3, 0)
+Blue.Position = UDim2.new(1, 0, 0.27, 0)
 Blue.Size = UDim2.new(0.5, 0, 0.3, 0)
 Blue.Font = Enum.Font.SourceSans
 Blue.Text = "Blue Corner"
@@ -181,8 +190,13 @@ Mouse.Button1Down:connect(function()
         if game.CoreGui:FindFirstChild("redHandles") then game.CoreGui.redHandles:Destroy() end
         if game.Workspace:FindFirstChild("redPart") then game.Workspace.redPart:Destroy() end
     
+        if game.Workspace:FindFirstChild("Preview") == nil then
+            local newFolder = Instance.new("Folder")
+            newFolder.Name = "Preview"
+            newFolder.Parent = Workspace
+        end
     
-        local redPart = Instance.new("Part", game.Workspace)
+        local redPart = Instance.new("Part", game.Workspace.Preview)
         redPart.Name = "redPart"
         redPart.Transparency = 0.4
         redPart.Color = Color3.fromRGB(250,0,0)
@@ -215,10 +229,10 @@ Mouse.Button1Down:connect(function()
                         Pos, addPos  = red.Adornee.Position, Vector3.new(0,-3,0)
                 end
                 if math.floor(Distance) > lastDragDist then
-                    red.Adornee.Position = Pos + addPos
+                    red.Adornee.CFrame = CFrame.new(Pos + addPos)
                     lastDragDist = math.floor(Distance)
                 elseif math.floor(Distance) < lastDragDist then
-                    red.Adornee.Position = Pos - addPos
+                    red.Adornee.CFrame = CFrame.new(Pos - addPos)
                     lastDragDist = math.floor(Distance)
                 end
             end
@@ -234,9 +248,14 @@ Mouse.Button1Down:connect(function()
         Blue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         if game.CoreGui:FindFirstChild("blueHandles") then game.CoreGui.blueHandles:Destroy() end
         if game.Workspace:FindFirstChild("bluePart") then game.Workspace.bluePart:Destroy() end
+
+        if game.Workspace:FindFirstChild("Preview") == nil then
+            local newFolder = Instance.new("Folder")
+            newFolder.Name = "Preview"
+            newFolder.Parent = Workspace
+        end    
     
-    
-        local bluePart = Instance.new("Part", game.Workspace)
+        local bluePart = Instance.new("Part", game.Workspace.Preview)
         bluePart.Name = "bluePart"
         bluePart.Transparency = 0.4
         bluePart.Color = Color3.fromRGB(0,0,250)
@@ -317,7 +336,7 @@ nameBox.Name = "nameBox"
 nameBox.Parent = Background
 nameBox.AnchorPoint = Vector2.new(0.5, 0.5)
 nameBox.BackgroundColor3 = Color3.new(1,1,1)
-nameBox.Position = UDim2.new(0.5, 0, 0.55, 0)
+nameBox.Position = UDim2.new(0.5, 0, 0.48, 0)
 nameBox.Size = UDim2.new(0.7, 0, 0.1, 0)
 nameBox.Font = Enum.Font.SourceSans
 nameBox.Text = ""
@@ -331,8 +350,8 @@ copyButton.Parent = Background
 copyButton.AnchorPoint = Vector2.new(0.5, 0.5)
 copyButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 copyButton.BackgroundTransparency = 0.500
-copyButton.Position = UDim2.new(0.5, 0, 0.7, 0)
-copyButton.Size = UDim2.new(0.5, 0, 0.1, 0)
+copyButton.Position = UDim2.new(0.5, 0, 0.58, 0)
+copyButton.Size = UDim2.new(0.5, 0, 0.07, 0)
 copyButton.Font = Enum.Font.SourceSans
 copyButton.Text = "Copy"
 copyButton.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -351,8 +370,8 @@ copyButton.MouseButton1Click:Connect(function()
     writefile("Saved Builds/"..fileName..".txt", "")
     readfile("Saved Builds/"..fileName..".txt")
     
-    local A = game.Workspace:FindFirstChild("bluePart")
-    local B = game.Workspace:FindFirstChild("redPart")
+    local A = game.Workspace.Preview:FindFirstChild("bluePart")
+    local B = game.Workspace.Preview:FindFirstChild("redPart")
     if A == nil and B == nil then
         notification("Error","You Need to lay down the corners first")
         return
@@ -391,11 +410,6 @@ local function toVector3(String, Separator)
 end
 
 local function generatePreview(item, position, lookVector)
-    if game.Workspace:FindFirstChild("Preview") == nil then
-        local newFolder = Instance.new("Folder")
-        newFolder.Name = "Preview"
-        newFolder.Parent = Workspace
-    end
     for i,v in pairs(game.ReplicatedStorage.Blocks:GetChildren()) do
         if v.Name == item then
             local itemClone = v:Clone()
@@ -408,14 +422,37 @@ local function generatePreview(item, position, lookVector)
     end
 end
 
+local function attachParts()
+    local Part1 = game.Workspace.Preview.redPart
+    task.wait()
+    for _, Part0 in pairs(game.Workspace.Preview:GetChildren()) do
+        if Part0.Name ~= Part1.Name then
+        
+            if Part0:FindFirstChild("HighlightBoxes") then 
+                Part0.HighlightBoxes:Destroy() 
+            end
+        
+	    local WeldConstraint = Instance.new("WeldConstraint")
+	    WeldConstraint.Part0 = Part0.Root
+	    WeldConstraint.Part1 = Part1
+	    WeldConstraint.Parent = WeldConstraint.Part0
+	
+	    Part0.Root.Anchored = false
+	    end
+    end
+    
+Part1.Anchored = true
+Part1.CanCollide = false
+end
+
 local previewButton = Instance.new("TextButton")
 previewButton.Name = "previewButton"
 previewButton.Parent = Background
 previewButton.AnchorPoint = Vector2.new(0.5, 0.5)
 previewButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 previewButton.BackgroundTransparency = 0.500
-previewButton.Position = UDim2.new(0.5, 0, 0.815, 0)
-previewButton.Size = UDim2.new(0.5, 0, 0.1, 0)
+previewButton.Position = UDim2.new(0.5, 0, 0.67, 0)
+previewButton.Size = UDim2.new(0.5, 0, 0.07, 0)
 previewButton.Font = Enum.Font.SourceSans
 previewButton.Text = "Preview"
 previewButton.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -429,11 +466,11 @@ previewButton.MouseButton1Click:Connect(function()
             notification("Error", "You have to type the file name first!")
         else
             notification("Error", "file name "..fileName.." doesnt exsist", 5)
-        return
         end
+        return
     end
     
-    local B = game.Workspace:FindFirstChild("redPart")
+    local B = game.Workspace.Preview:FindFirstChild("redPart")
     if not B then
         notification("Error", "Place down Red Corner first!", 5)
         return
@@ -495,6 +532,7 @@ previewButton.MouseButton1Click:Connect(function()
     end
     
     comma = 0
+    attachParts()
 end)
 
 
@@ -507,13 +545,72 @@ local function getPreviewBlocks()
     return previewBlocks
 end
 
+local rotateText = Instance.new("TextLabel")
+rotateText.Name = "rotateText"
+rotateText.Parent = Background
+rotateText.AnchorPoint = Vector2.new(0.5, 0.5)
+rotateText.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+rotateText.BackgroundTransparency = 0.500
+rotateText.Position = UDim2.new(0.5, 0, 0.76, 0)
+rotateText.Size = UDim2.new(0.5, 0, 0.07, 0)
+rotateText.Font = Enum.Font.SourceSans
+rotateText.Text = "Rotate"
+rotateText.TextColor3 = Color3.fromRGB(255,255,255)
+rotateText.TextSize = 14.000
+
+function rotatePart(amount)
+    local redBlock = game.Workspace.Preview.redPart
+    local newCFrame = CFrame.Angles(0, math.rad(amount), 0)
+    redBlock.CFrame = redBlock.CFrame * newCFrame
+end
+
+local rotateLeft = Instance.new("TextButton")
+rotateLeft.Name = "rotateLeft"
+rotateLeft.Parent = Background
+rotateLeft.AnchorPoint = Vector2.new(0, 0.5)
+rotateLeft.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+rotateLeft.BackgroundTransparency = 0.500
+rotateLeft.Position = UDim2.new(0.1, 0, 0.76, 0)
+rotateLeft.Size = UDim2.new(0.2, 0, 0.07, 0)
+rotateLeft.Font = Enum.Font.SourceSans
+rotateLeft.Text = "<"
+rotateLeft.TextColor3 = Color3.fromRGB(255,255,255)
+rotateLeft.TextSize = 14.000
+rotateLeft.MouseButton1Click:Connect(function()
+    if activePreview == false then
+        notification("Error", "Generate a Preview first!!", 5)
+        return
+    end
+    rotatePart(90)
+end)
+
+local rotateRight = Instance.new("TextButton")
+rotateRight.Name = "rotateRight"
+rotateRight.Parent = Background
+rotateRight.AnchorPoint = Vector2.new(1, 0.5)
+rotateRight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+rotateRight.BackgroundTransparency = 0.500
+rotateRight.Position = UDim2.new(0.9, 0, 0.76, 0)
+rotateRight.Size = UDim2.new(0.2, 0, 0.07, 0)
+rotateRight.Font = Enum.Font.SourceSans
+rotateRight.Text = ">"
+rotateRight.TextColor3 = Color3.fromRGB(255,255,255)
+rotateRight.TextSize = 14.000
+rotateRight.MouseButton1Click:Connect(function()
+    if activePreview == false then
+        notification("Error", "Generate a Preview first!!", 5)
+        return
+    end
+    rotatePart(-90)
+end)
+
 local pasteButton = Instance.new("TextButton")
 pasteButton.Name = "pasteButton"
 pasteButton.Parent = Background
 pasteButton.AnchorPoint = Vector2.new(0.5, 1)
 pasteButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 pasteButton.BackgroundTransparency = 0.500
-pasteButton.Position = UDim2.new(0.5, 0, 0.98, 0)
+pasteButton.Position = UDim2.new(0.5, 0, 0.95, 0)
 pasteButton.Size = UDim2.new(0.5, 0, 0.1, 0)
 pasteButton.Font = Enum.Font.SourceSans
 pasteButton.Text = "Paste"
@@ -527,11 +624,14 @@ pasteButton.MouseButton1Click:Connect(function()
     
     local previewBlocks = getPreviewBlocks()
     for i,v in pairs(previewBlocks) do
-        --tween, Time = goToPoint(v.Root.Position, 200)
+        if v.Name ~= "redPart" then
+        tween, Time = goToPoint(v.Root.Position, 200)
+        task.wait(Time)
         local upperBlock = false
         local cframe = v.Root.CFrame
         local block = v.Name
         task.spawn(placeBlock, upperBlock, cframe, block)
+        end
     end
     
     destroyPreview()

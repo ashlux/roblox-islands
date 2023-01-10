@@ -18,6 +18,7 @@ local animalModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox
 local treasureModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/treasure-chest-module.lua")
 local wildFruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/wild-fruit-module.lua")
 local wildCropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/wild-crops-module.lua")
+local chestModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/chest-module.lua")
 
 print("Loading Complete!")
 
@@ -33,7 +34,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1013) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 1/10"
+updates = "[Matt]: GUI Updated 1/6"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -365,12 +366,13 @@ function moveToMobs(mob)
     local tween
     if mob.Name == "magmaBlob" then
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
-    elseif mob.Name == "buffalkor" then
+    elseif mob.Name == "buffalkor" or mob.Name:find("skorp") then
+        print(mob, mob.HumanoidRootPart, mob.HumanoidRootPart.Position)
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-12,0))})
     else
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-8,0))})
-    tween:Play()
     end
+    tween:Play()
     return tween, distance, speed
 end
 
@@ -1912,7 +1914,7 @@ Notification3.TextColor3 = Color3.fromRGB(2,2,2)
 Notification3.TextScaled = true
 
 local Notification4 = Instance.new("TextLabel")
-Notification4.Position = UDim2.new(0,0,0,450)
+Notification4.Position = UDim2.new(0,0,0,550)
 Notification4.Size = UDim2.new(0,150,0,15)
 Notification4.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification4.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1924,7 +1926,7 @@ Notification4.TextScaled = true
 
 local Notification5 = Instance.new("TextLabel")
 Notification5.Size = UDim2.new(0,150,0,15)
-Notification5.Position = UDim2.new(0,0,0,210)
+Notification5.Position = UDim2.new(0,0,0,300)
 Notification5.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification5.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification5.ZIndex = 2
@@ -1934,7 +1936,7 @@ Notification5.TextColor3 = Color3.fromRGB(2,2,2)
 Notification5.TextScaled = true
 
 local BottomOfMisc = Instance.new("TextLabel") -- Bottom of Misc
-BottomOfMisc.Position = UDim2.new(0,0,0,590)
+BottomOfMisc.Position = UDim2.new(0,0,0,700)
 BottomOfMisc.Size = UDim2.new(0,120,0,15)
 BottomOfMisc.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 BottomOfMisc.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -3336,6 +3338,32 @@ Item75.Text = "Auto-Fish"
 Item75.TextColor3 = Color3.fromRGB(250,250,250)
 Item75.TextScaled = true
 
+local depositHeld = Instance.new("TextButton")
+depositHeld.Position = UDim2.new(0,0,1,127)
+depositHeld.Size = UDim2.new(0,140,0,20)
+depositHeld.BackgroundColor3 = Color3.fromRGB(63,63,63)
+depositHeld.BorderSizePixel = 1
+depositHeld.ZIndex = 2
+depositHeld.Parent = Notification3
+depositHeld.Text = "Deposit held into chests"
+depositHeld.TextColor3 = Color3.fromRGB(250,250,250)
+depositHeld.TextScaled = true
+depositHeld.MouseButton1Click:Connect(function()
+    if depositingHeld then
+        depositingHeld = false
+        depositHeld.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        depositHeld.TextColor3 = Color3.fromRGB(250,250,250)
+        depositHeld.Text = "Deposit held into chests"
+        chestModule.stopFillingChests()
+    else
+        depositingHeld = true
+        depositHeld.BackgroundColor3 = Color3.fromRGB(250,250,250)
+        depositHeld.TextColor3 = Color3.fromRGB(0,0,0)
+        depositHeld.Text = "Depositing held item"
+        chestModule.startFillingChests()
+    end
+end)
+
 local presentOpener = Instance.new("TextButton")
 presentOpener.Position = UDim2.new(0,71,1,106)
 presentOpener.Size = UDim2.new(0,70,0,20)
@@ -3364,7 +3392,7 @@ presentOpener.MouseButton1Click:Connect(function()
 end)
 
 local presentBreaker = Instance.new("TextButton")
-presentBreaker.Position = UDim2.new(0,0,1,127)
+presentBreaker.Position = UDim2.new(0,0,1,253)
 presentBreaker.Size = UDim2.new(0,140,0,20)
 presentBreaker.BackgroundColor3 = Color3.fromRGB(63,63,63)
 presentBreaker.BorderSizePixel = 1

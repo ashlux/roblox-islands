@@ -33,7 +33,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1013) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 1/6"
+updates = "[Matt]: GUI Updated 1/10"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -363,12 +363,14 @@ function moveToMobs(mob)
     local speed = 25
     local tweenInfo = TweenInfo.new(distance/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
     local tween
-    if mob.Name == "buffalkor" then
+    if mob.Name == "magmaBlob" then
+        tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
+    elseif mob.Name == "buffalkor" then
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-12,0))})
     else
-        tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
-    end
+        tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-8,0))})
     tween:Play()
+    end
     return tween, distance, speed
 end
 

@@ -1,5 +1,6 @@
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
+local Character = Player.Character
 local Island = game.Workspace.Islands:GetChildren()[1]
 local Blocks = Island.Blocks
 
@@ -50,10 +51,10 @@ end
 
 local function startFillingChests()
     setFillChests(true)
-    local heldItem = getHeldItem()
+    local tool = getHeldItem()
     
     while Player:GetAttribute("fillChests") and task.wait() do
-        local amount = heldItem.Amount.Value
+        local amount = tool.Amount.Value
         local chests = getNearbyChests()
         for _,chest in pairs(chests) do
             if Player:GetAttribute("fillChests") and chest:FindFirstChild("Contents") and #chest.Contents:GetChildren() < chest.MaxContentSlots.Value + 1 then
@@ -69,6 +70,6 @@ local function stopFillingchests()
 end
 
 return {
-    startFillingChests = startFillingChests,
-    stopFillingchests = stopFillingchests
+startFillingChests = startFillingChests,
+stopFillingchests = stopFillingchests
 }

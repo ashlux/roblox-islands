@@ -111,7 +111,7 @@ Drag.Parent = Background
 Drag.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Drag.Size = UDim2.new(1, 0, 0.12, 0)
 Drag.Font = Enum.Font.SourceSans
-Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.91"
+Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.92"
 Drag.TextColor3 = Color3.fromRGB(0, 0, 0)
 Drag.TextSize = 15.000
 Dragg = false
@@ -618,6 +618,7 @@ pasteButton.Text = "Paste"
 pasteButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 pasteButton.TextSize = 14.000
 pasteButton.MouseButton1Click:Connect(function()
+    Float()
     if activePreview == false then
         notification("Error", "Generate a Preview first!!", 5)
         return
@@ -626,7 +627,7 @@ pasteButton.MouseButton1Click:Connect(function()
     local previewBlocks = getPreviewBlocks()
     for i,v in pairs(previewBlocks) do
         if v.Name ~= "redPart" then
-        tween, Time = goToPoint(v.Root.Position, 200)
+        tween, Time = goToPoint(v.Root.Position, 100)
         task.wait(Time)
         local upperBlock = false
         local cframe = v.Root.CFrame
@@ -636,4 +637,5 @@ pasteButton.MouseButton1Click:Connect(function()
     end
     
     destroyPreview()
+    unFloat()
 end)

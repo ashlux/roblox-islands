@@ -253,7 +253,7 @@ Mouse.Button1Down:connect(function()
         end 
         
         if game.CoreGui:FindFirstChild("blueHandles") then game.CoreGui.blueHandles:Destroy() end
-        if game.Workspace.Preview:FindFirstChild("bluePart") then game.Workspace.bluePart:Destroy() end
+        if game.Workspace.Preview:FindFirstChild("bluePart") then game.Workspace.Preview.bluePart:Destroy() end
     
         local bluePart = Instance.new("Part", game.Workspace.Preview)
         bluePart.Name = "bluePart"

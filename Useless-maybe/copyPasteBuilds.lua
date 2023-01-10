@@ -16,7 +16,7 @@ local function destroyPreview()
     if game.Workspace:FindFirstChild("Preview") then
         for i,v in pairs(game.Workspace.Preview:GetChildren()) do
             if v.Name == "redPart" then
-                task.wait() -- idk why i couldnt get this to work as v.Name ~= "redPart"
+                task.wait()
             else
                 v:Destroy()
                 activePreview = false
@@ -111,7 +111,7 @@ Drag.Parent = Background
 Drag.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Drag.Size = UDim2.new(1, 0, 0.12, 0)
 Drag.Font = Enum.Font.SourceSans
-Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.9"
+Drag.Text = "BOB'S\nBuild Copy/Paste\nv0.91"
 Drag.TextColor3 = Color3.fromRGB(0, 0, 0)
 Drag.TextSize = 15.000
 Dragg = false
@@ -187,14 +187,13 @@ Mouse.Button1Down:connect(function()
     if redToggled then
         redToggled = false
         Red.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        if game.CoreGui:FindFirstChild("redHandles") then game.CoreGui.redHandles:Destroy() end
-        if game.Workspace:FindFirstChild("redPart") then game.Workspace.redPart:Destroy() end
-    
         if game.Workspace:FindFirstChild("Preview") == nil then
             local newFolder = Instance.new("Folder")
             newFolder.Name = "Preview"
             newFolder.Parent = Workspace
-        end
+        end   
+        if game.CoreGui:FindFirstChild("redHandles") then game.CoreGui.redHandles:Destroy() end
+        if game.Workspace.Preview:FindFirstChild("redPart") then game.Workspace.Preview.redPart:Destroy() end
     
         local redPart = Instance.new("Part", game.Workspace.Preview)
         redPart.Name = "redPart"
@@ -246,14 +245,15 @@ Mouse.Button1Down:connect(function()
     elseif blueToggled then
         blueToggled = false
         Blue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        if game.CoreGui:FindFirstChild("blueHandles") then game.CoreGui.blueHandles:Destroy() end
-        if game.Workspace:FindFirstChild("bluePart") then game.Workspace.bluePart:Destroy() end
-
+        
         if game.Workspace:FindFirstChild("Preview") == nil then
             local newFolder = Instance.new("Folder")
             newFolder.Name = "Preview"
             newFolder.Parent = Workspace
-        end    
+        end 
+        
+        if game.CoreGui:FindFirstChild("blueHandles") then game.CoreGui.blueHandles:Destroy() end
+        if game.Workspace.Preview:FindFirstChild("bluePart") then game.Workspace.bluePart:Destroy() end
     
         local bluePart = Instance.new("Part", game.Workspace.Preview)
         bluePart.Name = "bluePart"
@@ -443,6 +443,7 @@ local function attachParts()
     
 Part1.Anchored = true
 Part1.CanCollide = false
+activePreview = true
 end
 
 local previewButton = Instance.new("TextButton")

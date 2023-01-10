@@ -65,11 +65,11 @@ local function startFillingChests()
     
 end
 
-local function stopFillingchests()
+local function stopFillingChests()
     setFillChests(false)
 end
 
 return {
 startFillingChests = startFillingChests,
-stopFillingchests = stopFillingchests
+stopFillingChests = stopFillingChests
 }

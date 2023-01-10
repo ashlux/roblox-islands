@@ -58,7 +58,7 @@ local function startFillingChests()
         local chests = getNearbyChests()
         for _,chest in pairs(chests) do
             if Player:GetAttribute("fillChests") and chest:FindFirstChild("Contents") and #chest.Contents:GetChildren() < chest.MaxContentSlots.Value + 1 then
-                depositToChest(chest, amount, tool)
+                task.spawn(depositToChest, chest, amount, tool)
             end
         end
     end

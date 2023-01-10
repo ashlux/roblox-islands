@@ -627,8 +627,8 @@ pasteButton.MouseButton1Click:Connect(function()
     local previewBlocks = getPreviewBlocks()
     for i,v in pairs(previewBlocks) do
         if v.Name ~= "redPart" then
-        tween, Time = goToPoint(v.Root.Position, 100)
-        task.wait(Time)
+        --tween, Time = goToPoint(v.Root.Position, 100)
+        --task.wait(Time)
         local upperBlock = false
         local cframe = v.Root.CFrame
         local block = v.Name

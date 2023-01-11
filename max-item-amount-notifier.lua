@@ -33,7 +33,7 @@ local MAX_ITEM_MAP = {
 while wait(5) do
 	for _,item in pairs(Player.Backpack:GetChildren()) do
 		local amount = item.Amount.Value
-		local maxAmount = MAX_ITEM_MAP[item.Name] + 1 or 1000001
+		local maxAmount = (MAX_ITEM_MAP[item.Name] or 1000000) + 1
 		if amount >= maxAmount then	
 			local warningMsg = "[!!!]: " .. item.Name .. " is over the limit of " .. maxAmount .. " (you have " .. amount .. ")!";	
 			StarterGui:SetCore("ChatMakeSystemMessage", {

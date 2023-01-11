@@ -71,6 +71,15 @@ Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Frame.Position = UDim2.new(0, 50, 0, 200)
 Frame.Size = UDim2.new(0.150000006, 0, 0.300000012, 0)
 
+function GetCorner(sz, pos, anch)
+	pos = typeof(pos) == 'UDim2' and Vector2.new(pos.X.Offset, pos.Y.Offset) or pos
+	anch = anch or Vector2.new(0,0)
+	return pos+(sz*anch)
+end
+
+local guiCorner = GetCorner(Frame.AbsoluteSize, Frame.Position, Frame.AnchorPoint)
+local Center = guiCorner+(Frame.AbsoluteSize/2)
+
 Red.Name = "Red"
 Red.Parent = Frame
 Red.AnchorPoint = Vector2.new(0, 0.5)
@@ -138,10 +147,8 @@ Drag.Text = "Print/Delete"
 Drag.TextColor3 = Color3.fromRGB(0, 0, 0)
 Drag.TextSize = 14.000
 Dragg = false
-Drag.MouseButton1Down:Connect(function()Dragg = true while Dragg do game.TweenService:Create(Frame, TweenInfo.new(.06), {Position = UDim2.new(0,Mouse.X - 90,0,Mouse.Y + 93)}):Play()wait()end end)
+Drag.MouseButton1Down:Connect(function()Dragg = true while Dragg do game.TweenService:Create(Frame, TweenInfo.new(.06), {Position = UDim2.new(0,Mouse.X - (Center.X /2),0,Mouse.Y + (Center.Y/4))}):Play()wait()end end)
 Drag.MouseButton1Up:Connect(function()Dragg = false end)
-
-
 
 Exit.Name = "Exit"
 Exit.Parent = Frame
@@ -280,7 +287,10 @@ Print.Text = "Print"
 Print.TextColor3 = Color3.fromRGB(0, 0, 0)
 Print.TextSize = 14.000
 Print.MouseButton1Click:Connect(function()
+if not game.Workspace:FindFirstChild("redPart") and game.Workspace:FindFirstChild("bluePart") then return end
 stop = false
+local p1 = game.Workspace.redPart.Position
+local p2 = game.Workspace.bluePart.Position
 xBackup, yBackup, zBackup = p1.x, p1.y, p1.z
 X, Y, Z = p1.x, p1.y, p1.z
 X1, Y1, Z1 = p2.x, p2.y, p2.z

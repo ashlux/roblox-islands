@@ -34,7 +34,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1013) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 1/6"
+updates = "[Matt]: GUI Updated 1/11"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -2771,17 +2771,17 @@ for _,v in pairs(Island.Blocks:GetChildren()) do
 end
 end)
 
-local blockFiller = Instance.new("TextButton")
-blockFiller.Position = UDim2.new(0,0,1,21)
-blockFiller.Size = UDim2.new(0,70,0,20)
-blockFiller.BackgroundColor3 = Color3.fromRGB(63,63,63)
-blockFiller.BorderSizePixel = 1
-blockFiller.ZIndex = 2
-blockFiller.Parent = Notification3
-blockFiller.Text = "Block Filler"
-blockFiller.TextColor3 = Color3.fromRGB(250,250,250)
-blockFiller.TextScaled = true
-blockFiller.MouseButton1Click:Connect(function()
+local blockPrinter = Instance.new("TextButton")
+blockPrinter.Position = UDim2.new(0,0,1,21)
+blockPrinter.Size = UDim2.new(0,70,0,20)
+blockPrinter.BackgroundColor3 = Color3.fromRGB(63,63,63)
+blockPrinter.BorderSizePixel = 1
+blockPrinter.ZIndex = 2
+blockPrinter.Parent = Notification3
+blockPrinter.Text = "Block Printer"
+blockPrinter.TextColor3 = Color3.fromRGB(250,250,250)
+blockPrinter.TextScaled = true
+blockPrinter.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/islands%20FillBlocks.lua'))()
 end)
 

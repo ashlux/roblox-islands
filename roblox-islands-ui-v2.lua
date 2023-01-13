@@ -149,12 +149,12 @@ local function buildMain()
 	local vendingMonies = serverSection:CreateParagraph("")
 	
 	function updateDropCount(paragraph)
-		count = Island and Island.Drops and #Island.Drops:GetChildren() or 0
+		count = Island and Island:FindFirstChlid("Drops") and #Island.Drops:GetChildren() or 0
 		paragraph.Set("Drops: " .. stringUtils.formatInt(count))
 	end
 	
 	function updateBlockCount(paragraph)
-		local count = Island and Island.Blocks and #Island.Blocks:GetChildren() or 0
+		local count = Island and Island:FindFirstChlid("Blocks") and #Island.Blocks:GetChildren() or 0
 		paragraph.Set("Blocks: " .. stringUtils.formatInt(count))
 	end
 	
@@ -165,7 +165,7 @@ local function buildMain()
 		while wait(5) do
 			updateBlockCount(blockCount)
 			updateDropCount(dropCount)
-        end
+        	end
     end)
 	
 	function updateVendingMonies(paragraph)

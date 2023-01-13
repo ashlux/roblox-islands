@@ -160,7 +160,7 @@ local shopInfos = game:GetService("ReplicatedStorage").rbxts_include.node_module
 
 
 for i = 1,10 do
-    for i,v in pairs(shopInfos.islands) do -- server[jobId, placeId, privateServerId, accessCode], displayName, player[username, userId], time, maxVisitors, visitorCount, joinCode, china
+    for i,v in pairs(shopInfos.islands) do -- server = {jobId, placeId, privateServerId, accessCode}, displayName, player = {username, userId}, time, maxVisitors, visitorCount, joinCode, china
     
         filename2 = v.player.username..".txt"
     

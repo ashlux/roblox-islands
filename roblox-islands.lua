@@ -367,7 +367,6 @@ function moveToMobs(mob)
     if mob.Name == "magmaBlob" then
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position)})
     elseif mob.Name == "buffalkor" or mob.Name:find("skorp") then
-        print(mob, mob.HumanoidRootPart, mob.HumanoidRootPart.Position)
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-12,0))})
     else
         tween = TS:Create(Player.Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(mob.HumanoidRootPart.Position + Vector3.new(0,-8,0))})
@@ -400,7 +399,6 @@ function killPlayersAura()
     for i,v in pairs(Players:GetPlayers()) do
         playerCharacter = v.Character
         if playerCharacter and playerCharacter:FindFirstChild("HumanoidRootPart") and (HR.Position - playerCharacter.HumanoidRootPart.Position).magnitude < 30 then
-            print("nothing")
             local args = {
             [1] = HttpService:GenerateGUID(false),
             [2] = {
@@ -1803,9 +1801,7 @@ HWA.TextScaled = true
 for i,v in pairs(halloweenVendorScroll:GetChildren()) do
     if not v:IsA("TextBox") then
     v.MouseButton1Click:Connect(function()
-        print("Buy "..v.Name.." which is number", i)
         halloweenShop(i, tonumber(HWA.Text))
-        print(i, tonumber(HWA.Text))
     end)
     end
 end
@@ -6667,7 +6663,7 @@ Item75.MouseButton1Click:Connect(function()
             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, true, game, 1) -- click down
             wait(0.5)
             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, false, game, 1) -- click up
-            repeat wait() v = v + 1 print("waiting for bite") until Player.PlayerGui.ActionBarScreenGui.ActionBar:FindFirstChild("RoactTree") or v == 200
+            repeat wait() v = v + 1 until Player.PlayerGui.ActionBarScreenGui.ActionBar:FindFirstChild("RoactTree") or v == 200 -- waiting for bite
             wait(0.5)
             v = 0
             repeat
@@ -6679,18 +6675,18 @@ Item75.MouseButton1Click:Connect(function()
                         if bobber.AbsolutePosition.X - fish.AbsolutePosition.X < 35 then
                             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, true, game, 1)
                             wait()
-                        print("click down")
+                        --print("click down")
                         elseif bobber.AbsolutePosition.X - fish.AbsolutePosition.X > 35 then
                             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, false, game, 1)
-                            print("Click UP")
+                            --print("Click UP")
                             wait()
                         elseif bobber.AbsolutePosition.X - fish.AbsolutePosition.X == 35 then
                         wait()
-                        print("waiting")
+                        --print("waiting")
                         end
                     end
                 end
-                print("waiting for game over screen")
+                --print("waiting for game over screen")
             until Player.PlayerGui.ActionBarScreenGui.ActionBar:FindFirstChild("GameOverScreen") or v == 150
             wait(0.5)
         end
@@ -6960,7 +6956,6 @@ VoidMining.MouseButton1Click:Connect(function()
         while Toggled83 == true do
             wait()
             local Rocks = getVoidRocks()
-            print(Rocks)
             for i,v in pairs(Rocks) do
                 if Toggled83 == true then
                     tween, Time = goToPoint(v.Position, 0)

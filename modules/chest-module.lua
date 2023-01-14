@@ -2,7 +2,6 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local Character = Player.Character
 local Island = game.Workspace.Islands:GetChildren()[1]
-local Blocks = Island.Blocks
 
 local function setFillChests(value)
     Player:SetAttribute("fillChests", value or false)
@@ -37,7 +36,7 @@ end
 
 local function getNearbyChests()
     local chests = {}
-    for i,v in pairs(Blocks:GetChildren()) do
+    for i,v in pairs(Island.Blocks:GetChildren()) do
         if v.Name:find("chest") and Player:DistanceFromCharacter(v.Position) < 24 then
             table.insert(chests, v)
         end
@@ -70,6 +69,6 @@ local function stopFillingChests()
 end
 
 return {
-startFillingChests = startFillingChests,
-stopFillingChests = stopFillingChests
+	startFillingChests = startFillingChests,
+	stopFillingChests = stopFillingChests
 }

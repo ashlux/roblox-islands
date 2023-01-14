@@ -34,7 +34,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1013) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 1/11"
+updates = "[Matt]: GUI Updated 1/14"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
@@ -247,6 +247,12 @@ local function goToPoint(Point, distance)
     tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
     tween:Play()
     return tween, Time
+    end
+end
+
+local function cancelTween()
+    if tween then 
+        tween:Cancel()
     end
 end
 
@@ -3039,9 +3045,7 @@ allWoods.MouseButton1Click:Connect(function()
         allWoods.BackgroundColor3 = Color3.fromRGB(175,175,175)
         allWoods.Text = "All Woods"
         allWoods.TextColor3 = Color3.fromRGB(0,0,0)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         unFloat()
     else
         allWoods1 = true
@@ -3054,7 +3058,10 @@ allWoods.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                     tween, Time = goToPoint(v.Position, 24)
-                    wait(Time)
+                    if Time then
+                        wait(Time - 1)
+                        cancelTween()
+                    end
                     hitTree(v)
                 break
             end
@@ -4358,9 +4365,7 @@ Item4.MouseButton1Click:Connect(function()
         Item4.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled1 = true
         Item4.BackgroundColor3 = Color3.new(1,0,0)
@@ -4398,9 +4403,7 @@ Item5.MouseButton1Click:Connect(function()
         Noclipping:Disconnect()
         killEverything:Disconnect()
         noClip = false
-        if tween then
-            tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled2 = true
         Item5.BackgroundColor3 = Color3.new(1,0,0)
@@ -4438,9 +4441,7 @@ Mob3.MouseButton1Click:Connect(function()
         Mob3.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-            tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled3 = true
         Mob3.BackgroundColor3 = Color3.new(1,0,0)
@@ -4475,9 +4476,7 @@ Mob4.MouseButton1Click:Connect(function()
         Mob4.TextColor3 = Color3.fromRGB(1,1,1)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled4 = true
         Mob4.BackgroundColor3 = Color3.new(1,0,0)
@@ -4597,9 +4596,7 @@ Item36.MouseButton1Click:Connect(function()
         Item36.Text = "Clear Grass/Rocks"
         Item36.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled25 = true
         Item36.BackgroundColor3 = Color3.new(0,255,255)
@@ -4752,9 +4749,7 @@ Mob5.MouseButton1Click:Connect(function()
         if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
             Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         end
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled19 = true
         Mob5.BackgroundColor3 = Color3.new(1,0,0)
@@ -4792,9 +4787,7 @@ Mob6.MouseButton1Click:Connect(function()
         Mob6.TextColor3 = Color3.new(0,0,0)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled48 = true
         Mob6.BackgroundColor3 = Color3.new(1,0,0)
@@ -4830,9 +4823,7 @@ Mob7.MouseButton1Click:Connect(function()
         Mob7.TextColor3 = Color3.fromRGB(255,200,1)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled49 = true
         Mob7.BackgroundColor3 = Color3.new(1,0,0)
@@ -4867,9 +4858,7 @@ Mob8.MouseButton1Click:Connect(function()
         Mob8.Text = "Rock Mimic"
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled60 = true
         Mob8.BackgroundColor3 = Color3.new(1,0,0)
@@ -4916,9 +4905,7 @@ Mob9.MouseButton1Click:Connect(function()
         Mob9.TextColor3 = Color3.fromRGB(255,200,1)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled49 = true
         Mob9.BackgroundColor3 = Color3.new(1,0,0)
@@ -4964,9 +4951,7 @@ Mob10.MouseButton1Click:Connect(function()
         Mob10.TextColor3 = Color3.fromRGB(255,200,1)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled90 = true
         Mob10.BackgroundColor3 = Color3.new(1,0,0)
@@ -5012,9 +4997,7 @@ Mob11.MouseButton1Click:Connect(function()
         Mob11.TextColor3 = Color3.fromRGB(255,200,1)
         unFloat()
         killEverything:Disconnect()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled91 = true
         Mob11.BackgroundColor3 = Color3.new(1,0,0)
@@ -5075,9 +5058,7 @@ Item33.MouseButton1Click:Connect(function()
         Item33.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item33.Text = "Collect Truffles"
         Item33.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled21 = true
         Item33.BackgroundColor3 = Color3.fromRGB(0,255,255)
@@ -5431,9 +5412,7 @@ Item50.MouseButton1Click:Connect(function()
         Item50.Text = "Oak Wood"
         Item50.TextColor3 = Color3.fromRGB(0,0,0)
         unFloat()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled33 = true
         Item50.BackgroundColor3 = Color3.new(200,0,0)
@@ -5447,7 +5426,8 @@ Item50.MouseButton1Click:Connect(function()
                 if v.Name == "tree1" or v.Name == "tree2" or v.Name == "tree3" or v.Name == "tree4" then
                     tween, Time = goToPoint(v.Position, 24)
                     if Time then
-                    wait(Time - 2)
+                        wait(Time - 1)
+                        cancelTween()
                     end
                     hitTree(v)
                 break
@@ -5463,9 +5443,7 @@ Item51.MouseButton1Click:Connect(function()
         Item51.BackgroundColor3 = Color3.fromRGB(248,223,161)
         Item51.Text = "Birch Wood"
         Item51.TextColor3 = Color3.fromRGB(0,0,0)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         unFloat()
     else
         Toggled34 = true
@@ -5480,7 +5458,8 @@ Item51.MouseButton1Click:Connect(function()
                 if v.Name:find("treeBirch") then
                     tween, Time = goToPoint(v.Position, 24)
                     if Time then
-                    wait(Time - 2)
+                        wait(Time - 1)
+                        cancelTween()
                     end
                     hitTree(v)
                 break
@@ -5496,9 +5475,7 @@ Item52.MouseButton1Click:Connect(function()
         Item52.BackgroundColor3 = Color3.fromRGB(85,52,43)
         Item52.Text = "Pine Wood"
         Item52.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         unFloat()
     else
         Toggled35 = true
@@ -5513,7 +5490,8 @@ Item52.MouseButton1Click:Connect(function()
                 if v.Name:find("treePine") then
                     tween, Time = goToPoint(v.Position, 24)
                     if Time then
-                    wait(Time - 2)
+                        wait(Time - 1)
+                        cancelTween()
                     end
                     hitTree(v)
                 break
@@ -5529,9 +5507,7 @@ Item53.MouseButton1Click:Connect(function()
         Item53.BackgroundColor3 = Color3.fromRGB(200,111,87)
         Item53.Text = "Maple Wood"
         Item53.TextColor3 = Color3.fromRGB(0,0,0)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         unFloat()
     else
         Toggled36 = true
@@ -5546,7 +5522,8 @@ Item53.MouseButton1Click:Connect(function()
                 if v.Name:find("treeMaple") then
                     tween, Time = goToPoint(v.Position, 24)
                     if Time then
-                    wait(Time - 2)
+                        wait(Time - 1)
+                        cancelTween()
                     end
                     hitTree(v)
                 break
@@ -5562,9 +5539,7 @@ Item54.MouseButton1Click:Connect(function()
         Item54.BackgroundColor3 = Color3.fromRGB(258,233,171)
         Item54.Text = "Hickory Wood"
         Item54.TextColor3 = Color3.fromRGB(0,0,0)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         unFloat()
     else
         Toggled37 = true
@@ -5579,7 +5554,8 @@ Item54.MouseButton1Click:Connect(function()
                 if v.Name:find("treeHickory") then
                     tween, Time = goToPoint(v.Position, 24)
                     if Time then
-                    wait(Time - 2)
+                        wait(Time - 1)
+                        cancelTween()
                     end
                     hitTree(v)
                 break
@@ -5595,9 +5571,7 @@ Item55.MouseButton1Click:Connect(function()
         Item55.BackgroundColor3 = Color3.fromRGB(168,105,165)
         Item55.Text = "Spirit Wood"
         Item55.TextColor3 = Color3.fromRGB(0,0,0)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         unFloat()
     else
         Toggled38 = true
@@ -5612,7 +5586,8 @@ Item55.MouseButton1Click:Connect(function()
                 if v.Name:find("treeSpirit") then
                     tween, Time = goToPoint(v.Position, 24)
                     if Time then
-                    wait(Time - 2)
+                        wait(Time - 1)
+                        cancelTween()
                     end
                     hitTree(v)
                 break
@@ -5940,9 +5915,7 @@ Item61.MouseButton1Click:Connect(function()
         Item61.Text = "Catch Entities"
         Item61.TextColor3 = Color3.fromRGB(250,250,250)
         unFloat()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled44 = true
         Item61.BackgroundColor3 = Color3.new(0,255,255)
@@ -6815,9 +6788,7 @@ Item85.MouseButton1Click:Connect(function()
         Item85.Text = "Buffalkor Island"
         Item85.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled74 = true
         Item85.BackgroundColor3 = Color3.new(0,255,255)
@@ -6871,9 +6842,7 @@ Item86.MouseButton1Click:Connect(function()
         Item86.Text = "Diamond Island"
         Item86.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled75 = true
         Item86.BackgroundColor3 = Color3.new(0,255,255)
@@ -6936,9 +6905,7 @@ VoidMining.MouseButton1Click:Connect(function()
         VoidMining.Text = "Void Rocks"
         VoidMining.TextColor3 = Color3.new(1,1,1)
         unFloat()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled83 = true
         VoidMining.BackgroundColor3 = Color3.new(0,255,255)
@@ -6959,7 +6926,7 @@ VoidMining.MouseButton1Click:Connect(function()
             for i,v in pairs(Rocks) do
                 if Toggled83 == true then
                     tween, Time = goToPoint(v.Position, 0)
-                    if tween then
+                    if Time then
                         wait(Time - 2)
                     end
                     if v:FindFirstChild("1") then
@@ -6993,9 +6960,7 @@ ElectriteMining.MouseButton1Click:Connect(function()
         ElectriteMining.Text = "Electrite"
         ElectriteMining.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled85 = true
         ElectriteMining.BackgroundColor3 = Color3.new(0,255,255)
@@ -7068,9 +7033,7 @@ SnowMining.MouseButton1Click:Connect(function()
         SnowMining.Text = "Snow"
         SnowMining.TextColor3 = Color3.new(1,1,1)
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled86 = true
         SnowMining.BackgroundColor3 = Color3.new(0,255,255)
@@ -7122,9 +7085,7 @@ Item87.MouseButton1Click:Connect(function()
         Item87.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item87.Text = "Pick Berries"
         Item87.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         VirtualInputManager:SendMouseButtonEvent(0,0, 0, false, game, 1)
     else
@@ -7170,9 +7131,7 @@ Item88.MouseButton1Click:Connect(function()
         Item88.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item88.Text = "Composter"
         Item88.TextColor3 = Color3.fromRGB(250,250,250)
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         NoClipping:Disconnect()
     else
@@ -7246,9 +7205,7 @@ BFly.MouseButton1Click:Connect(function()
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         Noclipping:Disconnect()
         noClip = false
-        if tween then
-        tween:Cancel()
-        end
+        cancelTween()
     else
         Toggled89 = true
         BFly.BackgroundColor3 = Color3.new(0,255,255)

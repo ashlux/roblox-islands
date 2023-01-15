@@ -3057,9 +3057,9 @@ allWoods.MouseButton1Click:Connect(function()
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5424,9 +5424,9 @@ Item50.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                 if v.Name == "tree1" or v.Name == "tree2" or v.Name == "tree3" or v.Name == "tree4" then
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5456,9 +5456,9 @@ Item51.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                 if v.Name:find("treeBirch") then
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5488,9 +5488,9 @@ Item52.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                 if v.Name:find("treePine") then
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5520,9 +5520,9 @@ Item53.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                 if v.Name:find("treeMaple") then
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5552,9 +5552,9 @@ Item54.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                 if v.Name:find("treeHickory") then
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5584,9 +5584,9 @@ Item55.MouseButton1Click:Connect(function()
             local trees = getTrees()
             for k,v in pairs(trees) do
                 if v.Name:find("treeSpirit") then
-                    tween, Time = goToPoint(v.Position, 23)
+                    tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 1)
+                        wait(Time - 0.8)
                         cancelTween()
                     end
                     hitTree(v)

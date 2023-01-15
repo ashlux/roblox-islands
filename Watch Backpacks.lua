@@ -13,6 +13,18 @@ if getgenv().playerLeavingConnection then
 	getgenv().playerLeavingConnection:Disconnect()
 end
 
+function getTime()
+	local HOUR = math.floor((tick() % 86400) / 3600)
+	local MINUTE = math.floor((tick() % 3600) / 60)
+	local SECOND = math.floor(tick() % 60)
+	local AP = HOUR > 11 and 'PM' or 'AM'
+	HOUR = (HOUR % 12 == 0 and 12 or HOUR % 12)
+	HOUR = HOUR < 10 and '0' .. HOUR or HOUR
+	MINUTE = MINUTE < 10 and '0' .. MINUTE or MINUTE
+	SECOND = SECOND < 10 and '0' .. SECOND or SECOND
+	return HOUR .. ':' .. MINUTE .. ' ' .. AP
+end
+
 function getBackpackContents(backpack)
 	local contents = {}
 	for _,item in pairs(backpack:GetChildren()) do
@@ -74,13 +86,14 @@ function createFileCsv(player)
 end
 
 function logPlayerBackpackChanges(player)
-	local osTime = os.time()
+	local currentTime = getTime()
+	local dt = os.date("*t", os.time())
 	local txtFilename = createFileTxt(player)
 	local csvFilename = createFileCsv(player)
 	for itemName,quantities in pairs(getPlayerBackpackDiff(player)) do
 		local quantityChanged = quantities.endQuantity - quantities.startQuantity
 		appendfile(txtFilename, osTime .. " - " .. itemName .. " has changed " .. quantityChanged .. "\n")
-		appendfile(csvFilename, player.Name .. "," .. osTime .. "," .. itemName .. "," .. quantities.startQuantity .. "," .. quantities.endQuantity .. "\n")
+		appendfile(csvFilename, player.Name .. "," .. dt.month.."-"..dt.day.." "..currentTime .. "," .. itemName .. "," .. quantities.startQuantity .. "," .. quantities.endQuantity .. "\n")
 	end
 end
 

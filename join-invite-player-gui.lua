@@ -59,6 +59,7 @@ local function tableToCsv(list) -- turn the table into one string, with a comma 
 end
 
 local saveButton = Instn("TextButton",{BackgroundColor3 = Color3.new(0,1,1), BorderColor3 = Color3.new(1,1,1), Name = 'Save Typed',Parent = CmdHandler, Position = UDim2.new(0,2,0,0), Size = UDim2.new(0,110,0,15), Text = "Save Typed", TextColor = BrickColor.new(26), TextScaled = true})
+
 saveButton.MouseButton1Click:Connect(function()
     local check = isfile("Saved Names.txt")
     if not check then writefile("Saved Names.txt", "") end
@@ -95,6 +96,7 @@ saveButton.MouseButton1Click:Connect(function()
 end)
 
 local deleteButton = Instn("TextButton",{BackgroundColor3 = Color3.new(1,0,0), BorderColor3 = Color3.new(1,1,1), Name = 'Delete Typed',Parent = CmdHandler, Position = UDim2.new(0,2,0,0), Size = UDim2.new(0,110,0,15), Text = "Delete Typed", TextColor = BrickColor.new(50), TextScaled = true})
+
 deleteButton.MouseButton1Click:Connect(function()
     local check = isfile("Saved Names.txt")
     if not check then writefile("Saved Names.txt", "") end
@@ -120,7 +122,7 @@ deleteButton.MouseButton1Click:Connect(function()
             table.remove(tableList, number)
             writefile("Saved Names.txt", tableToCsv(tableList))
         else
-            deleteButton.Text = "Name doesnt exsist"
+            deleteButton.Text = "Name does not exist"
             task.wait(2)
             deleteButton.Text = "Delete Typed"
         end
@@ -130,50 +132,50 @@ deleteButton.MouseButton1Click:Connect(function()
 end)
 
 local function createPlayerList()
-local contents = readfile("Saved Names.txt")
-local tableList = csvToTable(contents)
-for i,v in pairs(tableList) do
-    local playerButton = Instn("TextButton",{BackgroundColor3 = Color3.new(0,1,1), BorderColor3 = Color3.new(1,1,1), Name = v,Parent = CmdHandler, Position = UDim2.new(0,2,0,0), Size = UDim2.new(0,110,0,15), Text = v, TextColor = BrickColor.new(26), TextScaled = true})
-    
-    playerButton.MouseButton1Click:Connect(function()
-        Main.Text = playerButton.Text
-    end)
-            
-end
+    if not isfile("Saved Names.txt") then writefile("Saved Names.txt", "") end
+
+	local contents = readfile("Saved Names.txt")
+	local tableList = csvToTable(contents)
+	for i,v in pairs(tableList) do
+		local playerButton = Instn("TextButton",{BackgroundColor3 = Color3.new(0,1,1), BorderColor3 = Color3.new(1,1,1), Name = v,Parent = CmdHandler, Position = UDim2.new(0,2,0,0), Size = UDim2.new(0,110,0,15), Text = v, TextColor = BrickColor.new(26), TextScaled = true})
+		playerButton.MouseButton1Click:Connect(function()
+			Main.Text = playerButton.Text
+		end)		
+	end
 end
 
 createPlayerList()
 
 Button.MouseButton1Click:Connect(function()
-    local Players = game:GetService("Players")
-    local NAME = Main.Text
-    
-    local cache = {}
-    function getUserIdFromUsername(name)
-        if cache[name] then return cache[name] end
-        local id
-        pcall(function()
-            id = Players:getUserIdFromNameAsync(name)
-        end)
-        cache[name] = id
-        return id
-    end
-   wait()
-    
-local args = {
-    [1] = {
-        ["userId"] = (getUserIdFromUsername(NAME)),
-        ["name"] = NAME
-    }
-}
+	local Players = game:GetService("Players")
+	local NAME = Main.Text
 
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_8:InvokeServer(unpack(args))
-    wait()
-    Button.Text = "invited"
-    wait(7)
-    Button.Text = "INVITE"
-    Button.BackgroundColor3 = Color3.new(0,1,1)
-    end)
+	local cache = {}
+	function getUserIdFromUsername(name)
+		if cache[name] then return cache[name] end
+		local id
+		pcall(function()
+			id = Players:getUserIdFromNameAsync(name)
+		end)
+		cache[name] = id
+		return id
+	end
+	wait()
+    
+	local args = {
+		[1] = {
+			["userId"] = (getUserIdFromUsername(NAME)),
+			["name"] = NAME
+		}
+	}
+
+	game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_8:InvokeServer(unpack(args))
+	wait()
+	Button.Text = "invited"
+	wait(7)
+	Button.Text = "INVITE"
+	Button.BackgroundColor3 = Color3.new(0,1,1)
+end)
 
 Button1.MouseButton1Click:Connect(function()
     local Players = game:GetService("Players")
@@ -189,15 +191,15 @@ Button1.MouseButton1Click:Connect(function()
         cache[name] = id
         return id
     end
-   wait()
+	wait()
     Button1.Text = "joining"
-local args = {
-    [1] = {
-        ["targetPlayerId"] = (getUserIdFromUsername(NAME))
-    }
-}
+	local args = {
+		[1] = {
+			["targetPlayerId"] = (getUserIdFromUsername(NAME))
+		}
+	}
 
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
+	game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
     wait()
     Button1.Text = "joining"
     wait(1.5)
@@ -209,39 +211,40 @@ game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetMana
 end)
 
 Button2.MouseButton1Click:Connect(function()
-local Timed = 0
-    while wait(1) do
-    local Players = game:GetService("Players")
-    local NAME = Main.Text
-    
-    local cache = {}
-    function getUserIdFromUsername(name)
-        if cache[name] then return cache[name] end
-        local id
-        pcall(function()
-            id = Players:getUserIdFromNameAsync(name)
-        end)
-        cache[name] = id
-        return id
-    end
-   wait()
-   Timed = Timed + 1
-    Button2.Text = "joining"..Timed
-local args = {
-    [1] = {
-        ["targetPlayerId"] = (getUserIdFromUsername(NAME))
-    }
-}
+	local Timed = 0
+	while wait(1) do
+		local Players = game:GetService("Players")
+		local NAME = Main.Text
 
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
-end
+		local cache = {}
+		function getUserIdFromUsername(name)
+			if cache[name] then return cache[name] end
+			local id
+			pcall(function()
+				id = Players:getUserIdFromNameAsync(name)
+			end)
+			cache[name] = id
+			return id
+		end
+		
+		wait()
+		
+		Timed = Timed + 1
+		Button2.Text = "joining"..Timed
+		local args = {
+			[1] = {
+				["targetPlayerId"] = (getUserIdFromUsername(NAME))
+			}
+		}
+
+		game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
+	end
 end)
 
 Button3.MouseButton1Click:Connect(function()
     if Background2.Visible == false then
         Background2.Visible = true
         Button3.Text = "Saved <"
-        
     else
         Background2.Visible = false
         Button3.Text = "Saved >"

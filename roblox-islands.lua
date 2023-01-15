@@ -4354,7 +4354,7 @@ end)
 
 
 Item2.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet('https://pastebin.com/raw/3MYQCdby'))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/join-invite-player-gui.lua'))()
 end)
 
 Item4.MouseButton1Click:Connect(function()

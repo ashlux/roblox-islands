@@ -16,6 +16,18 @@ local function notification(title, text, duration)
     local Player = game.Players.LocalPlayer
 end
 
+function getTime()
+    local HOUR = math.floor((tick() % 86400) / 3600)
+    local MINUTE = math.floor((tick() % 3600) / 60)
+    local SECOND = math.floor(tick() % 60)
+    local AP = HOUR > 11 and 'PM' or 'AM'
+    HOUR = (HOUR % 12 == 0 and 12 or HOUR % 12)
+    HOUR = HOUR < 10 and '0' .. HOUR or HOUR
+    MINUTE = MINUTE < 10 and '0' .. MINUTE or MINUTE
+    SECOND = SECOND < 10 and '0' .. SECOND or SECOND
+    return HOUR .. ':' .. MINUTE .. ' ' .. AP
+end
+
 local cache = {}
 
 function getUserIdFromUsername(name)
@@ -137,18 +149,21 @@ end
 if (not isfile(foldername2.."/"..filename2)) then
 	writefile(foldername2.."/"..filename2, "")
 
+local currentTime = getTime()
+
 for k,vm in pairs(Island.Blocks:GetChildren()) do
 	if (vm.Name:find("vendingMachine") and vm.SellingContents and #vm.SellingContents:GetChildren() == 1) then	
 		local item = vm.SellingContents:GetChildren()[1]
 		local amount = item.Amount.Value
 		local price = vm.TransactionPrice.Value
 		local mode = vm.Mode.Value
+		local coinBalance = vm.CoinBalance.Value
 		if mode == 0 then
-			--print("SELLING " .. amount .. " " .. item.Name .. " for " .. price)
-			appendfile(foldername.."/"..filename, OWNER .. ",selling,"  .. amount .. "," .. nameToDisplay(item.Name) .. "," .. price .. "," .. joinCodes .. "\n")
+			print("SELLING " .. amount .. " " .. item.Name .. " for " .. price)
+			appendfile(foldername.."/"..filename, currentTime .. "," .. OWNER .. ",selling,"  .. amount .. "," .. nameToDisplay(item.Name) .. "," .. price .. "," .. joinCodes .. ",stocked coins: " .. coinBalance .. "\n")
 		elseif mode == 1 then
-			--print("BUYING " .. item.Name .. " for " .. price)
-			appendfile(foldername.."/"..filename, OWNER .. ",buying," .. amount .. "," .. nameToDisplay(item.Name) .. "," .. price .. "," .. joinCodes ..  "\n")
+			print("BUYING " .. item.Name .. " for " .. price)
+			appendfile(foldername.."/"..filename, currentTime .. "," .. OWNER .. ",buying," .. amount .. "," .. nameToDisplay(item.Name) .. "," .. price .. "," .. joinCodes .. ",stocked coins: " .. coinBalance .. "\n")
 		end
 	end
 end
@@ -170,7 +185,6 @@ for i = 1,10 do
             for i = 1,30 do
                 joinUser(v.player.username)
                 task.wait()
-                print(v.visitorCount)
             end
         end
     end

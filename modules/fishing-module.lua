@@ -34,9 +34,11 @@ end
 
 local function startAutoFishing()
     setFishing(true)
+    local maxWaitTime = 20
     while Player:GetAttribute("fishing") and wait() do
+        local waitTime = 0
         castRod()
-        repeat task.wait() until ActionBar:FindFirstChild("RoactTree") or Player:GetAttribute("fishing") == false
+        repeat task.wait(0.5) waitTime = waitTime + 1 until ActionBar:FindFirstChild("RoactTree") or Player:GetAttribute("fishing") == false or waitTime == maxWaitTime
         task.wait()
         catchFish()
         if ActionBar:FindFirstChild("RoactTree") then

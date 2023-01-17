@@ -39,7 +39,9 @@ local function startAutoFishing()
         repeat task.wait() until ActionBar:FindFirstChild("RoactTree") or Player:GetAttribute("fishing") == false
         task.wait()
         catchFish()
-        ActionBar.RoactTree:Destroy()
+        if ActionBar:FindFirstChild("RoactTree") then
+            ActionBar.RoactTree:Destroy()
+        end
     end
 end
 

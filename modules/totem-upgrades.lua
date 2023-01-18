@@ -1,4 +1,4 @@
-local cropTotems = {
+local cropTotemNames = {
 	"totemPineapple",
 	"totemStarfruit",
 	"totemGrape",
@@ -16,9 +16,9 @@ local cropTotems = {
 	"totemPumpkin",
 	"totemPotato",
 }
-table.sort(cropTotems)
+table.sort(cropTotemNames)
 
-local rockTotems = {
+local rockTotemNames = {
 	"totemTest",
 	"totemObsidian",
 	"totemGranite",
@@ -34,13 +34,19 @@ local rockTotems = {
 	"totemSandstone",
 	"totemCoal",
 }
-table.sort(rockTotems)
+table.sort(rockTotemNames)
 
-local function getRockTotems() return rockTotems; end
-local function getCropTotems() return cropTotems; end
+local allTotemNames = {}
+for _,cropTotemName in pairs(cropTotemNames) do table.insert(allTotemNames, cropTotemName) end
+for _,rockTotemName in pairs(rockTotemNames) do table.insert(allTotemNames, rockTotemName) end
+table.sort(allTotemNames)
+
+local function getRockTotemNames() return rockTotemNames; end
+local function getCropTotemNames() return cropTotemNames; end
+local function getAllTotemNames() return allTotemNames; end
 
 local function getTotemTypeByName(totemName)
-	if cropTotems[totemName] then
+	if cropTotemNames[totemName] then
 		return "totem_crop"
 	end
 	return "totem_rock"
@@ -100,8 +106,9 @@ local function upgradeTotems(totemName, efficiency, quality, utility)
 end
 
 return {
-	getRockTotems = getRockTotems,
-	getCropTotems = getCropTotems,
+	getRockTotemNames = getRockTotemNames,
+	getCropTotemNames = getCropTotemNames,
+	getAllTotemNames = getAllTotemNames,
 	getTotemBlocksByName = getTotemBlocksByName,
 	upgradeTotems = upgradeTotems,
 	upgradeTotemBlockUtility = upgradeTotemBlockUtility,

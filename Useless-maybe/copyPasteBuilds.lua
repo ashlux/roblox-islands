@@ -86,7 +86,7 @@ local function placeBlock(upperBlock, cframe, block)
     ["blockType"] = block
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
 end
 
 notification("I worked very hard on this😊", "Please feel free to buy more stuff from me to support 😁", 5)

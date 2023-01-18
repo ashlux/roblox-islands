@@ -41,16 +41,16 @@ local function unFloat() -- gets rid of BV so you dont float
 end
 
 local function redeemMap()
-    if game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer() == nil then
+    if game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer() == nil then
         print("getting map maybe")
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.ClaimTreasureMap:FireServer()
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.ClaimTreasureMap:FireServer()
     end
 end
 
 local function getMapInfo()
     
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer() -- has to run twice some reason
-    local infos = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer() -- has to run twice some reason
+    local infos = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()
     return infos.location, infos.position
 
 end
@@ -123,7 +123,7 @@ local function teleport()
     }
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("Teleporters/UseHubTeleporter"):FireServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("Teleporters/UseHubTeleporter"):FireServer(unpack(args))
 end
 
 local function dropIntoVoid()
@@ -138,7 +138,7 @@ local function digTreasure()
     [2] = {}
     }
 
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.PlayerDigTreasure:FireServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.PlayerDigTreasure:FireServer(unpack(args))
 end
 
 local function startFarmingChests()

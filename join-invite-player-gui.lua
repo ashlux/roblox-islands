@@ -169,7 +169,7 @@ Button.MouseButton1Click:Connect(function()
 		}
 	}
 
-	game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_8:InvokeServer(unpack(args))
+	game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_8:InvokeServer(unpack(args))
 	wait()
 	Button.Text = "invited"
 	wait(7)
@@ -199,7 +199,7 @@ Button1.MouseButton1Click:Connect(function()
 		}
 	}
 
-	game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
+	game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
     wait()
     Button1.Text = "joining"
     wait(1.5)
@@ -237,7 +237,7 @@ Button2.MouseButton1Click:Connect(function()
 			}
 		}
 
-		game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
+		game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_2:InvokeServer(unpack(args))
 	end
 end)
 

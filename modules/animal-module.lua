@@ -4,7 +4,7 @@ local Player = Players.LocalPlayer
 local Character = Player.Character
 local Humanoid = Character.Humanoid
 local Island = game.Workspace.Islands:GetChildren()[1]
-local feedAnimalEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL
+local feedAnimalEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL
 
 local tween = nil
 local aura = false
@@ -120,7 +120,7 @@ local function getSpawnEggs()
             ["player_tracking_category"] = "join_from_web"
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 
         end
     end

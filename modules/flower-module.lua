@@ -66,7 +66,7 @@ local function startWaterClosestFlower()
             local mag = (HR.Position - flower.Position).magnitude
             walkToFlower(flower)
             equipWateringCan()
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
             if mag > 24 then break end
         end
     end
@@ -83,7 +83,7 @@ local function waterOnlyNearby()
         local mag = (HR.Position - flower.Position).magnitude
         if mag < 24 then
         equipWateringCan()
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_WATER_BLOCK:InvokeServer({["block"] = flower})
         end
     end
 end
@@ -104,7 +104,7 @@ local function startPickUnfertiles()
         local flowers = getUnfertiles()
         for _,v in pairs(flowers) do
             if Player:GetAttribute("pickingUnfertiles") then
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer({["flower"] = v})
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer({["flower"] = v})
             end
         end
     end

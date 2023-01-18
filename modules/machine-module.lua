@@ -17,7 +17,7 @@ local function refuel(machineBlock, fuelName)
 				}
 			}
 	
-		game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+		game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 			.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 	end
 end
@@ -34,7 +34,7 @@ local function collect(machineBlock, inOrOut)
 									["player_tracking_category"] = "join_from_web"
 								}
 							}
-				game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+				game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 					.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 			end
 		end)
@@ -68,7 +68,7 @@ local function fillWith(machineBlock, itemName)
 				}
 			}
 		
-		game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+		game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 			.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 	end
 end

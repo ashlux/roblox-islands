@@ -16,7 +16,7 @@ local function castRod()
     }
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("qTocunidxjgogwwelioctimtO/cpseorneEdOlGancbCkmjsyz"):FireServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("qTocunidxjgogwwelioctimtO/cpseorneEdOlGancbCkmjsyz"):FireServer(unpack(args))
 end
 
 local function catchFish()
@@ -25,7 +25,7 @@ local function catchFish()
     ["success"] = true
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("qTocunidxjgogwwelioctimtO/ccwCmtcxltrzaivyhCood"):FireServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("qTocunidxjgogwwelioctimtO/ccwCmtcxltrzaivyhCood"):FireServer(unpack(args))
 end
 
 local function setFishing(value)

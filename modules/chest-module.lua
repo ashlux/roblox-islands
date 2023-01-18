@@ -14,7 +14,7 @@ local function openChest(chest, bool)
     ["open"] = bool or false
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CHEST_TOGGLE:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CHEST_TOGGLE:InvokeServer(unpack(args))
 end
 
 local function depositToChest(chest, amount, tool)
@@ -29,7 +29,7 @@ local function depositToChest(chest, amount, tool)
     ["action"] = "deposit"
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
     
     openChest(chest, false)
 end

@@ -64,7 +64,7 @@ end
 
 local function harvestPlant(plant)
     if plant:FindFirstChild("Watered") then
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer({["flower"] = plant})
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer({["flower"] = plant})
     else
         local args = {
         [1] = {
@@ -73,7 +73,7 @@ local function harvestPlant(plant)
         ["model"] = plant
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
     end
 end
 

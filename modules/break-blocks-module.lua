@@ -68,7 +68,7 @@ local function breakThisBlock(Block)
             ["pos"] = Vector3.new(0, 1, 0)
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
             break
         end
     end

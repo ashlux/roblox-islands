@@ -15,7 +15,7 @@ end
 
 function pickFlower(flower)
 		local arg = {{["flower"] = flower}}
-		return game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+		return game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 				.client_request_1:InvokeServer(unpack(arg))
 end
 

@@ -16,7 +16,7 @@ function giveBuild(player)
 	for i = 1,100 do
 		wait(0.5)
 		local args = {[1] = {["accessRank"] = 3, ["player"] = player}}
-		game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHANGE_ISLAND_ACCESS_LEVEL:InvokeServer(unpack(args))
+		game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHANGE_ISLAND_ACCESS_LEVEL:InvokeServer(unpack(args))
 	end
 end
 

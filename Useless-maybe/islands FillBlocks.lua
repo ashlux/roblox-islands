@@ -406,7 +406,7 @@ Delete.MouseButton1Click:Connect(function()
                     local tooMuch = 0
                     repeat breakBlock(v)
                         tooMuch = tooMuch + 1
-                    until v:FindFirstChild("Health") == nil or tooMuch == 20 or Deleting == false
+                    until v:FindFirstChild("Health") == nil or tooMuch == 200 or Deleting == false
                 end
             end
         end

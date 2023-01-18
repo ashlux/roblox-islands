@@ -18,7 +18,7 @@ for i,totem in pairs(island.Blocks:GetChildren()) do
             [2] = "totem_crop",
             [3] = "efficiency"
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.UpgradeBlock:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.UpgradeBlock:InvokeServer(unpack(args))
         end
         if totem.UpgradeProgress.quality.Value < MaxQuality then
             local args = {
@@ -26,7 +26,7 @@ for i,totem in pairs(island.Blocks:GetChildren()) do
             [2] = "totem_crop",
             [3] = "quality"
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.UpgradeBlock:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.UpgradeBlock:InvokeServer(unpack(args))
         end
         if totem.UpgradeProgress.utility.Value < MaxUtility then
             local args = {
@@ -34,7 +34,7 @@ for i,totem in pairs(island.Blocks:GetChildren()) do
             [2] = "totem_crop",
             [3] = "utility"
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.UpgradeBlock:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.UpgradeBlock:InvokeServer(unpack(args))
         end
         end
     end

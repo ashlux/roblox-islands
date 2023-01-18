@@ -32,6 +32,7 @@ local machineModule = loadModule("modules/machine-module.lua")
 local stringUtils = loadModule("modules/string-utils.lua")
 local vendingModule = loadModule("modules/vending-module.lua")
 local cropModule = loadModule("modules/crop-module.lua")
+local totemModule = loadModule("modules/totem-module.lua")
 
 local UI = Atlas.new({
 	Name = "Roblox Islands";
@@ -43,9 +44,6 @@ local UI = Atlas.new({
 -- BUILD MAIN PAGE --
 local function buildMain()
 	local page = UI:CreatePage("Main")
-	
-	-- TODO: pull useful information from here: https://api.github.com/repos/ashlux/roblox-islands/branches/main
-	-- TODO: Add ability to switch versions based on tags and branches and commit sha
 	
 	local performanceSection = page:CreateSection("Performance")
 	
@@ -183,15 +181,9 @@ local function buildMain()
 	serverSection:CreateParagraph("") -- fixes Atlas cutting off part of the last part of the page00
 end
 
-local function buildVendingPage()
-	local page = UI:CreatePage("Vending")
-	
-	local page
-end
-
 --BUILD CROP PAGE--
 local function buildCropPage()
-	local page = UI:CreatePage("Crop")
+	local page = UI:CreatePage("Crops")
 	
 	local cropFarmSection = page:CreateSection("Crop Farming")
 	
@@ -340,6 +332,56 @@ local function buildMachinePage()
 	createMachineSection({machineName = "sawmill", displayName = "Sawmill", pluralDisplayName = "Sawmills"})
 end
 
+
+--BUILD CROP PAGE--
+local function buildTotemPage()
+	local page = UI:CreatePage("Totems")
+	
+	local totemUpgradesSection = page:CreateSection("Totem Upgrades")
+	
+	local selectedTotemNameToUpgrade = nil
+	totemUpgradesSection:CreateDropdown({
+		Name = "Select Totem";
+		Callback = function(item) selectedTotemNameToUpgrade = item end;
+		Options = totemModule.getAllTotemNames();
+		ItemSelecting = true;
+		DefaultItemSelected = selectedTotemNameToUpgrade;
+	})
+
+	totemUpgradesSection:CreateTextBox({
+		Name = "Utility";
+		Flag = "upgradeTotemUtilityValue";
+		DefaultText = "0";
+		ClearTextOnFocus = true;
+	})
+	
+	totemUpgradesSection:CreateTextBox({
+		Name = "Efficiency";
+		Flag = "upgradeTotemEfficiencyValue";
+		DefaultText = "0";
+		ClearTextOnFocus = true;
+	})
+
+	totemUpgradesSection:CreateTextBox({
+		Name = "Quality";
+		Flag = "upgradeTotemQualityValue";
+		DefaultText = "0";
+		ClearTextOnFocus = true;
+	})
+	
+	totemUpgradesSection:CreateButton({
+		Name = "Start Upgrading";
+		Callback = function()
+			local utility = tonumber(UI.Flags.upgradeTotemUtilityValue) or 0
+			local efficiency = tonumber(UI.Flags.upgradeTotemEfficiencyValue) or 0
+			local quality = tonumber(UI.Flags.upgradeTotemQualityValue) or 0
+			if (selectedTotemNameToUpgrade) then
+				totemModule.upgradeTotems(selectedTotemNameToUpgrade, efficiency, quality, utility)
+			end
+		end
+	})
+end
+
 -- BUILD PLAYER PAGE --
 local function buildPlayerPage()
 	local Page = UI:CreatePage("Player")
@@ -349,7 +391,7 @@ local function buildPlayerPage()
 	--gravity modifier--
 	modifyStats:CreateSlider({
 		Name = "Gravity";
-		Flag = "MySlider";
+		Flag = "Gravity";
 		Min = 0;
 		Max = 1000;
 		AllowOutOfRange = true;
@@ -389,7 +431,8 @@ local function buildPlayerPage()
 	--Camera Zoom Distance --
 	modifyStats:CreateSlider({
 		Name = "Max Zoom Distance";
-		Flag = "MaxZoom";Min = 0;
+		Flag = "MaxZoom";
+		Min = 0;
 		Max = 1000;
 		AllowOutOfRange = true;
 		Digits = 0;
@@ -457,4 +500,5 @@ buildMain()
 buildCropPage()
 buildTreePage()
 buildMachinePage()
+buildTotemPage()
 buildPlayerPage()

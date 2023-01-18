@@ -47,7 +47,7 @@ local function getAllTotemNames() return allTotemNames; end
 
 local function getTotemTypeByName(totemName)
 	for _, cropTotemName in pairs(cropTotemNames) do
-		if (totemName == cropTotemName)
+		if (totemName == cropTotemName) then
 			return "totem_crop"
 		end
 	end

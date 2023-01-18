@@ -46,8 +46,10 @@ local function getCropTotemNames() return cropTotemNames; end
 local function getAllTotemNames() return allTotemNames; end
 
 local function getTotemTypeByName(totemName)
-	if cropTotemNames[totemName] then
-		return "totem_crop"
+	for _, cropTotemName in pairs(cropTotemNames) do
+		if (totemName == cropTotemName)
+			return "totem_crop"
+		end
 	end
 	return "totem_rock"
 end
@@ -89,7 +91,7 @@ end
 local function upgradeTotems(totemName, efficiency, quality, utility)
 	local totemBlocks = getTotemBlocksByName(totemName)
 
-	for currentUpgradeAmount = 1,52 do
+	for currentUpgradeAmount = 1,53 do
 		for _,totemBlock in pairs(totemBlocks) do
 			local upgradeProgress = totemBlock.UpgradeProgress
 			if upgradeProgress.efficiency.Value < efficiency then

@@ -365,7 +365,18 @@ function getMobs()
 	return mobs
 end
 
-function moveToMobs(mob)
+local function equipWeapon(weapon)
+    if Player.Backpack:FindFirstChild(weapon) then
+        Player.Backpack[weapon].Parent = Character
+    end
+end
+
+function moveToMobs(mob, weapon)
+    if Character.IsDead.Value then
+        task.wait(7)
+        equipWeapon(weapon)
+        return nil, 1, 1
+    end
     local distance = Player:DistanceFromCharacter(mob.HumanoidRootPart.Position)
     local speed = 25
     local tweenInfo = TweenInfo.new(distance/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0)
@@ -379,6 +390,16 @@ function moveToMobs(mob)
     end
     tween:Play()
     return tween, distance, speed
+end
+
+function getEquipped()
+    local tool = "rageblade"
+    for _,v in pairs(Character:GetChildren()) do
+        if v:IsA("Tool") then
+            tool = v.Name
+        end
+    end
+    return tool
 end
 
 function killAura()
@@ -4364,6 +4385,8 @@ Item4.MouseButton1Click:Connect(function()
         Item4.BackgroundColor3 = Color3.fromRGB(63,165,63)
         Item4.Text = "Slimes"
         Item4.TextColor3 = Color3.fromRGB(250,250,250)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4372,9 +4395,12 @@ Item4.MouseButton1Click:Connect(function()
         Item4.BackgroundColor3 = Color3.new(1,0,0)
         Item4.Text = "KILL!"
         Item4.TextColor3 = Color3.fromRGB(0,0,0)
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "slime"
+        local weapon = getEquipped()
         while Toggled1 == true do
             wait()
             local mobs = getMobs()
@@ -4384,7 +4410,7 @@ Item4.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4411,6 +4437,7 @@ Item5.MouseButton1Click:Connect(function()
         Item5.Text = "KILL"
         Item5.TextColor3 = Color3.fromRGB(0,0,0)
         local enemy = "buffalkor"
+        local weapon = getEquipped()
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
@@ -4424,7 +4451,7 @@ Item5.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4440,6 +4467,8 @@ Mob3.MouseButton1Click:Connect(function()
         Mob3.BackgroundColor3 = Color3.fromRGB(128,0,0)
         Mob3.Text = "Wizard"
         Mob3.TextColor3 = Color3.fromRGB(250,250,250)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4449,8 +4478,11 @@ Mob3.MouseButton1Click:Connect(function()
         Mob3.Text = "KILL!"
         Mob3.TextColor3 = Color3.fromRGB(0,0,0)
         local enemy = "wizardLizard"
+        local weapon = getEquipped()
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         while Toggled3 == true do
             local mobs = getMobs()
             if #mobs == 0 then
@@ -4459,7 +4491,7 @@ Mob3.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4478,6 +4510,8 @@ Mob4.MouseButton1Click:Connect(function()
         unFloat()
         killEverything:Disconnect()
         cancelTween()
+        Noclipping:Disconnect()
+        noClip = false
     else
         Toggled4 = true
         Mob4.BackgroundColor3 = Color3.new(1,0,0)
@@ -4485,6 +4519,8 @@ Mob4.MouseButton1Click:Connect(function()
         Mob4.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         enemy = "skorpRuby"
         enemy2 = "skorpGold"
         enemy3 = "skorpIron"
@@ -4747,20 +4783,22 @@ Mob5.MouseButton1Click:Connect(function()
         Mob5.BackgroundColor3 = Color3.fromRGB(155,0,0)
         Mob5.Text = "magmaBlob"
         Mob5.TextColor3 = Color3.fromRGB(255,200,1)
-        if Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-            Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
-        end
+        Noclipping:Disconnect()
+        noClip = false
+        unFloat()
         cancelTween()
+        killEverything:Disconnect()
     else
         Toggled19 = true
         Mob5.BackgroundColor3 = Color3.new(1,0,0)
         Mob5.Text = "KILL"
         Mob5.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
+        killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy, enemy2, enemy3 = "magmaBlob", "magmaGolem", "magmaGolemite"
+        local weapon = getEquipped()
         while Toggled19 == true do
             wait()
             local mobs = getMobs()
@@ -4770,7 +4808,7 @@ Mob5.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy or v.Name == enemy2 or v.Name == enemy3 then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4786,6 +4824,8 @@ Mob6.MouseButton1Click:Connect(function()
         Mob6.BackgroundColor3 = Color3.fromRGB(200,200,200)
         Mob6.Text = "Skeleton Pirate"
         Mob6.TextColor3 = Color3.new(0,0,0)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4796,7 +4836,10 @@ Mob6.MouseButton1Click:Connect(function()
         Mob6.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         local enemy = "skeletonPirate"
+        local weapon = getEquipped()
         while Toggled48 == true do
             wait()
             local mobs = getMobs()
@@ -4806,7 +4849,7 @@ Mob6.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4822,6 +4865,8 @@ Mob7.MouseButton1Click:Connect(function()
         Mob7.BackgroundColor3 = Color3.fromRGB(200,50,50)
         Mob7.Text = "Crabs"
         Mob7.TextColor3 = Color3.fromRGB(255,200,1)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4831,8 +4876,11 @@ Mob7.MouseButton1Click:Connect(function()
         Mob7.Text = "KILL"
         Mob7.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "hostileCrab"
+        local weapon = getEquipped()
         while Toggled49 == true do
             wait()
             local mobs = getMobs()
@@ -4842,7 +4890,7 @@ Mob7.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4857,6 +4905,8 @@ Mob8.MouseButton1Click:Connect(function()
         Toggled60 = false
         Mob8.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
         Mob8.Text = "Rock Mimic"
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4864,11 +4914,14 @@ Mob8.MouseButton1Click:Connect(function()
         Toggled60 = true
         Mob8.BackgroundColor3 = Color3.new(1,0,0)
         Mob8.Text = "KILL"
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "rockMimicGold"
         local enemy2 = "rockMimicIron"
         local enemy3 = "rockMimicCoal"
+        local weapon = getEquipped()
         while Toggled60 == true do
             wait()
             local mobs = getMobs()
@@ -4878,7 +4931,7 @@ Mob8.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy or v.Name == enemy2 or v.Name == enemy3 then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4904,6 +4957,8 @@ Mob9.MouseButton1Click:Connect(function()
         Mob9.BackgroundColor3 = Color3.fromRGB(150,0,150)
         Mob9.Text = "Void Dog"
         Mob9.TextColor3 = Color3.fromRGB(255,200,1)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4913,8 +4968,11 @@ Mob9.MouseButton1Click:Connect(function()
         Mob9.Text = "KILL"
         Mob9.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "voidDog"
+        local weapon = getEquipped()
         while Toggled49 == true do
             wait()
             local mobs = getMobs()
@@ -4924,7 +4982,7 @@ Mob9.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4950,6 +5008,8 @@ Mob10.MouseButton1Click:Connect(function()
         Mob10.BackgroundColor3 = Color3.fromRGB(250,150,150)
         Mob10.Text = "Slime Queen"
         Mob10.TextColor3 = Color3.fromRGB(255,200,1)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -4959,8 +5019,11 @@ Mob10.MouseButton1Click:Connect(function()
         Mob10.Text = "KILL"
         Mob10.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "slimeQueen"
+        local weapon = getEquipped()
         while Toggled90 == true do
             wait()
             local mobs = getMobs()
@@ -4970,7 +5033,7 @@ Mob10.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -4996,6 +5059,8 @@ Mob11.MouseButton1Click:Connect(function()
         Mob11.BackgroundColor3 = Color3.fromRGB(0,150,0)
         Mob11.Text = "Slime King"
         Mob11.TextColor3 = Color3.fromRGB(255,200,1)
+        Noclipping:Disconnect()
+        noClip = false
         unFloat()
         killEverything:Disconnect()
         cancelTween()
@@ -5004,9 +5069,12 @@ Mob11.MouseButton1Click:Connect(function()
         Mob11.BackgroundColor3 = Color3.new(1,0,0)
         Mob11.Text = "KILL"
         Mob11.TextColor3 = Color3.fromRGB(0,0,0)
+        Noclipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+        noClip = true
         Float()
         killEverything = game:GetService('RunService').Stepped:Connect(killAura)
         local enemy = "slimeKing"
+        local weapon = getEquipped()
         while Toggled91 == true do
             wait()
             local mobs = getMobs()
@@ -5016,7 +5084,7 @@ Mob11.MouseButton1Click:Connect(function()
                 for k,v in pairs(mobs) do
                     if v.Name == enemy then
                     local mob = v
-                    tween, distance, speed = moveToMobs(mob)
+                    tween, distance, speed = moveToMobs(mob, weapon)
                     wait(distance/speed - 1)
                     break
                     end
@@ -7135,6 +7203,7 @@ Item88.MouseButton1Click:Connect(function()
         cancelTween()
         Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
         NoClipping:Disconnect()
+        noClip = false
     else
         Toggled79 = true
         Item88.BackgroundColor3 = Color3.new(0,255,255)

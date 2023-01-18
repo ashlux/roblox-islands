@@ -39,18 +39,18 @@ updates = "[Matt]: GUI Updated 1/14"
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("scrUmbngVAieost/xqmwqjscweyllpcqzpxkvczh")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lipjwigZufppSgnGezzooGsh/qmLpWukkxmwtNeycd")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lipjwigZufppSgnGezzooGsh/eKqffldznsusccfr")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("lipjwigZufppSgnGezzooGsh/nQjkdrdcHedgbrd")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/ofNxpgrwbiHpdozHumffKmihuyornul")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/dlqCnIpYhgmrpgwhtpp")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/lOyzaynvkmCkfdvuPcmnsv")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("scrUmbngVAieost/xqmwqjscweyllpcqzpxkvczh")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("lipjwigZufppSgnGezzooGsh/qmLpWukkxmwtNeycd")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("lipjwigZufppSgnGezzooGsh/eKqffldznsusccfr")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("lipjwigZufppSgnGezzooGsh/nQjkdrdcHedgbrd")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/ofNxpgrwbiHpdozHumffKmihuyornul")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/dlqCnIpYhgmrpgwhtpp")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/lOyzaynvkmCkfdvuPcmnsv")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/cdfgYihig")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/venLngzrcancetWqrsyb")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/gireeZzunizgyuivzcyhaI")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("rzlbxasamqlznqyGdfssejdL/ZVballmfhmoftfaeslsRdamWpVpjwwhMekx")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/cdfgYihig")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/venLngzrcancetWqrsyb")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/gireeZzunizgyuivzcyhaI")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("rzlbxasamqlznqyGdfssejdL/ZVballmfhmoftfaeslsRdamWpVpjwwhMekx")
 
 ---
 local Players = game:GetService("Players")
@@ -189,7 +189,7 @@ local function pickWildernessPlantAura(plant)
             ["model"] = v
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
         end
     end
     if pickingPlants == false then
@@ -229,7 +229,7 @@ function unFloat() -- gets rid of BV so you dont float
 end
 
 function getMapInfo() -- get treasure map info
-    for i,v in pairs(game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()) do
+    for i,v in pairs(game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.GetPlayerActiveTreasureMap:InvokeServer()) do
         if i == "position" then
             Point = v
         else
@@ -290,7 +290,7 @@ function hitBlock(Block)
     ["pos"] = nil --[[Vector3]]
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 function digSpot(Spot)
@@ -300,7 +300,7 @@ function digSpot(Spot)
     ["block"] = Spot
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
 end
 
 function getPick()
@@ -440,7 +440,7 @@ local args = {
         ["blockType"] = Crop.Name
     }
 }
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
 end
 
 function sicklePlants(Crop)
@@ -451,7 +451,7 @@ function sicklePlants(Crop)
     [2] = Crops
     }
 
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.SwingSickle:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.SwingSickle:InvokeServer(unpack(args))
 end
 
 function getSickle()
@@ -536,7 +536,7 @@ function withdrawFromChest(chest)
         ["action"] = "withdraw"
         }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
         end)
     end
 end
@@ -574,7 +574,7 @@ function hitTree(tree)
 			["pos"] = nil
 		}
 	}
-	return game.ReplicatedStorage.rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+	return game.ReplicatedStorage.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 function halloweenShop(itemNumber, amount)
@@ -585,7 +585,7 @@ local args = {
         ["amount"] = amount
     }
 }
-game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 
 end
 
@@ -1392,7 +1392,7 @@ C1.MouseButton1Click:Connect(function()
 	["offerId"] = 101,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C2 = Instance.new("TextButton")
@@ -1412,7 +1412,7 @@ C2.MouseButton1Click:Connect(function()
 	["offerId"] = 102,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C3 = Instance.new("TextButton")
@@ -1432,7 +1432,7 @@ C3.MouseButton1Click:Connect(function()
 	["offerId"] = 103,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C4 = Instance.new("TextButton")
@@ -1452,7 +1452,7 @@ C4.MouseButton1Click:Connect(function()
 	["offerId"] = 104,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C5 = Instance.new("TextButton")
@@ -1472,7 +1472,7 @@ C5.MouseButton1Click:Connect(function()
 	["offerId"] = 105,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C6 = Instance.new("TextButton")
@@ -1492,7 +1492,7 @@ C6.MouseButton1Click:Connect(function()
 	["offerId"] = 106,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C7 = Instance.new("TextButton")
@@ -1512,7 +1512,7 @@ C7.MouseButton1Click:Connect(function()
 	["offerId"] = 107,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C8 = Instance.new("TextButton")
@@ -1532,7 +1532,7 @@ C8.MouseButton1Click:Connect(function()
 	["offerId"] = 108,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C9 = Instance.new("TextButton")
@@ -1552,7 +1552,7 @@ C9.MouseButton1Click:Connect(function()
 	["offerId"] = 109,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C10 = Instance.new("TextButton")
@@ -1572,7 +1572,7 @@ C10.MouseButton1Click:Connect(function()
 	["offerId"] = 110,
 	["amount"] = tonumber(CA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local C11 = Instance.new("TextButton")
@@ -1593,7 +1593,7 @@ C11.MouseButton1Click:Connect(function()
     ["offerId"] = 2,
     ["amount"] = 3
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 end)
 
 local C12 = Instance.new("TextButton")
@@ -1614,7 +1614,7 @@ C12.MouseButton1Click:Connect(function()
     ["offerId"] = 2,
     ["amount"] = 6
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 end)
 
 local C13 = Instance.new("TextButton")
@@ -1635,7 +1635,7 @@ C13.MouseButton1Click:Connect(function()
     ["offerId"] = 10,
     ["amount"] = 8
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 end)
 
 local C13 = Instance.new("TextButton")
@@ -1656,7 +1656,7 @@ C13.MouseButton1Click:Connect(function()
     ["offerId"] = 10,
     ["amount"] = 4
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 end)
 
 local Wholesaler = Instance.new("Frame")
@@ -1725,7 +1725,7 @@ WS1.MouseButton1Click:Connect(function()
     ["offerId"] = 170,
     ["amount"] = tonumber(WSA.Text)
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 end)
 
 local WS2 = Instance.new("TextButton")
@@ -1746,7 +1746,7 @@ WS2.MouseButton1Click:Connect(function()
     ["offerId"] = 171,
     ["amount"] = tonumber(WSA.Text)
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(args))
 end)
 
 local halloweenVendor = Instance.new("Frame")
@@ -3147,7 +3147,7 @@ local function onInputBegan(input, gp)
                 ["pos"] = mouse.Target:FindFirstChild("Position")
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
                 end)
             end
         end
@@ -3389,7 +3389,7 @@ presentOpener.MouseButton1Click:Connect(function()
         presentOpener.Text = "Opening"
         presentOpener.TextColor3 = Color3.fromRGB(0,0,0)
         while openingPresents and task.wait() do
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_22:InvokeServer()
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_22:InvokeServer()
         end
     end
 end)
@@ -3509,7 +3509,7 @@ L1.MouseButton1Click:Connect(function()
 	["offerId"] = 2,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local L2 = Instance.new("TextButton")
@@ -3529,7 +3529,7 @@ L2.MouseButton1Click:Connect(function()
 	["offerId"] = 20,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local L3 = Instance.new("TextButton")
@@ -3549,7 +3549,7 @@ L3.MouseButton1Click:Connect(function()
 	["offerId"] = 30,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local L4 = Instance.new("TextButton")
@@ -3569,7 +3569,7 @@ L4.MouseButton1Click:Connect(function()
 	["offerId"] = 40,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L5 = Instance.new("TextButton")
@@ -3589,7 +3589,7 @@ L5.MouseButton1Click:Connect(function()
 	["offerId"] = 50,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L6 = Instance.new("TextButton")
@@ -3609,7 +3609,7 @@ L6.MouseButton1Click:Connect(function()
 	["offerId"] = 60,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L7 = Instance.new("TextButton")
@@ -3629,7 +3629,7 @@ L7.MouseButton1Click:Connect(function()
 	["offerId"] = 70,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L8 = Instance.new("TextButton")
@@ -3649,7 +3649,7 @@ L8.MouseButton1Click:Connect(function()
 	["offerId"] = 80,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L9 = Instance.new("TextButton")
@@ -3669,7 +3669,7 @@ L9.MouseButton1Click:Connect(function()
 	["offerId"] = 90,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L10 = Instance.new("TextButton")
@@ -3689,7 +3689,7 @@ L10.MouseButton1Click:Connect(function()
 	["offerId"] = 100,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L11 = Instance.new("TextButton")
@@ -3709,7 +3709,7 @@ L11.MouseButton1Click:Connect(function()
 	["offerId"] = 110,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L12 = Instance.new("TextButton")
@@ -3729,7 +3729,7 @@ L12.MouseButton1Click:Connect(function()
 	["offerId"] = 120,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L13 = Instance.new("TextButton")
@@ -3749,7 +3749,7 @@ L13.MouseButton1Click:Connect(function()
 	["offerId"] = 130,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L14 = Instance.new("TextButton")
@@ -3769,7 +3769,7 @@ L14.MouseButton1Click:Connect(function()
 	["offerId"] = 140,
 	["amount"] = tonumber(LA.Text)
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 L14 = Instance.new("TextButton")
@@ -3789,7 +3789,7 @@ L14.MouseButton1Click:Connect(function()
 	["offerId"] = 1,
 	["amount"] = 1
 	}}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MERCHANT_ORDER_REQUEST:InvokeServer(unpack(Cookie))
 end)
 
 local Item82 = Instance.new("TextButton")
@@ -4552,7 +4552,7 @@ Island.Blocks.ChildAdded:Connect(function(flower)
         local args = {
         [1] = {
         ["flower"] = flower
-        }}game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+        }}game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
     end
 end)
 end
@@ -4663,7 +4663,7 @@ Item23.MouseButton1Click:Connect(function()
                 ["tree"] = hive
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_COLLECT_HONEY:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_COLLECT_HONEY:InvokeServer(unpack(args))
             end
         end
     end
@@ -4718,7 +4718,7 @@ Item25.MouseButton1Click:Connect(function()
 						}
 					}
 
-					game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+					game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 
 					if MayoSpinner.WorkerContents:FindFirstChild("jarMayonnaise") then
 	
@@ -4731,7 +4731,7 @@ Item25.MouseButton1Click:Connect(function()
 							}
 						}
 
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						else
 					end
 				end
@@ -5088,7 +5088,7 @@ Item33.MouseButton1Click:Connect(function()
                         }
                         }
 
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
                     elseif TruffleBarrel.Contents:FindFirstChild("truffleWhite") then
                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - TruffleBarrel.Position).magnitude > 24 then
                             Point = TruffleBarrel.Position
@@ -5109,7 +5109,7 @@ Item33.MouseButton1Click:Connect(function()
                             }
                         }
 
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
 
                         wait()
                     else
@@ -5213,7 +5213,7 @@ Item44.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
             end
         end
         else
@@ -5228,7 +5228,7 @@ Item44.MouseButton1Click:Connect(function()
                     ["pos"] = nil --[[Vector3]]
                 }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
             end
         end
         end
@@ -5259,7 +5259,7 @@ Item46.MouseButton1Click:Connect(function()
                     }
                 }
 
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(Pickup))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(Pickup))
                 end)
             end
         end
@@ -5286,21 +5286,21 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerMumBlackFertile") then
             local args = {
             [1] = {
             ["flower"] = Island.Blocks.flowerMumBlackFertile
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerMumRedFertile") then
             local args = {
             [1] = {
             ["flower"] = Island.Blocks.flowerMumRedFertile
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerHyacinthYellowFertile") then
             local args = {
                 [1] = {
@@ -5308,7 +5308,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerTulipYellowFertile") then
             local args = {
                 [1] = {
@@ -5316,7 +5316,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerTulipRedFertile") then
             local args = {
                 [1] = {
@@ -5324,7 +5324,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerHyacinthBlueFertile") then
             local args = {
                 [1] = {
@@ -5332,7 +5332,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerDaisyRedFertile") then
             local args = {
                 [1] = {
@@ -5340,7 +5340,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerDaisyYellowFertile") then
             local args = {
                 [1] = {
@@ -5348,7 +5348,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerLilyRedFertile") then
             local args = {
                 [1] = {
@@ -5356,7 +5356,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerLilyYellowFertile") then
             local args = {
                 [1] = {
@@ -5364,7 +5364,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerLilyBlueFertile") then
             local args = {
                 [1] = {
@@ -5372,7 +5372,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerHibiscusBlueFertile") then
             local args = {
                 [1] = {
@@ -5380,7 +5380,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerHibiscusLightGreenFertile") then
             local args = {
                 [1] = {
@@ -5388,7 +5388,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             elseif Island.Blocks:FindFirstChild("flowerHibiscusLightGreenFertile") then
             local args = {
                 [1] = {
@@ -5396,7 +5396,7 @@ Item48.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
             else
                 wait()
             end
@@ -5623,7 +5623,7 @@ Item56.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 else    
                     local args = {
                         [1] = {
@@ -5632,7 +5632,7 @@ Item56.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 end
             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
                 local args = {
@@ -5644,7 +5644,7 @@ Item56.MouseButton1Click:Connect(function()
                     }
                 }
                     
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
                 
                 local args = {
                     [1] = {
@@ -5655,7 +5655,7 @@ Item56.MouseButton1Click:Connect(function()
                     }
                 }
                     
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
             else
                 wait()
             end
@@ -5669,7 +5669,7 @@ Item56.MouseButton1Click:Connect(function()
                 }
             }
             
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
         end
     end
 end
@@ -5703,7 +5703,7 @@ Item57.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 else    
                     local args = {
                         [1] = {
@@ -5712,7 +5712,7 @@ Item57.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 end
             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
                 local args = {
@@ -5724,7 +5724,7 @@ Item57.MouseButton1Click:Connect(function()
                     }
                 }
                     
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
                 
                 local args = {
                     [1] = {
@@ -5735,7 +5735,7 @@ Item57.MouseButton1Click:Connect(function()
                     }
                 }
                     
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
             else
                 wait()
             end
@@ -5749,7 +5749,7 @@ Item57.MouseButton1Click:Connect(function()
                 }
             }
             
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
         end
     end
 end
@@ -5783,7 +5783,7 @@ Item58.MouseButton1Click:Connect(function()
                                         }
                                     }
                     
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 else    
                                     local args = {
                                         [1] = {
@@ -5792,7 +5792,7 @@ Item58.MouseButton1Click:Connect(function()
                                         }
                                     }
                                     
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 end
                         elseif StoneCutter.WorkerContents:FindFirstChild("prismarineBrick") then
                                 if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - StoneCutter.Position).magnitude > 24 then
@@ -5805,7 +5805,7 @@ Item58.MouseButton1Click:Connect(function()
                                         }
                                     }
                     
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 else    
                                     local args = {
                                         [1] = {
@@ -5814,7 +5814,7 @@ Item58.MouseButton1Click:Connect(function()
                                         }
                                     }
                                     
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 end
                             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
                                 local args = {
@@ -5826,7 +5826,7 @@ Item58.MouseButton1Click:Connect(function()
                                     }
                                 }
                             
-                                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
                 
                                 local args = {
                                     [1] = {
@@ -5837,7 +5837,7 @@ Item58.MouseButton1Click:Connect(function()
                                     }
                                 }
                     
-                                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
                             else
                                 wait()
                             end    
@@ -5852,7 +5852,7 @@ Item58.MouseButton1Click:Connect(function()
                             }
                         }
                     
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
                     
                     end
                 end
@@ -5887,7 +5887,7 @@ Item59.MouseButton1Click:Connect(function()
                         ["player_tracking_category"] = "join_from_web"
                         }
                         }
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                     elseif Loom.WorkerContents:FindFirstChild("woolWhite") then
                         wait()
                     else    
@@ -5899,7 +5899,7 @@ Item59.MouseButton1Click:Connect(function()
                             ["toolName"] = "woolWhite"
                             }
                             }
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
         
                     end
                 end
@@ -5988,13 +5988,13 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
         local args = {
             [1] = {
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
     elseif insect.Name == "cow" and insect.Sleeping.Value == false and (insect.FoodLevel.Value < 900 or insect.AnimalProductReady.Value > 0) then
 		if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
             Point = insect.HumanoidRootPart.Position + Vector3.new(0,1.5,0)
@@ -6017,7 +6017,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 ["animal"] = insect
                 }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MILK_COW:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MILK_COW:InvokeServer(unpack(args))
 		end
     if insect.FoodLevel.Value < 900 then
         local args = {
@@ -6025,7 +6025,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "wheatHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6037,7 +6037,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     elseif insect.Name == "pig" and insect.Sleeping.Value == false and (insect.FoodLevel.Value < 900 or insect.AnimalProductReady.Value > 0) then
 		if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
@@ -6055,7 +6055,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_29:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_29:InvokeServer(unpack(args))
         end
     if insect.FoodLevel.Value < 900 then
         local args = {
@@ -6063,7 +6063,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "carrotHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6075,7 +6075,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     elseif insect.Name == "sheep" and insect.Sleeping.Value == false and (insect.FoodLevel.Value < 900 or insect.AnimalProductReady.Value > 0) then
 		if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
@@ -6099,7 +6099,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 ["animal"] = insect
                 }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_24:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_24:InvokeServer(unpack(args))
         end
     if insect.FoodLevel.Value < 900 then
         local args = {
@@ -6107,7 +6107,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "potatoHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6119,7 +6119,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     elseif insect.Name == "chicken" and insect.Sleeping.Value == false and insect.FoodLevel.Value < 900 then
         if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
@@ -6137,7 +6137,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "berryHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6149,7 +6149,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     elseif insect.Name == "yak" and insect.Sleeping.Value == false and insect.FoodLevel.Value < 900 then
 		if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
@@ -6173,7 +6173,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
                 ["animal"] = insect
                 }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_MILK_COW:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_MILK_COW:InvokeServer(unpack(args))
 		end
     if insect.FoodLevel.Value < 900 then
         local args = {
@@ -6181,7 +6181,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "radishHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6193,7 +6193,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     elseif insect.Name == "horse" and insect.Sleeping.Value == false and insect.FoodLevel.Value < 900 then
         if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
@@ -6211,7 +6211,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "carrotHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6223,7 +6223,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     elseif insect.Name == "turkey" and insect.Sleeping.Value == false and (insect.FoodLevel.Value < 900 or insect.AnimalProductReady.Value > 0) then
 		if (HR.Position - insect.HumanoidRootPart.Position).magnitude > 24 then
@@ -6239,7 +6239,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             local args = {
                 [1] = insect
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.SpookTurkey:FireServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.SpookTurkey:FireServer(unpack(args))
         end
     if insect.FoodLevel.Value < 900 then
         local args = {
@@ -6247,7 +6247,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PET_ANIMAL:InvokeServer(unpack(args))
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.Name == "berryHarvested" then
                 v.Parent = game:GetService("Players").LocalPlayer.Character
@@ -6259,7 +6259,7 @@ for i,insect in pairs(Island.Entities:GetChildren()) do
             ["animal"] = insect
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_FEED_ANIMAL:InvokeServer(unpack(args))
     end
     end
 end
@@ -6284,7 +6284,7 @@ for i,nest in pairs(Island.Blocks:GetChildren()) do
             ["action"] = "withdraw"
             }
         }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
         end
     end
 end
@@ -6307,7 +6307,7 @@ for _,itemport in pairs(Island.Blocks:GetChildren()) do
                     ["player_tracking_category"] = "join_from_web"
                     }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
             end
         end
     end
@@ -6359,7 +6359,7 @@ for i,v in pairs(CmdHandler6:GetChildren()) do
                     ["tool"] = Player.Character[ToOl]
                     }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_EAT_FOOD:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_EAT_FOOD:InvokeServer(unpack(args))
                 wait(900)
             end
         end
@@ -6408,7 +6408,7 @@ Item70.MouseButton1Click:Connect(function()
 						}
 					}
 
-					game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+					game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 
 					if MayoSpinner.WorkerContents:FindFirstChild("yakButter") then
 	
@@ -6421,7 +6421,7 @@ Item70.MouseButton1Click:Connect(function()
 							}
 						}
 
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						else
 					end
 				end
@@ -6457,7 +6457,7 @@ Item72.MouseButton1Click:Connect(function()
 									["toolName"] = "ironOre"
 									}
 								}
-								game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+								game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 							end
 						end
 						if b.WorkerOutputContents:FindFirstChild("iron") then
@@ -6473,7 +6473,7 @@ Item72.MouseButton1Click:Connect(function()
 							        ["player_tracking_category"] = "join_from_web"
 							        }
 							        }
-						            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						        end
 						    end
 					    end
@@ -6488,7 +6488,7 @@ Item72.MouseButton1Click:Connect(function()
 							["toolName"] = "coal"
 							}
 							}
-							game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+							game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 						end
 					end
 				end
@@ -6523,7 +6523,7 @@ Item73.MouseButton1Click:Connect(function()
 									["toolName"] = "goldOre"
 									}
 								}
-								game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+								game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 							end
 						else
 							wait()
@@ -6541,7 +6541,7 @@ Item73.MouseButton1Click:Connect(function()
 							["player_tracking_category"] = "join_from_web"
 							}
 							}
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						    end
 						    end
 					    end
@@ -6555,7 +6555,7 @@ Item73.MouseButton1Click:Connect(function()
 							["toolName"] = "coal"
 							}
 							}
-							game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+							game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
 						end
 					end
 				end
@@ -6584,7 +6584,7 @@ Item74.MouseButton1Click:Connect(function()
                 ["block"] = Grass
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PLOW_BLOCK_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PLOW_BLOCK_REQUEST:InvokeServer(unpack(args))
 end
 end
 end
@@ -6611,7 +6611,7 @@ UnPlow.MouseButton1Click:Connect(function()
                 ["block"] = Grass
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_PLOW_BLOCK_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_PLOW_BLOCK_REQUEST:InvokeServer(unpack(args))
 end
 end
 end
@@ -6686,7 +6686,7 @@ Item76.MouseButton1Click:Connect(function()
                 ["player_tracking_category"] = "join_from_web"
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
             end
             for i,content in pairs(smelter.WorkerContents:GetChildren()) do
                 local args = {
@@ -6695,7 +6695,7 @@ Item76.MouseButton1Click:Connect(function()
                 ["player_tracking_category"] = "join_from_web"
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
             end
         end
     end
@@ -6755,7 +6755,7 @@ Item79.MouseButton1Click:Connect(function()
                     }
                     }
                     }
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("iazhmspkp/knlDDbuzwMzaerl"):FireServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged:FindFirstChild("iazhmspkp/knlDDbuzwMzaerl"):FireServer(unpack(args))
                     wait()
                 end
             end
@@ -6825,7 +6825,7 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
     ["norm"] = nil --[[Vector3]],
     ["pos"] = nil --[[Vector3]]
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
     until
     v:FindFirstChild("1") == nil
     end
@@ -6878,7 +6878,7 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
     ["norm"] = nil --[[Vector3]],
     ["pos"] = nil --[[Vector3]]
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
     until
     v:FindFirstChild("1") == nil
     end
@@ -7004,7 +7004,7 @@ ElectriteMining.MouseButton1Click:Connect(function()
                         ["norm"] = nil --[[Vector3]],
                         ["pos"] = nil --[[Vector3]]
                         }}
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
                         Continue = Continue + 1
                         until
                         v:FindFirstChild("1") == nil or Continue > 20 or Toggled85 == false
@@ -7067,7 +7067,7 @@ SnowMining.MouseButton1Click:Connect(function()
                             ["shovelType"] = "shovelStone",
                             ["block"] = v
                             }}
-                            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
+                            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
                             Continue = Continue + 1
                         until
                         v:FindFirstChild("Targettable") == nil or Continue == 20 or Toggled86 == false
@@ -7117,7 +7117,7 @@ Item87.MouseButton1Click:Connect(function()
                     ["player"] = game:GetService("Players").LocalPlayer,
                     ["player_tracking_category"] = "join_from_web",
                     ["model"] = Bush}}
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_HARVEST_CROP_REQUEST:InvokeServer(unpack(args))
                     end
                 end
             end
@@ -7161,7 +7161,7 @@ Item88.MouseButton1Click:Connect(function()
                         ["player_tracking_category"] = "join_from_web",
                         ["toolName"] = Fish
                         }}
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_WORKER_DEPOSIT_TOOL_REQUEST:InvokeServer(unpack(args))
                     end
                     if Composter.WorkerOutputContents:FindFirstChild("fertilizerBasic") and Composter.WorkerOutputContents:FindFirstChild("fertilizerBasic").Amount.Value == 20 then
                         if (HR.Position - Composter.Position).magnitude > 24 then
@@ -7178,7 +7178,7 @@ Item88.MouseButton1Click:Connect(function()
                         ["tool"] = Composter.WorkerOutputContents.fertilizerBasic,
                         ["player_tracking_category"] = "join_from_web"
                         }}
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                     end
                 end
             end

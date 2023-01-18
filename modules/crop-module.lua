@@ -90,7 +90,7 @@ local function replantCrop(cropName, cframe)
 			["blockType"] = cropName
 		}
 	}
-	game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+	game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 		.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
 end
 
@@ -102,7 +102,7 @@ local function sickleCrops(cropBlocks)
 			[2] = cropBlocks
 		}
 
-		game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+		game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 			.SwingSickle:InvokeServer(unpack(args))
 	end
 end
@@ -184,7 +184,7 @@ local function plantCropsOnce(cropNameToPlant)
 								["blockType"] = cropNameToPlant
 							}
                         }
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
 							.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
                    end)
 			   end

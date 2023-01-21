@@ -22,9 +22,9 @@ local chestModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
-if game.PlaceId == 11838346571 then -- snowball-Fight
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Snowball-Fight'))()
-    return -- SNOWBALL FIGHT
+if game.PlaceId == 11838346571 then -- lunar event (islands arcade)
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/lunar-area.lua'))()
+    return
 end
 
 local StarterGui = game:GetService("StarterGui")

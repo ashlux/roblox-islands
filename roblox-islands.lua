@@ -29,28 +29,28 @@ end
 
 local StarterGui = game:GetService("StarterGui")
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1019) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 672) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 596) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 240) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1021) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 674) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 598) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 242) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 1/20"
+updates = "[Matt]: GUI Updated 1/21"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("pnlgmtdxrtaKifyoIqhqnwrybshtfzbzgiGmCujt/nRchb")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/tohSysrhtoghczqdhmivtuutphjzbseftemlemostoY")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/xDrhufmHnwicdjwFfAkes")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/tEgBceNyj")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/EwfvxeccbgkjcexgcvoBnzhtsf")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/MpKdpgchvlyvgxYbF")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/amopjznpdw")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlhvtxwmxyKOJjhWpqzDKywkuqqejnwbj/uoEAwcxidfqlzvp")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aoKCvmiaLyhl/efEhloNmXmfyymBWicdydleC")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aoKCvmiaLyhl/lhkvjdkxnwqnWdclfufrsCkNbhrYxvplrbrxome")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aoKCvmiaLyhl/xudxxLgakGZykzbhnGfbxeLtrjMxeilt")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qptZjmMUqvwpaADLwiebmluz/RqdvqHlRmcrfhmMHMlIhrZhcH")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qptZjmMUqvwpaADLwiebmluz/owkomyxohNwuqIlddwfayoMwtypzgtfHvyonoyp")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/phrlkvWcoxThsmwzL")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/JmtikIzfazqgmzbvkbsj")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/accavvPOia")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("RbQxvfjutbQFcw/okoqwzqzpVzeuGwvewlrk")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qptZjmMUqvwpaADLwiebmluz/QcmmTWxczidc")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qptZjmMUqvwpaADLwiebmluz/LdbqqMrPeA")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qptZjmMUqvwpaADLwiebmluz/SkjtgaqzlyvdiwwyPnwMbqsc")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qptZjmMUqvwpaADLwiebmluz/qfnfamjCLibnSrVjtkdhbsHxnIcaqbfFljxjbivc")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("pfbQivthzoPjdtxiuXpmvRvpBXVxsc/uuaprogkyskqtgu")
 
 ---
 local Players = game:GetService("Players")
@@ -1114,7 +1114,7 @@ local function createPlayerInfoMenu(person)
 
 	local function getPlayerCoins(name)
 		local player = getPlayer(name)
-		local coins = player and player.leaderstats and player.leaderstats.Coins
+		--local coins = player and player.leaderstats and player.leaderstats.Coins
 		return coins and coins.Value or 0
 	end
 
@@ -1183,7 +1183,7 @@ local function createPlayerInfoMenu(person)
             personCoinsLabel.BorderColor3 = Color3.new(1,1,1)
             personCoinsLabel.ZIndex = 2
             personCoinsLabel.Parent = Hndl2
-            personCoinsLabel.Text = "Coins - " .. tostring(addComma(playerCoins))
+            personCoinsLabel.Text = "Coins - N/A"-- .. tostring(addComma(playerCoins))
             personCoinsLabel.TextColor3 = Color3.new(1,1,1)
             personCoinsLabel.TextScaled = true
             personCoinsLabel.BackgroundTransparency = 0.6

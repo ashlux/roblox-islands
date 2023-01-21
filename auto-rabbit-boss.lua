@@ -70,6 +70,13 @@ local function killAura()
     end
 end
 
+local function antiAFK()
+	VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+        task.wait()
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+	task.wait(10)
+end
+
 
 if game.PlaceId == 4872321990 then
     local Island = game.Workspace.Islands:GetChildren()[1]
@@ -81,6 +88,8 @@ if game.PlaceId == 4872321990 then
     Portal.Frame.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 
 elseif game.PlaceId == 5899156129 then
+	
+	task.spawn(antiAFK)
 
     task.wait(3)
     

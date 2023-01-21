@@ -29,28 +29,28 @@ end
 
 local StarterGui = game:GetService("StarterGui")
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1016) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 669) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 593) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 237) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1017) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 670) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 594) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 238) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 1/18"
+updates = "[Matt]: GUI Updated 1/20"
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("bwskrJam/jeelncovrFcqjyQnVahgtpcqgjjQbZQR")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbcxngwupsbd/ftDsvawXwGvtzkkCdtbvtySnDvqUg")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbcxngwupsbd/oheOfSuyakuawhoszpBjswmtoLb")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbcxngwupsbd/jltzwWzwfrcxxt")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qqictnmhRUFlivlirxv/xyoxTvdzyqlTojpapgnskyEbsYxktldj")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qqictnmhRUFlivlirxv/laetxfivxq")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qqictnmhRUFlivlirxv/jrarqkFrH")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("voXonigwm/WaUbfehkbcwqhlvbzsdToxwyDrgkhyhcrxuryJzQqsi")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("zftwvNwWiqrigIxgrtoeqjv/XhmjtxlrThim")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("zftwvNwWiqrigIxgrtoeqjv/fawdsqaeaoqawohScbkaklgwAR")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("zftwvNwWiqrigIxgrtoeqjv/AibZzxqBhBnatilqqogpnsVMjVnoecze")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlmaqfnkvctmqhfilHXyYjicAugm/xsYfLbcfdsxwhpvofzzxe")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlmaqfnkvctmqhfilHXyYjicAugm/xifzwDE")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlmaqfnkvctmqhfilHXyYjicAugm/aglqKWanzBlYNpzswonesbx")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qqictnmhRUFlivlirxv/rrzinmocuqjtkFYkhnEnjyqbizsjljtyxZgAh")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qqictnmhRUFlivlirxv/qehAirqxtjc")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qqictnmhRUFlivlirxv/fzJdzepLblhjJcgomYxsAcjltoz")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("CffhpjillnrdemxzlsdcQwpmlbEnudKqymaPqyGEkdtSc/enpidyitccoecqncIepkd")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlmaqfnkvctmqhfilHXyYjicAugm/StjgtKGfEoocuUbAiwgqmai")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlmaqfnkvctmqhfilHXyYjicAugm/zufokbMPNlyRvvUtqgrdllsstnujSzukdZn")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jlmaqfnkvctmqhfilHXyYjicAugm/xmJsirnkigzmdlhwu")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("axNwyTXuvykiyHm/saGsE")
 
 ---
 local Players = game:GetService("Players")

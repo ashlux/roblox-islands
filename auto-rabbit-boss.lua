@@ -73,10 +73,9 @@ end
 
 if game.PlaceId == 4872321990 then
     local Island = game.Workspace.Islands:GetChildren()[1]
-    local Portal = Island.Blocks:FindFirstChild("portalToSpawn")
     
-    repeat wait() until Portal
-    
+    repeat wait() until Island.Blocks:FindFirstChild("portalToSpawn")
+    local Portal = Island.Blocks.portalToSpawn
     task.wait(3)
     
     Portal.Frame.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame

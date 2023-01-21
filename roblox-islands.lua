@@ -40,7 +40,7 @@ StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), 
 
 --- these items change all the dang time!
 hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("pnlgmtdxrtaKifyoIqhqnwrybshtfzbzgiGmCujt/nRchb")
-sendTrade = gamegame:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/tohSysrhtoghczqdhmivtuutphjzbseftemlemostoY")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/tohSysrhtoghczqdhmivtuutphjzbseftemlemostoY")
 addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/xDrhufmHnwicdjwFfAkes")
 tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("aqkacfkwrqtsYcUdhgM/tEgBceNyj")
 openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("obuoyupbpmpPrjcvdnenpwbifsnsQywuVXyjp/EwfvxeccbgkjcexgcvoBnzhtsf")

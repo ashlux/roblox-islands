@@ -864,6 +864,7 @@ Minimum.MouseButton1Click:Connect(function()
 	end
 end)
 
+local v2Debounce = false
 Item3 = Instance.new("TextButton")
 Item3.Position = UDim2.new(0,1,0,341)
 Item3.Size = UDim2.new(0,100,0,20)

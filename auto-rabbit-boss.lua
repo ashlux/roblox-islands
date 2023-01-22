@@ -29,7 +29,7 @@ end
 
 if keepGoing == false then return end
 
-local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ojEuoyxqmjaly/YwgxrqlaZgmqcetXtnCdubawg")
+local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("imkd/yxapvyva")
 
 local function equipBane()
     local Bane = Player.Backpack:FindFirstChild("serpentsBane")

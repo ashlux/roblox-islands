@@ -46,6 +46,14 @@ function killAura()
 end
 end
 
+local function AntiAFK()
+    while wait(25) do
+        game:GetService('VirtualUser'):CaptureController();
+        wait();
+        game:GetService('VirtualUser'):ClickButton2(Vector2.new(0,0))
+    end
+end
+
 
 
 local oldGui = game.CoreGui:FindFirstChild("Snowball")
@@ -165,3 +173,4 @@ local function createMainBackground()
 end
 
 createMainBackground()
+task.spawn(AntiAFK)

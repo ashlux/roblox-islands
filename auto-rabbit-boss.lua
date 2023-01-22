@@ -71,10 +71,11 @@ local function killAura()
 end
 
 local function antiAFK()
-	VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
-        task.wait()
-        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
-	task.wait(10)
+    while wait(25) do
+        game:GetService('VirtualUser'):CaptureController();
+        wait();
+        game:GetService('VirtualUser'):ClickButton2(Vector2.new(0,0))
+    end
 end
 
 

@@ -870,16 +870,20 @@ Item3.Size = UDim2.new(0,100,0,20)
 Item3.BackgroundColor3 = Color3.new(0,0,1)
 Item3.BorderColor3 = Color3.new(1,1,1)
 Item3.ZIndex = 2
-Item3.Text = "Islands GUI V2 (Beta)"
+Item3.Text = "Islands GUI V2"
 Item3.TextColor3 = Color3.fromRGB(250,250,250)
 Item3.TextScaled = true
 Item3.LayoutOrder = 10
 Item3.Parent = CmdHandler
 Item3.MouseButton1Click:Connect(function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-ui-v2.lua'))()
-Item3.Text = "Loading V2"
-wait(5)
-Item3.Text = "Islands GUI V2 (Beta)"
+    if v2Debounce == false then
+        v2Debounce = true
+        Item3.Text = "Loading V2"
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/roblox-islands-ui-v2.lua'))()
+        task.wait()
+        Item3.Text = "Islands GUI V2"
+        v2Debounce = false
+    end
 end)
 
 Copypaste = Instance.new("TextButton")
@@ -894,10 +898,10 @@ Copypaste.TextScaled = true
 Copypaste.LayoutOrder = 10
 Copypaste.Parent = CmdHandler
 Copypaste.MouseButton1Click:Connect(function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/copyPasteBuilds.lua'))()
-Copypaste.Text = "Loading"
-wait(5)
-Copypaste.Text = "Copy/Paste (Beta)"
+    Copypaste.Text = "Loading"
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/copyPasteBuilds.lua'))()
+    task.wait()
+    Copypaste.Text = "Copy/Paste (Beta)"
 end)
 
 Title = Instance.new("TextButton")

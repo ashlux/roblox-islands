@@ -39,18 +39,18 @@ updates = "[Matt]: GUI Updated 1/22"
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("imkd/yxapvyva")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hbNlEcQJnozvan/vbnRjLsxhysJqjahpeqvjo")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hbNlEcQJnozvan/giuom")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hbNlEcQJnozvan/pnmsUros")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("Sivpbwl/TZxwsalulEghao")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("Sivpbwl/ukKDvheGvPrvmbhrmbjhf")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("karwXNsygcznhp/OkAcbbwiJ")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("pnnxmglhrjrwmjBYldohXh/rfoNlmxtdsplypDpxlcZaTfupwWGtbk")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("pnnxmglhrjrwmjBYldohXh/dvtjVbbhqpugcopyiRmDxvmpHh")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("pnnxmglhrjrwmjBYldohXh/arizboxvxblzkiz")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("WectzGuffndGtmkirkvyWBTIvqtlsk/jwrwaogxOenleiMmtlsgQtmQwwrlznv")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("WectzGuffndGtmkirkvyWBTIvqtlsk/lnjathnjpd")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("Sivpbwl/dfdzbtnxX")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("Sivpbwl/qwkdoomuuleaJ")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("Sivpbwl/ypzpHMtgtaFytqrTvtZYeeUztrdb")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("Sivpbwl/xfrkjluwcrtkwcgnplFYnpfgzWlXtt")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ehseOSjaGgxppuoiufUE/cbveafbpZbzyYQtenctmjelsaxigxSpOwssjg")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("WectzGuffndGtmkirkvyWBTIvqtlsk/drwhxdpmrbjfwaTNxtvtbq")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("WectzGuffndGtmkirkvyWBTIvqtlsk/xciKsoCeBkw")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("WectzGuffndGtmkirkvyWBTIvqtlsk/fktodANddwjxWzkhokjqevjmcWwd")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("WectzGuffndGtmkirkvyWBTIvqtlsk/zhvefsGCpppmst")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("jwnRjhP/udrayriTor")
 
 ---
 local Players = game:GetService("Players")

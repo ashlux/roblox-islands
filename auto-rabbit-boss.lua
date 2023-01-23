@@ -29,7 +29,7 @@ end
 
 if keepGoing == false then return end
 
-local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("whztaviICrqefnvqxsZkfdBT/vosxhmusipSuhrindifdzbnvBvheJn")
+--local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("whztaviICrqefnvqxsZkfdBT/vosxhmusipSuhrindifdzbnvBvheJn")
 
 local function equipBane()
     local Bane = Player.Backpack:FindFirstChild("serpentsBane")
@@ -115,7 +115,7 @@ else
     Humanoid.MoveToFinished:wait()
     
     godMode()
-    local killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+    --local killEverything = game:GetService('RunService').Stepped:Connect(killAura)
     
     repeat
         if rabbitBoss:FindFirstChild("HumanoidRootPart") then 

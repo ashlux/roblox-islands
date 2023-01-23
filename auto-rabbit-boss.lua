@@ -29,7 +29,7 @@ end
 
 if keepGoing == false then return end
 
---local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("whztaviICrqefnvqxsZkfdBT/vosxhmusipSuhrindifdzbnvBvheJn")
+local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("whztaviICrqefnvqxsZkfdBT/vosxhmusipSuhrindifdzbnvBvheJn")
 
 local function equipBane()
     local Bane = Player.Backpack:FindFirstChild("serpentsBane")
@@ -51,23 +51,21 @@ end
     
 local function killAura()
     HR = getRoot(Character)
-    equipBane()
     for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
-        if v:FindFirstChild("HumanoidRootPart") then
-            if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["crit"] = true,
-                ["hitUnit"] = v
-                }
-                }
-                }
-                hitMobEvent:FireServer(unpack(args))
-            end
+    if v:FindFirstChild("HumanoidRootPart") then
+        if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
+            local args = {
+            [1] = HttpService:GenerateGUID(false),
+            [2] = {
+            [1] = {
+            ["hitUnit"] = v
+            }
+            }
+            }
+            hitMobEvent:FireServer(unpack(args))
         end
     end
+end
 end
 
 local function antiAFK()
@@ -115,7 +113,7 @@ else
     Humanoid.MoveToFinished:wait()
     
     godMode()
-    --local killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+    local killEverything = game:GetService('RunService').Stepped:Connect(killAura)
     
     repeat
         if rabbitBoss:FindFirstChild("HumanoidRootPart") then 

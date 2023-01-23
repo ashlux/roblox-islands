@@ -51,21 +51,22 @@ end
     
 local function killAura()
     HR = getRoot(Character)
+    equipBane()
     for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
-    if v:FindFirstChild("HumanoidRootPart") then
-        if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
-            local args = {
-            [1] = HttpService:GenerateGUID(false),
-            [2] = {
-            [1] = {
-            ["hitUnit"] = v
-            }
-            }
-            }
-            hitMobEvent:FireServer(unpack(args))
+        if v:FindFirstChild("HumanoidRootPart") then
+            if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["hitUnit"] = v
+                }
+                }
+                }
+                hitMobEvent:FireServer(unpack(args))
+            end
         end
     end
-end
 end
 
 local function antiAFK()

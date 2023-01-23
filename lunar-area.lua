@@ -35,7 +35,6 @@ function killAura()
             [1] = HttpService:GenerateGUID(false),
             [2] = {
             [1] = {
-            ["crit"] = true,
             ["hitUnit"] = v
             }
             }

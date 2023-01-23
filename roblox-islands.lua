@@ -571,6 +571,7 @@ function getTrees()
 		    tree.Name:find("treeSpirit") or 
 		    tree.Name:find("treeHickory") or
 		    tree.Name:find("treeBirch") or
+		    tree.Name:find("treeCherry") or
 		    tree.Name == "tree1" or 
                tree.Name == "tree2" or 
 		    tree.Name == "tree3" or 
@@ -3038,9 +3039,51 @@ Item55.Text = "Spirit Wood"
 Item55.TextColor3 = Color3.fromRGB(0,0,0)
 Item55.TextScaled = true
 
+local cherryWood = Instance.new("TextButton")
+cherryWood.Position = UDim2.new(0,0,1,64)
+cherryWood.Size = UDim2.new(0,69,0,20)
+cherryWood.BackgroundColor3 = Color3.fromRGB(250,150,150)
+cherryWood.BorderSizePixel = 1
+cherryWood.ZIndex = 2
+cherryWood.Parent = Notification8
+cherryWood.Text = "Cherry Wood"
+cherryWood.TextColor3 = Color3.fromRGB(0,0,0)
+cherryWood.TextScaled = true
+cherryWood.MouseButton1Click:Connect(function()
+    if Toggled38 then
+        Toggled38 = false
+        cherryWood.BackgroundColor3 = Color3.fromRGB(250,150,150)
+        cherryWood.Text = "Cherry Wood"
+        cherryWood.TextColor3 = Color3.fromRGB(0,0,0)
+        cancelTween()
+        unFloat()
+    else
+        Toggled38 = true
+        cherryWood.BackgroundColor3 = Color3.new(200,0,0)
+        cherryWood.Text = "Getting Cherry"
+        cherryWood.TextColor3 = Color3.fromRGB(0,0,0)
+        Float()
+        while Toggled38 == true do
+            wait()
+            local trees = getTrees()
+            for k,v in pairs(trees) do
+                if v.Name == "treeCherryBlossom" then
+                    tween, Time = goToPoint(v.Position, 12)
+                    if Time then
+                        wait(Time - 0.6)
+                        cancelTween()
+                    end
+                    hitTree(v)
+                break
+                end
+            end
+        end
+    end
+end)
+
 local allWoods = Instance.new("TextButton")
-allWoods.Position = UDim2.new(0,0,1,64)
-allWoods.Size = UDim2.new(0,69,0,20)
+allWoods.Position = UDim2.new(0,0,1,85)
+allWoods.Size = UDim2.new(0,140,0,20)
 allWoods.BackgroundColor3 = Color3.fromRGB(175,175,175)
 allWoods.BorderSizePixel = 1
 allWoods.ZIndex = 2
@@ -3068,7 +3111,7 @@ allWoods.MouseButton1Click:Connect(function()
             for k,v in pairs(trees) do
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5483,7 +5526,7 @@ Item50.MouseButton1Click:Connect(function()
                 if v.Name == "tree1" or v.Name == "tree2" or v.Name == "tree3" or v.Name == "tree4" then
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5515,7 +5558,7 @@ Item51.MouseButton1Click:Connect(function()
                 if v.Name:find("treeBirch") then
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5547,7 +5590,7 @@ Item52.MouseButton1Click:Connect(function()
                 if v.Name:find("treePine") then
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5579,7 +5622,7 @@ Item53.MouseButton1Click:Connect(function()
                 if v.Name:find("treeMaple") then
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5611,7 +5654,7 @@ Item54.MouseButton1Click:Connect(function()
                 if v.Name:find("treeHickory") then
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)
@@ -5643,7 +5686,7 @@ Item55.MouseButton1Click:Connect(function()
                 if v.Name:find("treeSpirit") then
                     tween, Time = goToPoint(v.Position, 12)
                     if Time then
-                        wait(Time - 0.8)
+                        wait(Time - 0.6)
                         cancelTween()
                     end
                     hitTree(v)

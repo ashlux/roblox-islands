@@ -22,6 +22,10 @@ local chestModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
+local updates = "😲Script down while I test some things!!😲"
+StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
+return
+
 if game.PlaceId == 11838346571 then -- lunar event (islands arcade)
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/lunar-area.lua'))()
     return

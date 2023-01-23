@@ -22,6 +22,7 @@ local chestModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-
 
 print("Loading Complete!")
 
+local StarterGui = game:GetService("StarterGui")
 local updates = "😲Script down while I test some things!!😲"
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 return
@@ -31,7 +32,6 @@ if game.PlaceId == 11838346571 then -- lunar event (islands arcade)
     return
 end
 
-local StarterGui = game:GetService("StarterGui")
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
 if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1030) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 683) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 607) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 251) then
     updates = "😲 GUI might not function in this server 😲"

@@ -19,7 +19,7 @@ local HR = Character.HumanoidRootPart
 local Mouse = Player:GetMouse()
 local killEverything
 local HttpService = game:GetService("HttpService")
-local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("uFgvoIxomfin/pfpfeMnolyrKazgjbex")
+local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("cxdvVzgmb/czNjkkivRyyoow")
 
 function getRoot(char) -- find root part of character if they dont have HR
 	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')

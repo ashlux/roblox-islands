@@ -43,7 +43,7 @@ function getRoot(char) -- find root part of character if they dont have HR
 	return rootPart
 end
     
-local function godMode()
+local function godMode() -- insta-ban
     if Character:FindFirstChild("CurrentHealth") then
         Character.CurrentHealth:Destroy()
     end
@@ -113,7 +113,7 @@ else
     Humanoid:MoveTo(Vector3.new(-19, 42, -204)) -- move inside after rabbitBoss
     Humanoid.MoveToFinished:wait()
     
-    godMode()
+    --godMode()
     local killEverything = game:GetService('RunService').Stepped:Connect(killAura)
     
     repeat

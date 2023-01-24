@@ -38,6 +38,14 @@ end
 
 if keepGoing == false then return end
 
+local function randomizeposition()
+    
+    repeat X,Z = math.random(-35,35), math.random(-35,35)
+    until (X >= 15 or X <= -15) and (Z >= 15 or Z <= -15)
+
+    return X,Z
+end
+
 local function equipBane()
     local Bane = Player.Backpack:FindFirstChild("serpentsBane")
     if Bane then
@@ -197,7 +205,7 @@ else
         game:GetService('RunService').Stepped:Connect(killAura)
     end
     
-    local X,Z = math.random(15,30), math.random(15,30)
+    local X,Z = randomizeposition()
     
     repeat
         if Character.IsDead.Value then
@@ -206,7 +214,6 @@ else
             Humanoid.MoveToFinished:wait()
             Humanoid:MoveTo(Vector3.new(-19, 42, -204))
             Humanoid.MoveToFinished:wait()
-            X,Z = math.random(15,30), math.random(15,30)
         end
         if rabbitBoss:FindFirstChild("HumanoidRootPart") then 
             if string.lower(method) == "melee" then

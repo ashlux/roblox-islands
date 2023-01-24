@@ -26,8 +26,8 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local HttpService = game:GetService("HttpService")
 
 local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ZvvoiojcqmllqGhgm/xizSdpMxnlrBhnzcoGxxxnxwyRxa")
-local fireSpellEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ZvvoiojcqmllqGhgm/iaxkwzdcHAEzaqp")
-local fireBowEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ZvvoiojcqmllqGhgm/iqkuzUuq")
+local fireSpellEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("cxdvVzgmb/zAqegarFyexhyriitnihmjvYguygjxShtfzA")
+local fireBowEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("cxdvVzgmb/nkmamtHvGtcyvxaqgdmklnqzxmenevxsvlbpcazmab")
 
 
 local keepGoing = false

@@ -2,7 +2,7 @@ local itemsToTrade = {}
 
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
-local sendTradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbcxngwupsbd/oheOfSuyakuawhoszpBjswmtoLb")
+local sendTradeEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("xDYmwujtl/ltkemoZnranznaMrEBvhjSqoPmoo")
 local HttpService = game:GetService("HttpService")
 local mouse = game.Players.LocalPlayer:GetMouse()
 
@@ -301,7 +301,7 @@ local function createGUI()
                 writefile(foldername.."/"..filename, "")
                 
                 for i,v in pairs(itemsToTrade) do
-                    appendfile(foldername.."/"..filename, v..","..i.."\n")
+                    appendfile(foldername.."/"..filename, v..","..i.Name.."\n")
                 end
                 
                 task.wait(0.5)

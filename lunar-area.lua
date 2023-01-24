@@ -136,15 +136,15 @@ local function createMainBackground()
     God.ZIndex = 2
     God.Font = Enum.Font.Roboto
     God.Parent = Background2
-    God.Text = "Enable God Mode"
+    God.Text = "Break Rabbit"
     God.TextColor3 = Color3.fromRGB(200,200,150)
     God.TextScaled = true
 	God.Visible = false
     God.MouseButton1Click:Connect(function()
-        Character.CurrentHealth:Destroy()
-        God.Text = "God Mode Enabled"
+        Character.IsPlayer:Destroy()
+        God.Text = "Rabbit should stop"
         God.BackgroundColor3 = Color3.fromRGB(250,250,250)
-        God.TextColor3 = Color3.fromRGB(200,100,50)
+        God.TextColor3 = Color3.fromRGB(0,0,0)
     end)
     
     local KillAura = Instance.new("TextButton")

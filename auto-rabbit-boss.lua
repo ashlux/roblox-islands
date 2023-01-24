@@ -1,5 +1,11 @@
---local farmingAlts = {"tryAnd_BanI", "anotherAlt"} -- capitalization doesn't matter.  Enter your alts here with commas between
+--local farmingAlts = {"ANOTHERhammerban", "anotherAlt"} -- capitalization doesn't matter.  Enter your alts here with commas between
+--local method = "magic" --can be "melee", "bow" or "magic"
 --the farming alts will be set outside of the loadstring
+
+if method == nil then
+    method = "magic"
+end
+
 if not game:IsLoaded() then
 game.Loaded:Wait()
 end
@@ -7,7 +13,7 @@ end
 local Players = game:GetService("Players")
 
 repeat wait()
-until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Head") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") 
 local mouse = game.Players.LocalPlayer:GetMouse() 
 repeat wait() until mouse
 
@@ -20,7 +26,8 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local HttpService = game:GetService("HttpService")
 
 local hitMobEvent =  game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ypsuIzewhcuIKhvahtkDkinDSappX/cktWywscGtzkhiycqrlBjrvspk")
-
+local fireSpellEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ypsuIzewhcuIKhvahtkDkinDSappX/caejlhvwxdlzzIUKaXfqlpm")
+local fireBowEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ypsuIzewhcuIKhvahtkDkinDSappX/tlkRxCa")
 
 local keepGoing = false
 for _,v in pairs(farmingAlts) do
@@ -35,6 +42,20 @@ local function equipBane()
     local Bane = Player.Backpack:FindFirstChild("serpentsBane")
     if Bane then
         Bane.Parent = Character
+    end
+end
+
+local function equipBook()
+    local book = Player.Backpack:FindFirstChild("spellbook")
+    if book then
+        book.Parent = Character
+    end
+end
+
+local function equipBow()
+    local bow = Player.Backpack:FindFirstChild("bow5")
+    if bow then
+        bow.Parent = Character
     end
 end
 
@@ -67,6 +88,57 @@ local function killAura()
             end
         end
     end
+end
+
+local function getDirection(entity)
+    local direction
+    local thingToShoot = entity
+    if entity:FindFirstChild("HumanoidRootPart") then
+        direction = CFrame.new(HR.Position, thingToShoot.HumanoidRootPart.Position)
+    else
+        direction = CFrame.new(HR.Position, thingToShoot.Position)
+    end
+    local LookVector = direction.LookVector
+    return LookVector
+end
+
+local function fireSpellbook(spellBook, entity)
+    local direction = getDirection(entity)
+    equipBook()
+    local args = {
+    [1] = HttpService:GenerateGUID(false),
+    [2] = {
+        [1] = {
+        ["charge"] = 1,
+        ["shootType"] = 0,
+        ["spellBook"] = spellBook,
+        ["time"] = tick(),
+        ["direction"] = direction
+        }
+    }
+    }
+
+    fireSpellEvent:FireServer(unpack(args))
+end
+
+local function shootBow(bow, entity)
+    local direction = getDirection(entity)
+    equipBow()
+    local args = {
+    [1] = HttpService:GenerateGUID(false),
+    [2] = {
+        [1] = {
+            ["direction"] = direction,
+            ["time"] = tick(),
+            ["charge"] = 1,
+            ["bow"] = Character.bow5,
+            ["arrowName"] = "arrow3"
+        }
+    }
+    }
+
+    fireBowEvent:FireServer(unpack(args))
+
 end
 
 local function antiAFK()
@@ -107,6 +179,13 @@ else
     task.wait(5)
     Humanoid:MoveTo(Vector3.new(14, 38, -290)) -- move to gate
     Humanoid.MoveToFinished:wait()
+    
+    --destroys orb thingies
+    local start = game.Workspace.ChildAdded:Connect(function(part)
+        if part.Name == "part" then
+            part:Destroy()
+        end
+    end)
 
     repeat wait(0.5) until game:GetService("Workspace").WildernessIsland.Entities:FindFirstChild("lunarRabbit")
     local rabbitBoss = game:GetService("Workspace").WildernessIsland.Entities.lunarRabbit
@@ -114,19 +193,42 @@ else
     Humanoid.MoveToFinished:wait()
     
     --godMode()
-    local killEverything = game:GetService('RunService').Stepped:Connect(killAura)
+    if string.lower(method) == "melee" then
+        game:GetService('RunService').Stepped:Connect(killAura)
+    end
     
     repeat
+        if Character.IsDead.Value then
+            task.wait(7)
+            Humanoid:MoveTo(Vector3.new(14, 38, -290)) -- move to gate
+            Humanoid.MoveToFinished:wait()
+            Humanoid:MoveTo(Vector3.new(-19, 42, -204))
+            Humanoid.MoveToFinished:wait()
+        end
         if rabbitBoss:FindFirstChild("HumanoidRootPart") then 
-            Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position)
+            if string.lower(method) == "melee" then
+                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position)
             
             
-            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
-            task.wait()
-            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
-            
+                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+                task.wait()
+                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+            elseif string.lower(method) == "magic" then
+                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position + Vector3.new(30,0,0))
+                
+                local spellBook = Player.Character:FindFirstChild("spellbook")
+                fireSpellbook(spellBook, rabbitBoss)
+                task.wait()
+            elseif string.lower(method) == "bow" then
+                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position + Vector3.new(30,0,0))
+                
+                local bow = Player.Character:FindFirstChild("bow5")
+                shootBow(bow, rabbitBoss)
+                task.wait()
+            end
         end
     until rabbitBoss:FindFirstChild("HumanoidRootPart") == nil -- follow the dum dum
+    
     
     task.wait(1)
     local playAgainButton = Player.PlayerGui.MatchCompleted["28"]["1"]

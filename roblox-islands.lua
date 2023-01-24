@@ -2113,6 +2113,7 @@ God.Parent = Notification6
 God.Text = "Enable God Mode"
 God.TextColor3 = Color3.fromRGB(50,200,100)
 God.TextScaled = true
+God.Visible = false
 
 local KillAura = Instance.new("TextButton")
 KillAura.Position = UDim2.new(0,1,1,180)

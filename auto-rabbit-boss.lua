@@ -197,6 +197,8 @@ else
         game:GetService('RunService').Stepped:Connect(killAura)
     end
     
+    local X,Z = math.random(15,30), math.random(15,30)
+    
     repeat
         if Character.IsDead.Value then
             task.wait(7)
@@ -204,6 +206,7 @@ else
             Humanoid.MoveToFinished:wait()
             Humanoid:MoveTo(Vector3.new(-19, 42, -204))
             Humanoid.MoveToFinished:wait()
+            X,Z = math.random(15,30), math.random(15,30)
         end
         if rabbitBoss:FindFirstChild("HumanoidRootPart") then 
             if string.lower(method) == "melee" then
@@ -214,13 +217,13 @@ else
                 task.wait()
                 VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
             elseif string.lower(method) == "magic" then
-                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position + Vector3.new(30,0,0))
+                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position + Vector3.new(X,0,Z))
                 
                 local spellBook = Player.Character:FindFirstChild("spellbook")
                 fireSpellbook(spellBook, rabbitBoss)
                 task.wait()
             elseif string.lower(method) == "bow" then
-                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position + Vector3.new(30,0,0))
+                Humanoid:MoveTo(rabbitBoss.HumanoidRootPart.Position + Vector3.new(X,0,Z))
                 
                 local bow = Player.Character:FindFirstChild("bow5")
                 shootBow(bow, rabbitBoss)

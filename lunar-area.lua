@@ -139,7 +139,6 @@ local function createMainBackground()
     God.Text = "Break Rabbit"
     God.TextColor3 = Color3.fromRGB(200,200,150)
     God.TextScaled = true
-	God.Visible = false
     God.MouseButton1Click:Connect(function()
         Character.IsPlayer:Destroy()
         God.Text = "Rabbit should stop"

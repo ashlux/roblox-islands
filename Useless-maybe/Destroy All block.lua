@@ -1,5 +1,5 @@
 _G.active = true -- set to false if you want it to stop
-local Block = "cauldron2" -- NOT display name, but item name
+_G.Block = "stone" -- NOT display name, but item name
 
 local TS = game:GetService("TweenService")
 local Player = game.Players.LocalPlayer
@@ -31,8 +31,10 @@ function Float() -- makes you float using BV
 end
 
 function unFloat() -- gets rid of BV so you dont float
-    if HR:FindFirstChild("BodyVelocity") then
-        HR.BodyVelocity:Destroy()
+    for i,v in pairs(HR:GetChildren()) do
+        if v.Name == "BodyVelocity" then
+            v:Destroy()
+        end
     end
 end
 
@@ -50,7 +52,7 @@ end
 
  while _G.active do
     wait()
-    local Blocks = getBlocks(Block)
+    local Blocks = getBlocks(_G.Block)
     for i,v in pairs(Blocks) do
         tween, Time = goToPoint(v.Position)
         Float()
@@ -68,7 +70,7 @@ end
             ["pos"] = Vector3.new(0, 1, 0)
             }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
             tooMuch = tooMuch + 1
         until v:FindFirstChild("Health") == nil or tooMuch == 20 or _G.active == false
     break
@@ -76,3 +78,5 @@ end
 end
 
 unFloat()
+
+tween:Cancel()

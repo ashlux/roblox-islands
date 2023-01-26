@@ -157,6 +157,7 @@ local function createMainBackground()
     KillAura.Text = "Kill Aura"
     KillAura.TextColor3 = Color3.fromRGB(200,200,150)
     KillAura.TextScaled = true
+KillAura.Visible = false
     KillAura.MouseButton1Click:Connect(function()
         if killing then
             killing = false

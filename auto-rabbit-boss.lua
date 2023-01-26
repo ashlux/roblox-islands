@@ -2,6 +2,7 @@
 --local method = "magic" --can be "melee", "bow" or "magic"
 --the farming alts will be set outside of the loadstring
 
+return
 if method == nil then
     method = "magic"
 end

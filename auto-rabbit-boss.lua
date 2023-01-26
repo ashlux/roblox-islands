@@ -25,9 +25,9 @@ local Humanoid = Character.Humanoid
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local HttpService = game:GetService("HttpService")
 
-local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qlbfDhvkRbkksqpwfI/hbBjvith")
-local fireSpellEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qlbfDhvkRbkksqpwfI/qnqObstrmLzl")
-local fireBowEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qlbfDhvkRbkksqpwfI/iMfxxmkswvkVyaqygnjrhxgzujghmbelbDpcc")
+local hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ymMtnfy/zyuMcgagquC")
+local fireSpellEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ymMtnfy/mqwdMTnIjSmwPewqSbnzG")
+local fireBowEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ymMtnfy/stpnlZpnhnaitjgtyzqtcqeWrrB")
 
 
 local keepGoing = false

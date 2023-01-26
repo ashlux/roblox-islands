@@ -403,26 +403,29 @@ function getEquipped()
     return tool
 end
 
-function killAura()
+--function killAura() -- broken
     HR = getRoot(Character)
     for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
-    if v:FindFirstChild("HumanoidRootPart") then
-        if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
-            local args = {
-            [1] = HttpService:GenerateGUID(false),
-            [2] = {
-            [1] = {
-            ["hitUnit"] = v
-            }
-            }
-            }
-            hitMobEvent:FireServer(unpack(args))
+        if v:FindFirstChild("HumanoidRootPart") then
+            if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
+                local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
+                ["hitUnit"] = v
+                }
+                }
+                }
+    
+	        hitMobEvent:FireServer(unpack(args))
+
+            end
         end
     end
-end
-end
+--end
 
-function killPlayersAura()
+--function killPlayersAura()
     for i,v in pairs(Players:GetPlayers()) do
         playerCharacter = v.Character
         if playerCharacter and playerCharacter:FindFirstChild("HumanoidRootPart") and (HR.Position - playerCharacter.HumanoidRootPart.Position).magnitude < 30 then
@@ -430,7 +433,7 @@ function killPlayersAura()
             [1] = HttpService:GenerateGUID(false),
             [2] = {
             [1] = {
-            ["crit"] = true,
+            ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
             ["hitUnit"] = playerCharacter
             }
             }
@@ -438,7 +441,7 @@ function killPlayersAura()
             hitMobEvent:FireServer(unpack(args))
         end
     end
-end
+--end
 
 function round(number)
     return math.floor(number + 0.5)
@@ -2127,6 +2130,7 @@ KillAura.Text = "Kill Aura"
 KillAura.TextColor3 = Color3.fromRGB(250,50,50)
 KillAura.TextScaled = true
 KillAura.Modal = true
+KillAura.Visible = false
 KillAura.MouseButton1Click:Connect(function()
     if KA then
         KA = false
@@ -2157,6 +2161,7 @@ KillPlayersAura.Text = "Kill Players Aura"
 KillPlayersAura.TextColor3 = Color3.fromRGB(250,50,50)
 KillPlayersAura.TextScaled = true
 KillPlayersAura.Modal = true
+KillPlayersAura.Visible = false
 KillPlayersAura.MouseButton1Click:Connect(function()
     if KPA then
         KPA = false

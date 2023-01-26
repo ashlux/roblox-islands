@@ -40,18 +40,18 @@ updates = "[Matt]: GUI Updated 1/26"
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 
 --- these items change all the dang time!
-hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("qlbfDhvkRbkksqpwfI/hbBjvith")
-sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbgkEvljebdrQ/dgrqnrvgxoTreqrgnkLurFkqodvjgftg")
-addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbgkEvljebdrQ/dbbJual")
-tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("fbgkEvljebdrQ/kSmWdfNftjiozoQvlmcDlovNleycrrtdr")
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hvuvltyfqcpd/wefCoRyycTdvmjdcxvuYqpajdqlafbuvmtIvuego")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hvuvltyfqcpd/ekhhsgAQxm")
+hitMobEvent = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("ymMtnfy/zyuMcgagquC")
+sendTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("BVoaoeblmxdiZ/LiwakzlsidhDjnvlsjowWssFp")
+addTrade = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("BVoaoeblmxdiZ/adwOrnziejawbchcqumYvETafUdav")
+tradeAccept = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("BVoaoeblmxdiZ/mlvjjTfzryledupfqh")
+openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("rqokekunqlfo/wluhwadhskimjsesqrvoA")
+emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("rqokekunqlfo/nxivpkwjtsNOoclwF")
 refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hvuvltyfqcpd/qtbUvOyfnheweoys")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hvuvltyfqcpd/Ysaasdpeoflugthwborfvmcpxbxwxjydq")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hvuvltyfqcpd/njQsXVzOMGtbGsqpdrknrbqwrtpNybys")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("hvuvltyfqcpd/kdcqrwxCavxfjdprahzatulczcspelp")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("uezb/ctczwdZUdifjdrrVl")
+refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("rqokekunqlfo/qehkLxigoKjziygmblMaGvklpLzDs")
+takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("rqokekunqlfo/vnmxfItueXzlrfohv")
+changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("rqokekunqlfo/Ftgi")
+closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("rqokekunqlfo/TxdaKfwmjiRmiygdbHofYe")
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged:FindFirstChild("quroasfEBgmYh/ljebncbKjwkeinysvfbikpfmd")
 
 ---
 local Players = game:GetService("Players")

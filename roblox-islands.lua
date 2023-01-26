@@ -30,7 +30,7 @@ if game.PlaceId == 11838346571 then -- lunar event (islands arcade)
 end
 
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1037) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 690) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 614) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 258) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1038) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 691) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 615) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 259) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end

@@ -404,43 +404,43 @@ function getEquipped()
 end
 
 --function killAura() -- broken
-    HR = getRoot(Character)
-    for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
-        if v:FindFirstChild("HumanoidRootPart") then
-            if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
-                ["hitUnit"] = v
-                }
-                }
-                }
-    
-	        hitMobEvent:FireServer(unpack(args))
-
-            end
-        end
-    end
+--    HR = getRoot(Character)
+--    for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
+--        if v:FindFirstChild("HumanoidRootPart") then
+--            if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
+--                local args = {
+--                [1] = HttpService:GenerateGUID(false),
+--                [2] = {
+--                [1] = {
+--                ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
+--                ["hitUnit"] = v
+--                }
+--                }
+--                }
+--    
+--	        hitMobEvent:FireServer(unpack(args))
+--
+--            end
+--        end
+--    end
 --end
 
 --function killPlayersAura()
-    for i,v in pairs(Players:GetPlayers()) do
-        playerCharacter = v.Character
-        if playerCharacter and playerCharacter:FindFirstChild("HumanoidRootPart") and (HR.Position - playerCharacter.HumanoidRootPart.Position).magnitude < 30 then
-            local args = {
-            [1] = HttpService:GenerateGUID(false),
-            [2] = {
-            [1] = {
-            ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
-            ["hitUnit"] = playerCharacter
-            }
-            }
-            }
-            hitMobEvent:FireServer(unpack(args))
-        end
-    end
+--    for i,v in pairs(Players:GetPlayers()) do
+--        playerCharacter = v.Character
+--        if playerCharacter and playerCharacter:FindFirstChild("HumanoidRootPart") and (HR.Position - playerCharacter.HumanoidRootPart.Position).magnitude < 30 then
+--            local args = {
+--            [1] = HttpService:GenerateGUID(false),
+--            [2] = {
+--            [1] = {
+--            ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
+--            ["hitUnit"] = playerCharacter
+--            }
+--            }
+--            }
+--            hitMobEvent:FireServer(unpack(args))
+--        end
+--    end
 --end
 
 function round(number)

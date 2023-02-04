@@ -1,3 +1,5 @@
+local StarterGui = game:GetService("StarterGui")
+
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
 if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1059) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 709) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 633) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 277) then
     updates = "😲 GUI might not function in this server 😲"

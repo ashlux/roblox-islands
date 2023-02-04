@@ -10,9 +10,9 @@ repeat wait() until mouse
 if not game.PlaceId == 9551640993 then return end-- mining sim
 
 ----these are what change-----
-local whatWorld = "Mystic Forest"
-local walk1 = Vector3.new(43402, 5, 56)
-local walk2 = Vector3.new (43402, 5, 56)
+local whatWorld = "Mystery Egg v4"
+local walk1 = Vector3.new(27, 5, 345)
+local walk2 = Vector3.new (27, 5, 345)
 local whatEgg = "Element Egg"
 -------------------------------
 
@@ -36,7 +36,7 @@ local function autoFactory()
         for _,v in pairs(numbers) do
             game:GetService("ReplicatedStorage").Events.ClaimFactoryCraft:FireServer(v)
             task.wait(1)
-            game:GetService("ReplicatedStorage").Events.StartFactoryCraft:FireServer("Shells 4", v)
+            game:GetService("ReplicatedStorage").Events.StartFactoryCraft:FireServer("Crystals 4", v)
         end
         wait(451)
     end

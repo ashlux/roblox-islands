@@ -381,7 +381,7 @@ function getEquipped()
 end
 
 function killAura() -- broken
-    clickScreen(0,0)
+    --clickScreen(0,0)
             local args = {
                 [1] = HttpService:GenerateGUID(false),
                 [2] = {
@@ -392,7 +392,7 @@ function killAura() -- broken
                 }
                 }
                 
-                game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("rxkpWqtnuegabs/JdfKyaeWuAl"):FireServer(unpack(args))
+                --game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("rxkpWqtnuegabs/JdfKyaeWuAl"):FireServer(unpack(args))
 end
 
 --function killPlayersAura()

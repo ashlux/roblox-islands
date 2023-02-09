@@ -69,7 +69,7 @@ local function harvestPlant(plant)
         local args = {
         [1] = {
         ["player"] = Player,
-        ["player_tracking_category"] = "join_from_web",
+        ["hfooqfruixcORdqjwedrztXtnttuyneeepiuRjZepiq"] = "\7\240\159\164\161\240\159\164\163\7\n\7\n\7\ndhwxz",
         ["model"] = plant
         }
         }

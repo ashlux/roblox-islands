@@ -380,27 +380,20 @@ function getEquipped()
     return tool
 end
 
---function killAura() -- broken
---    HR = getRoot(Character)
---    for i,v in pairs(workspace.WildernessIsland.Entities:GetChildren()) do
---        if v:FindFirstChild("HumanoidRootPart") then
---            if (HR.Position - v.HumanoidRootPart.Position).magnitude < 30 then
---                local args = {
---                [1] = HttpService:GenerateGUID(false),
---                [2] = {
---                [1] = {
---                ["reqCode"] = "\240\159\152\142b\7\n\7\n\7\niPfhv", -- ??
---                ["hitUnit"] = v
---                }
---                }
---                }
---    
---	        hitMobEvent:FireServer(unpack(args))
---
---            end
---        end
---    end
---end
+function killAura() -- broken
+    clickScreen(0,0)
+            local args = {
+                [1] = HttpService:GenerateGUID(false),
+                [2] = {
+                [1] = {
+                ["xbxsjdjbuEsizRmUfpiZfv"] = "\7\240\159\164\161\240\159\164\163\7\n\7\n\7\nhtqqWmsyrxshJnvXfdLlrxltbfmqbfltms",
+                ["hitUnit"] = v
+                }
+                }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("rxkpWqtnuegabs/JdfKyaeWuAl"):FireServer(unpack(args))
+end
 
 --function killPlayersAura()
 --    for i,v in pairs(Players:GetPlayers()) do
@@ -2120,7 +2113,7 @@ KillAura.MouseButton1Click:Connect(function()
         KillAura.Text = "Killin"
         KillAura.TextColor3 = Color3.fromRGB(0,0,0)
         while KA do
-            wait()
+            wait(0.3)
             killAura()
         end
     end

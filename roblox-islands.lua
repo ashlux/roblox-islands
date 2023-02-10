@@ -3959,6 +3959,7 @@ VoidParasite.Parent = N2
 VoidParasite.Text = "Use Void Rocks under mining for VoidParasite"
 VoidParasite.TextColor3 = Color3.fromRGB(250,250,250)
 VoidParasite.TextScaled = true
+VoidParasite.Visible = false
 
 
 Title.MouseButton1Click:Connect(function()
@@ -6991,12 +6992,12 @@ VoidMining.MouseButton1Click:Connect(function()
         Float()
         local Continue = 0
         pickingPlants = true
-        coroutine.wrap(function()
-            while pickingPlants do
-                task.wait()
-                pickWildernessPlantAura("voidParasite")
-            end
-        end)()
+        --coroutine.wrap(function()
+        --    while pickingPlants do
+        --        task.wait()
+        --        pickWildernessPlantAura("voidParasite")
+        --    end
+        --end)()
         while Toggled83 == true do
             wait()
             local Rocks = getVoidRocks()

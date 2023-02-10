@@ -2831,6 +2831,7 @@ wildCrops.Parent = N1
 wildCrops.Text = "Wilderness Crops"
 wildCrops.TextColor3 = Color3.fromRGB(250,250,250)
 wildCrops.TextScaled = true
+wildCrops.Visible = false
 wildCrops.MouseButton1Click:Connect(function()
     if pickingWildCrops then
         pickingWildCrops = false

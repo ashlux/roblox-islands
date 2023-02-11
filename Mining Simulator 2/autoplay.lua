@@ -11,9 +11,9 @@ if not game.PlaceId == 9551640993 then return end-- mining sim
 
 ----these are what change-----
 local whatWorld = "The Overworld"
-local walk1 = Vector3.new(27, 5, 345)
-local walk2 = Vector3.new (27, 5, 345)
-local whatEgg = "Mystery Egg v4"
+local walk1 = Vector3.new(31, 5, 341)
+local walk2 = Vector3.new (31, 5, 341)
+local whatEgg = "Valentine Egg"
 -------------------------------
 
 local Player = game.Players.LocalPlayer
@@ -65,6 +65,26 @@ local function autoGetBoosts()
 wait(1000)
     end
 end
+    
+local function redeemSpins()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin")
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("BuySpinToWin"):FireServer()
+
+    task.wait(300)
+end
+
+local function autoSpinToWin()
+    local amount = Player.PlayerGui.ScreenGui.SpinToWin.Frame.Container.Spins.Count.Text
+    
+    if amount ~= "0" then
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaySpinToWin"):FireServer()
+    
+    end
+    
+    task.wait(5)
+end    
 
 local function teleportToWorld(world)
     game:GetService("ReplicatedStorage").Events.Teleport:FireServer(world)
@@ -92,6 +112,8 @@ end
 
 task.spawn(autoFactory)
 task.spawn(autoGetBoosts)
+task.spawn(redeemSping)
+task.spawn(autoSpinToWin)
 
 teleportToWorld(whatWorld)
 task.wait(1)

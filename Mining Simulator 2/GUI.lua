@@ -1525,7 +1525,7 @@ Item19.Text = "Redeem All Codes"
 Item19.TextColor3 = Color3.fromRGB(250,250,250)
 Item19.TextScaled = true
 Item19.MouseButton1Click:Connect(function()
-    local codes = {"Update29", "TechMstery", "Update28", "Element", "Update26", "HappyNewYear", "Update27", "Mystical", "Update25", "Festive", "Update24","Advent","Update23", "Christmas", "freecrate", "release", "FreeEgg", "RareCrate", "Gems", "Trading", "FreeGems", "Lucky", "SuperLucky", "Update4", "Factory", "Update5", "July4th", "Update6", "Fishing", "Update7", "treasure", "Update8", "Mystery", "Season2", "SuperEvent", "ExtraLuck", "Atlantis", "Update9", "LostCity", "LuckEvent", "Update10", "UltraLucky", "Atlantic", "Update11", "Update12", "MysteryV3", "Update13", "Candyland", "Update14", "Chocolate", "Update15", "Pastry", "Update16", "Halloween", "Update17", "Spooky", "Update18", "Ghost", "Omega24", "Super24", "Lucky24", "Update20", "Pixel", "Update22", "Cartoon"}
+    local codes = {"Update30", "Valentines", "Update29", "TechMstery", "Update28", "Element", "Update26", "HappyNewYear", "Update27", "Mystical", "Update25", "Festive", "Update24","Advent","Update23", "Christmas", "freecrate", "release", "FreeEgg", "RareCrate", "Gems", "Trading", "FreeGems", "Lucky", "SuperLucky", "Update4", "Factory", "Update5", "July4th", "Update6", "Fishing", "Update7", "treasure", "Update8", "Mystery", "Season2", "SuperEvent", "ExtraLuck", "Atlantis", "Update9", "LostCity", "LuckEvent", "Update10", "UltraLucky", "Atlantic", "Update11", "Update12", "MysteryV3", "Update13", "Candyland", "Update14", "Chocolate", "Update15", "Pastry", "Update16", "Halloween", "Update17", "Spooky", "Update18", "Ghost", "Omega24", "Super24", "Lucky24", "Update20", "Pixel", "Update22", "Cartoon"}
     for i,v in pairs(codes) do
         game:GetService("ReplicatedStorage").Functions.RedeemCode:InvokeServer(v)
     end
@@ -1957,76 +1957,69 @@ Item30.MouseButton1Click:Connect(function()
 	end
 end)
 
-local giftGiver = Instance.new("TextButton")
-giftGiver.Position = UDim2.new(0,1,0,147)
-giftGiver.Size = UDim2.new(0,140,0,20)
-giftGiver.BackgroundColor3 = Color3.fromRGB(70,70,70)
-giftGiver.BorderColor3 = Color3.new(1,1,1)
-giftGiver.ZIndex = 2
-giftGiver.Parent = CmdHandler3
-giftGiver.Text = "Gift Giver 1"
-giftGiver.TextColor3 = Color3.fromRGB(250,250,250)
-giftGiver.TextScaled = true
-giftGiver.MouseButton1Click:Connect(function()
-    if giveGifts then
-		giveGifts = false
-		giftGiver.BackgroundColor3 = Color3.fromRGB(70,70,70)
+
+local function redeemSpins()
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin")
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("BuySpinToWin"):FireServer()
+
+    task.wait(300)
+end
+
+local function autoSpinToWin()
+    local amount = Player.PlayerGui.ScreenGui.SpinToWin.Frame.Container.Spins.Count.Text
+    
+    if amount ~= "0" then
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("PlaySpinToWin"):FireServer()
+    
+    end
+    
+    task.wait(5)
+end
+
+local spinToWin = Instance.new("TextButton")
+spinToWin.Position = UDim2.new(0,1,0,147)
+spinToWin.Size = UDim2.new(0,140,0,20)
+spinToWin.BackgroundColor3 = Color3.fromRGB(70,70,70)
+spinToWin.BorderColor3 = Color3.new(1,1,1)
+spinToWin.ZIndex = 2
+spinToWin.Parent = CmdHandler3
+spinToWin.Text = "Redeem Spin-to-win"
+spinToWin.TextColor3 = Color3.fromRGB(250,250,250)
+spinToWin.TextScaled = true
+spinToWin.MouseButton1Click:Connect(function()
+    if spinToWinToggle then
+		spinToWinToggle = false
+		spinToWin.BackgroundColor3 = Color3.fromRGB(70,70,70)
 	else
-		giveGifts = true
-		giftGiver.BackgroundColor3 = Color3.new(0,1,1)
-		local Points = {Vector3.new(-8807, 23, 184),
-		    Vector3.new(-8807, 23, 207),
-		    Vector3.new(-8793, 23, 223),
-		    Vector3.new(-8765, 23, 229),
-		    Vector3.new(-8751, 23, 209),
-		    }
-        while giveGifts do
-            for i,v in pairs(Points) do
-                if giveGifts then
-                    Humanoid:MoveTo(v)
-                    task.wait(3.3)
-                    if i == 1 then
-                        task.wait(0.3)
-                    end
-                end
-            end
+		spinToWinToggle = true
+		spinToWin.BackgroundColor3 = Color3.new(0,1,1)
+        while spinToWinToggle do
+            redeemSpins()
 		end
     end
 end)
 
-local giftGiver2 = Instance.new("TextButton")
-giftGiver2.Position = UDim2.new(0,1,0,168)
-giftGiver2.Size = UDim2.new(0,140,0,20)
-giftGiver2.BackgroundColor3 = Color3.fromRGB(70,70,70)
-giftGiver2.BorderColor3 = Color3.new(1,1,1)
-giftGiver2.ZIndex = 2
-giftGiver2.Parent = CmdHandler3
-giftGiver2.Text = "Gift Giver 2"
-giftGiver2.TextColor3 = Color3.fromRGB(250,250,250)
-giftGiver2.TextScaled = true
-giftGiver2.MouseButton1Click:Connect(function()
-    if giveGifts2 then
-		giveGifts2 = false
-		giftGiver2.BackgroundColor3 = Color3.fromRGB(70,70,70)
+local autoSpin = Instance.new("TextButton")
+autoSpin.Position = UDim2.new(0,1,0,168)
+autoSpin.Size = UDim2.new(0,140,0,20)
+autoSpin.BackgroundColor3 = Color3.fromRGB(70,70,70)
+autoSpin.BorderColor3 = Color3.new(1,1,1)
+autoSpin.ZIndex = 2
+autoSpin.Parent = CmdHandler3
+autoSpin.Text = "Auto Spin-to-win"
+autoSpin.TextColor3 = Color3.fromRGB(250,250,250)
+autoSpin.TextScaled = true
+autoSpin.MouseButton1Click:Connect(function()
+    if autoSpinToggle then
+		autoSpin = false
+		autoSpin.BackgroundColor3 = Color3.fromRGB(70,70,70)
 	else
-		giveGifts2 = true
-		giftGiver2.BackgroundColor3 = Color3.new(0,1,1)
-		local Points = {Vector3.new(-8645, 23, 224),
-		    Vector3.new(-8621, 23, 238),
-		    Vector3.new(-8600, 23, 235),
-		    Vector3.new(-8584, 23, 208),
-		    Vector3.new(-8591, 23, 183),
-		    }
-        while giveGifts2 do
-            for i,v in pairs(Points) do
-                if giveGifts2 then
-                    Humanoid:MoveTo(v)
-                    task.wait(3.3)
-                    if i == 1 then
-                        task.wait(0.3)
-                    end
-                end
-            end
+		autoSpinToggle = true
+		autoSpin.BackgroundColor3 = Color3.new(0,1,1)
+        while autoSpinToggle do
+            autoSpinToWin()
 		end
     end
 end)

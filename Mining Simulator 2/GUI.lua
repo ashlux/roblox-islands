@@ -1959,7 +1959,7 @@ end)
 
 
 local function redeemSpins()
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin")
+    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin"):FireServer()
 
     game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("BuySpinToWin"):FireServer()
 
@@ -2013,7 +2013,7 @@ autoSpin.TextColor3 = Color3.fromRGB(250,250,250)
 autoSpin.TextScaled = true
 autoSpin.MouseButton1Click:Connect(function()
     if autoSpinToggle then
-		autoSpin = false
+		autoSpinToggle = false
 		autoSpin.BackgroundColor3 = Color3.fromRGB(70,70,70)
 	else
 		autoSpinToggle = true

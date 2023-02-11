@@ -112,7 +112,7 @@ end
 
 task.spawn(autoFactory)
 task.spawn(autoGetBoosts)
-task.spawn(redeemSping)
+task.spawn(redeemSpins)
 task.spawn(autoSpinToWin)
 
 teleportToWorld(whatWorld)

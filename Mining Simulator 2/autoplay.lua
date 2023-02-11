@@ -67,14 +67,17 @@ wait(1000)
 end
     
 local function redeemSpins()
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin")
+        while true do
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin")
 
-    game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("BuySpinToWin"):FireServer()
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("BuySpinToWin"):FireServer()
 
-    task.wait(300)
+            task.wait(300)
+        end
 end
 
 local function autoSpinToWin()
+        while true do
     local amount = Player.PlayerGui.ScreenGui.SpinToWin.Frame.Container.Spins.Count.Text
     
     if amount ~= "0" then
@@ -84,6 +87,7 @@ local function autoSpinToWin()
     end
     
     task.wait(5)
+            end
 end    
 
 local function teleportToWorld(world)

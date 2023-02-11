@@ -68,7 +68,7 @@ end
     
 local function redeemSpins()
         while true do
-            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin")
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClaimSpinToWin"):FireServer()
 
             game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("BuySpinToWin"):FireServer()
 

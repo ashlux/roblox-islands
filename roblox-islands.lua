@@ -2784,6 +2784,62 @@ Item32.Text = "Send items to Click"
 Item32.TextColor3 = Color3.fromRGB(250,250,250)
 Item32.TextScaled = true
 
+
+local function getHeldItem()
+    if Character:FindFirstChildWhichIsA("Tool") then
+        return Character:FindFirstChildWhichIsA("Tool")
+    else
+        task.wait()
+        return "Error"
+    end
+end
+
+local function dropItem()
+    local item = getHeldItem()
+    if item ~= "Error" then
+        
+        local args = {
+        [1] = {
+        ["player_tracking_category"] = "join_from_web",
+        ["tool"] = item,
+        ["amount"] = 1
+        }
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("CLIENT_DROP_TOOL_REQUEST"):InvokeServer(unpack(args))
+    
+    end
+end
+
+local dropHeld = Instance.new("TextButton")
+dropHeld.Position = UDim2.new(0,72,1,169)
+dropHeld.Size = UDim2.new(0,70,0,20)
+dropHeld.BackgroundColor3 = Color3.fromRGB(63,63,63)
+dropHeld.BorderSizePixel = 1
+dropHeld.ZIndex = 2
+dropHeld.Parent = Notification3
+dropHeld.Text = "Drop Held"
+dropHeld.TextColor3 = Color3.fromRGB(250,250,250)
+dropHeld.TextScaled = true
+dropHeld.MouseButton1Click:Connect(function()
+    if droppingHeld then
+        droppingHeld = false
+        dropHeld.BackgroundColor3 = Color3.fromRGB(63,63,63)
+        dropHeld.Text = "Drop Held"
+        dropHeld.TextColor3 = Color3.fromRGB(250,250,250)
+    else
+        droppingHeld = true
+        dropHeld.BackgroundColor3 = Color3.fromRGB(0,255,255)
+        dropHeld.Text = "Dropping Held"
+        dropHeld.TextColor3 = Color3.fromRGB(0,0,0)
+        while droppingHeld do
+            dropItem()
+        end
+    end
+end)
+
+
+
 local Treasure = Instance.new("TextButton")
 Treasure.Position = UDim2.new(0,71,1,22)
 Treasure.Size = UDim2.new(0,70,0,20)
@@ -3903,6 +3959,7 @@ Item87.Parent = N1
 Item87.Text = "Pick Berries"
 Item87.TextColor3 = Color3.fromRGB(250,250,250)
 Item87.TextScaled = true
+Item87.Visible = false
 
 local kiwiPicker = Instance.new("TextButton")
 kiwiPicker.Position = UDim2.new(0,1,1,85)

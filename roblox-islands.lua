@@ -1,5 +1,5 @@
 print("Loading")
-return
+
 repeat wait()
 until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
 local mouse = game.Players.LocalPlayer:GetMouse()
@@ -8,6 +8,8 @@ repeat wait() until mouse
 function loadModule(url)
 	return loadstring(game:HttpGet(url))()
 end
+
+return
 
 --load remote events--
 loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/remoteEvents.lua")

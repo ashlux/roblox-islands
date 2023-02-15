@@ -4,6 +4,9 @@ local Player = Players.LocalPlayer
 local Character = Player.Character
 local Humanoid = Character.Humanoid
 local Island = game.Workspace.Islands:GetChildren()[1]
+local Camera = game.Workspace.CurrentCamera
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
 
 local tween = nil
 
@@ -81,17 +84,59 @@ local function moveToRandomHarvestableCropByName(cropName)
     end
 end
 
-local function replantCrop(cropName, cframe)
-	local args = {
-		[1] = {
-			["upperBlock"] = false,
-			["cframe"] = cframe,
-			["player_tracking_category"] = "join_from_web",
-			["blockType"] = cropName
-		}
-	}
-	game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
-		.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+local function moveCamera(focus)
+    
+    if focus == "Humanoid" then
+        Camera.CameraSubject = Humanoid
+        Camera.CameraType = Enum.CameraType.Custom
+    elseif focus.Name:find("tree") then
+        Camera.CameraType = Enum.CameraType.Scriptable
+        Camera.CameraSubject = focus
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,5,5))
+    else
+        Camera.CameraType = Enum.CameraType.Scriptable
+        Camera.CameraSubject = focus
+        Camera.Focus = focus.CFrame
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,5,0), focus.Position)
+    end
+    
+end
+
+function clickScreen(area)
+    
+    local screenSize = Camera.ViewportSize
+   
+    if area == "middle" then
+        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, true, game, 1)
+        task.wait()
+        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, false, game, 1)
+    
+    elseif area == "corner" then
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+        
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+    end
+    
+end
+
+local function replantCrop(crop, cframe)
+    
+    moveCamera(crop)
+    task.wait()
+    clickScreen("middle")
+    task.wait()
+    moveCamera("Humanoid")
+    
+	--local args = {
+	--	[1] = {
+	--		["upperBlock"] = false,
+	--		["cframe"] = cframe,
+	--		["player_tracking_category"] = "join_from_web",
+	--		["blockType"] = cropName
+	--	}
+	--}
+	--game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
+	--	.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
 end
 
 local function sickleCrops(cropBlocks)
@@ -128,14 +173,14 @@ local function setSickleAndReplanting(value)
 end
 
 local function replantCropBlocks(cropBlocks)
-	task.spawn(function()
+	--task.spawn(function()
 		for i,cropBlock in pairs(cropBlocks or {}) do
 			if not Player:GetAttribute("sickleAndReplanting") then
 				return nil;
 			end
-			task.spawn(replantCrop, cropBlock.Name, cropBlock.CFrame)
+			replantCrop(cropBlock, cropBlock.CFrame)
 		end
-	end)
+	--end)
 end
 
 local function startSicklingAndReplanting(cropNameToHarvest)
@@ -169,24 +214,15 @@ local function sicklingAndDoNotReplant(cropNameToHarvest)
 end
 
 local function plantCropsOnce(cropNameToPlant)
+    
 	function plantCropOnDirt(cropNameToPlant, plantLocation)
 		for i,dirt in pairs(Island and Island.Blocks and Island.Blocks:GetChildren() or {}) do
 			if dirt.Name == plantLocation and Player:DistanceFromCharacter(dirt.Position) < 150 then
 				local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
                 local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
                 if not hitPart then
-					task.spawn(function()
-						local args = {
-							[1] = {
-								["upperBlock"] = false,
-								["cframe"] = CFrame.new((dirt.Position + Vector3.new(0,3,0)), (dirt.Position + Vector3.new(0,0,3))),
-								["player_tracking_category"] = "join_from_web",
-								["blockType"] = cropNameToPlant
-							}
-                        }
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged
-							.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
-                   end)
+                    replantCrop(dirt, dirt.CFrame)
+					
 			   end
 		   end
 	   end

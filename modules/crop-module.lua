@@ -178,7 +178,7 @@ local function replantCropBlocks(cropBlocks)
 			if not Player:GetAttribute("sickleAndReplanting") then
 				return nil;
 			end
-			replantCrop(cropBlock, cropBlock.CFrame)
+			task.spawn(replantCrop, cropBlock, cropBlock.CFrame)
 		end
 	end)
 end

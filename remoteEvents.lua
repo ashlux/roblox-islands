@@ -6,7 +6,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1065) or (game.PlaceId =
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 
-updates = "[Matt]: GUI Updated 2/14"
+updates = "[Matt]: I'm having to take out a lot of things.  I'll try and have it back up soon."
 
 StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 

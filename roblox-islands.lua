@@ -1879,7 +1879,6 @@ N0.Parent = CmdHandler7
 N0.Text = "Sickle Farm"
 N0.TextColor3 = Color3.fromRGB(2,2,2)
 N0.TextScaled = true
-N0.Visible = false
 
 local N3 = Instance.new("TextLabel")
 N3.Position = UDim2.new(0,0,0,85)
@@ -1894,7 +1893,7 @@ N3.TextScaled = true
 N3.Visible = false
 
 local N1 = Instance.new("TextLabel")
-N1.Position = UDim2.new(0,0,0,0)
+N1.Position = UDim2.new(0,0,0,90)
 N1.Size = UDim2.new(0,150,0,15)
 N1.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 N1.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -2303,7 +2302,6 @@ sickleButton.Parent = N0
 sickleButton.Text = "Sickle Farm"
 sickleButton.TextColor3 = Color3.fromRGB(250,250,250)
 sickleButton.TextScaled = true
-sickleButton.Visible = false
 
 
 sickleButton.MouseButton1Click:Connect(function()
@@ -2488,7 +2486,6 @@ plantCropButton.Parent = N0
 plantCropButton.Text = "Plant on nearby dirt"
 plantCropButton.TextColor3 = Color3.fromRGB(250,250,250)
 plantCropButton.TextScaled = true
-plantCropButton.Visible = false
 
 plantCropButton.MouseButton1Click:Connect(function()
     local cropToHarvest = cropSection.Text

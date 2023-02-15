@@ -12,8 +12,6 @@ end
 --load remote events--
 loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/remoteEvents.lua")
 
-return
-
 local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
 local cropModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/crop-module.lua")
@@ -1824,9 +1822,10 @@ N3.Parent = CmdHandler7
 N3.Text = "Fruit Farm"
 N3.TextColor3 = Color3.fromRGB(2,2,2)
 N3.TextScaled = true
+N3.Visible = false
 
 local N1 = Instance.new("TextLabel")
-N1.Position = UDim2.new(0,0,0,150)
+N1.Position = UDim2.new(0,0,0,0)
 N1.Size = UDim2.new(0,150,0,15)
 N1.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 N1.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -1846,6 +1845,7 @@ N2.Parent = CmdHandler7
 N2.Text = "Wilderness Islands"
 N2.TextColor3 = Color3.fromRGB(2,2,2)
 N2.TextScaled = true
+N2.Visible = false
 
 local CmdHandler3 = Instance.new("ScrollingFrame")
 CmdHandler3.Name = "CmdHandler3"
@@ -2461,6 +2461,7 @@ Item25.Parent = N1
 Item25.Text = "Auto-Mayo"
 Item25.TextColor3 = Color3.fromRGB(250,250,250)
 Item25.TextScaled = true
+Item25.Visible = false
 
 local Item2 = Instance.new("TextButton")
 Item2.Position = UDim2.new(0,0,1,1)
@@ -2891,6 +2892,7 @@ Item33.Parent = N1
 Item33.Text = "Collect Truffles"
 Item33.TextColor3 = Color3.fromRGB(250,250,250)
 Item33.TextScaled = true
+Item33.Visible = false
 
 local wildCrops = Instance.new("TextButton")
 wildCrops.Position = UDim2.new(0,72,1,22)
@@ -2962,6 +2964,7 @@ Item42.Parent = CmdHandler
 Item42.Text = "Machines >"
 Item42.TextColor3 = Color3.fromRGB(250,250,250)
 Item42.TextScaled = true
+Item42.Visible = false
 
 local Item43 = Instance.new("TextButton")
 Item43.Position = UDim2.new(0,71,1,64)
@@ -3217,6 +3220,7 @@ Item59.Parent = N1
 Item59.Text = "Cloth Loom"
 Item59.TextColor3 = Color3.fromRGB(250,250,250)
 Item59.TextScaled = true
+Item59.Visible = false
 
 local Item61 = Instance.new("TextButton")
 Item61.Position = UDim2.new(0,0,1,64)
@@ -3400,6 +3404,7 @@ Item70.Parent = N1
 Item70.Text = "Auto-Yak Butter"
 Item70.TextColor3 = Color3.fromRGB(250,250,250)
 Item70.TextScaled = true
+Item70.Visible = false
 
 local Item72 = Instance.new("TextButton")
 Item72.Position = UDim2.new(0,0,1,1)
@@ -3444,7 +3449,7 @@ Item75.Parent = Notification3
 Item75.Text = "Auto-Fish"
 Item75.TextColor3 = Color3.fromRGB(250,250,250)
 Item75.TextScaled = true
-item75.Visible = false
+Item75.Visible = false
 
 local depositHeld = Instance.new("TextButton")
 depositHeld.Position = UDim2.new(0,0,1,127)
@@ -3509,6 +3514,8 @@ presentBreaker.Parent = Notification3
 presentBreaker.Text = "Present Breaker"
 presentBreaker.TextColor3 = Color3.fromRGB(250,250,250)
 presentBreaker.TextScaled = true
+presentBreaker.Visible = false
+
 presentBreaker.MouseButton1Click:Connect(function()
     if breakingPresents then
         breakingPresents = false
@@ -3993,6 +4000,8 @@ kiwiPicker.Parent = N1
 kiwiPicker.Text = "Pirate Kiwi"
 kiwiPicker.TextColor3 = Color3.fromRGB(250,250,250)
 kiwiPicker.TextScaled = true
+kiwiPicker.Visible = false
+
 kiwiPicker.MouseButton1Click:Connect(function()
     if pickingKiwis then
         pickingKiwis = false
@@ -4017,6 +4026,7 @@ Item88.Parent = N1
 Item88.Text = "Composter"
 Item88.TextColor3 = Color3.fromRGB(250,250,250)
 Item88.TextScaled = true
+Item88.Visible = false
 
 local function NoclipLoop()
     if noClip == true and Player.Character ~= nil then
@@ -4856,7 +4866,7 @@ Item25.MouseButton1Click:Connect(function()
 							}
 						}
 
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						--game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						else
 					end
 				end
@@ -5416,7 +5426,7 @@ Item46.MouseButton1Click:Connect(function()
                     }
                 }
 
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(Pickup))
+                --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(Pickup))
                 end)
             end
         end
@@ -5780,7 +5790,7 @@ Item56.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 else    
                     local args = {
                         [1] = {
@@ -5789,7 +5799,7 @@ Item56.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 end
             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
                 local args = {
@@ -5860,7 +5870,7 @@ Item57.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 else    
                     local args = {
                         [1] = {
@@ -5869,7 +5879,7 @@ Item57.MouseButton1Click:Connect(function()
                         }
                     }
                     
-                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                 end
             elseif #StoneCutter.WorkerContents:GetChildren() == 0 then
                 local args = {
@@ -5940,7 +5950,7 @@ Item58.MouseButton1Click:Connect(function()
                                         }
                                     }
                     
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                                    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 else    
                                     local args = {
                                         [1] = {
@@ -5962,7 +5972,7 @@ Item58.MouseButton1Click:Connect(function()
                                         }
                                     }
                     
-                                    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                                    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                                 else    
                                     local args = {
                                         [1] = {
@@ -6044,7 +6054,7 @@ Item59.MouseButton1Click:Connect(function()
                         ["player_tracking_category"] = "join_from_web"
                         }
                         }
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                        --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                     elseif Loom.WorkerContents:FindFirstChild("woolWhite") then
                         wait()
                     else    
@@ -6464,7 +6474,7 @@ for _,itemport in pairs(Island.Blocks:GetChildren()) do
                     ["player_tracking_category"] = "join_from_web"
                     }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
             end
         end
     end
@@ -6578,7 +6588,7 @@ Item70.MouseButton1Click:Connect(function()
 							}
 						}
 
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						--game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						else
 					end
 				end
@@ -6630,7 +6640,7 @@ Item72.MouseButton1Click:Connect(function()
 							        ["player_tracking_category"] = "join_from_web"
 							        }
 							        }
-						            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						            --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						        end
 						    end
 					    end
@@ -6698,7 +6708,7 @@ Item73.MouseButton1Click:Connect(function()
 							["player_tracking_category"] = "join_from_web"
 							}
 							}
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+						--game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
 						    end
 						    end
 					    end
@@ -6843,7 +6853,7 @@ Item76.MouseButton1Click:Connect(function()
                 ["player_tracking_category"] = "join_from_web"
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
             end
             for i,content in pairs(smelter.WorkerContents:GetChildren()) do
                 local args = {
@@ -6852,7 +6862,7 @@ Item76.MouseButton1Click:Connect(function()
                 ["player_tracking_category"] = "join_from_web"
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
             end
         end
     end
@@ -7338,7 +7348,7 @@ Item88.MouseButton1Click:Connect(function()
                         ["tool"] = Composter.WorkerOutputContents.fertilizerBasic,
                         ["player_tracking_category"] = "join_from_web"
                         }}
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
+                        --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_TOOL_PICKUP_REQUEST:InvokeServer(unpack(args))
                     end
                 end
             end

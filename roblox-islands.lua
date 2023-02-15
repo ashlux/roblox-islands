@@ -2994,6 +2994,7 @@ Item46.Parent = Notification3
 Item46.Text = "Pickup Drops Aura"
 Item46.TextColor3 = Color3.fromRGB(250,250,250)
 Item46.TextScaled = true
+Item46.Visible = false
 
 local Item48 = Instance.new("TextButton")
 Item48.Position = UDim2.new(0,0,1,66)

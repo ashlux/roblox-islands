@@ -9,10 +9,10 @@ function loadModule(url)
 	return loadstring(game:HttpGet(url))()
 end
 
-return
-
 --load remote events--
 loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/remoteEvents.lua")
+
+return
 
 local treeModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/tree-module.lua")
 local fruitModule = loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/modules/fruit-module.lua")
@@ -270,7 +270,7 @@ function hitBlock(Block)
     ["pos"] = nil --[[Vector3]]
     }
     }
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 function digSpot(Spot)
@@ -436,7 +436,7 @@ local args = {
         ["blockType"] = Crop.Name
     }
 }
-game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
+--game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_PLACE_REQUEST:InvokeServer(unpack(args))
 end
 
 function sicklePlants(Crop)
@@ -571,7 +571,7 @@ function hitTree(tree)
 			["pos"] = nil
 		}
 	}
-	return game.ReplicatedStorage.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+	return --game.ReplicatedStorage.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 function halloweenShop(itemNumber, amount)
@@ -874,6 +874,9 @@ Copypaste.TextColor3 = Color3.fromRGB(250,250,250)
 Copypaste.TextScaled = true
 Copypaste.LayoutOrder = 10
 Copypaste.Parent = CmdHandler
+Copypaste.Visible = false
+
+
 Copypaste.MouseButton1Click:Connect(function()
     Copypaste.Text = "Loading"
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/copyPasteBuilds.lua'))()
@@ -892,6 +895,7 @@ Title.Parent = CmdHandler
 Title.Text = "Mob Farms >"
 Title.TextColor3 = Color3.fromRGB(250,250,250)
 Title.TextScaled = true
+Title.Visible = false
 
 local BowBoss = Instance.new("TextButton") -- not bowboss anymore. now Trees
 BowBoss.Position = UDim2.new(0,1,0,76)
@@ -904,6 +908,7 @@ BowBoss.Parent = CmdHandler
 BowBoss.Text = "Wood >"
 BowBoss.TextColor3 = Color3.fromRGB(250,250,250)
 BowBoss.TextScaled = true
+BowBoss.Visible = false
 
 local GUIs = Instance.new("TextButton")
 GUIs.Position = UDim2.new(0,1,0,51)
@@ -1807,6 +1812,7 @@ N0.Parent = CmdHandler7
 N0.Text = "Sickle Farm"
 N0.TextColor3 = Color3.fromRGB(2,2,2)
 N0.TextScaled = true
+N0.Visible = false
 
 local N3 = Instance.new("TextLabel")
 N3.Position = UDim2.new(0,0,0,85)
@@ -2228,6 +2234,9 @@ sickleButton.Parent = N0
 sickleButton.Text = "Sickle Farm"
 sickleButton.TextColor3 = Color3.fromRGB(250,250,250)
 sickleButton.TextScaled = true
+sickleButton.Visible = false
+
+
 sickleButton.MouseButton1Click:Connect(function()
     if sickleFarming then
         sickleFarming = false
@@ -2410,6 +2419,8 @@ plantCropButton.Parent = N0
 plantCropButton.Text = "Plant on nearby dirt"
 plantCropButton.TextColor3 = Color3.fromRGB(250,250,250)
 plantCropButton.TextScaled = true
+plantCropButton.Visible = false
+
 plantCropButton.MouseButton1Click:Connect(function()
     local cropToHarvest = cropSection.Text
     cropModule.stopSicklingAndReplanting()
@@ -2771,6 +2782,8 @@ blockPrinter.Parent = Notification3
 blockPrinter.Text = "Block Printer"
 blockPrinter.TextColor3 = Color3.fromRGB(250,250,250)
 blockPrinter.TextScaled = true
+blockPrinter.Visible = false
+
 blockPrinter.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/ashlux/roblox-islands/main/Useless-maybe/islands%20FillBlocks.lua'))()
 end)
@@ -2971,6 +2984,7 @@ Item44.Parent = Notification3
 Item44.Text = "Island Pickaxe Aura"
 Item44.TextColor3 = Color3.fromRGB(250,250,250)
 Item44.TextScaled = true
+Item44.Visible = false
 
 local Item45 = Instance.new("TextButton")
 Item45.Position = UDim2.new(0,0,1,45)
@@ -3235,7 +3249,7 @@ local function onInputBegan(input, gp)
                 ["pos"] = mouse.Target:FindFirstChild("Position")
                 }
                 }
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
                 end)
             end
         end
@@ -3259,6 +3273,8 @@ fastPick.Parent = Notification3
 fastPick.Text = "Fast Mining"
 fastPick.TextColor3 = Color3.fromRGB(250,250,250)
 fastPick.TextScaled = true
+fastPick.Visible = false
+
 fastPick.MouseButton1Click:Connect(function()
     if fastPickToggle then
         fastPickToggle = false
@@ -3428,6 +3444,7 @@ Item75.Parent = Notification3
 Item75.Text = "Auto-Fish"
 Item75.TextColor3 = Color3.fromRGB(250,250,250)
 Item75.TextScaled = true
+item75.Visible = false
 
 local depositHeld = Instance.new("TextButton")
 depositHeld.Position = UDim2.new(0,0,1,127)
@@ -3541,6 +3558,7 @@ Item79.Parent = Notification3
 Item79.Text = "Catch Spirits"
 Item79.TextColor3 = Color3.fromRGB(250,250,250)
 Item79.TextScaled = true
+Item79.Visible = false
 
 local Item80 = Instance.new("TextButton")
 Item80.Position = UDim2.new(0,1,0,222)
@@ -3929,6 +3947,7 @@ Item84.Parent = CmdHandler
 Item84.Text = "Mining >"
 Item84.TextColor3 = Color3.fromRGB(250,250,250)
 Item84.TextScaled = true
+Item84.Visible = false
 
 local Item85 = Instance.new("TextButton")
 Item85.Position = UDim2.new(0,0,1,1)
@@ -5351,7 +5370,7 @@ Item44.MouseButton1Click:Connect(function()
                 }
             }
 
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
             end
         end
         else
@@ -5366,7 +5385,7 @@ Item44.MouseButton1Click:Connect(function()
                     ["pos"] = nil --[[Vector3]]
                 }
             }
-            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
             end
         end
         end
@@ -6963,7 +6982,7 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
     ["norm"] = nil --[[Vector3]],
     ["pos"] = nil --[[Vector3]]
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
     until
     v:FindFirstChild("1") == nil
     end
@@ -7016,7 +7035,7 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
     ["norm"] = nil --[[Vector3]],
     ["pos"] = nil --[[Vector3]]
     }}
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
     until
     v:FindFirstChild("1") == nil
     end
@@ -7091,6 +7110,8 @@ ElectriteMining.Parent = Notification11
 ElectriteMining.Text = "Electrite"
 ElectriteMining.TextColor3 = Color3.fromRGB(250,250,250)
 ElectriteMining.TextScaled = true
+ElectriteMining.Visible = false
+
 ElectriteMining.MouseButton1Click:Connect(function()
     if Toggled85 then
         Toggled85 = false
@@ -7142,7 +7163,7 @@ ElectriteMining.MouseButton1Click:Connect(function()
                         ["norm"] = nil --[[Vector3]],
                         ["pos"] = nil --[[Vector3]]
                         }}
-                        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                        --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
                         Continue = Continue + 1
                         until
                         v:FindFirstChild("1") == nil or Continue > 20 or Toggled85 == false

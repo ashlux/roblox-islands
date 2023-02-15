@@ -46,6 +46,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local TS = game:GetService('TweenService')
 local HttpService = game:GetService("HttpService")
 local uis = game:GetService("UserInputService")
+local Camera = game.Workspace.CurrentCamera
 
 local torso = Player.Character.LowerTorso
 local flying = false
@@ -535,6 +536,28 @@ function withdrawFromChest(chest)
     end
 end
 
+local function onInputBegan(input, gp)
+    
+    if gp then return end -- if clicking chat
+    
+    if input.KeyCode == Enum.KeyCode.P then
+        STOPIT = true
+    end
+    
+end
+
+local function onInputEnd(input, gp)
+    if gp then wait() end
+    
+    if input.KeyCode == Enum.KeyCode.P then
+        STOPIT = false
+    end
+end
+
+clicks = uis.InputBegan:Connect(onInputBegan)
+unclicks = uis.InputEnded:Connect(onInputEnd)
+
+
 function getTrees()
 	local trees = {}
 	for k,v in pairs(Island.Blocks:GetChildren()) do
@@ -559,16 +582,63 @@ function getTrees()
 	return trees
 end
 
+local function moveCamera(focus)
+    
+    if focus == "Humanoid" then
+        Camera.CameraSubject = Humanoid
+        Camera.CameraType = Enum.CameraType.Custom
+    elseif focus.Name:find("tree") then
+        Camera.CameraType = Enum.CameraType.Scriptable
+        Camera.CameraSubject = focus
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,5,5))
+    else
+        Camera.CameraType = Enum.CameraType.Scriptable
+        Camera.CameraSubject = focus
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,0,5))
+    end
+    
+end
+
+function clickScreen(area)
+    
+    local screenSize = Camera.ViewportSize
+    if area == "middle" then
+        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, true, game, 1)
+        task.wait(0.1)
+        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, false, game, 1)
+    elseif area == "corner" then
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+        
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+    end
+    
+end
+
 function hitTree(tree)
-	local args = {
-		[1] = {
-			["player_tracking_category"] = "join_from_web",
-			["part"] = tree:FindFirstChild("trunk"),
-			["block"] = tree,
-			["norm"] = nil,
-			["pos"] = nil
-		}
-	}
+    
+    if STOPIT == true then return end
+    
+    local timeout = 0
+    moveCamera(tree)
+    
+    repeat 
+        clickScreen("middle") 
+        timeout = timeout + 1 
+        wait() 
+    until not tree.Parent or timeout == 100 or STOPIT == true
+    
+    moveCamera("Humanoid")
+    
+    
+	--local args = {
+	--	[1] = {
+	--		["player_tracking_category"] = "join_from_web",
+	--		["part"] = tree:FindFirstChild("trunk"),
+	--		["block"] = tree,
+	--		["norm"] = nil,
+	--		["pos"] = nil
+	--	}
+	--}
 	return --game.ReplicatedStorage.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
@@ -634,8 +704,8 @@ Background5.Parent = Background
 Background5.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Background5.BorderSizePixel = 0
 Background5.BorderColor3 = Color3.new(1,0,1)
-Background5.Position = UDim2.new(1, 0, 0.3, 0)
-Background5.Size = UDim2.new(0, 150, 0, 125)
+Background5.Position = UDim2.new(1, 0, 0.1, 0)
+Background5.Size = UDim2.new(0, 150, 0, 180)
 Background5.Active = true
 Background5.Visible = false
 
@@ -906,7 +976,6 @@ BowBoss.Parent = CmdHandler
 BowBoss.Text = "Wood >"
 BowBoss.TextColor3 = Color3.fromRGB(250,250,250)
 BowBoss.TextScaled = true
-BowBoss.Visible = false
 
 local GUIs = Instance.new("TextButton")
 GUIs.Position = UDim2.new(0,1,0,51)
@@ -1880,7 +1949,7 @@ CmdHandler5.BackgroundTransparency = 1.000
 CmdHandler5.BorderSizePixel = 0
 CmdHandler5.AutomaticCanvasSize = "Y"
 CmdHandler5.Position = UDim2.new(0, 1, 0, 1)
-CmdHandler5.Size = UDim2.new(0, 148, 0, 165)
+CmdHandler5.Size = UDim2.new(1, 0, 1, 0)
 CmdHandler5.ScrollBarThickness = 8
 
 local CmdHandler9 = Instance.new("ScrollingFrame")
@@ -3118,6 +3187,9 @@ cherryWood.MouseButton1Click:Connect(function()
         cherryWood.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled38 == true do
+            
+            if STOPIT == true then firesignal(cherryWood.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -3160,6 +3232,9 @@ allWoods.MouseButton1Click:Connect(function()
         allWoods.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while allWoods1 == true do
+            
+            if STOPIT == true then firesignal(allWoods.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -3174,6 +3249,18 @@ allWoods.MouseButton1Click:Connect(function()
         end
     end
 end)
+
+local pressPNotification = Instance.new("TextLabel")
+pressPNotification.Position = UDim2.new(0,0,1,105)
+pressPNotification.Size = UDim2.new(0,140,0,50)
+pressPNotification.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
+pressPNotification.BorderColor3 = Color3.fromRGB(25, 25, 25)
+pressPNotification.ZIndex = 2
+pressPNotification.Parent = Notification8
+pressPNotification.Text = "Press \"P\" to stop the wood farms"
+pressPNotification.TextColor3 = Color3.fromRGB(2,2,2)
+pressPNotification.TextScaled = true
+
 
 local Item56 = Instance.new("TextButton")
 Item56.Position = UDim2.new(0,0,1,43)
@@ -3233,40 +3320,6 @@ Item61.Parent = Notification3
 Item61.Text = "Catch Entities"
 Item61.TextColor3 = Color3.fromRGB(250,250,250)
 Item61.TextScaled = true
-
-
-local function onInputBegan(input, gp)
-    
-    if gp then return end -- if clicking chat
-    
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        SMACKING = true
-        while SMACKING do
-            task.wait()
-            if mouse.Target ~= nil then
-                pcall(function()
-                local args = {
-                [1] = {
-                ["player_tracking_category"] = "join_from_web",
-                ["part"] = mouse.Target,
-                ["block"] = mouse.Target,
-                ["norm"] = mouse.Target:FindFirstChild("Position"),
-                ["pos"] = mouse.Target:FindFirstChild("Position")
-                }
-                }
-                --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-                end)
-            end
-        end
-    end
-end
-
-local function onInputEnd(input, gp)
-    if gp then wait() end
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        SMACKING = false
-    end
-end
 
 local fastPick = Instance.new("TextButton")
 fastPick.Position = UDim2.new(0,0,1,85)
@@ -5588,6 +5641,9 @@ Item50.MouseButton1Click:Connect(function()
         Item50.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled33 == true do
+            
+            if STOPIT == true then firesignal(Item50.MouseButton1Click) return end
+                
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -5620,6 +5676,9 @@ Item51.MouseButton1Click:Connect(function()
         Item51.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled34 == true do
+            
+            if STOPIT == true then firesignal(Item51.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -5652,6 +5711,9 @@ Item52.MouseButton1Click:Connect(function()
         Item52.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled35 == true do
+            
+            if STOPIT == true then firesignal(Item52.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -5684,6 +5746,9 @@ Item53.MouseButton1Click:Connect(function()
         Item53.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled36 == true do
+            
+            if STOPIT == true then firesignal(Item53.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -5716,6 +5781,9 @@ Item54.MouseButton1Click:Connect(function()
         Item54.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled37 == true do
+            
+            if STOPIT == true then firesignal(Item54.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do
@@ -5748,6 +5816,9 @@ Item55.MouseButton1Click:Connect(function()
         Item55.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled38 == true do
+            
+            if STOPIT == true then firesignal(Item55.MouseButton1Click) return end
+            
             wait()
             local trees = getTrees()
             for k,v in pairs(trees) do

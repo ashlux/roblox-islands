@@ -173,14 +173,14 @@ local function setSickleAndReplanting(value)
 end
 
 local function replantCropBlocks(cropBlocks)
-	task.spawn(function()
+
 		for i,cropBlock in pairs(cropBlocks or {}) do
 			if not Player:GetAttribute("sickleAndReplanting") then
 				return nil;
 			end
-			task.spawn(replantCrop, cropBlock, cropBlock.CFrame)
+			replantCrop(cropBlock, cropBlock.CFrame)
 		end
-	end)
+
 end
 
 local function startSicklingAndReplanting(cropNameToHarvest)
@@ -222,7 +222,7 @@ local function plantCropsOnce(cropNameToPlant)
                 local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
                 if not hitPart then
                     
-                    task.spawn(replantCrop, dirt, dirt.CFrame)
+                    replantCrop(dirt, dirt.CFrame)
 					
 			   end
 		   end

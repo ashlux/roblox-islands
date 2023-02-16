@@ -259,19 +259,6 @@ function getVoidRocks()
     return Rocks
 end
 
-function hitBlock(Block)
-    local args = {
-    [1] = {
-    ["player_tracking_category"] = "join_from_web",
-    ["part"] = Block,
-    ["block"] = Block,
-    ["norm"] = nil --[[Vector3]],
-    ["pos"] = nil --[[Vector3]]
-    }
-    }
-    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
-end
-
 function digSpot(Spot)
     local args = {
     [1] = {
@@ -488,15 +475,6 @@ function getAllCrops(Crop)
 	return crops
 end
 
-if Island.Blocks then
-Island.Blocks.ChildRemoved:Connect(function(child)
-    if sickleFarming then
-        wait(0.5)
-        rePlant(child)
-    end
-end)
-end
-
 function getIslandEntities()
     local Entities = {}
     for i,v in pairs(Island.Entities:GetChildren()) do
@@ -594,7 +572,8 @@ local function moveCamera(focus)
     else
         Camera.CameraType = Enum.CameraType.Scriptable
         Camera.CameraSubject = focus
-        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,0,5))
+        Camera.Focus = focus.CFrame
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,4,0), focus.Position)
     end
     
 end
@@ -640,6 +619,32 @@ function hitTree(tree)
 	--	}
 	--}
 	return --game.ReplicatedStorage.rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+end
+
+function hitBlock(Block)
+    
+    if STOPIT == true then return end
+    
+    local timeout = 0
+    moveCamera(Block)
+    
+    repeat 
+        clickScreen("middle") 
+        timeout = timeout + 1 
+        wait() 
+    until not Block.Parent or timeout == 100 or STOPIT == true
+    
+    
+    --local args = {
+    --[1] = {
+    --["player_tracking_category"] = "join_from_web",
+    --["part"] = Block,
+    --["block"] = Block,
+    --["norm"] = nil --[[Vector3]],
+    --["pos"] = nil --[[Vector3]]
+    --}
+    --}
+    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 function halloweenShop(itemNumber, amount)
@@ -694,7 +699,7 @@ Background4.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Background4.BorderSizePixel = 0
 Background4.BorderColor3 = Color3.new(1,0,1)
 Background4.Position = UDim2.new(1, 0, 0.1, 0)
-Background4.Size = UDim2.new(0, 150, 0, 170)
+Background4.Size = UDim2.new(0, 180, 0, 250)
 Background4.Active = true
 Background4.Visible = false
 
@@ -1924,7 +1929,7 @@ CmdHandler3.BackgroundTransparency = 1.000
 CmdHandler3.BorderSizePixel = 0
 CmdHandler3.AutomaticCanvasSize = "Y"
 CmdHandler3.Position = UDim2.new(0, 1, 0, 1)
-CmdHandler3.Size = UDim2.new(0, 148, 0, 165)
+CmdHandler3.Size = UDim2.new(1, 0, 1, 0)
 CmdHandler3.ScrollBarThickness = 8
 
 local CmdHandler4 = Instance.new("ScrollingFrame")
@@ -1965,7 +1970,7 @@ CmdHandler9.ScrollBarThickness = 8
 
 local Notification3 = Instance.new("TextLabel")
 Notification3.Position = UDim2.new(0,0,0,0)
-Notification3.Size = UDim2.new(0,150,0,15)
+Notification3.Size = UDim2.new(1,0,.1,0)
 Notification3.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification3.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification3.ZIndex = 2
@@ -1986,8 +1991,8 @@ Notification4.TextColor3 = Color3.fromRGB(2,2,2)
 Notification4.TextScaled = true
 
 local Notification5 = Instance.new("TextLabel")
-Notification5.Size = UDim2.new(0,150,0,15)
-Notification5.Position = UDim2.new(0,0,0,300)
+Notification5.Size = UDim2.new(1,0,0.1,0)
+Notification5.Position = UDim2.new(0,0,1,0)
 Notification5.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification5.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification5.ZIndex = 2
@@ -2059,9 +2064,14 @@ Notification11.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification11.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification11.ZIndex = 2
 Notification11.Parent = CmdHandler9
-Notification11.Text = "WildernessIslands"
+Notification11.Text = "Mining"
 Notification11.TextColor3 = Color3.fromRGB(2,2,2)
 Notification11.TextScaled = true
+
+N11grid = Instance.new("UIGridLayout")
+N11grid.CellPadding = UDim2.new(0,0,0,0)
+N11grid.CellSize = UDim2.new(1,0,1.5,0)
+N11grid.Parent = Notification11
 
 local Item4 = Instance.new("TextButton")
 Item4.Position = UDim2.new(0,0,1,1)
@@ -2507,8 +2517,8 @@ Item23.TextColor3 = Color3.fromRGB(250,250,250)
 Item23.TextScaled = true
 
 local Item24 = Instance.new("TextButton")
-Item24.Position = UDim2.new(0,71,1,1)
-Item24.Size = UDim2.new(0,70,0,20)
+Item24.Position = UDim2.new(.5,0,1,1)
+Item24.Size = UDim2.new(0.5,0,1,0)
 Item24.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item24.BorderSizePixel = 1
 Item24.ZIndex = 2
@@ -2530,8 +2540,8 @@ Item25.TextScaled = true
 Item25.Visible = false
 
 local Item2 = Instance.new("TextButton")
-Item2.Position = UDim2.new(0,0,1,1)
-Item2.Size = UDim2.new(0,70,0,20)
+Item2.Position = UDim2.new(0.01,0,1,0)
+Item2.Size = UDim2.new(0.5,0,1,0)
 Item2.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item2.BorderSizePixel = 1
 Item2.ZIndex = 2
@@ -2856,8 +2866,8 @@ blockPrinter.MouseButton1Click:Connect(function()
 end)
 
 local Item32 = Instance.new("TextButton")
-Item32.Position = UDim2.new(0,0,1,169)
-Item32.Size = UDim2.new(0,70,0,20)
+Item32.Position = UDim2.new(0,0,5,0)
+Item32.Size = UDim2.new(1,0,1,0)
 Item32.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item32.BorderSizePixel = 1
 Item32.ZIndex = 2
@@ -2894,8 +2904,8 @@ local function dropItem()
 end
 
 local dropHeld = Instance.new("TextButton")
-dropHeld.Position = UDim2.new(0,72,1,169)
-dropHeld.Size = UDim2.new(0,70,0,20)
+dropHeld.Position = UDim2.new(0.5,0,6,0)
+dropHeld.Size = UDim2.new(0.5,0,1,0)
 dropHeld.BackgroundColor3 = Color3.fromRGB(63,63,63)
 dropHeld.BorderSizePixel = 1
 dropHeld.ZIndex = 2
@@ -2923,8 +2933,8 @@ end)
 
 
 local Treasure = Instance.new("TextButton")
-Treasure.Position = UDim2.new(0,71,1,22)
-Treasure.Size = UDim2.new(0,70,0,20)
+Treasure.Position = UDim2.new(0.5,0,1,22)
+Item24.Size = UDim2.new(0.5,0,1,0)
 Treasure.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Treasure.BorderSizePixel = 1
 Treasure.ZIndex = 2
@@ -3034,8 +3044,8 @@ Item42.TextScaled = true
 Item42.Visible = false
 
 local Item43 = Instance.new("TextButton")
-Item43.Position = UDim2.new(0,71,1,64)
-Item43.Size = UDim2.new(0,70,0,20)
+Item43.Position = UDim2.new(0.5,0,2,0)
+Item43.Size = UDim2.new(0.5,0,1,0)
 Item43.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item43.BorderSizePixel = 1
 Item43.ZIndex = 2
@@ -3050,11 +3060,10 @@ Item44.Size = UDim2.new(0,70,0,20)
 Item44.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item44.BorderSizePixel = 1
 Item44.ZIndex = 2
-Item44.Parent = Notification3
+Item44.Parent = Notification11
 Item44.Text = "Island Pickaxe Aura"
 Item44.TextColor3 = Color3.fromRGB(250,250,250)
 Item44.TextScaled = true
-Item44.Visible = false
 
 local Item45 = Instance.new("TextButton")
 Item45.Position = UDim2.new(0,0,1,45)
@@ -3308,8 +3317,8 @@ Item59.TextScaled = true
 Item59.Visible = false
 
 local Item61 = Instance.new("TextButton")
-Item61.Position = UDim2.new(0,0,1,64)
-Item61.Size = UDim2.new(0,70,0,20)
+Item61.Position = UDim2.new(0,0,2,0)
+Item61.Size = UDim2.new(0.5,0,1,0)
 Item61.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item61.BorderSizePixel = 1
 Item61.ZIndex = 2
@@ -3379,8 +3388,8 @@ Item64.TextColor3 = Color3.fromRGB(250,250,250)
 Item64.TextScaled = true
 
 local Item65 = Instance.new("TextButton")
-Item65.Position = UDim2.new(0,71,1,85)
-Item65.Size = UDim2.new(0,70,0,20)
+Item65.Position = UDim2.new(0.5,0,3,0)
+Item65.Size = UDim2.new(0.5,0,1,0)
 Item65.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item65.BorderSizePixel = 1
 Item65.ZIndex = 2
@@ -3503,8 +3512,8 @@ Item75.TextScaled = true
 Item75.Visible = false
 
 local depositHeld = Instance.new("TextButton")
-depositHeld.Position = UDim2.new(0,0,1,127)
-depositHeld.Size = UDim2.new(0,140,0,20)
+depositHeld.Position = UDim2.new(0,0,4,0)
+depositHeld.Size = UDim2.new(1,0,1,0)
 depositHeld.BackgroundColor3 = Color3.fromRGB(63,63,63)
 depositHeld.BorderSizePixel = 1
 depositHeld.ZIndex = 2
@@ -3529,8 +3538,8 @@ depositHeld.MouseButton1Click:Connect(function()
 end)
 
 local presentOpener = Instance.new("TextButton")
-presentOpener.Position = UDim2.new(0,71,1,106)
-presentOpener.Size = UDim2.new(0,70,0,20)
+presentOpener.Position = UDim2.new(0,0,3,0)
+presentOpener.Size = UDim2.new(0.5,0,1,0)
 presentOpener.BackgroundColor3 = Color3.fromRGB(63,63,63)
 presentOpener.BorderSizePixel = 1
 presentOpener.ZIndex = 2
@@ -4005,7 +4014,6 @@ Item84.Parent = CmdHandler
 Item84.Text = "Mining >"
 Item84.TextColor3 = Color3.fromRGB(250,250,250)
 Item84.TextScaled = true
-Item84.Visible = false
 
 local Item85 = Instance.new("TextButton")
 Item85.Position = UDim2.new(0,0,1,1)
@@ -5421,32 +5429,17 @@ Item44.MouseButton1Click:Connect(function()
         if Island ~= "" then
         for i,v in pairs(Island.Blocks:GetChildren()) do
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 23 and v:FindFirstChild("CollisionBoxes") and v:FindFirstChild("1") then
-            local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = v:FindFirstChild("1"),
-                    ["block"] = v,
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-
-            --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+            
+            hitBlock(v)
+            
             end
         end
         else
         for i,v in pairs(game.Workspace.WildernessBlocks:GetChildren()) do
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 23 and v:FindFirstChild("RockStage") and v:FindFirstChild("1") then
-            local args = {
-                [1] = {
-                    ["player_tracking_category"] = "join_from_web",
-                    ["part"] = v:FindFirstChild("1"),
-                    ["block"] = v,
-                    ["norm"] = nil --[[Vector3]],
-                    ["pos"] = nil --[[Vector3]]
-                }
-            }
-            --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                
+                hitBlock(v)
+                
             end
         end
         end
@@ -7023,20 +7016,15 @@ Item85.MouseButton1Click:Connect(function()
         Item85.BackgroundColor3 = Color3.fromRGB(55,55,55)
         Item85.Text = "Buffalkor Island"
         Item85.TextColor3 = Color3.new(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        unFloat()
         cancelTween()
     else
         Toggled74 = true
         Item85.BackgroundColor3 = Color3.new(0,255,255)
         Item85.Text = "Mining!"
         Item85.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        local YSpeed = 0
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
         POs = Vector3.new(1584, 384, 107)
-        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(1211, 385, 115))
         wait(1)
         while Toggled74 == true do
             wait()
@@ -7054,16 +7042,9 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
         wait(Time - 2)
     end
     repeat
-    local args = {[1] = {
-    ["player_tracking_category"] = "join_from_web",
-    ["part"] = v:FindFirstChild("1"),
-    ["block"] = v,
-    ["norm"] = nil --[[Vector3]],
-    ["pos"] = nil --[[Vector3]]
-    }}
-    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+        hitBlock(v)
     until
-    v:FindFirstChild("1") == nil
+        v:FindFirstChild("1") == nil
     end
 end
 end
@@ -7077,18 +7058,14 @@ Item86.MouseButton1Click:Connect(function()
         Item86.BackgroundColor3 = Color3.fromRGB(55,55,55)
         Item86.Text = "Diamond Island"
         Item86.TextColor3 = Color3.new(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        unFloat()
         cancelTween()
     else
         Toggled75 = true
         Item86.BackgroundColor3 = Color3.new(0,255,255)
         Item86.Text = "Mining!"
         Item86.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        local YSpeed = 0
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
         POs = Vector3.new(2752, 285, 1196)
         wait(1)
         while Toggled75 == true do
@@ -7107,16 +7084,9 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
         wait(Time - 2)
     end
     repeat
-    local args = {[1] = {
-    ["player_tracking_category"] = "join_from_web",
-    ["part"] = v:FindFirstChild("1"),
-    ["block"] = v,
-    ["norm"] = nil --[[Vector3]],
-    ["pos"] = nil --[[Vector3]]
-    }}
-    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+        hitBlock()
     until
-    v:FindFirstChild("1") == nil
+        v:FindFirstChild("1") == nil
     end
 end
 end
@@ -7149,7 +7119,7 @@ VoidMining.MouseButton1Click:Connect(function()
         VoidMining.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         local Continue = 0
-        pickingPlants = true
+        --pickingPlants = true
         --coroutine.wrap(function()
         --    while pickingPlants do
         --        task.wait()
@@ -7169,7 +7139,7 @@ VoidMining.MouseButton1Click:Connect(function()
                         equipPick()
                         hitBlock(v)
                     else
-                        equipShovel()
+                        --equipShovel() -- not nessicary
                         digSpot(v)
                     end
                 end
@@ -7230,19 +7200,8 @@ ElectriteMining.MouseButton1Click:Connect(function()
                             wait(Time - 2)
                         end
                         repeat
-                        if Pickaxe then
-                            Pickaxe.Parent = Character
-                            elseif  AltPickaxe then
-                            AltPickaxe.Parent = Character
-                        end
-                        local args = {[1] = {
-                        ["player_tracking_category"] = "join_from_web",
-                        ["part"] = v:FindFirstChild("1"),
-                        ["block"] = v,
-                        ["norm"] = nil --[[Vector3]],
-                        ["pos"] = nil --[[Vector3]]
-                        }}
-                        --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
+                        equipPick()
+                        hitBlock(v)
                         Continue = Continue + 1
                         until
                         v:FindFirstChild("1") == nil or Continue > 20 or Toggled85 == false
@@ -7270,18 +7229,14 @@ SnowMining.MouseButton1Click:Connect(function()
         SnowMining.BackgroundColor3 = Color3.fromRGB(55,55,55)
         SnowMining.Text = "Snow"
         SnowMining.TextColor3 = Color3.new(1,1,1)
-        Character.HumanoidRootPart:FindFirstChild("BodyVelocity"):Destroy()
+        unFloat()
         cancelTween()
     else
         Toggled86 = true
         SnowMining.BackgroundColor3 = Color3.new(0,255,255)
         SnowMining.Text = "Mining!"
         SnowMining.TextColor3 = Color3.fromRGB(0,0,0)
-        local BV = Instance.new("BodyVelocity")
-        local YSpeed = 0
-        BV.Velocity = Vector3.new(0,0,0)
-        BV.Parent = Character.HumanoidRootPart
-        BV.MaxForce = Vector3.new(0,math.huge,0)
+        Float()
         local Continue = 0
         wait(1)
         while Toggled86 == true do
@@ -7299,10 +7254,11 @@ SnowMining.MouseButton1Click:Connect(function()
                             tween:Play()
                             wait(Time - 2)
                         end
+                        local shovelType = getShovel()
                         repeat
                             local args = {
                             [1] = {
-                            ["shovelType"] = "shovelStone",
+                            ["shovelType"] = shovelType,
                             ["block"] = v
                             }}
                             game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_21:InvokeServer(unpack(args))
@@ -7426,8 +7382,8 @@ Item88.MouseButton1Click:Connect(function()
 end)
 
 local BFly = Instance.new("TextButton")
-BFly.Position = UDim2.new(0,71,1,148)
-BFly.Size = UDim2.new(0,70,0,20)
+BFly.Position = UDim2.new(0,0,6,0)
+BFly.Size = UDim2.new(0.5,0,1,0)
 BFly.BackgroundColor3 = Color3.fromRGB(63,63,63)
 BFly.BorderSizePixel = 1
 BFly.ZIndex = 2

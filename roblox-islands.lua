@@ -634,7 +634,7 @@ function hitBlock(Block)
         wait() 
     until not Block.Parent or timeout == 100 or STOPIT == true
     
-    
+    moveCamera("Humanoid")
     --local args = {
     --[1] = {
     --["player_tracking_category"] = "join_from_web",
@@ -1970,7 +1970,7 @@ CmdHandler9.ScrollBarThickness = 8
 
 local Notification3 = Instance.new("TextLabel")
 Notification3.Position = UDim2.new(0,0,0,0)
-Notification3.Size = UDim2.new(1,0,.1,0)
+Notification3.Size = UDim2.new(.95,0,.1,0)
 Notification3.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification3.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification3.ZIndex = 2
@@ -1980,8 +1980,8 @@ Notification3.TextColor3 = Color3.fromRGB(2,2,2)
 Notification3.TextScaled = true
 
 local Notification4 = Instance.new("TextLabel")
-Notification4.Position = UDim2.new(0,0,0,550)
-Notification4.Size = UDim2.new(0,150,0,15)
+Notification4.Position = UDim2.new(0,0,2,0)
+Notification4.Size = UDim2.new(.95,0,.1,0)
 Notification4.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification4.BorderColor3 = Color3.fromRGB(25, 25, 25)
 Notification4.ZIndex = 2
@@ -1991,7 +1991,7 @@ Notification4.TextColor3 = Color3.fromRGB(2,2,2)
 Notification4.TextScaled = true
 
 local Notification5 = Instance.new("TextLabel")
-Notification5.Size = UDim2.new(1,0,0.1,0)
+Notification5.Size = UDim2.new(.95,0,.1,0)
 Notification5.Position = UDim2.new(0,0,1,0)
 Notification5.BackgroundColor3 = Color3.fromRGB(25, 200, 200)
 Notification5.BorderColor3 = Color3.fromRGB(25, 25, 25)
@@ -2001,16 +2001,16 @@ Notification5.Text = "Shop Stuff"
 Notification5.TextColor3 = Color3.fromRGB(2,2,2)
 Notification5.TextScaled = true
 
-local BottomOfMisc = Instance.new("TextLabel") -- Bottom of Misc
-BottomOfMisc.Position = UDim2.new(0,0,0,700)
-BottomOfMisc.Size = UDim2.new(0,120,0,15)
-BottomOfMisc.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-BottomOfMisc.BorderColor3 = Color3.fromRGB(25, 25, 25)
-BottomOfMisc.Parent = CmdHandler3
-BottomOfMisc.ZIndex = 2
-BottomOfMisc.Text = ""
-BottomOfMisc.TextColor3 = Color3.fromRGB(2,2,2)
-BottomOfMisc.TextScaled = true
+--local BottomOfMisc = Instance.new("TextLabel") -- Bottom of Misc
+--BottomOfMisc.Position = UDim2.new(0,0,0,700)
+--BottomOfMisc.Size = UDim2.new(0,120,0,15)
+--BottomOfMisc.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+--BottomOfMisc.BorderColor3 = Color3.fromRGB(25, 25, 25)
+--BottomOfMisc.Parent = CmdHandler3
+--BottomOfMisc.ZIndex = 2
+--BottomOfMisc.Text = ""
+--BottomOfMisc.TextColor3 = Color3.fromRGB(2,2,2)
+--BottomOfMisc.TextScaled = true
 
 local Notification6 = Instance.new("TextLabel")
 Notification6.Position = UDim2.new(0,0,0,0)
@@ -2262,8 +2262,8 @@ Tests.TextColor3 = Color3.fromRGB(250,250,250)
 Tests.TextScaled = true
 
 local Item22 = Instance.new("TextButton")
-Item22.Position = UDim2.new(0,0,1,1)
-Item22.Size = UDim2.new(0,70,0,20)
+Item22.Position = UDim2.new(0,0,1,0)
+Item22.Size = UDim2.new(0.5,0,1,0)
 Item22.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item22.BorderSizePixel = 0
 Item22.ZIndex = 2
@@ -2551,8 +2551,8 @@ Item2.TextColor3 = Color3.fromRGB(250,250,250)
 Item2.TextScaled = true
 
 infos = Instance.new("TextLabel")
-infos.Position = UDim2.new(0,1,1,1)
-infos.Size = UDim2.new(0,70,0,40)
+infos.Position = UDim2.new(0,0,1,0)
+infos.Size = UDim2.new(0.5,0,2,0)
 infos.BackgroundColor3 = Color3.fromRGB(0,0,0)
 infos.BorderSizePixel = 1
 infos.ZIndex = 2
@@ -2562,8 +2562,8 @@ infos.TextColor3 = Color3.fromRGB(250,250,250)
 infos.TextScaled = true
 
 fillAmount = Instance.new("TextBox")
-fillAmount.Position = UDim2.new(0,71,1,1)
-fillAmount.Size = UDim2.new(0,70,0,20)
+fillAmount.Position = UDim2.new(0.5,0,1,0)
+fillAmount.Size = UDim2.new(0.5,0,1,0)
 fillAmount.BackgroundColor3 = Color3.fromRGB(50,50,50)
 fillAmount.BorderSizePixel = 1
 fillAmount.BorderColor3 = Color3.fromRGB(200,200,200)
@@ -2575,8 +2575,8 @@ fillAmount.TextColor3 = Color3.fromRGB(250,250,250)
 fillAmount.TextScaled = true
 
 fillMachines = Instance.new("TextButton")
-fillMachines.Position = UDim2.new(0,71,1,21)
-fillMachines.Size = UDim2.new(0,70,0,20)
+fillMachines.Position = UDim2.new(0.5,0,2,0)
+fillMachines.Size = UDim2.new(0.5,0,1,0)
 fillMachines.BackgroundColor3 = Color3.fromRGB(63,63,63)
 fillMachines.BorderSizePixel = 1
 fillMachines.ZIndex = 2
@@ -2634,8 +2634,8 @@ end
 end)
 
 withdrawCoins = Instance.new("TextButton")
-withdrawCoins.Position = UDim2.new(0,1,1,42)
-withdrawCoins.Size = UDim2.new(0,140,0,20)
+withdrawCoins.Position = UDim2.new(0,0,3,0)
+withdrawCoins.Size = UDim2.new(1,0,1,0)
 withdrawCoins.BackgroundColor3 = Color3.fromRGB(63,63,63)
 withdrawCoins.BorderSizePixel = 1
 withdrawCoins.ZIndex = 2
@@ -2679,8 +2679,8 @@ end
 end)
 
 fillVendings = Instance.new("TextButton")
-fillVendings.Position = UDim2.new(0,1,1,63)
-fillVendings.Size = UDim2.new(0,140,0,20)
+fillVendings.Position = UDim2.new(0,0,4,0)
+fillVendings.Size = UDim2.new(1,0,1,0)
 fillVendings.BackgroundColor3 = Color3.fromRGB(63,63,63)
 fillVendings.BorderSizePixel = 1
 fillVendings.ZIndex = 2
@@ -2744,8 +2744,8 @@ end
 end)
 
 collectItems = Instance.new("TextButton")
-collectItems.Position = UDim2.new(0,1,1,84)
-collectItems.Size = UDim2.new(0,140,0,20)
+collectItems.Position = UDim2.new(0,0,5,0)
+collectItems.Size = UDim2.new(1,0,1,0)
 collectItems.BackgroundColor3 = Color3.fromRGB(63,63,63)
 collectItems.BorderSizePixel = 1
 collectItems.ZIndex = 2
@@ -2795,8 +2795,8 @@ end
 end)
 
 local Item26 = Instance.new("TextButton")
-Item26.Position = UDim2.new(0,1,1,129)
-Item26.Size = UDim2.new(0,140,0,20)
+Item26.Position = UDim2.new(0,0,7,0)
+Item26.Size = UDim2.new(1,0,1,0)
 Item26.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item26.BorderSizePixel = 1
 Item26.ZIndex = 2
@@ -2996,8 +2996,8 @@ wildCrops.MouseButton1Click:Connect(function()
 end)
 
 local Item34 = Instance.new("TextButton")
-Item34.Position = UDim2.new(0,71,1,1)
-Item34.Size = UDim2.new(0,70,0,20)
+Item34.Position = UDim2.new(0.5,0,1,0)
+Item34.Size = UDim2.new(0.5,0,1,0)
 Item34.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item34.BorderSizePixel = 1
 Item34.ZIndex = 2
@@ -3007,8 +3007,8 @@ Item34.TextColor3 = Color3.fromRGB(250,250,250)
 Item34.TextScaled = true
 
 local Item35 = Instance.new("TextButton")
-Item35.Position = UDim2.new(0,0,1,22)
-Item35.Size = UDim2.new(0,70,0,20)
+Item35.Position = UDim2.new(0,0,2,0)
+Item35.Size = UDim2.new(0.5,0,1,0)
 Item35.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item35.BorderSizePixel = 1
 Item35.ZIndex = 2
@@ -3018,8 +3018,8 @@ Item35.TextColor3 = Color3.fromRGB(250,250,250)
 Item35.TextScaled = true
 
 local Item36 = Instance.new("TextButton")
-Item36.Position = UDim2.new(0,71,1,22)
-Item36.Size = UDim2.new(0,70,0,20)
+Item36.Position = UDim2.new(0.5,0,2,0)
+Item36.Size = UDim2.new(0.5,0,1,0)
 Item36.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item36.BorderSizePixel = 1
 Item36.ZIndex = 2
@@ -3065,8 +3065,8 @@ Item44.TextColor3 = Color3.fromRGB(250,250,250)
 Item44.TextScaled = true
 
 local Item45 = Instance.new("TextButton")
-Item45.Position = UDim2.new(0,0,1,45)
-Item45.Size = UDim2.new(0,140,0,20)
+Item45.Position = UDim2.new(0,0,3,0)
+Item45.Size = UDim2.new(1,0,1,0)
 Item45.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item45.BorderSizePixel = 1
 Item45.ZIndex = 2
@@ -3091,13 +3091,13 @@ Item46.TextScaled = true
 Item46.Visible = false
 
 local Item48 = Instance.new("TextButton")
-Item48.Position = UDim2.new(0,0,1,66)
-Item48.Size = UDim2.new(0,140,0,20)
+Item48.Position = UDim2.new(0,0,4,0)
+Item48.Size = UDim2.new(1,0,1,0)
 Item48.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item48.BorderSizePixel = 1
 Item48.ZIndex = 2
 Item48.Parent = Notification4
-Item48.Text = "Clear Island Fertiles"
+Item48.Text = "Clear Spawnable Fertiles"
 Item48.TextColor3 = Color3.fromRGB(250,250,250)
 Item48.TextScaled = true
 
@@ -3376,8 +3376,8 @@ UnPlow.TextColor3 = Color3.fromRGB(250,250,250)
 UnPlow.TextScaled = true
 
 local Item64 = Instance.new("TextButton")
-Item64.Position = UDim2.new(0,0,1,108)
-Item64.Size = UDim2.new(0,70,0,20)
+Item64.Position = UDim2.new(0,0,6,0)
+Item64.Size = UDim2.new(0.5,0,1,0)
 Item64.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item64.BorderSizePixel = 1
 Item64.ZIndex = 2

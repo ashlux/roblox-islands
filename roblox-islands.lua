@@ -573,7 +573,7 @@ local function moveCamera(focus)
         Camera.CameraType = Enum.CameraType.Scriptable
         Camera.CameraSubject = focus
         Camera.Focus = focus.CFrame
-        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,4,0), focus.Position)
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,1,0), focus.Position)
     end
     
 end
@@ -583,11 +583,11 @@ function clickScreen(area)
     local screenSize = Camera.ViewportSize
     if area == "middle" then
         VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, true, game, 1)
-        task.wait(0.1)
+        task.wait()
         VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, false, game, 1)
     elseif area == "corner" then
         VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
-        
+        task.wait()
         VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
     end
     
@@ -630,9 +630,8 @@ function hitBlock(Block)
     
     repeat 
         clickScreen("middle") 
-        timeout = timeout + 1 
-        wait() 
-    until not Block.Parent or timeout == 100 or STOPIT == true
+        timeout = timeout + 1
+    until not Block.Parent or timeout == 1000 or STOPIT == true
     
     moveCamera("Humanoid")
     --local args = {
@@ -2185,7 +2184,6 @@ KillAura.Parent = Notification6
 KillAura.Text = "Kill Aura"
 KillAura.TextColor3 = Color3.fromRGB(250,50,50)
 KillAura.TextScaled = true
-KillAura.Modal = true
 KillAura.Visible = false
 KillAura.MouseButton1Click:Connect(function()
     if KA then
@@ -2216,7 +2214,6 @@ KillPlayersAura.Parent = Notification6
 KillPlayersAura.Text = "Kill Players Aura"
 KillPlayersAura.TextColor3 = Color3.fromRGB(250,50,50)
 KillPlayersAura.TextScaled = true
-KillPlayersAura.Modal = true
 KillPlayersAura.Visible = false
 KillPlayersAura.MouseButton1Click:Connect(function()
     if KPA then
@@ -2247,7 +2244,6 @@ Item6.Parent = Notification6
 Item6.Text = "Fire ProximityPrompts"
 Item6.TextColor3 = Color3.fromRGB(50,250,50)
 Item6.TextScaled = true
-Item6.Modal = true
 
 local Tests = Instance.new("TextButton")
 Tests.Position = UDim2.new(0,1,0,151)
@@ -3027,7 +3023,6 @@ Item36.Parent = Notification4
 Item36.Text = "Clear Grass/Rocks"
 Item36.TextColor3 = Color3.fromRGB(250,250,250)
 Item36.TextScaled = true
-Item36.Visible = false
 
 local Item42 = Instance.new("TextButton")
 Item42.Position = UDim2.new(0,1,0,199)
@@ -7037,9 +7032,9 @@ if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
         Distance = (HR.Position - Point).Magnitude
         Speed = 20
         Time = Distance/Speed
-        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point - Vector3.new(0,5,0))})
         tween:Play()
-        wait(Time - 2)
+        wait(Time - 0.5)
     end
     repeat
         hitBlock(v)

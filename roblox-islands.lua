@@ -3027,6 +3027,7 @@ Item36.Parent = Notification4
 Item36.Text = "Clear Grass/Rocks"
 Item36.TextColor3 = Color3.fromRGB(250,250,250)
 Item36.TextScaled = true
+Item36.Visible = false
 
 local Item42 = Instance.new("TextButton")
 Item42.Position = UDim2.new(0,1,0,199)

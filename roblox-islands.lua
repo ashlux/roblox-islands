@@ -4794,6 +4794,9 @@ Item36.MouseButton1Click:Connect(function()
         Float()
         while Toggled25 == true do
             wait()
+            
+            if STOPIT == true then firesignal(Item36.MouseButton1Click) return end
+            
 			spawnables = getSpawnables()
             for i,v in pairs(spawnables) do
                 local tween, Time = goToPoint(v.Position, 24)
@@ -5421,6 +5424,9 @@ Item44.MouseButton1Click:Connect(function()
         Item44.TextColor3 = Color3.fromRGB(250,250,0)
         while Toggled28 == true do
             wait()
+            
+            if STOPIT == true then firesignal(Item44.MouseButton1Click) return end
+            
         if Island ~= "" then
         for i,v in pairs(Island.Blocks:GetChildren()) do
             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude < 23 and v:FindFirstChild("CollisionBoxes") and v:FindFirstChild("1") then
@@ -7019,30 +7025,22 @@ Item85.MouseButton1Click:Connect(function()
         Item85.Text = "Mining!"
         Item85.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
-        POs = Vector3.new(1584, 384, 107)
-        wait(1)
+        local POs = Vector3.new(1584, 384, 107)
         while Toggled74 == true do
+            
+            if STOPIT == true then firesignal(Item85.MouseButton1Click) return end
             wait()
-Blocks = game.Workspace.WildernessBlocks
-for i,v in pairs(Blocks:GetChildren()) do
-if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
-    if Toggled74 == true then
-    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude > 23 then
-        Point = v.Position
-        Distance = (HR.Position - Point).Magnitude
-        Speed = 20
-        Time = Distance/Speed
-        tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point - Vector3.new(0,5,0))})
-        tween:Play()
-        wait(Time - 0.5)
-    end
-    repeat
-        hitBlock(v)
-    until
-        v:FindFirstChild("1") == nil
-    end
-end
-end
+            local Blocks = game.Workspace.WildernessBlocks
+            for i,v in pairs(Blocks:GetChildren()) do
+                if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
+                    if Toggled74 == true then
+                        tween, Time = goToPoint(v.Position, 0)
+                        wait(Time - 0.5)
+                        repeat hitBlock(v)
+                        until v:FindFirstChild("1") == nil
+                    end
+                end
+            end
         end
     end
 end)
@@ -7065,6 +7063,9 @@ Item86.MouseButton1Click:Connect(function()
         wait(1)
         while Toggled75 == true do
             wait()
+            
+            if STOPIT == true then firesignal(Item86.MouseButton1Click) return end
+            
 Blocks = game.Workspace.WildernessBlocks
 for i,v in pairs(Blocks:GetChildren()) do
 if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
@@ -7122,6 +7123,9 @@ VoidMining.MouseButton1Click:Connect(function()
         --    end
         --end)()
         while Toggled83 == true do
+            
+            if STOPIT == true then firesignal(VoidMining.MouseButton1Click) return end
+            
             wait()
             local Rocks = getVoidRocks()
             for i,v in pairs(Rocks) do
@@ -7233,9 +7237,11 @@ SnowMining.MouseButton1Click:Connect(function()
         SnowMining.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         local Continue = 0
-        wait(1)
         while Toggled86 == true do
             wait()
+            
+            if STOPIT == true then firesignal(SnowMining.MouseButton1Click) return end
+            
             Blocks = game.Workspace.WildernessBlocks
             for i,v in pairs(Blocks:GetChildren()) do
                 if v.Name == "pileSnow" then

@@ -164,7 +164,7 @@ Background2.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Background2.BorderSizePixel = 0
 Background2.BorderColor3 = Color3.new(1,0,1)
 Background2.Position = UDim2.new(1, 0, 0.1, 0)
-Background2.Size = UDim2.new(0, 150, 0, 165)
+Background2.Size = UDim2.new(0, 200, 1, 0)
 Background2.Active = true
 Background2.Visible = false
 
@@ -281,8 +281,8 @@ CmdHandler2.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
 CmdHandler2.BackgroundTransparency = 1.000
 CmdHandler2.BorderSizePixel = 0
 CmdHandler2.AutomaticCanvasSize = "Y"
-CmdHandler2.Position = UDim2.new(0, 1, 0, 1)
-CmdHandler2.Size = UDim2.new(0, 148, 0, 165)
+CmdHandler2.Position = UDim2.new(0, 0, 0, 0)
+CmdHandler2.Size = UDim2.new(1, 0, 1, 0)
 CmdHandler2.ScrollBarThickness = 8
 
 local CmdHandler3 = Instance.new("ScrollingFrame")
@@ -984,6 +984,20 @@ Christmas.MouseButton1Click:Connect(function()
 local args = {[1] = "Mystic Forest"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
 end)
 
+local rainbowLand = Instance.new("TextButton")
+rainbowLand.Position = UDim2.new(0,20,0,189)
+rainbowLand.Size = UDim2.new(0,80,0,20)
+rainbowLand.BackgroundColor3 = Color3.fromRGB(70,70,70)
+rainbowLand.BorderColor3 = Color3.new(1,1,1)
+rainbowLand.ZIndex = 2
+rainbowLand.Parent = CmdHandler2
+rainbowLand.Text = "Rainbow Land"
+rainbowLand.TextColor3 = Color3.fromRGB(250,250,250)
+rainbowLand.TextScaled = true
+rainbowLand.MouseButton1Click:Connect(function()
+local args = {[1] = "Rainbow Land SurfaceSell"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
+end)
+
 
 local Item7 = Instance.new("TextButton")
 Item7.Position = UDim2.new(0,1,0,1)
@@ -1498,8 +1512,8 @@ game:GetService("ReplicatedStorage").Events.Telesport:FireServer(unpack(args))
 end)
 
 local Item13 = Instance.new("TextButton")
-Item13.Position = UDim2.new(0,20,0,1)
-Item13.Size = UDim2.new(0,80,0,18)
+Item13.Position = UDim2.new(0,0,0,0)
+Item13.Size = UDim2.new(0.5,0,0.1,0)
 Item13.BackgroundColor3 = Color3.fromRGB(70,70,70)
 Item13.BorderColor3 = Color3.new(1,1,1)
 Item13.ZIndex = 2

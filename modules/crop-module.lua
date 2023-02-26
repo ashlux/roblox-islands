@@ -190,7 +190,7 @@ local function startSicklingAndReplanting(cropNameToHarvest)
     while Player:GetAttribute("sickleAndReplanting") and wait() do
 		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
-		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 18)
+		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
 		sickleCrops(cropsBlocksToSickle)
 		replantCropBlocks(cropsBlocksToSickle)
 	end	
@@ -206,7 +206,7 @@ local function sicklingAndDoNotReplant(cropNameToHarvest)
 	while wait() do
 		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
-		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 18)
+		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
 		if (#cropsBlocksToSickle == 0) then
 			return nil;
 		end
@@ -218,7 +218,7 @@ local function plantCropsOnce(cropNameToPlant)
     
 	function plantCropOnDirt(cropNameToPlant, plantLocation)
 		for i,dirt in pairs(Island and Island.Blocks and Island.Blocks:GetChildren() or {}) do
-			if dirt.Name == plantLocation and Player:DistanceFromCharacter(dirt.Position) < 150 then
+			if dirt.Name == plantLocation and Player:DistanceFromCharacter(dirt.Position) < 24 then
 				local ray = Ray.new(dirt.Position, Vector3.new(0,3,0))
                 local hitPart, hitPosition = workspace:FindPartOnRay(ray,dirt)
                 if not hitPart then

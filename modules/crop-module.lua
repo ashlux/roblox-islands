@@ -122,10 +122,9 @@ end
 local function replantCrop(crop, cframe)
     
     moveCamera(crop)
-    task.wait()
+    wait()
     clickScreen("middle")
-    task.wait()
-    moveCamera("Humanoid")
+    wait()
     
 	--local args = {
 	--	[1] = {
@@ -180,6 +179,8 @@ local function replantCropBlocks(cropBlocks)
 			end
 			replantCrop(cropBlock, cropBlock.CFrame)
 		end
+		
+		moveCamera("Humanoid")
 
 end
 
@@ -189,7 +190,7 @@ local function startSicklingAndReplanting(cropNameToHarvest)
     while Player:GetAttribute("sickleAndReplanting") and wait() do
 		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
-		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
+		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 18)
 		sickleCrops(cropsBlocksToSickle)
 		replantCropBlocks(cropsBlocksToSickle)
 	end	
@@ -205,7 +206,7 @@ local function sicklingAndDoNotReplant(cropNameToHarvest)
 	while wait() do
 		local tween, movementTime = moveToRandomHarvestableCropByName(cropNameToHarvest)
 		wait(movementTime)
-		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 24)
+		local cropsBlocksToSickle = getHarvestableCropsByName(cropNameToHarvest, 18)
 		if (#cropsBlocksToSickle == 0) then
 			return nil;
 		end
@@ -224,6 +225,7 @@ local function plantCropsOnce(cropNameToPlant)
                     
                     replantCrop(dirt, dirt.CFrame)
 					
+					
 			   end
 		   end
 	   end
@@ -241,6 +243,9 @@ local function plantCropsOnce(cropNameToPlant)
 	else
 		plantCropOnDirt(cropNameToPlant, "soil")
 	end
+	
+	moveCamera("Humanoid")
+	
 end
 
 return {

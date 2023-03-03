@@ -3370,6 +3370,7 @@ UnPlow.Parent = N1
 UnPlow.Text = "Unplow Nearby"
 UnPlow.TextColor3 = Color3.fromRGB(250,250,250)
 UnPlow.TextScaled = true
+UnPlow.Visible = false
 
 local Item64 = Instance.new("TextButton")
 Item64.Position = UDim2.new(0,0,6,0)
@@ -3493,6 +3494,7 @@ Item74.Parent = N1
 Item74.Text = "Plow Nearby"
 Item74.TextColor3 = Color3.fromRGB(250,250,250)
 Item74.TextScaled = true
+Item74.Visible = false
 
 local Item75 = Instance.new("TextButton")
 Item75.Position = UDim2.new(0,0,1,106)

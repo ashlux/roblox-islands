@@ -11,9 +11,9 @@ if not game.PlaceId == 9551640993 then return end-- mining sim
 
 ----these are what change-----
 local whatWorld = "Rainbow Land SurfaceSell"
-local walk1 = Vector3.new(52129, 6, 72)
-local walk2 = Vector3.new (52129, 6, 72)
-local whatEgg = "Fancy Egg"
+local walk1 = Vector3.new(52126, 6, 74)
+local walk2 = Vector3.new (52126, 6, 74)
+local whatEgg = "Comet Egg"
 -------------------------------
 
 local Player = game.Players.LocalPlayer

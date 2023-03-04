@@ -3359,6 +3359,7 @@ Item63.Parent = N1
 Item63.Text = "Animal Farm"
 Item63.TextColor3 = Color3.fromRGB(250,250,250)
 Item63.TextScaled = true
+Item63.Visible = false
 
 local UnPlow = Instance.new("TextButton")
 UnPlow.Position = UDim2.new(0,1,1,43)
@@ -3370,7 +3371,6 @@ UnPlow.Parent = N1
 UnPlow.Text = "Unplow Nearby"
 UnPlow.TextColor3 = Color3.fromRGB(250,250,250)
 UnPlow.TextScaled = true
-UnPlow.Visible = false
 
 local Item64 = Instance.new("TextButton")
 Item64.Position = UDim2.new(0,0,6,0)
@@ -3449,6 +3449,7 @@ Item69.Parent = N1
 Item69.Text = "Fertility Potion Aura"
 Item69.TextColor3 = Color3.fromRGB(250,250,250)
 Item69.TextScaled = true
+Item69.Visible = false
 
 local Item70 = Instance.new("TextButton")
 Item70.Position = UDim2.new(0,0,1,106)
@@ -3494,7 +3495,6 @@ Item74.Parent = N1
 Item74.Text = "Plow Nearby"
 Item74.TextColor3 = Color3.fromRGB(250,250,250)
 Item74.TextScaled = true
-Item74.Visible = false
 
 local Item75 = Instance.new("TextButton")
 Item75.Position = UDim2.new(0,0,1,106)
@@ -3611,6 +3611,7 @@ Item78.Parent = N1
 Item78.Text = "Give Fertility Potions"
 Item78.TextColor3 = Color3.fromRGB(250,250,250)
 Item78.TextScaled = true
+Item78.Visible = false
 
 local Item79 = Instance.new("TextButton")
 Item79.Position = UDim2.new(0,0,1,148)

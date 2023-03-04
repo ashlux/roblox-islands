@@ -5,7 +5,7 @@ if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1067) or (game.PlaceId =
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 else
-    updates = "[Matt]: Updated and tested 2/17."
+    updates = "[Matt]: Updated and tested 3/3."
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 end
 

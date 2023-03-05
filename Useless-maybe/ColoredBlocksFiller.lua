@@ -24,13 +24,12 @@ loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/remoteE
 
 function getVendings()
     vendings = {}
-    otherBlocks = {}
     for i,v in pairs(Island.Blocks:GetChildren()) do
         if (HR.Position - v.Position).Magnitude < 45 and (v.Name == "vendingMachine" or v.Name == "vendingMachine1") then
             table.insert(vendings, v)
         end
     end
-    return vendings, otherBlocks
+    return vendings
 end
  
 function refillMachines()   
@@ -48,7 +47,7 @@ for _,v in pairs(vendings) do
         local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
         
         if raycastResult then
-            local blockToFill = raycastResult.Instance.Name
+            blockToFill = raycastResult.Instance.Name
         end
         
         if blockToFill ~= nil then

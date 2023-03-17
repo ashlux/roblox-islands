@@ -923,7 +923,7 @@ game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
 end)
 
 local Atlantis = Instance.new("TextButton")
-Atlantis.Position = UDim2.new(0,20,0,126)
+Atlantis.Position = UDim2.new(0,0,0,126)
 Atlantis.Size = UDim2.new(0,80,0,20)
 Atlantis.BackgroundColor3 = Color3.fromRGB(70,70,70)
 Atlantis.BorderColor3 = Color3.new(1,1,1)
@@ -941,7 +941,7 @@ game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
 end)
 
 local Candyland = Instance.new("TextButton")
-Candyland.Position = UDim2.new(0,20,0,147)
+Candyland.Position = UDim2.new(0,0,0,147)
 Candyland.Size = UDim2.new(0,80,0,20)
 Candyland.BackgroundColor3 = Color3.fromRGB(70,70,70)
 Candyland.BorderColor3 = Color3.new(1,1,1)
@@ -957,7 +957,7 @@ local args = {
 end)
 
 local Toyland = Instance.new("TextButton")
-Toyland.Position = UDim2.new(0,20,0,168)
+Toyland.Position = UDim2.new(0,0,0,168)
 Toyland.Size = UDim2.new(0,80,0,20)
 Toyland.BackgroundColor3 = Color3.fromRGB(70,70,70)
 Toyland.BorderColor3 = Color3.new(1,1,1)
@@ -985,7 +985,7 @@ local args = {[1] = "Mystic Forest"}game:GetService("ReplicatedStorage").Events.
 end)
 
 local rainbowLand = Instance.new("TextButton")
-rainbowLand.Position = UDim2.new(0,20,0,189)
+rainbowLand.Position = UDim2.new(0,0,0,189)
 rainbowLand.Size = UDim2.new(0,80,0,20)
 rainbowLand.BackgroundColor3 = Color3.fromRGB(70,70,70)
 rainbowLand.BorderColor3 = Color3.new(1,1,1)
@@ -996,6 +996,20 @@ rainbowLand.TextColor3 = Color3.fromRGB(250,250,250)
 rainbowLand.TextScaled = true
 rainbowLand.MouseButton1Click:Connect(function()
 local args = {[1] = "Rainbow Land SurfaceSell"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
+end)
+
+local eventArea = Instance.new("TextButton")
+eventArea.Position = UDim2.new(0,0,0,210)
+eventArea.Size = UDim2.new(0,80,0,20)
+eventArea.BackgroundColor3 = Color3.fromRGB(70,70,70)
+eventArea.BorderColor3 = Color3.new(1,1,1)
+eventArea.ZIndex = 2
+eventArea.Parent = CmdHandler2
+eventArea.Text = "St Patricks Event"
+eventArea.TextColor3 = Color3.fromRGB(250,250,250)
+eventArea.TextScaled = true
+eventArea.MouseButton1Click:Connect(function()
+local args = {[1] = "St Patricks"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
 end)
 
 
@@ -1539,7 +1553,7 @@ Item19.Text = "Redeem All Codes"
 Item19.TextColor3 = Color3.fromRGB(250,250,250)
 Item19.TextScaled = true
 Item19.MouseButton1Click:Connect(function()
-    local codes = {"Update31", "Rainbow", "Update30", "Valentines", "Update29", "TechMstery", "Update28", "Element", "Update26", "HappyNewYear", "Update27", "Mystical", "Update25", "Festive", "Update24","Advent","Update23", "Christmas", "freecrate", "release", "FreeEgg", "RareCrate", "Gems", "Trading", "FreeGems", "Lucky", "SuperLucky", "Update4", "Factory", "Update5", "July4th", "Update6", "Fishing", "Update7", "treasure", "Update8", "Mystery", "Season2", "SuperEvent", "ExtraLuck", "Atlantis", "Update9", "LostCity", "LuckEvent", "Update10", "UltraLucky", "Atlantic", "Update11", "Update12", "MysteryV3", "Update13", "Candyland", "Update14", "Chocolate", "Update15", "Pastry", "Update16", "Halloween", "Update17", "Spooky", "Update18", "Ghost", "Omega24", "Super24", "Lucky24", "Update20", "Pixel", "Update22", "Cartoon"}
+    local codes = {"StPatricks", "Update33", "Update32", "Comet", "Update31", "Rainbow", "Update30", "Valentines", "Update29", "TechMstery", "Update28", "Element", "Update26", "HappyNewYear", "Update27", "Mystical", "Update25", "Festive", "Update24","Advent","Update23", "Christmas", "freecrate", "release", "FreeEgg", "RareCrate", "Gems", "Trading", "FreeGems", "Lucky", "SuperLucky", "Update4", "Factory", "Update5", "July4th", "Update6", "Fishing", "Update7", "treasure", "Update8", "Mystery", "Season2", "SuperEvent", "ExtraLuck", "Atlantis", "Update9", "LostCity", "LuckEvent", "Update10", "UltraLucky", "Atlantic", "Update11", "Update12", "MysteryV3", "Update13", "Candyland", "Update14", "Chocolate", "Update15", "Pastry", "Update16", "Halloween", "Update17", "Spooky", "Update18", "Ghost", "Omega24", "Super24", "Lucky24", "Update20", "Pixel", "Update22", "Cartoon"}
     for i,v in pairs(codes) do
         game:GetService("ReplicatedStorage").Functions.RedeemCode:InvokeServer(v)
     end
@@ -2251,7 +2265,7 @@ rainbowSell.MouseButton1Click:Connect(function()
     if rainbowSellToggle then
         rainbowSellToggle = false
         rainbowSell.BackgroundColor3 = Color3.fromRGB(70,70,70)
-        rainbowSell.Text = "@ Mystic Forest"
+        rainbowSell.Text = "@ Rainbow Land"
         rainbowSell.TextColor3 = Color3.fromRGB(250,250,250)
     else
         rainbowSellToggle = true
@@ -2269,6 +2283,56 @@ rainbowSell.MouseButton1Click:Connect(function()
                 playerPosition = HR.Position
                 wait(0.5)
                 local args = {[1] = "Violet ForestSell"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
+                wait(0.5)
+                
+                Point = Vector3.new(playerPosition.X, HR.Position.Y, playerPosition.Z)
+                Distance = (HR.Position - Point).Magnitude
+                Speed = 20
+                Time = Distance/Speed
+                tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+                tween:Play()
+                wait(Time)
+                tween = TS:Create(HR, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(playerPosition)})
+                tween:Play()
+                wait(0.5)
+            end     
+        end
+    end
+end)
+
+
+local rainbowSell = Instance.new("TextButton")
+rainbowSell.Position = UDim2.new(0,1,0,147)
+rainbowSell.Size = UDim2.new(0,140,0,20)
+rainbowSell.BackgroundColor3 = Color3.fromRGB(70,70,70)
+rainbowSell.BorderColor3 = Color3.new(1,1,1)
+rainbowSell.ZIndex = 2
+rainbowSell.Parent = CmdHandler9
+rainbowSell.Text = "@ St Patricks"
+rainbowSell.TextColor3 = Color3.fromRGB(250,250,250)
+rainbowSell.TextScaled = true
+rainbowSell.MouseButton1Click:Connect(function()
+    if rainbowSellToggle then
+        rainbowSellToggle = false
+        rainbowSell.BackgroundColor3 = Color3.fromRGB(70,70,70)
+        rainbowSell.Text = "@ St Patricks"
+        rainbowSell.TextColor3 = Color3.fromRGB(250,250,250)
+    else
+        rainbowSellToggle = true
+        rainbowSell.BackgroundColor3 = Color3.new(0,1,1)
+        rainbowSell.Text = "Auto-Selling"
+        rainbowSell.TextColor3 = Color3.fromRGB(0,0,0)
+        local Player = game.Players.LocalPlayer
+        local TS = game:GetService('TweenService')
+        local HR = Player.Character.HumanoidRootPart
+        local playerPosition = HR.Position
+        while rainbowSellToggle == true do
+            wait()
+            if Player.PlayerGui.ScreenGui.HUD.MiningFrame.Bar.Health.Text == "Backpack Full" then
+                
+                playerPosition = HR.Position
+                wait(0.5)
+                local args = {[1] = "St Patricks SurfaceSell"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
                 wait(0.5)
                 
                 Point = Vector3.new(playerPosition.X, HR.Position.Y, playerPosition.Z)

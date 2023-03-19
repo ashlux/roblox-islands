@@ -2453,7 +2453,7 @@ cropSection.MouseButton1Click:Connect(function()
     end
 end)
 
-crops = {"spiritCrop", "opuntiaSeeds", "vineStemSeeds", "chiliPepper", "carrot", "onion", "potato", "spinach", "tomato", "wheat", "melon", "pineapple", "candyCaneVine", "grapeVine", "dragonfruit", "cactus", "pumpkin", "radish", "rice", "seaweed", "starfruit", "voidParasite"}
+crops = {"spiritCrop", "opuntia", "vineStem", "chiliPepper", "carrot", "onion", "potato", "spinach", "tomato", "wheat", "melon", "pineapple", "candyCaneVine", "grapeVine", "dragonfruit", "cactus", "pumpkin", "radish", "rice", "seaweed", "starfruit", "voidParasite"}
 NaMe = 0
 YPos = 0
 for i,v in pairs(crops) do

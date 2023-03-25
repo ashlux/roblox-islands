@@ -2016,7 +2016,7 @@ spinToWin.Parent = CmdHandler3
 spinToWin.Text = "Redeem Spin-to-win"
 spinToWin.TextColor3 = Color3.fromRGB(250,250,250)
 spinToWin.TextScaled = true
-spinToWin.Visible = false
+spinToWin.Visible = true
 spinToWin.MouseButton1Click:Connect(function()
     if spinToWinToggle then
 		spinToWinToggle = false
@@ -2040,7 +2040,7 @@ autoSpin.Parent = CmdHandler3
 autoSpin.Text = "Auto Spin-to-win"
 autoSpin.TextColor3 = Color3.fromRGB(250,250,250)
 autoSpin.TextScaled = true
-autoSpin.Visible = false
+autoSpin.Visible = true
 autoSpin.MouseButton1Click:Connect(function()
     if autoSpinToggle then
 		autoSpinToggle = false

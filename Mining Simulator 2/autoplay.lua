@@ -11,9 +11,9 @@ if not game.PlaceId == 9551640993 then return end-- mining sim
 
 ----these are what change-----
 local whatWorld = "St Patricks"
-local walk1 = Vector3.new(-8825, 5, 86)
-local walk2 = Vector3.new (-8825, 5, 86)
-local whatEgg = "Lucky Egg"
+local walk1 = Vector3.new(-8832, 5, 83)
+local walk2 = Vector3.new (-8832, 5, 83)
+local whatEgg = "Unlucky Egg"
 -------------------------------
 
 local Player = game.Players.LocalPlayer

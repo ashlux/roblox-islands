@@ -1,7 +1,7 @@
 local StarterGui = game:GetService("StarterGui")
 
 --placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1071) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 721) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 645) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 289) then
+if (game.PlaceId == 4872321990 and game.PlaceVersion ~= 1076) or (game.PlaceId == 5626342417 and game.PlaceVersion ~= 726) or (game.PlaceId == 5899156129 and game.PlaceVersion ~= 650) or (game.PlaceId == 9501318975 and game.PlaceVersion ~= 294) then
     updates = "😲 GUI might not function in this server 😲"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
 else

@@ -1005,11 +1005,11 @@ eventArea.BackgroundColor3 = Color3.fromRGB(70,70,70)
 eventArea.BorderColor3 = Color3.new(1,1,1)
 eventArea.ZIndex = 2
 eventArea.Parent = CmdHandler2
-eventArea.Text = "St Patricks Event"
+eventArea.Text = "Spring World"
 eventArea.TextColor3 = Color3.fromRGB(250,250,250)
 eventArea.TextScaled = true
 eventArea.MouseButton1Click:Connect(function()
-local args = {[1] = "St Patricks"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
+local args = {[1] = "Spring World"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
 end)
 
 
@@ -2308,14 +2308,14 @@ rainbowSell.BackgroundColor3 = Color3.fromRGB(70,70,70)
 rainbowSell.BorderColor3 = Color3.new(1,1,1)
 rainbowSell.ZIndex = 2
 rainbowSell.Parent = CmdHandler9
-rainbowSell.Text = "@ St Patricks"
+rainbowSell.Text = "@ Spring World"
 rainbowSell.TextColor3 = Color3.fromRGB(250,250,250)
 rainbowSell.TextScaled = true
 rainbowSell.MouseButton1Click:Connect(function()
     if rainbowSellToggle then
         rainbowSellToggle = false
         rainbowSell.BackgroundColor3 = Color3.fromRGB(70,70,70)
-        rainbowSell.Text = "@ St Patricks"
+        rainbowSell.Text = "@ Spring World"
         rainbowSell.TextColor3 = Color3.fromRGB(250,250,250)
     else
         rainbowSellToggle = true
@@ -2332,7 +2332,7 @@ rainbowSell.MouseButton1Click:Connect(function()
                 
                 playerPosition = HR.Position
                 wait(0.5)
-                local args = {[1] = "St Patricks SurfaceSell"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
+                local args = {[1] = "Spring World SurfaceSell"}game:GetService("ReplicatedStorage").Events.Teleport:FireServer(unpack(args))
                 wait(0.5)
                 
                 Point = Vector3.new(playerPosition.X, HR.Position.Y, playerPosition.Z)

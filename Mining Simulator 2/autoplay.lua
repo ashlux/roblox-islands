@@ -10,10 +10,10 @@ repeat wait() until mouse
 if not game.PlaceId == 9551640993 then return end-- mining sim
 
 ----these are what change-----
-local whatWorld = "St Patricks"
-local walk1 = Vector3.new(-8832, 5, 83)
-local walk2 = Vector3.new (-8832, 5, 83)
-local whatEgg = "Unlucky Egg"
+local whatWorld = "Spring World"
+local walk1 = Vector3.new(-8782, 14, -149)
+local walk2 = Vector3.new (-8917, 23, -146)
+local whatEgg = "Bunny Egg"
 -------------------------------
 
 local Player = game.Players.LocalPlayer

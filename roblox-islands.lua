@@ -3506,7 +3506,6 @@ Item75.Parent = Notification3
 Item75.Text = "Auto-Fish"
 Item75.TextColor3 = Color3.fromRGB(250,250,250)
 Item75.TextScaled = true
-Item75.Visible = false
 
 local depositHeld = Instance.new("TextButton")
 depositHeld.Position = UDim2.new(0,0,4,0)

@@ -2686,7 +2686,7 @@ fillVendings.TextColor3 = Color3.fromRGB(250,250,250)
 fillVendings.TextScaled = true
 fillVendings.MouseButton1Click:Connect(function()
     for i,v in pairs(Island.Blocks:GetChildren()) do
-    if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 0 then
+    if (HR.Position - v.Position).Magnitude < 30 and (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 0 then
         contents = v.SellingContents:GetChildren()[1]
         if contents ~= nil and contents.Amount.Value < 1000 and Player.Backpack:FindFirstChild(contents.Name) then
             local args = {

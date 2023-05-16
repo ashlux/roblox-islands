@@ -183,15 +183,6 @@ end
 
 local HR = getRoot(Character)
 
-local function AntiAFK() -- keeps you from going afk by clicking corner of screen when player goes "Idled"
-    game:GetService('Players').LocalPlayer.Idled:Connect(function()
-    game:GetService('VirtualUser'):CaptureController();
-    wait();
-    game:GetService('VirtualUser'):ClickButton2(Vector2.new(0,0))
-    end)
-end
-spawn(AntiAFK)
-
 function Float() -- makes you float using BV
 	BV = Instance.new("BodyVelocity", getRoot(Character))
 	BV.Velocity = Vector3.new(0,0,0)

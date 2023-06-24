@@ -52,7 +52,7 @@ local function getAllHarvestableCrops()
     local cropBlocks = {}
 	for _,cropBlock in pairs(Island and Island.Blocks and Island.Blocks:GetChildren()) do
 		local stage = cropBlock:FindFirstChild("stage")
-	    if stage and stage.Value == 3 then
+	    if stage and (cropBlock.Name ~= "chiliPepper" and stage.Value == 3) or (cropBlock.Name == "chiliPepper" and stage.Value == 4) then
 		    table.insert(cropBlocks, cropBlock)
         end
 	end

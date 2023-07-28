@@ -4719,7 +4719,6 @@ Item22.MouseButton1Click:Connect(function()
         Item22.BackgroundColor3 = Color3.fromRGB(63,63,63)
         Item22.Text = "Pick Useless Fertiles"
         Item22.TextColor3 = Color3.fromRGB(250,250,250)
-        Pickem:Disconnect()
     else
         Toggled9 = true
         Item22.BackgroundColor3 = Color3.new(0,255,255)
@@ -4728,15 +4727,15 @@ Item22.MouseButton1Click:Connect(function()
     end
 end)
 
-if Island == "" then wait() else
-Island.Blocks.ChildAdded:Connect(function(flower)
-    if Toggled9 == true and (flower.Name == "flowerHibiscusPinkFertile" or flower.Name == "flowerHibiscusLightGreenFertile" or flower.Name == "flowerHibiscusBlueFertile" or flower.Name == "flowerHibiscusWhiteFertile" or flower.Name == "flowerHibiscusPurpleFertile" or flower.Name == "flowerHibiscusOrangeFertile" or flower.Name == "flowerHibiscusBlackFertile" or flower.Name == "flowerHyacinthRedFertile" or flower.Name == "flowerHyacinthYellowFertile" or flower.Name == "flowerHyacinthBlueFertile" or flower.Name == "flowerHyacinthCyanFertile"  or flower.Name == "flowerHyacinthLightGreenFertile" or flower.Name == "flowerHyacinthOrangeFertile" or flower.Name == "flowerHyacinthRedFertile" or flower.Name == "flowerLilyCyanFertile" or flower.Name == "flowerLilyBlueFertile" or flower.Name == "flowerLilyBlackFertile" or flower.Name == "flowerLilyYellowFertile" or flower.Name == "flowerLilyDarkGreenFertile" or flower.Name == "flowerLilyRedFertile" or flower.Name == "flowerDaisyWhiteFertile" or flower.Name == "flowerDaisyRedFertile" or flower.Name == "flowerDaisyLightGreenFertile" or flower.Name == "flowerDaisyCyanFertile" or flower.Name == "flowerDaisyDarkGreenFertile" or flower.Name == "flowerDaisyYellowFertile" or flower.Name == "flowerTulipYellowFertile" or flower.Name == "flowerTulipLightGreenFertile" or flower.Name == "flowerTulipRedFertile" or flower.Name == "flowerTulipPinkFertile" or flower.Name == "flowerTulipOrangeFertile" or flower.Name == "flowerTulipDarkGreenFertile" or flower.Name == "flowerTulipWhiteFertile" or flower.Name == "flowerMumWhiteFertile" or flower.Name == "flowerMumRedFertile" or flower.Name == "flowerMumCyanFertile" or flower.Name == "flowerMumLightGreenFertile" or flower.Name == "flowerMumBlueFertile" or flower.Name == "flowerMumBlackFertile" or flower.Name == "flowerMumPurpleFertile" or flower.Name == "flowerMumPinkFertile" or flower.Name == "flowerMumChromeFertile" or flower.Name == "flowerDaffodilYellowFertile" or flower.Name == "flowerDaffodilOrangeFertile" or flower.Name == "flowerDaffodilLightGreenFertile" or flower.Name == "flowerDaffodilPinkFertile" or flower.Name == "flowerDaffodilWhiteFertile" or flower.Name == "flowerDaffodilDarkGreenFertile" or flower.Name == "flowerRosePurpleFertile" or flower.Name == "flowerRosePinkFertile" or flower.Name == "flowerYellowHyacinthFertile") then
-        local args = {
-        [1] = {
-        ["flower"] = flower
-        }}game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-    end
-end)
+if Island ~= "" then
+	Island:WaitForChild("Blocks").ChildAdded:Connect(function(flower)
+	    if Toggled9 == true and flower.Name:find("Fertile") then
+	        local args = {
+	        [1] = {
+	        ["flower"] = flower
+	        }}game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+	    end
+	end)
 end
 
 Item34.MouseButton1Click:Connect(function()
@@ -5598,6 +5597,22 @@ Item48.MouseButton1Click:Connect(function()
             local args = {
                 [1] = {
                     ["flower"] = Island.Blocks.flowerHibiscusLightGreenFertile
+                }
+            }
+
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+	elseif Island.Blocks:FindFirstChild("flowerLavenderPurpleFertile") then
+            local args = {
+                [1] = {
+                    ["flower"] = Island.Blocks.flowerLavenderPurpleFertile
+                }
+            }
+
+            game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
+	elseif Island.Blocks:FindFirstChild("flowerLavenderWhiteFertile") then
+            local args = {
+                [1] = {
+                    ["flower"] = Island.Blocks.flowerLavenderWhiteFertile
                 }
             }
 

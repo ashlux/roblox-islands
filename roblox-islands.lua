@@ -592,9 +592,11 @@ function hitTree(tree)
     moveCamera(tree)
     
     repeat 
-        clickScreen("middle") 
-        timeout = timeout + 1 
-        wait() 
+    	if STOPIT == false and tree.Parent then
+        	clickScreen("middle") 
+        	timeout = timeout + 1 
+        end
+        wait()
     until not tree.Parent or timeout == 100 or STOPIT == true
     
     moveCamera("Humanoid")
@@ -620,8 +622,11 @@ function hitBlock(Block)
     moveCamera(Block)
     
     repeat 
-        clickScreen("middle") 
-        timeout = timeout + 1
+    	if STOPIT == false and Block.Parent then
+        	clickScreen("middle") 
+        	timeout = timeout + 1
+        end
+        wait()
     until not Block.Parent or timeout == 1000 or STOPIT == true
     
     moveCamera("Humanoid")

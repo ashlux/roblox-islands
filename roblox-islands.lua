@@ -48,6 +48,9 @@ local HttpService = game:GetService("HttpService")
 local uis = game:GetService("UserInputService")
 local Camera = game.Workspace.CurrentCamera
 
+--this will stop some functions in this script
+local STOPIT = false
+
 local torso = Player.Character.LowerTorso
 local flying = false
 local deb = true 
@@ -560,7 +563,12 @@ local function moveCamera(focus)
         Camera.CameraType = Enum.CameraType.Scriptable
         Camera.CameraSubject = focus
         Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,5,5))
-    else
+elseif focus:FindFirstChild("1") then
+	Camera.CameraType = Enum.CameraType.Scriptable
+        Camera.CameraSubject = focus
+        Camera.Focus = focus.CFrame
+        Camera.CFrame = CFrame.new(focus.CFrame.Position + Vector3.new(0,12,0), focus.Position)	
+else
         Camera.CameraType = Enum.CameraType.Scriptable
         Camera.CameraSubject = focus
         Camera.Focus = focus.CFrame
@@ -574,11 +582,9 @@ function clickScreen(area)
     local screenSize = Camera.ViewportSize
     if area == "middle" then
         VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, true, game, 1)
-	task.wait()
         VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, false, game, 1)
     elseif area == "corner" then
         VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
-	task.wait()
         VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
     end
     
@@ -622,6 +628,7 @@ function hitBlock(Block)
     moveCamera(Block)
     
     repeat 
+	print(STOPIT, Block.Parent)
     	if STOPIT == false and Block.Parent then
         	clickScreen("middle") 
         	timeout = timeout + 1
@@ -630,16 +637,6 @@ function hitBlock(Block)
     until not Block.Parent or timeout == 1000 or STOPIT == true
     
     moveCamera("Humanoid")
-    --local args = {
-    --[1] = {
-    --["player_tracking_category"] = "join_from_web",
-    --["part"] = Block,
-    --["block"] = Block,
-    --["norm"] = nil --[[Vector3]],
-    --["pos"] = nil --[[Vector3]]
-    --}
-    --}
-    --game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_BLOCK_HIT_REQUEST:InvokeServer(unpack(args))
 end
 
 function halloweenShop(itemNumber, amount)
@@ -4786,7 +4783,7 @@ Item36.MouseButton1Click:Connect(function()
     else
         Toggled25 = true
         Item36.BackgroundColor3 = Color3.new(0,255,255)
-        Item36.Text = "clearing spawnables"
+        Item36.Text = "P TO STOP"
         Item36.TextColor3 = Color3.fromRGB(0,0,0)
         Float()
         while Toggled25 == true do
@@ -5606,18 +5603,18 @@ Item48.MouseButton1Click:Connect(function()
             }
 
             game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-	elseif Island.Blocks:FindFirstChild("flowerLavenderPurpleFertile") then
+	elseif Island.Blocks:FindFirstChild("flowerLavPurpleFertile") then
             local args = {
                 [1] = {
-                    ["flower"] = Island.Blocks.flowerLavenderPurpleFertile
+                    ["flower"] = Island.Blocks.flowerLavPurpleFertile
                 }
             }
 
             game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer(unpack(args))
-	elseif Island.Blocks:FindFirstChild("flowerLavenderWhiteFertile") then
+	elseif Island.Blocks:FindFirstChild("flowerLavWhiteFertile") then
             local args = {
                 [1] = {
-                    ["flower"] = Island.Blocks.flowerLavenderWhiteFertile
+                    ["flower"] = Island.Blocks.flowerLavWhiteFertile
                 }
             }
 
@@ -7024,6 +7021,47 @@ God.MouseButton1Click:Connect(function()
     end
 end)
 
+local electriteButton = Instance.new("TextButton")
+electriteButton.Name = "electriteButton"
+electriteButton.BackgroundColor3 = Color3.fromRGB(55,155,55)
+electriteButton.Text = "Electrite"
+electriteButton.TextColor3 = Color3.new(1,1,1)
+electriteButton.Position = UDim2.new(0,0,1,64)
+electriteButton.Size = UDim2.new(0,70,0,20)
+electriteButton.TextScaled = true
+electriteButton.Parent = Notification11
+electriteButton.MouseButton1Click:Connect(function()
+    if electriteToggle then
+        electriteToggle = false
+        electriteButton.BackgroundColor3 = Color3.fromRGB(55,55,55)
+        electriteButton.Text = "Electrite"
+        electriteButton.TextColor3 = Color3.new(1,1,1)
+        unFloat()
+        cancelTween()
+    else
+        electriteToggle = true
+        electriteButton.BackgroundColor3 = Color3.new(0,255,255)
+        electriteButton.Text = "Mining!"
+        electriteButton.TextColor3 = Color3.fromRGB(0,0,0)
+        Float()
+        local POs = Vector3.new(1629, 293, 260)
+        while electriteToggle == true do
+            
+            if STOPIT == true then firesignal(Item85.MouseButton1Click) return end
+            wait()
+            local Blocks = game.Workspace.WildernessBlocks
+            for i,v in pairs(Blocks:GetChildren()) do
+                if (POs - v.Position).magnitude < 100 and v:FindFirstChild("1") and electriteToggle == true then
+                tween, Time = goToPoint(v.Position, 0)
+                wait(Time - 0.5)
+                repeat hitBlock(v)
+                 until v:FindFirstChild("1") == nil or STOPIT == true or electriteToggle == false
+                end
+            end
+        end
+    end
+end)
+
 Item85.MouseButton1Click:Connect(function()
     if Toggled74 then
         Toggled74 = false
@@ -7045,13 +7083,11 @@ Item85.MouseButton1Click:Connect(function()
             wait()
             local Blocks = game.Workspace.WildernessBlocks
             for i,v in pairs(Blocks:GetChildren()) do
-                if (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
-                    if Toggled74 == true then
-                        tween, Time = goToPoint(v.Position, 0)
-                        wait(Time - 0.5)
-                        repeat hitBlock(v)
-                        until v:FindFirstChild("1") == nil
-                    end
+                if Toggled74 == true and (POs - v.Position).magnitude < 600 and v:FindFirstChild("1") then
+                 tween, Time = goToPoint(v.Position, 5)
+                 wait(Time - 0.5)
+                 repeat hitBlock(v)
+                 until v:FindFirstChild("1") == nil or STOPIT == true or Toggled74 == false
                 end
             end
         end

@@ -21,7 +21,7 @@ refillCoins = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include")
 takeCoins = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("zixydvnrEfhdgxjhayPkaeRSflvi/nfsxgqsnsbrfvg")
 changeSettings = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("zixydvnrEfhdgxjhayPkaeRSflvi/rxfl")
 closeVending = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("zixydvnrEfhdgxjhayPkaeRSflvi/pejXdmrciambeyshThotqDXwpkveqvncqmqi")
-useNet = game.rbxts_include.node_modules["@rbxts"].net.out["_NetManaged"] -- sorry im too lazy to update this one
+useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out["_NetManaged"] -- sorry im too lazy to update this one
 
 if emptyItem then
     updates = "⚠️ Test stuff on alts first!  Trading and vendings should work though."

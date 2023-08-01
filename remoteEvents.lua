@@ -9,20 +9,11 @@ local function AntiAFK() -- keeps you from going afk by clicking corner of scree
 end
 task.spawn(AntiAFK)
 
---placeId are in this order.  Home, OnlineIsland, Hub, Wilderness Islands
-if game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("qbSkdeMutcoohhhzdgjqudhoopnsrvrrc/atgvRonvjykiavkfugpyspsetgx") then
-    updates = "⚠️ Test stuff on alts first!!  Trading and vendings should work though."
-    StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
-else
-    updates = "⚠️ Test stuff on alts first!!"
-    StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
-end
-
 --- these items change all the dang time!
 --hitMobEvent = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("eicpsr/qqsFOc")
-sendTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("qbSkdeMutcoohhhzdgjqudhoopnsrvrrc/atgvRonvjykiavkfugpyspsetgx")
-addTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("qbSkdeMutcoohhhzdgjqudhoopnsrvrrc/sevmYlDaqjxlxr")
-tradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("qbSkdeMutcoohhhzdgjqudhoopnsrvrrc/jriczhkhmJrpMcqwBmTxGowmBihmnnwpKKexyu")
+sendTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("fiyymnzwvXeaDZgodnhpueGuDiKuiiwgrrMqhofabcyq/lbjeAhdzfz")
+addTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("fiyymnzwvXeaDZgodnhpueGuDiKuiiwgrrMqhofabcyq/praaCinzx")
+tradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("fiyymnzwvXeaDZgodnhpueGuDiKuiiwgrrMqhofabcyq/irFfpfUSf")
 openVending = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("mmbtfMirGbbkE/BWyzkw")
 emptyItem = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("mmbtfMirGbbkE/xujuyZkaafyecwyuUlw")
 refillItem = emptyItem
@@ -31,3 +22,12 @@ takeCoins = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):W
 changeSettings = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("mmbtfMirGbbkE/uaMqkcdua")
 closeVending = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("mmbtfMirGbbkE/wgbU")
 useNet = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("lqkdlmGmcfpvjCxeu/pdtgdNg")
+
+
+if sendTrade then
+    updates = "⚠️ Test stuff on alts first!!  Trading and vendings should work though."
+    StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(250,0,0), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
+else
+    updates = "⚠️ Test stuff on alts first!!"
+    StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(0,255,255), Font = Enum.Font.SourceSansBold, TextSize = 18, Text = updates})
+end

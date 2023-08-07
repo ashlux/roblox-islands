@@ -126,11 +126,11 @@ walkTo(walk1) -- to the stairs
 task.wait(5)
 walkTo(walk2) -- to the egg
 
-game.Workspace.Camera.ChildAdded:Connect(destroyAnimations, animation)
-PlayerGui.ChildAdded:Connect(destroyHatch, hatchGui)
+--game.Workspace.Camera.ChildAdded:Connect(destroyAnimations, animation)
+--PlayerGui.ChildAdded:Connect(destroyHatch, hatchGui)
 
 notification("Auto Egg", "is ON", 5)
 
-setfpscap(10)
+setfpscap(20)
 
 autoHatchEgg(whatEgg)

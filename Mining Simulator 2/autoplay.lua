@@ -96,6 +96,7 @@ end
 
 local function walkTo(pos)
     Humanoid:MoveTo(pos)
+        Humanoid.MoveToFinished:Wait()
 end
 
 local function destroyAnimations(animation)
@@ -116,8 +117,8 @@ end
 
 task.spawn(autoFactory)
 task.spawn(autoGetBoosts)
-task.spawn(redeemSpins)
-task.spawn(autoSpinToWin)
+--task.spawn(redeemSpins)
+--task.spawn(autoSpinToWin)
 
 teleportToWorld(whatWorld)
 task.wait(1)

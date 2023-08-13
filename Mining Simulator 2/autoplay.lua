@@ -10,10 +10,10 @@ repeat wait() until mouse
 if not game.PlaceId == 9551640993 then return end-- mining sim
 
 ----these are what change-----
-local whatWorld = "Summer Carnival"
-local walk1 = Vector3.new(-8855, 5, 77)
-local walk2 = Vector3.new(-8855, 5, 77)
-local whatEgg = "Corrupt Egg"
+local whatWorld = "The Overworld"
+local walk1 = Vector3.new(29, 6, 341)
+local walk2 = Vector3.new(29, 6, 341)
+local whatEgg = "50th Egg"
 -------------------------------
 
 local Player = game.Players.LocalPlayer
@@ -90,6 +90,12 @@ local function autoSpinToWin()
             end
 end    
 
+local function redeemGroupRewards()
+    while true and task.wait(120) do
+        game:GetService("ReplicatedStorage"):WaitForChild("Functions"):WaitForChild("ClaimGroupBenefits"):InvokeServer()
+    end
+end
+
 local function teleportToWorld(world)
     game:GetService("ReplicatedStorage").Events.Teleport:FireServer(world)
 end
@@ -117,6 +123,7 @@ end
 
 task.spawn(autoFactory)
 task.spawn(autoGetBoosts)
+task.spawn(redeemGroupRewards)
 --task.spawn(redeemSpins)
 --task.spawn(autoSpinToWin)
 

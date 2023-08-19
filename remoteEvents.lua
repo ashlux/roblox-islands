@@ -27,6 +27,6 @@ if emptyItem then
     updates = "⚠️ Test stuff on alts first!  Trading and vendings is fine right now though."
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(150,150,255), Font = Enum.Font.SourceSansBold, TextSize = 20, Text = updates})
 else
-    updates = "⚠️ Test stuff on alts first!!"
+    updates = "⚠️ Test stuff on alts first!! Trading and vendings are broken!"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(255,150,150), Font = Enum.Font.SourceSansBold, TextSize = 20, Text = updates})
 end

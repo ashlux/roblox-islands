@@ -3401,6 +3401,22 @@ CmdHandler6.ScrollBarThickness = 8
 
 local YPos = 1
 local NaMe = 1
+if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("food") then
+	Foodz = Instance.new("TextButton")
+    Foodz.Name = NaMe
+    Foodz.Position = UDim2.new(0,1,0,YPos)
+    Foodz.Size = UDim2.new(0,95,0,15)
+    Foodz.BackgroundColor3 = Color3.fromRGB(70,70,70)
+    Foodz.BorderColor3 = Color3.new(1,1,1)
+    Foodz.ZIndex = 2
+    Foodz.Parent = CmdHandler6
+    Foodz.Text = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Name
+    Foodz.TextColor3 = Color3.fromRGB(250,250,250)
+    Foodz.TextScaled = true
+	NaMe = NaMe + 1
+    YPos = YPos + 15
+end
+
 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
     if v:FindFirstChild("food") then
     Foodz = Instance.new("TextButton")

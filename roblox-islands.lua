@@ -6892,7 +6892,7 @@ Item75.MouseButton1Click:Connect(function()
             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, true, game, 1) -- click down
             wait(0.5)
             VirtualInputManager:SendMouseButtonEvent(X, Y, 0, false, game, 1) -- click up
-            repeat wait() v = v + 1 until Player.PlayerGui.ActionBarScreenGui.ActionBar:FindFirstChild("RoactTree") or v == 200 -- waiting for bite
+            repeat wait() v = v + 1 until Player.PlayerGui.ActionBarScreenGui.ActionBar:FindFirstChild("RoactTree") or v == 250 -- waiting for bite
             wait(0.5)
             v = 0
             repeat

@@ -217,7 +217,7 @@ local function goToPoint(Point, distance)
     Distance = (HR.Position - Point).Magnitude
     Speed = 25
     Time = Distance/Speed
-    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point)})
+    tween = TS:Create(HR, TweenInfo.new(Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false, 0), {CFrame = CFrame.new(Point) + Vector3.new(0,2,0})
     tween:Play()
     return tween, Time
     end

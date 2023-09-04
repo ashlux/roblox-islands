@@ -1,4 +1,3 @@
-
 repeat wait()
 until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
 local mouse = game.Players.LocalPlayer:GetMouse()
@@ -3505,7 +3504,7 @@ Item74.TextColor3 = Color3.fromRGB(250,250,250)
 Item74.TextScaled = true
 
 local Item75 = Instance.new("TextButton")
-Item75.Position = UDim2.new(0,0,1,106)
+Item75.Position = UDim2.new(0,0,1,148)
 Item75.Size = UDim2.new(0,70,0,20)
 Item75.BackgroundColor3 = Color3.fromRGB(63,63,63)
 Item75.BorderSizePixel = 1

@@ -1,3 +1,9 @@
+if not game:IsLoaded() then
+game.Loaded:Wait()
+end
+
+print("Loading")
+
 repeat wait()
 until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
 local mouse = game.Players.LocalPlayer:GetMouse()
@@ -490,20 +496,17 @@ function getChests()
 end
 
 function withdrawFromChest(chest)
-    for i,b in pairs(chest.Contents:GetChildren()) do
-        task.spawn(function()
-        local args = {
-        [1] = {
-        ["chest"] = chest,
-        ["player_tracking_category"] = "join_from_web",
-        ["amount"] = b.Amount.Value,
-        ["tool"] = b,
-        ["action"] = "withdraw"
-        }
-        }
-        game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
-        end)
-    end
+    local chestItem = chest.Contents:GetChildren()[1]
+    local args = {
+    [1] = {
+    ["chest"] = chest,
+    ["player_tracking_category"] = "join_from_web",
+    ["amount"] = chestItem.Amount.Value,
+    ["tool"] = chestItem,
+    ["action"] = "withdraw"
+    }
+    }
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.CLIENT_CHEST_TRANSACTION:InvokeServer(unpack(args))
 end
 
 local function onInputBegan(input, gp)

@@ -107,14 +107,9 @@ function clickScreen(area)
     local screenSize = Camera.ViewportSize
    
     if area == "middle" then
-        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, true, game, 1)
-        task.wait()
-        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, false, game, 1)
-    
+        VirtualInputManager:SendTouchEvent(1, 0, screenSize.X/2, screenSize.Y/2)
     elseif area == "corner" then
-        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
-        
-        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+        VirtualInputManager:SendTouchEvent(1, 0, 0, 0)
     end
     
 end

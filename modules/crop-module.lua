@@ -107,9 +107,9 @@ function clickScreen(area)
     local screenSize = Camera.ViewportSize
    
     if area == "middle" then
-        VirtualInputManager:SendTouchEvent(1, 0, screenSize.X/2, screenSize.Y/2)
+        VirtualInputManager:SendTouchEvent(0, 0, screenSize.X/2, screenSize.Y/2)
     elseif area == "corner" then
-        VirtualInputManager:SendTouchEvent(1, 0, 0, 0)
+        VirtualInputManager:SendTouchEvent(0, 0, 0, 0)
     end
     
 end

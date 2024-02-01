@@ -123,8 +123,8 @@ local function replantCrop(crop, cframe)
     
     moveCamera(crop)
     wait()
-    clickScreen("middle")
-    wait()
+   -- clickScreen("middle")
+   -- wait()
     
 	--local args = {
 	--	[1] = {

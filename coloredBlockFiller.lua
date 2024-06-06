@@ -171,3 +171,71 @@ refillButton.TextScaled = true
 refillButton.MouseButton1Click:Connect(function()
     refillMachines()
 end)
+
+
+
+
+
+local function refillCoins()
+for i,v in pairs(Island.Blocks:GetChildren()) do
+    if (v.Name == "vendingMachine" or v.Name == "vendingMachine1") and v.Mode.Value == 1 and v.TransactionPrice.Value <= tonumber(fillAmount.Text) then
+        if v.CoinBalance.Value < ((v.TransactionPrice.Value * 1.07) * 1000) then
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["vendingMachine"] = v
+        }
+        }
+        }
+        openVending:FireServer(unpack(args))
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["vendingMachine"] = v,
+        ["player_tracking_category"] = "join_from_web",
+        ["amount"] = v.CoinBalance.Value
+        }
+        }
+        }
+        takeCoins:FireServer(unpack(args))
+        print((v.TransactionPrice.Value * 1.07) * 1000)
+        local args = {
+        [1] = HttpService:GenerateGUID(false),
+        [2] = {
+        [1] = {
+        ["vendingMachine"] = v,
+        ["player_tracking_category"] = "join_from_web",
+        ["amount"] = 5000000000
+        }
+        }
+        }
+        refillCoins:FireServer(unpack(args))
+        
+        local args = {
+        [1] = {
+        ["vendingMachine"] = v
+        }
+        }
+        closeVending:FireServer(unpack(args))
+        print("Finished")
+        end
+    end
+end
+end)
+
+
+refillCoinsButton = Instance.new("TextButton")
+refillCoinsButton.Position = UDim2.new(0,1,0,42)
+refillCoinsButton.Size = UDim2.new(0,100,0,20)
+refillCoinsButton.BackgroundColor3 = Color3.fromRGB(50,100,50)
+refillCoinsButton.BorderColor3 = Color3.new(1,1,1)
+refillCoinsButton.ZIndex = 2
+refillCoinsButton.Parent = Background
+refillCoinsButton.Text = "insert 5b coins"
+refillCoinsButton.TextColor3 = Color3.new(1,1,1)
+refillCoinsButton.TextScaled = true
+refillCoinsButton.MouseButton1Click:Connect(function()
+    refillCoins()
+end)

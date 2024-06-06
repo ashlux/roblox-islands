@@ -9,31 +9,27 @@ until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.P
 local mouse = game.Players.LocalPlayer:GetMouse() 
 repeat wait() until mouse
 
+function loadModule(url)
+	return loadstring(game:HttpGet(url))()
+end
+
 local HttpService = game:GetService("HttpService")
 local Island = game.Workspace.Islands:GetChildren()[1]
 local Player = Players.LocalPlayer
 local HR = Player.Character.HumanoidRootPart
 local GetM = Player:GetMouse()
 
-openVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/ofNxpgrwbiHpdozHumffKmihuyornul")
-closeVending = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/dlqCnIpYhgmrpgwhtpp")
-emptyItem = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/lOyzaynvkmCkfdvuPcmnsv")
-refillItem = emptyItem
-refillCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/cdfgYihig")
-takeCoins = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/venLngzrcancetWqrsyb")
-changeSettings = game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged:FindFirstChild("mhuhxisrJNukxyjdabcfSvHhqxptysawldb/gireeZzunizgyuivzcyhaI")
+--load remote events--
+loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/remoteEvents.lua")
 
 function getVendings()
     vendings = {}
-    otherBlocks = {}
     for i,v in pairs(Island.Blocks:GetChildren()) do
-        if (HR.Position - v.Position).Magnitude < 200 and (v.Name == "vendingMachine" or v.Name == "vendingMachine1") then
+        if (HR.Position - v.Position).Magnitude < 45 and (v.Name == "vendingMachine" or v.Name == "vendingMachine1") then
             table.insert(vendings, v)
-        else
-            table.insert(otherBlocks, v)
         end
     end
-    return vendings, otherBlocks
+    return vendings
 end
  
 function refillMachines()   
@@ -41,11 +37,22 @@ vendings, otherBlocks = getVendings()
 for _,v in pairs(vendings) do
     contents = v.SellingContents:GetChildren()[1]
     if v.Mode.Value == 0 and (contents == nil or contents.Amount.Value > 1000) then
-        for _,b in pairs(otherBlocks) do
-            if b ~= nil and b.Position == (v.Position + Vector3.new(0,-3,0)) then
-                blockToFill = b.Name
-            end
+        local rayOrigin = v.Position
+        local rayDirection = Vector3.new(0, -100, 0)
+        local raycastParams = RaycastParams.new()
+        raycastParams.FilterDescendantsInstances = {v}
+        raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+        raycastParams.IgnoreWater = true
+
+        local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+        
+        print(raycastResult.Instance.Name)
+        if raycastResult then
+            blockToFill = raycastResult.Instance.Name
         end
+        
+        print(blockToFill)
+        
         if blockToFill ~= nil then
             local args = {
             [1] = HttpService:GenerateGUID(false),
@@ -58,9 +65,10 @@ for _,v in pairs(vendings) do
             openVending:FireServer(unpack(args))
             -------
             if Player.Backpack:FindFirstChild(blockToFill) then
+                
                 if contents == nil then
                     if Player.Backpack[blockToFill].Amount.Value >= 1000 then
-                    number = 1000
+                        number = 1000
                     else
                         number = Player.Backpack[blockToFill].Amount.Value
                     end
@@ -69,7 +77,9 @@ for _,v in pairs(vendings) do
                 else
                     number = 1000 - contents.Amount.Value
                 end
-                print(number)
+                print(blockToFill, number)
+                
+                
                 local args = {
                 [1] = HttpService:GenerateGUID(false),
                 [2] = {
@@ -148,16 +158,16 @@ Close.MouseButton1Click:Connect(function()
 CmdGui:Destroy()
 end)
 
-Cauldrons = Instance.new("TextButton")
-Cauldrons.Position = UDim2.new(0,1,0,21)
-Cauldrons.Size = UDim2.new(0,100,0,20)
-Cauldrons.BackgroundColor3 = Color3.fromRGB(50,100,50)
-Cauldrons.BorderColor3 = Color3.new(1,1,1)
-Cauldrons.ZIndex = 2
-Cauldrons.Parent = Background
-Cauldrons.Text = "Refill Colored Blocks"
-Cauldrons.TextColor3 = Color3.new(1,1,1)
-Cauldrons.TextScaled = true
-Cauldrons.MouseButton1Click:Connect(function()
+refillButton = Instance.new("TextButton")
+refillButton.Position = UDim2.new(0,1,0,21)
+refillButton.Size = UDim2.new(0,100,0,20)
+refillButton.BackgroundColor3 = Color3.fromRGB(50,100,50)
+refillButton.BorderColor3 = Color3.new(1,1,1)
+refillButton.ZIndex = 2
+refillButton.Parent = Background
+refillButton.Text = "Refill Colored Blocks"
+refillButton.TextColor3 = Color3.new(1,1,1)
+refillButton.TextScaled = true
+refillButton.MouseButton1Click:Connect(function()
     refillMachines()
 end)

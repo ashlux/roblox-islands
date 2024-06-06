@@ -2599,13 +2599,18 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         }
         takeCoins:FireServer(unpack(args))
         print((v.TransactionPrice.Value * 1.07) * 1000)
+
+	local amountToFill = (round(v.TransactionPrice.Value * 1.07)) * 1000
+
+	if amountToFill > 5000000000 then amountToFill = 5000000000 end
+					
         local args = {
         [1] = HttpService:GenerateGUID(false),
         [2] = {
         [1] = {
         ["vendingMachine"] = v,
         ["player_tracking_category"] = "join_from_web",
-        ["amount"] = (round(v.TransactionPrice.Value * 1.07)) * 1000
+        ["amount"] = amountToFill
         }
         }
         }

@@ -223,7 +223,7 @@ for i,v in pairs(Island.Blocks:GetChildren()) do
         end
     end
 end
-end)
+end
 
 
 refillCoinsButton = Instance.new("TextButton")

@@ -1,5 +1,5 @@
 if not game:IsLoaded() then
-game.Loaded:Wait()
+	game.Loaded:Wait()
 end
 
 local Players = game:GetService("Players")
@@ -23,93 +23,92 @@ local GetM = Player:GetMouse()
 loadModule("https://raw.githubusercontent.com/ashlux/roblox-islands/main/remoteEvents.lua")
 
 function getVendings()
-    vendings = {}
-    for i,v in pairs(Island.Blocks:GetChildren()) do
-        if (HR.Position - v.Position).Magnitude < 45 and (v.Name == "vendingMachine" or v.Name == "vendingMachine1") then
-            table.insert(vendings, v)
-        end
-    end
-    return vendings
+	local vendings = {}
+	for i,v in pairs(Island.Blocks:GetChildren()) do
+		if (HR.Position - v.Position).Magnitude < 45 and (v.Name == "vendingMachine" or v.Name == "vendingMachine1") then
+			table.insert(vendings, v)
+		end
+	end
+	return vendings
 end
- 
-function refillMachines()   
-vendings, otherBlocks = getVendings()
-for _,v in pairs(vendings) do
-    contents = v.SellingContents:GetChildren()[1]
-    if v.Mode.Value == 0 and (contents == nil or contents.Amount.Value > 1000) then
-        local rayOrigin = v.Position
-        local rayDirection = Vector3.new(0, -100, 0)
-        local raycastParams = RaycastParams.new()
-        raycastParams.FilterDescendantsInstances = {v}
-        raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-        raycastParams.IgnoreWater = true
 
-        local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
-        
-        print(raycastResult.Instance.Name)
-        if raycastResult then
-            blockToFill = raycastResult.Instance.Name
-        end
-        
-        print(blockToFill)
-        
-        if blockToFill ~= nil then
-            local args = {
-            [1] = HttpService:GenerateGUID(false),
-            [2] = {
-            [1] = {
-            ["vendingMachine"] = v
-            }
-            }
-            }
-            openVending:FireServer(unpack(args))
-            -------
-            if Player.Backpack:FindFirstChild(blockToFill) then
-                
-                if contents == nil then
-                    if Player.Backpack[blockToFill].Amount.Value >= 1000 then
-                        number = 1000
-                    else
-                        number = Player.Backpack[blockToFill].Amount.Value
-                    end
-                elseif Player.Backpack[blockToFill].Amount.Value < (1000 - contents.Amount.Value) then
-                    number = Player.Backpack[blockToFill].Amount.Value
-                else
-                    number = 1000 - contents.Amount.Value
-                end
-                print(blockToFill, number)
-                
-                
-                local args = {
-                [1] = HttpService:GenerateGUID(false),
-                [2] = {
-                [1] = {
-                ["player_tracking_category"] = "join_from_web",
-                ["amount"] = number,
-                ["vendingMachine"] = v,
-                ["tool"] = Player.Backpack[blockToFill],
-                ["action"] = "deposit"
-                }
-                }
-                }
-                refillItem:FireServer(unpack(args))
-            end
-        end
-        -------
-        local args = {
-        [1] = {
-        ["vendingMachine"] = v
-        }
-        }
-        closeVending:FireServer(unpack(args))
-    end
-end
+function refillMachines()   
+	local vendings = getVendings()
+	for _,v in pairs(vendings) do
+		local contents = v.SellingContents:GetChildren()[1]
+		if v.Mode.Value == 0 and (contents == nil or contents.Amount.Value > 1000) then
+			local rayOrigin = v.Position
+			local rayDirection = Vector3.new(0, -100, 0)
+			local raycastParams = RaycastParams.new()
+			raycastParams.FilterDescendantsInstances = {v}
+			raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+			raycastParams.IgnoreWater = true
+
+			local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+
+			local blockToFill
+			
+			if raycastResult then
+				blockToFill = raycastResult.Instance.Name
+			end
+
+			if blockToFill ~= nil then
+				local args = {
+					[1] = HttpService:GenerateGUID(false),
+					[2] = {
+						[1] = {
+							["vendingMachine"] = v
+						}
+					}
+				}
+				openVending:FireServer(unpack(args))
+				-------
+				if Player.Backpack:FindFirstChild(blockToFill) then
+
+					if contents == nil then
+						if Player.Backpack[blockToFill].Amount.Value >= 1000 then
+							number = 1000
+						else
+							number = Player.Backpack[blockToFill].Amount.Value
+						end
+					elseif Player.Backpack[blockToFill].Amount.Value < (1000 - contents.Amount.Value) then
+						number = Player.Backpack[blockToFill].Amount.Value
+					else
+						number = 1000 - contents.Amount.Value
+					end
+					
+
+					local args = {
+						[1] = HttpService:GenerateGUID(false),
+						[2] = {
+							[1] = {
+								["player_tracking_category"] = "join_from_web",
+								["amount"] = number,
+								["vendingMachine"] = v,
+								["tool"] = Player.Backpack[blockToFill],
+								["action"] = "deposit"
+							}
+						}
+					}
+					refillItem:FireServer(unpack(args))
+				end
+			
+				-------
+				local args = {
+				[1] = {
+					["vendingMachine"] = v
+				}
+				}
+				closeVending:FireServer(unpack(args))
+			end
+		end
+	end
 end
 
 
 local oldGui = game.CoreGui:FindFirstChild("Button")
 if oldGui then
-    oldGui:Destroy()
+	oldGui:Destroy()
 end
 
 CmdGui = Instance.new("ScreenGui")
@@ -137,7 +136,6 @@ CmdName.Font = Enum.Font.GothamBlack
 CmdName.Text = "Islands GUI"
 CmdName.TextColor3 = Color3.fromRGB(255, 255, 255)
 CmdName.TextScaled = true
-CmdName.TextSize = 14.000
 CmdName.TextWrapped = true
 Dragg = false
 CmdName.MouseButton1Down:Connect(function()Dragg = true while Dragg do game.TweenService:Create(Background, TweenInfo.new(.06), {Position = UDim2.new(0,GetM.X-40,0,GetM.Y-5)}):Play()wait()end end)
@@ -155,7 +153,7 @@ Close.Text = "X"
 Close.TextColor3 = Color3.fromRGB(255, 255, 255)
 Close.TextSize = 14.000
 Close.MouseButton1Click:Connect(function()
-CmdGui:Destroy()
+	CmdGui:Destroy()
 end)
 
 refillButton = Instance.new("TextButton")
@@ -169,5 +167,5 @@ refillButton.Text = "Refill Colored Blocks"
 refillButton.TextColor3 = Color3.new(1,1,1)
 refillButton.TextScaled = true
 refillButton.MouseButton1Click:Connect(function()
-    refillMachines()
+	refillMachines()
 end)

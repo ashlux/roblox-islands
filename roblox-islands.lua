@@ -40,6 +40,7 @@ local Player = Players.LocalPlayer
 local Character = Player.Character
 local Humanoid = Character.Humanoid
 local Island = game.Workspace.Islands:GetChildren()[1] or ""
+local blocks = Island:WaitForChild("Blocks")
 local CmdGui = Instance.new("ScreenGui")
 local Background = Instance.new("Frame")
 local CmdHandler = Instance.new("ScrollingFrame")
@@ -4752,7 +4753,7 @@ Item22.MouseButton1Click:Connect(function()
 end)
 
 if Island ~= "" then
-	Island:WaitForChild("Blocks").ChildAdded:Connect(function(flower)
+	blocks.ChildAdded:Connect(function(flower)
 	    if Toggled9 == true and flower.Name:find("Fertile") then
 	        local args = {
 	        [1] = {

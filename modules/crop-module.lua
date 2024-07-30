@@ -107,14 +107,14 @@ function clickScreen(area)
     local screenSize = Camera.ViewportSize
    
     if area == "middle" then
-        VirtualInputManager:SendTouchEvent(1, 0, screenSize.X/2, screenSize.Y/2)
+        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, true, game, 1)
         task.wait()
-        VirtualInputManager:SendTouchEvent(1, 2, screenSize.X/2, screenSize.Y/2)
+        VirtualInputManager:SendMouseButtonEvent(screenSize.X/2, screenSize.Y/2, 0, false, game, 1)
     
     elseif area == "corner" then
-        VirtualInputManager:SendTouchEvent(1, 0, 0, 0)
-        task.wait()
-        VirtualInputManager:SendTouchEvent(1, 2, 0, 0)
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+        
+        VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
     end
     
 end
@@ -123,8 +123,8 @@ local function replantCrop(crop, cframe)
     
     moveCamera(crop)
     wait()
-   -- clickScreen("middle")
-   -- wait()
+    clickScreen("middle")
+    wait()
     
 	--local args = {
 	--	[1] = {

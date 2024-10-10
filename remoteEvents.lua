@@ -11,9 +11,9 @@ task.spawn(AntiAFK)
 
 --- these items change all the dang time!
 --hitMobEvent = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("eicpsr/qqsFOc")
-sendTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("fyxjlrQNkbzh/ygzHgkyawxblzlNg")
-addTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("fyxjlrQNkbzh/dsdnipqudwhUdKddqjlhjjd")
-tradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("fyxjlrQNkbzh/foupuvnbznqysbt")
+sendTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("bperxgRefYPwecbaoqkgspusaqorboqwgmgtdpbfg/keytivbetdssmuqjkflfwUnttoslreebv")
+addTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("bperxgRefYPwecbaoqkgspusaqorboqwgmgtdpbfg/Qhbna")
+tradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("bperxgRefYPwecbaoqkgspusaqorboqwgmgtdpbfg/vogszaifsyldiqdrlbgwbigFolbK")
 openVending = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("uQGwRfFzhxuxzz/ziDEKukpjqow")
 emptyItem = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("uQGwRfFzhxuxzz/zHyndeslaVdcUuP")
 refillItem = emptyItem
@@ -26,6 +26,9 @@ useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts
 if emptyItem then
     updates = "⚠️ Test stuff on alts first!  Vendings are fine right now though."
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(150,150,255), Font = Enum.Font.SourceSansBold, TextSize = 20, Text = updates})
+elseif sendTrade then
+     updates = "⚠️ Test stuff on alts first!! Trading should work, but vendings are broken!"
+    StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(200,200,255), Font = Enum.Font.SourceSansBold, TextSize = 20, Text = updates})
 else
     updates = "⚠️ Test stuff on alts first!! Trading and vendings are broken!"
     StarterGui:SetCore("ChatMakeSystemMessage", {Color = Color3.fromRGB(255,150,150), Font = Enum.Font.SourceSansBold, TextSize = 20, Text = updates})

@@ -98,13 +98,30 @@ local function getUnfertiles()
     return flowers
 end
 
+
+local lagReducer = 0
+local function reduceLag()
+	lagReducer += 1
+	if lagReducer > 20 then
+		task.wait()
+		lagReducer = 0
+	end
+end
+
+local function pickFlower(flower)
+	game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer({["flower"] = flower})
+end
+
 local function startPickUnfertiles()
     setPickingUnfertiles(true)
     while Player:GetAttribute("pickingUnfertiles") and task.wait() do
         local flowers = getUnfertiles()
-        for _,v in pairs(flowers) do
+		
+        for _,flower in pairs(flowers) do
             if Player:GetAttribute("pickingUnfertiles") then
-                game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.client_request_1:InvokeServer({["flower"] = v})
+				
+				reduceLag()
+				task.spawn(pickFlower, flower)
             end
         end
     end

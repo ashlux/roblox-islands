@@ -13,7 +13,7 @@ task.spawn(AntiAFK)
 --hitMobEvent = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("eicpsr/qqsFOc")
 sendTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("bqerxgRefYxPwecbaoqkgspusaqorboqwgmgtdpbfg/keytivbetdssmuqjkflfwUnttoslreebv")
 addTrade = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("bqerxgRefYxPwecbaoqkgspusaqorboqwgmgtdpbfg/Qhbna")
-tradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("bqerxgRefYxPwecbaoqkgspusaqorboqwgmgtdpbfg/vogszaifsyldiqdrlbgwbigFolbK")
+tradeAccept = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("bqerxgRefYxPwecbaoqkgspusaqorboqwgmgtdpbfg/vogszaifsyIdiqdrIbgwbigFolbK")
 openVending = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("vgvigLycuBykEisGk/JjddhzhzqeZivADimaohvbSzef")
 emptyItem = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("vgvigLycuBykEisGk/alXozkllttScuqorgdwnhQMTscsgRgg")
 refillItem = emptyItem
@@ -21,7 +21,7 @@ refillCoins = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include")
 takeCoins = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("vgvigLycuBykEisGk/thdheckjectsj")
 changeSettings = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("vgvigLycuBykEisGk/hgqlenpacdGwgilKbq")
 closeVending = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):FindFirstChild("vgvigLycuBykEisGk/rgcydxOfeiiwrhdqfdvvEiviibRulezdEq")
-useNet = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out["_NetManaged"] -- sorry im too lazy to update this one
+useNet = game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("eleJiJefvlrMfnbzonoFz/pnIprccqlQdwqjmlx")
 
 if emptyItem then
     updates = "⚠️ Test stuff on alts first!  Vendings and trading are fine right now though."

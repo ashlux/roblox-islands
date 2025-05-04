@@ -88,24 +88,24 @@ local function waterOnlyNearby()
     end
 end
 
+local lagReducer = 0
+local function reduceLag(load)
+	lagReducer += load
+	if lagReducer > 200 then
+		task.wait()
+		lagReducer = 0
+	end
+end
+
 local function getUnfertiles()
     local flowers = {}
     for i,v in pairs(Island.Blocks:GetChildren()) do
+		reduceLag(1)
         if (v:IsA("Part")) and v:FindFirstChild("Watered") and v:FindFirstChild("Top") == nil then
             table.insert(flowers, v)
         end
     end
     return flowers
-end
-
-
-local lagReducer = 0
-local function reduceLag()
-	lagReducer += 1
-	if lagReducer > 20 then
-		task.wait()
-		lagReducer = 0
-	end
 end
 
 local function pickFlower(flower)
@@ -120,7 +120,7 @@ local function startPickUnfertiles()
         for _,flower in pairs(flowers) do
             if Player:GetAttribute("pickingUnfertiles") then
 				
-				reduceLag()
+				reduceLag(10)
 				task.spawn(pickFlower, flower)
             end
         end
